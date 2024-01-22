@@ -4,7 +4,8 @@ CFLAGS = -Wall -Wextra -Werror -g3
 #-fsanitize=address 
 #-Ibonus
 
-CFILES = src/push_swap.c utils/utils.c
+CFILES = src/push_swap.c src/operations.c \
+		utils/utils.c utils/ft_split.c utils/ft_split2.c
 
 #BONUS_FILES = bonus/bonus.c bonus/bonus-utils.c \
                         gnl/get_next_line_utils.c gnl/get_next_line.c
