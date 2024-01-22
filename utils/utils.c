@@ -12,42 +12,14 @@
 
 #include "../src/push_swap.h"
 
-int	ft_isdigit(char *str)
+void	free_args(char **av)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
-		return (0);
-	if (str[i] == '-' || str[i] == '+')
-		i++;
-	while (str[i])
-	{
-		if (str[i] >= 48 && str[i] <= 57)
-			i++;
-		else
-			return (0);
-	}
-	return (1);
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int				i;
-	unsigned char	*string1;
-	unsigned char	*string2;
-
-	i = 0;
-	string1 = (unsigned char *)s1;
-	string2 = (unsigned char *)s2;
-	while ((string1[i]))
-	{
-		if (string1[i] == string2[i])
-			i++;
-		else
-			return (string1[i] - string2[i]);
-	}
-	return (string1[i] - string2[i]);
+	while (av[i])
+		free(av[i++]);
+	free (av);
 }
 
 static char	*ft_vide(void)
@@ -89,27 +61,18 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-int	ft_atoi(const char *str)
+char	**check_in_quotes(int *ac, char **av)
 {
-	int	i;
-	int	num;
-	int	sign;
+	char	**split_av;
+	int		index;
 
-	i = 0;
-	num = 0;
-	sign = 1;
-	if (str[i])
-	{
-		while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-			i++;
-		if (str[i] == 45)
-			sign = sign * -1;
-		if (str[i] == 43 || str[i] == 45)
-			i++;
-		while (str[i] >= 48 && str[i] <= 57)
-			num = (num * 10) + (str[i++] - 48);
-		num = num * sign;
-		return (num);
-	}
-	return (0);
+	split_av = ft_split(av[1], ' ');
+	if (!split_av)
+		exit(EXIT_FAILURE);
+	index = 0;
+	while (split_av[index] != NULL)
+		index++;
+	*ac = index;
+	//	printf("Test in quotes: ac = %i\n", ac);
+	return (split_av);
 }

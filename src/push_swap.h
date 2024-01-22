@@ -16,12 +16,23 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
-int		ft_isdigit(char *str);
+char	**check_in_quotes(int *ac, char **av);
+int		check_errors(int ac, char **av);
 size_t	ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
-int		ft_strcmp(const char *s1, const char *s2);
-int		ft_atoi(const char *str);
+int		do_atoi(const char *str, int *error);
+void	free_args(char **av);
+
+typedef struct s_node
+{
+	int				value;
+	struct s_node	*next;
+}					t_node;
+
+void	add_to_stack(t_node **stack, int input);
+int		remove_from_stack(t_node **stack);
 
 #endif

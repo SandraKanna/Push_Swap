@@ -5,28 +5,29 @@ CFLAGS = -Wall -Wextra -Werror -g3
 #-Ibonus
 
 CFILES = src/push_swap.c src/operations.c \
-		utils/utils.c utils/ft_split.c utils/ft_split2.c
+	utils/utils.c utils/ft_split.c utils/check_params.c \
+	utils/core.c
 
 #BONUS_FILES = bonus/bonus.c bonus/bonus-utils.c \
-                        gnl/get_next_line_utils.c gnl/get_next_line.c
+			gnl/get_next_line_utils.c gnl/get_next_line.c
 
 OBJ = $(CFILES:.c=.o)
 #BONUS_OBJ = $(BONUS_FILES:.c=.o)
 
 %.o: %.c
-        $(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ)
-        $(CC) $(CFLAGS) $(CFILES) -o $(NAME)
+	$(CC) $(CFLAGS) $(CFILES) -o $(NAME)
 
 all: $(NAME)
 
 clean:
-        rm -f $(OBJ) 
+	rm -f $(OBJ) 
 #$(BONUS_OBJ)
 
 fclean: clean
-        rm -f $(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
