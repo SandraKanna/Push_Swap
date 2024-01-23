@@ -6,32 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:49:11 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/22 16:33:23 by skanna           ###   ########.fr       */
+/*   Updated: 2024/01/23 17:17:27 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../src/push_swap.h"
-
-void	free_args(char **av)
-{
-	int	i;
-
-	i = 0;
-	while (av[i])
-		free(av[i++]);
-	free (av);
-}
-
-static char	*ft_vide(void)
-{
-	char	*str;
-
-	str = malloc(1);
-	if (str == NULL)
-		return (NULL);
-	str[0] = '\0';
-	return (str);
-}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -61,18 +40,34 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (substr);
 }
 
-char	**check_in_quotes(int *ac, char **av)
+int	do_atoi(const char *str, int *error)
 {
-	char	**split_av;
-	int		index;
+	long	num;
+	int		sign;
 
-	split_av = ft_split(av[1], ' ');
-	if (!split_av)
-		exit(EXIT_FAILURE);
-	index = 0;
-	while (split_av[index] != NULL)
-		index++;
-	*ac = index;
-	//	printf("Test in quotes: ac = %i\n", ac);
-	return (split_av);
+	num = 0;
+	sign = 1;
+	//while (*str == 32 || (*str >= 9 && *str <= 13))
+	//	str++;
+	if (*str == 45)
+		sign = -1;
+	if (*str == 43 || *str == 45)
+		str++;
+	while (*str)
+	{
+		if (*str < '0' && *str > '9')
+		{
+			*error = 1;
+			return (0);
+		}
+		num = (num * 10) + (*str - '0');
+		if ((sign == 1 && num > INT_MAX) || (sign == -1 && (-num) < INT_MIN))
+		{
+			*error = 1;
+			return (0);
+		}
+		str++;
+	}
+	return ((int)(num * sign));
 }
+

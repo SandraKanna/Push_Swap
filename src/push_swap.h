@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/22 16:04:26 by skanna           ###   ########.fr       */
+/*   Updated: 2024/01/23 17:27:49 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,16 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <stdio.h>
 
-char	**check_in_quotes(int *ac, char **av);
+char	**parse_args(int *ac, int argc, char **av);
 int		check_errors(int ac, char **av);
 size_t	ft_strlen(const char *str);
+char	*ft_vide(void);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 int		do_atoi(const char *str, int *error);
+char	*ft_strdup(const char *s);
 void	free_args(char **av);
 
 typedef struct s_node
@@ -34,5 +37,6 @@ typedef struct s_node
 
 void	add_to_stack(t_node **stack, int input);
 int		remove_from_stack(t_node **stack);
+void	free_stack(t_node **stack);
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   core.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/23 11:19:29 by skanna            #+#    #+#             */
+/*   Updated: 2024/01/23 11:29:11 by skanna           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 void	add_to_stack(t_node **stack, int input)
@@ -18,7 +30,7 @@ int	remove_from_stack(t_node **stack)
 	int		value;
 
 	if (stack == NULL || *stack == NULL)
-		return (ERROR);
+		return (INT_MIN); //INT_MIN en attendand de trouver message erreur adapte
 	top_node = *stack;
 	value = top_node->value;
 	*stack = top_node->next;

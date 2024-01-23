@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -g3
 
 CFILES = src/push_swap.c src/operations.c \
 	utils/utils.c utils/ft_split.c utils/check_params.c \
-	utils/core.c
+	utils/core.c utils/clean.c
 
 #BONUS_FILES = bonus/bonus.c bonus/bonus-utils.c \
 			gnl/get_next_line_utils.c gnl/get_next_line.c
