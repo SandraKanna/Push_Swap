@@ -12,12 +12,12 @@
 
 #include "../src/push_swap.h"
 
-static int	ft_isdigit(char *str)
+int	ft_isdigit(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!str || (str[0] == '-' || str[0] == '+') && str[1] == '\0')
+	if (!str || ((str[0] == '-' || str[0] == '+') && str[1] == '\0'))
 		return (0);
 	if (str[0] == '-' || str[0] == '+')
 		i = 1;
@@ -30,7 +30,7 @@ static int	ft_isdigit(char *str)
 	return (1);
 }
 
-static int	has_duplicates(int ac, int *input)
+int	has_duplicates(int ac, int *input)
 {
 	int	i;
 	int	j;
@@ -41,7 +41,7 @@ static int	has_duplicates(int ac, int *input)
 		j = i + 1;
 		while (j < ac)
 		{
-			if (input[i], input[j] == 0)
+			if (input[i] == input[j])
 				return (1);
 			j++;
 		}
@@ -56,7 +56,7 @@ char	**parse_args(int *ac, int argc, char **av)
 	int		i;
 
 	if (argc == 2)
-	{	
+	{
 		new_av = ft_split(av[1], ' ');
 		if (!new_av)
 			exit(EXIT_FAILURE);

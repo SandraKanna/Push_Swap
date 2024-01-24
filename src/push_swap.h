@@ -19,6 +19,10 @@
 # include <limits.h>
 # include <stdio.h>
 
+//for test
+int		ft_isdigit(char *str);
+int		has_duplicates(int ac, int *input);
+
 char	**parse_args(int *ac, int argc, char **av);
 int		check_errors(int ac, char **av);
 size_t	ft_strlen(const char *str);
@@ -36,10 +40,14 @@ typedef struct s_node
 }					t_node;
 
 t_node	*initialize_stack_a(char **av, int ac);
-void	push(t_node **head, int input);
-void	add_to_stack(t_node **stack, int input);
-int		remove_from_stack(t_node **stack);
-void	swap(t_node	**stack);
+t_node	*initialize_stack_a2(char **av, int ac);
+void	push1(t_node **stack, int input);
+void	push2(t_node **head, int input);
+int		pop1(t_node **stack);
+int		pop2(t_node **stack);
+void	swap1(t_node	**stack);
+void	swap2(t_node	**stack);
+void	rotate_up(t_node **stack);
 void	push_swap(t_node **stack_a, t_node	**stack_b);
 void	free_stack(t_node **stack);
 

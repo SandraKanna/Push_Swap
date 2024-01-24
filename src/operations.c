@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+/*
 void	sa()
 {
 	//Do nothing if there is only one or no elements: if node1 or node 2 == NULL
@@ -77,3 +78,4 @@ void	rra()
 {
 	//rrr : rra and rrb at the same time.
 }
+*/

@@ -39,11 +39,12 @@ int	main(int argc, char **argv)
 	swap1(&stack_test);
 	print_test(stack_test);
 	printf("\n");
-/*
+
 	//test rotate
 	printf("Rotate:\n---\n");
-
+	rotate_up(&stack_test);
 	print_test(stack_test);
-	printf("\n");*/
-	return 0;
+	printf("\n");
+	
+	return (0);
 }

@@ -55,11 +55,6 @@ int	do_atoi(const char *str, int *error)
 		str++;
 	while (*str)
 	{
-		if (*str < '0' && *str > '9')
-		{
-			*error = 1;
-			return (0);
-		}
 		num = (num * 10) + (*str - '0');
 		if ((sign == 1 && num > INT_MAX) || (sign == -1 && (-num) < INT_MIN))
 		{
