@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/23 17:27:49 by skanna           ###   ########.fr       */
+/*   Updated: 2024/01/24 18:14:31 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,12 @@ typedef struct s_node
 	struct s_node	*next;
 }					t_node;
 
+t_node	*initialize_stack_a(char **av, int ac);
+void	push(t_node **head, int input);
 void	add_to_stack(t_node **stack, int input);
 int		remove_from_stack(t_node **stack);
+void	swap(t_node	**stack);
+void	push_swap(t_node **stack_a, t_node	**stack_b);
 void	free_stack(t_node **stack);
 
 #endif
