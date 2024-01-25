@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:49:11 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/25 15:03:35 by skanna           ###   ########.fr       */
+/*   Updated: 2024/01/25 17:47:01 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,3 @@ int	do_atoi(const char *str, int *error)
 	}
 	return ((int)(num * sign));
 }
-

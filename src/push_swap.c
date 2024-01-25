@@ -6,21 +6,25 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/25 15:58:29 by skanna           ###   ########.fr       */
+/*   Updated: 2024/01/25 17:51:45 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-
-/*void	push_swap(t_node **stack_a, t_node	**stack_b)
+void	push_swap(t_node **stack_a)
 {
-	//push: move the top elem from one stack to the top of the other as long as they're not empty
+	t_node	*stack_b;
+	t_node	*temp;
 
-	//swap: swap the first 2 elemest of the stack, only if it has more than 1 element
-	//rotate: Shift up all elements of stack by 1.
-	//reverse: Shift down all elements of stack by 1.
-}*/
+	stack_b = NULL;
+	temp = *stack_a;
+	while (temp->next != NULL)
+		temp = temp->next;
+	if ((*stack_a)->value > temp->value)
+		ra(stack_a);
+		
+}
 
 t_node	*initialize_stack_a(char **av, int ac)
 {
