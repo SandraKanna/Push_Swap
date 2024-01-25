@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:49:11 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/23 17:17:27 by skanna           ###   ########.fr       */
+/*   Updated: 2024/01/25 15:03:35 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ int	do_atoi(const char *str, int *error)
 
 	num = 0;
 	sign = 1;
-	//while (*str == 32 || (*str >= 9 && *str <= 13))
-	//	str++;
 	if (*str == 45)
 		sign = -1;
 	if (*str == 43 || *str == 45)

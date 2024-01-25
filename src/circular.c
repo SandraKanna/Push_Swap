@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core.c                                             :+:      :+:    :+:   */
+/*   circular.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:19:29 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/24 19:41:01 by skanna           ###   ########.fr       */
+/*   Updated: 2024/01/25 13:45:58 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_node	*initialize_stack_a2(char **av, int ac)
 	return (stack_a);
 }
 /*
-void	rotate12(t_node **stack)
+void	rotate2(t_node **stack)
 {
 	t_node	temp1;
 	t_node	*temp2;

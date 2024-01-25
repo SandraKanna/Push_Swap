@@ -25,24 +25,30 @@ int	main(int argc, char **argv)
 
 	//test push
 	printf("Add: %i\n---\n", add);
-	push1(&stack_test, add);
+	push(&stack_test, add);
 	print_test(stack_test);
 	printf("\n");
 
 	//test pop
-	printf("Remove: %i\n---\n", pop1(&stack_test));
+	printf("Remove: %i\n---\n", pop(&stack_test));
 	print_test(stack_test);
 	printf("\n");
 
 	//test swap
 	printf("Swap:\n---\n");
-	swap1(&stack_test);
+	swap(&stack_test);
 	print_test(stack_test);
 	printf("\n");
 
-	//test rotate
-	printf("Rotate:\n---\n");
+	//test rotate up
+	printf("Rotate 1 up:\n---\n");
 	rotate_up(&stack_test);
+	print_test(stack_test);
+	printf("\n");
+	
+	//test rotate down
+	printf("Rotate 1 down:\n---\n");
+	rotate_down(&stack_test);
 	print_test(stack_test);
 	printf("\n");
 	
