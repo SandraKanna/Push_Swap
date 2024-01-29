@@ -6,11 +6,22 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/25 17:51:45 by skanna           ###   ########.fr       */
+/*   Updated: 2024/01/29 12:13:57 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	is_ordered(t_node *stack)
+{
+	while (stack->next != NULL)
+	{
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
 
 void	push_swap(t_node **stack_a)
 {
@@ -19,11 +30,19 @@ void	push_swap(t_node **stack_a)
 
 	stack_b = NULL;
 	temp = *stack_a;
-	while (temp->next != NULL)
-		temp = temp->next;
-	if ((*stack_a)->value > temp->value)
-		ra(stack_a);
-		
+	while (!is_ordered(*stack_a) && *stack_a != NULL)
+	{
+		if ((*stack_a)->value < (*stack_a)->next->value)
+			sa(stack_a);
+		else
+		{
+			pb(stack_a, &stack_b);
+		//	write(2, "test pb\n", 8);
+		}
+	}
+	//write(2, "test2\n", 6);
+	while (stack_b != NULL)
+		pa(stack_a, &stack_b);
 }
 
 t_node	*initialize_stack_a(char **av, int ac)

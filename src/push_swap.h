@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/25 16:00:05 by skanna           ###   ########.fr       */
+/*   Updated: 2024/01/29 11:43:39 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	rr(t_node **stack_a, t_node **stack_b);
 void	rra(t_node **stack_a);
 void	rrb(t_node **stack_b);
 void	rrr(t_node **stack_a, t_node **stack_b);
-void	push_swap(t_node **stack_a, t_node	**stack_b);
+int		is_ordered(t_node *stack);
+void	push_swap(t_node **stack_a);
 //clean nodes
 void	free_stack(t_node **stack);
 

@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:06:48 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/25 16:30:57 by skanna           ###   ########.fr       */
+/*   Updated: 2024/01/29 11:32:05 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	pb(t_node **stack_a, t_node **stack_b)
 	value = pop(stack_a);
 	push(stack_b, value);
 	write(1, "pb\n", 3);
+	return ;
 }
 

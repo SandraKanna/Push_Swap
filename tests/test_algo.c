@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 
 	//test algo simple
 	printf("\noperations:\n-----\n");
-	push_swap(&stack_a, ac);
+	push_swap(&stack_a);
 	printf("\nSorted stack:\n-----\n");
 	print_test(stack_a);
 	printf("\n");
