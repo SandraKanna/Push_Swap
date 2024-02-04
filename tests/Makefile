@@ -2,7 +2,7 @@ TESTS = test1 test2 test3 test4 test5
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -Isrc
 
-SRC = $(wildcard ../src/*.c) $(wildcard ../utils/*.c ../ops/*.c)
+SRC = $(wildcard ../src/*.c) $(wildcard ../src/utils/*.c ../src/ops/*.c)
 
 OBJ = $(SRC:.c=.o)
 
