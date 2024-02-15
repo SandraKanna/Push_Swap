@@ -6,11 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:06:48 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/29 11:32:05 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/15 17:35:43 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/push_swap.h"
+#include "../../Includes/push_swap.h"
 
 void	pa(t_node **stack_a, t_node **stack_b)
 {

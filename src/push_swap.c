@@ -6,13 +6,13 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/29 12:13:57 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/15 19:00:42 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../Includes/push_swap.h"
 
-int	is_ordered(t_node *stack)
+int	is_sorted(t_node *stack)
 {
 	while (stack->next != NULL)
 	{
@@ -30,7 +30,7 @@ void	push_swap(t_node **stack_a)
 
 	stack_b = NULL;
 	temp = *stack_a;
-	while (!is_ordered(*stack_a) && *stack_a != NULL)
+	while (!is_sorted(*stack_a) && *stack_a != NULL)
 	{
 		if ((*stack_a)->value < (*stack_a)->next->value)
 			sa(stack_a);

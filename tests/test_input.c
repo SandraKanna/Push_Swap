@@ -1,4 +1,4 @@
-#include "../src/push_swap.h"
+#include "../Includes/push_swap.h"
 
 void	test_parse_args(int *argc2, char **argv2, char ***new_tab)
 {
@@ -28,7 +28,7 @@ void	test_digits(int test_argc, char **test_argv)
 
 	while (i < test_argc)
 	{
-		if (!ft_isdigit(test_argv[i]))
+		if (!is_signed_nbr(test_argv[i]))
 		{
 			printf("argv[%i] = %s is not a digit\n", i, test_argv[i]);
 			exit (EXIT_FAILURE);
@@ -53,29 +53,33 @@ void	test_convert(int *ac, char **av, int **convert)
 
 int	main(int ac, char **av)
 {
-	int		*convert;
-	char	**new_tab = NULL;
-
-	printf("---Arguments parsing---\n");
-	test_parse_args(&ac, av, &new_tab);
-	printf("\n");
-
-	printf("---Checking digits---\n");
-	test_digits(ac, new_tab);
-	printf("\n");
-
-	printf("---Converting to int---\n");
-	convert = malloc (sizeof(int) * (ac));
-	if (!convert)
+	if (ac >= 2)
 	{
-		printf("Malloc error");
-		exit(1);
+		int		*convert;
+		char	**new_tab = NULL;
+
+		printf("---Arguments parsing---\n");
+		test_parse_args(&ac, av, &new_tab);
+		printf("\n");
+
+		printf("---Checking digits---\n");
+		test_digits(ac, new_tab);
+		printf("\n");
+
+		printf("---Converting to int---\n");
+		convert = malloc (sizeof(int) * (ac));
+		if (!convert)
+		{
+			printf("Malloc error");
+			exit(1);
+		}
+		test_convert(&ac, new_tab, &convert);
+		if (has_duplicates(ac, convert))
+			printf("There are duplicates in the input\n");
+		else
+			printf("There are no duplicates in the input\n");
+		free(convert);
 	}
-	test_convert(&ac, new_tab, &convert);
-	if (has_duplicates(ac, convert))
-		printf("There are duplicates in the input\n");
 	else
-		printf("There are no duplicates in the input\n");
-	free(convert);
-	printf("\n");
+		printf("Please enter at least 2 numbers after './test1'\n");
 }

@@ -6,13 +6,13 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/23 17:29:53 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/15 18:14:58 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/push_swap.h"
+#include "../../Includes/push_swap.h"
 
-int	ft_isdigit(char *str)
+int	is_signed_nbr(char *str)//to review
 {
 	int	i;
 
@@ -76,7 +76,7 @@ char	**parse_args(int *ac, int argc, char **av)
 	return (new_av);
 }
 
-int	check_errors(int ac, char **av)
+int	check_errors(int ac, char **av)//to review
 {
 	int	i;
 	int	error;
@@ -88,7 +88,7 @@ int	check_errors(int ac, char **av)
 		return (1);
 	while (i < ac)
 	{
-		if (!ft_isdigit(av[i]))
+		if (!is_signed_nbr(av[i]))
 		{
 			free (int_convert);
 			return (1);

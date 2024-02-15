@@ -6,13 +6,13 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:49:11 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/25 17:47:01 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/15 18:20:23 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/push_swap.h"
+#include "../../Includes/push_swap.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+/*char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	size_t	len_s;
@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return (NULL);
 	len_s = ft_strlen(s);
 	if (start >= len_s || !len)
-		return (ft_vide());
+		return (ft_empty());
 	if (len > len_s)
 		len = len_s;
 	if (len > len_s - start)
@@ -38,7 +38,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	substr[i] = '\0';
 	return (substr);
-}
+}*/
 
 int	do_atoi(const char *str, int *error)
 {

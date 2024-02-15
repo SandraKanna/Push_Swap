@@ -1,48 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean.c                                            :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 10:46:26 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/23 17:31:08 by skanna           ###   ########.fr       */
+/*   Created: 2023/11/03 14:58:12 by skanna            #+#    #+#             */
+/*   Updated: 2024/02/14 11:05:53 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/push_swap.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-void	free_args(char **av)
-{
-	int	i;
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdarg.h>
+# include "libftv3.h"
 
-	i = 0;
-	while (av[i])
-		free(av[i++]);
-	free (av);
-}
+int	ft_printf(const char *format, ...);
+int	ft_putchar(int c);
+int	ft_putstr(char *s);
+int	ft_putsigned(int n, const char c);
+int	ft_putunsigned(unsigned int n, const char c);
+int	ft_print_p1(unsigned long long n);
 
-char	*ft_vide(void)
-{
-	char	*str;
-
-	str = malloc(1);
-	if (str == NULL)
-		return (NULL);
-	str[0] = '\0';
-	return (str);
-}
-
-void	free_stack(t_node **stack)
-{
-	t_node	*temp;
-
-	if (!*stack)
-		return ;
-	while (*stack)
-	{
-		temp = (*stack)->next;
-		free(*stack);
-		*stack = temp;
-	}
-}
+#endif

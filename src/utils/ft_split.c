@@ -6,13 +6,13 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 18:37:04 by skanna            #+#    #+#             */
-/*   Updated: 2024/01/22 16:04:05 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/15 18:17:17 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../src/push_swap.h"
+//#include "../../Includes/push_swap.h"
 
-size_t	ft_strlen(const char *str)
+/*size_t	ft_strlen(const char *str)
 {
 	int	i;
 
@@ -102,7 +102,7 @@ char	**ft_split(char const *s, char c)
 	return (split);
 }
 
-/*int main(void)
+int main(void)
 {
 		char *s = "tripouille";
 	char c = 32;
