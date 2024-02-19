@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 11:19:29 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/15 17:49:47 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 14:49:22 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,12 @@ t_node	*initialize_stack_a2(char **av, int ac)
 	t_node	*stack_a;
 	int		input;
 	int		i;
-	int		dummy;
 
 	stack_a = NULL;
-	dummy = 0;
 	i = ac - 1;
 	while (i >= 0)
 	{
-		input = do_atoi(av[i], &dummy);
+		input = ft_atoi(av[i]);
 		push2(&stack_a, input);
 		i--;
 	}

@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:03:17 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/14 17:21:42 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 14:47:03 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,16 @@ void	free_list(t_list **lst);
 /*checks*/
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
-int		are_digits(char *str);
 int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
+int		is_nbr(char *str);
 int		has_quotes(char const *str);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /*measure*/
+int		count_digits(char *str);
 size_t	ft_strlen(const char *str);
 int		int_length(long int n);
 int		arg_count(char const *s, char c);
@@ -52,6 +53,7 @@ int		arg_count_quotes(char const *s, char c, int q);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 int		ft_atoi(const char *str);
+int		ft_atoi_err(const char *str, int *error);
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
 char	**split_quotes(char const *s, char c);

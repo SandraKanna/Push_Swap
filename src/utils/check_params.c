@@ -6,29 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/15 18:14:58 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 14:49:43 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/push_swap.h"
-
-int	is_signed_nbr(char *str)//to review
-{
-	int	i;
-
-	i = 0;
-	if (!str || ((str[0] == '-' || str[0] == '+') && str[1] == '\0'))
-		return (0);
-	if (str[0] == '-' || str[0] == '+')
-		i = 1;
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 int	has_duplicates(int ac, int *input)
 {
@@ -76,30 +58,38 @@ char	**parse_args(int *ac, int argc, char **av)
 	return (new_av);
 }
 
-int	check_errors(int ac, char **av)//to review
+int	check_errors(int int_count, char **int_list)
 {
 	int	i;
+	int	*temp_conversion;
 	int	error;
-	int	*int_convert;
-
+	
 	i = 0;
-	int_convert = malloc (sizeof(int *) * ac);
-	if (!int_convert)
+	temp_conversion = malloc (sizeof(int *) * int_count);
+	if (!temp_conversion)
 		return (1);
-	while (i < ac)
+	while (i < int_count)
 	{
-		if (!is_signed_nbr(av[i]))
-		{
-			free (int_convert);
-			return (1);
-		}
+		if (!is_nbr(int_list[i]))
+			return (free (temp_conversion), 1);
 		error = 0;
-		int_convert[i] = do_atoi(av[i], &error);
+		temp_conversion[i] = ft_atoi_err(int_list[i], &error);
 		if (error)
-			return (1);
+			return (free (temp_conversion), 1);
 		i++;
 	}
-	if (has_duplicates(ac, int_convert))
-		return (1);
-	return (0);
+	if (has_duplicates(int_count, temp_conversion))
+		return (free (temp_conversion), 1);
+	return (free (temp_conversion), 0);
+}
+
+int	is_sorted(t_node *stack)
+{
+	while (stack->next != NULL)
+	{
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }

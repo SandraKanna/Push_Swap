@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:51:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/14 17:21:44 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 14:50:04 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int	is_sign(long int n)
 		return (1);
 }
 
-int	are_digits(char *str)
+int	count_digits(char *str)
 {
 	int	i;
 	
@@ -77,7 +77,7 @@ int	ft_atoi(const char *str)
 		sign = -1;
 	if (*str == 43 || *str == 45)
 		str++;
-	n = are_digits((char *)str);
+	n = count_digits((char *)str);
 	i = 0;
 	while (i < n)
 	{
@@ -85,6 +85,30 @@ int	ft_atoi(const char *str)
 		if ((sign == 1 && num > INT_MAX) || (sign == -1 && (-num) < INT_MIN))
 			return (0);
 		i++;
+	}
+	return ((int)(num * sign));
+}
+
+int	ft_atoi_err(const char *str, int *error)
+{
+	long	num;
+	int		sign;
+
+	num = 0;
+	sign = 1;
+	if (*str == 45)
+		sign = -1;
+	if (*str == 43 || *str == 45)
+		str++;
+	while (*str)
+	{
+		num = (num * 10) + (*str - '0');
+		if ((sign == 1 && num > INT_MAX) || (sign == -1 && (-num) < INT_MIN))
+		{
+			*error = 1;
+			return (0);
+		}
+		str++;
 	}
 	return ((int)(num * sign));
 }

@@ -2,7 +2,7 @@ LIBRARY = libft3.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3 -IIncludes
 
-CHECK_FILES = $(addprefix libft_src/ft_checks/, basic_checks.c cmp_checks.c parse_checks.c)
+CHECK_FILES = $(addprefix libft_src/ft_checks/, basic_checks.c cmp_checks.c other_checks.c)
 CONV_FILES = $(addprefix libft_src/ft_conversions/, chars_conversion.c ints_and_chars.c string_to_tab.c)
 LIST_FILES = $(addprefix libft_src/ft_lists/, lst_clean.c lst_content_ops.c lst_node_ops.c lst_search.c)
 MEASURE_FILES = $(addprefix libft_src/ft_measures/, measures_basics.c measures_parse.c)

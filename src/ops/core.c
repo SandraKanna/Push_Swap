@@ -6,11 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:46:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/15 17:49:53 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 14:48:31 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/push_swap.h"
+#include "../../Includes/push_swap.h"
 
 void	push(t_node **stack, int input)
 {
