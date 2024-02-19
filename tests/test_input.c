@@ -1,11 +1,17 @@
 #include "../Includes/push_swap.h"
+# include <stdio.h>
+
+#define COLOR_RED "\033[91m"
+#define COLOR_GREEN "\033[92m"
+#define COLOR_YELLOW "\033[93m"
+#define COLOR_RESET "\033[0m"
 
 void	test_parse_args(int *argc2, char **argv2, char ***new_tab)
 {
 	int		ac_test;
 	int		i = 0;
 
-	printf("initial argc: %i\n", *argc2);
+	printf("\ninitial argc: %i\n", *argc2);
 	while (argv2[i])
 	{
 		printf("arg[%i}: %s\n", i, argv2[i]);
@@ -28,14 +34,14 @@ void	test_digits(int test_argc, char **test_argv)
 
 	while (i < test_argc)
 	{
-		if (!is_signed_nbr(test_argv[i]))
+		if (!is_nbr(test_argv[i]))
 		{
-			printf("argv[%i] = %s is not a digit\n", i, test_argv[i]);
+			printf(COLOR_RED "argv[%i] = %s is not a digit\n" COLOR_RESET, i, test_argv[i]);
 			exit (EXIT_FAILURE);
 		}
 		i++;
 	}
-	printf("All inputs are digits\n");
+	printf(COLOR_GREEN "\n---All inputs are digits---\n" COLOR_RESET);
 }
 
 void	test_convert(int *ac, char **av, int **convert)
@@ -45,11 +51,12 @@ void	test_convert(int *ac, char **av, int **convert)
 
 	while (i < *ac)
 	{
-		(*convert)[i] = do_atoi(av[i], &err);
+		(*convert)[i] = ft_atoi_err(av[i], &err);
 		printf("%s was converted to int %i\n", av[i], (*convert)[i]);
 		i++;
 	}
 }
+
 
 int	main(int ac, char **av)
 {
@@ -58,28 +65,28 @@ int	main(int ac, char **av)
 		int		*convert;
 		char	**new_tab = NULL;
 
-		printf("---Arguments parsing---\n");
+		printf(COLOR_YELLOW "\n---Arguments parsing---\n" COLOR_RESET);
 		test_parse_args(&ac, av, &new_tab);
 		printf("\n");
 
-		printf("---Checking digits---\n");
+		printf(COLOR_YELLOW "\n---Checking digits---\n" COLOR_RESET);
 		test_digits(ac, new_tab);
 		printf("\n");
 
-		printf("---Converting to int---\n");
+		printf(COLOR_YELLOW "\n---Converting to int---\n" COLOR_RESET);
 		convert = malloc (sizeof(int) * (ac));
 		if (!convert)
 		{
-			printf("Malloc error");
+			printf(COLOR_RED "\nMalloc error\n" COLOR_RESET);
 			exit(1);
 		}
 		test_convert(&ac, new_tab, &convert);
 		if (has_duplicates(ac, convert))
-			printf("There are duplicates in the input\n");
+			printf(COLOR_RED "\n---There are duplicates in the input---\n\n" COLOR_RESET);
 		else
-			printf("There are no duplicates in the input\n");
+			printf(COLOR_GREEN "\n---There are no duplicates in the input---\n\n" COLOR_RESET);
 		free(convert);
 	}
 	else
-		printf("Please enter at least 2 numbers after './test1'\n");
+		printf(COLOR_YELLOW "\nPlease enter at least 2 numbers after './test1'\n\n" COLOR_RESET);
 }
