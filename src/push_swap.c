@@ -6,31 +6,29 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 14:49:44 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 15:08:14 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
 
-// void	push_swap(t_node **stack_a)
-// {
-// 	t_node	*stack_b;
-// 	t_node	*temp;
+void	push_swap(t_node **stack_a)
+{
+	t_node	*stack_b;
+	t_node	*temp;
 
-// 	stack_b = NULL;
-// 	temp = *stack_a;
-// 	while (!is_sorted(*stack_a) && *stack_a != NULL)
-// 	{
-// 		if ((*stack_a)->value < (*stack_a)->next->value)
-// 			sa(stack_a);
-// 		else
-// 			pb(stack_a, &stack_b);
-// 	}
-// 	while (stack_b != NULL)
-// 		pa(stack_a, &stack_b);
-// }
-
-
+	stack_b = NULL;
+	temp = *stack_a;
+	while (!is_sorted(*stack_a) && *stack_a != NULL)
+	{
+		if ((*stack_a)->value < (*stack_a)->next->value)
+			sa(stack_a);
+		else
+			pb(stack_a, &stack_b);
+	}
+	while (stack_b != NULL)
+		pa(stack_a, &stack_b);
+}
 
 t_node	*initialize_stack_a(char **av, int ac)
 {
