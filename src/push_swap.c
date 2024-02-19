@@ -6,57 +6,67 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 16:11:31 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 19:58:37 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
 
-// void	push_swap(t_node **stack_a)
-// {
-// 	t_node	*stack_b;
-// 	t_node	*temp;
-
-// 	stack_b = NULL;
-// 	temp = *stack_a;
-// 	while (!is_sorted(*stack_a) && *stack_a != NULL)
-// 	{
-// 		if ((*stack_a)->value < (*stack_a)->next->value)
-// 			sa(stack_a);
-// 		else
-// 			pb(stack_a, &stack_b);
-// 	}
-// 	while (stack_b != NULL)
-// 		pa(stack_a, &stack_b);
-// }
-
-void	push_swap(t_node **stack)
+void	push_swap(t_node **stack_a)
 {
-	int		swapped;
+	t_node	*stack_b;
 	t_node	*temp;
-	
-	swapped = 1;
-	temp = *stack;
 
-	while (swapped)
+	stack_b = NULL;
+	temp = *stack_a;
+	while (!is_sorted(*stack_a))
 	{
-		swapped = 0;
-		if (is_sorted(*stack))
-			return ;
-		while (temp && temp->next)
-		{
-			if (temp->value > temp->next->value)
-			{
-				sa(stack);
-				swapped = 1;
-			}
-			temp = temp->next;
-		}
-	//	temp = *stack;
+		if ((*stack_a)->value < (*stack_a)->next->value)
+			ra(stack_a);
+		else
+			pb(stack_a, &stack_b);
 	}
+	while (stack_b != NULL)
+		pa(stack_a, &stack_b);
 }
 
-t_node	*initialize_stack_a(char **av, int ac)
+A: 0 -2 6 85 4
+min: -2
+max: 85
+med: 
+
+
+// void	push_swap(t_node **stack, int count)
+// {
+// 	int		iteration;
+// 	t_node	*temp;
+	
+// 	if (count == 2)
+// 	{
+// 		if (!is_sorted(*stack))
+// 			sa(stack);
+// 		return ;
+// 	}
+// 	iteration = 0;
+// 	while (iteration < count)
+// 	{
+// 		if (is_sorted(*stack))
+// 			return ;
+// 		temp = *stack;
+// 		while (temp && temp->next)
+// 		{
+// 			if (temp->value > temp->next->value)
+// 			{
+// 				ra(stack);
+// 				// break ;
+// 			}
+// 			temp = temp->next;
+// 		}
+// 		iteration++;
+// 	}
+// }
+
+t_node	*initialize_stack_a(char **av, int count)
 {
 	t_node	*stack_a;
 
@@ -64,7 +74,7 @@ t_node	*initialize_stack_a(char **av, int ac)
 	int		i;
 
 	stack_a = NULL;
-	i = ac - 1;
+	i = count - 1;
 	while (i >= 0)
 	{
 		input = ft_atoi(av[i]);
@@ -83,6 +93,7 @@ int	main(int argc, char **argv)
 	stack_a = NULL;
 	if (argc < 2)
 		return (0);
+	count = argc;
 	list = parse_args(&count, argc, argv);
 	if (check_errors(count, list))
 	{
@@ -91,7 +102,7 @@ int	main(int argc, char **argv)
 	}
 	stack_a = initialize_stack_a(list);
 	free_tab(list);
-	push_swap(&stack_a, is_sorted);
+	push_swap(&stack_a, count);
 	free_stack(stack_a);
 	return (0);
 }*/

@@ -49,16 +49,17 @@ int	main(int argc, char **argv)
 		printf("\n");
 
 		// pa(&stack_a, &stack_b);
+		// pa(&stack_a, &stack_b);
 		// print_stacks(stack_a, stack_b);
 		// printf("-   -\n");
 		// printf("A   B\n");
 		// printf("\n");
 
-		// sa(&stack_a);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
+		sa(&stack_a);
+		print_stacks(stack_a, stack_b);
+		printf("-   -\n");
+		printf("A   B\n");
+		printf("\n");
 
 		// pb(&stack_a, &stack_b);
 		// print_stacks(stack_a, stack_b);

@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 15:11:05 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 16:32:12 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ int	has_duplicates(int ac, int *input)
 	return (0);
 }
 
-char	**parse_args(int *ac, int argc, char **av)
+char	**parse_args(int *count, int ac, char **av)
 {
 	char	**new_av;
 	int		i;
 
-	if (argc == 2)
+	if (ac == 2)
 	{
 		new_av = ft_split(av[1], ' ');
 		if (!new_av)
@@ -45,15 +45,15 @@ char	**parse_args(int *ac, int argc, char **av)
 		i = 0;
 		while (new_av[i] != NULL)
 			i++;
-		*ac = i;
+		*count = i;
 	}
 	else
 	{
-		new_av = malloc (sizeof(char *) * argc);
+		new_av = malloc (sizeof(char *) * ac);
 		if (!new_av)
 			exit(EXIT_FAILURE);
 		new_av = ++av;
-		*ac = argc - 1;
+		*count = ac - 1;
 	}
 	return (new_av);
 }

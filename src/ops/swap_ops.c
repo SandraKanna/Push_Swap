@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:06:48 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/15 17:35:54 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 17:21:40 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	sa(t_node **stack)
 	//Do nothing if there is only one or no elements: if node1 or node 2 == NULL
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	//sa (swap a): Swap the first 2 elements at the top of stack a.
 	swap(stack);
 	write(1, "sa\n", 3);
 }
@@ -27,7 +26,6 @@ void	sb(t_node **stack)
 	//Do nothing if there is only one or no elements: if node1 or node 2 == NULL
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	//sb (swap b): Swap the first 2 elements at the top of stack b.
 	swap(stack);
 	write(1, "sb\n", 3);
 }

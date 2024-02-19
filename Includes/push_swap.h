@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 15:59:19 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 19:14:39 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 //checks
 int		has_duplicates(int ac, int *input);
-char	**parse_args(int *ac, int argc, char **av);
-int		check_errors(int ac, char **av);
+char	**parse_args(int *count, int ac, char **av);
+int		check_errors(int int_count, char **int_list);
 
 typedef struct s_node
 {
@@ -31,7 +31,15 @@ typedef struct s_node
 	struct s_node	*next;
 }					t_node;
 
-t_node	*initialize_stack_a(char **av, int ac);
+typedef struct s_struct
+{
+	int				bigest;
+	int				smallest;
+	int				median;
+	struct	s_node	*list;
+}					t_struct;
+
+t_node	*initialize_stack_a(char **av, int count);
 t_node	*initialize_stack_a2(char **av, int ac);
 //core
 void	push(t_node **stack, int input);
