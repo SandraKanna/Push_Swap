@@ -1,5 +1,10 @@
 #include "../Includes/push_swap.h"
 
+#define COLOR_RED "\033[91m"
+#define COLOR_GREEN "\033[92m"
+#define COLOR_YELLOW "\033[93m"
+#define COLOR_RESET "\033[0m"
+
 void	print_test(t_node *printme)
 {
 	while (printme != NULL)
@@ -11,26 +16,31 @@ void	print_test(t_node *printme)
 
 int	main(int argc, char **argv)
 {
-	char	**new_tab = NULL;
-//	t_node	*stack_b = NULL;
-	int		ac;
-	t_node	*stack_a;
+	if (argc >= 2)
+	{
+		char	**new_tab = NULL;
+	//	t_node	*stack_b = NULL;
+		int		ac;
+		t_node	*stack_a;
 
-	new_tab = parse_args(&ac, argc, argv);
-	//create stack
-	printf("\nInitial stack:\n------\n");
-	stack_a = initialize_stack_a(new_tab, ac);
-	printf("\n");
-	print_test(stack_a);
+		new_tab = parse_args(&ac, argc, argv);
+		//create stack
+		printf(COLOR_YELLOW "\nInitial stack:\n------\n" COLOR_RESET);
+		stack_a = initialize_stack_a(new_tab, ac);
+		printf("\n");
+		print_test(stack_a);
 
-	//test algo simple
-	printf("\noperations:\n-----\n");
-	push_swap(&stack_a);
-	printf("\nSorted stack:\n-----\n");
-	print_test(stack_a);
-	printf("\n");
+		//test algo simple
+		printf(COLOR_YELLOW "\noperations:\n-----\n" COLOR_RESET);
+		push_swap(&stack_a);
+		printf(COLOR_YELLOW "\nSorted stack:\n-----\n" COLOR_RESET);
+		print_test(stack_a);
+		printf("\n");
 
-	// printf("\n");
+	}
+	else
+		printf(COLOR_YELLOW "\nPlease enter at least 2 numbers after './test5'\n\n" COLOR_RESET);
+
 	return (0);
 }
 

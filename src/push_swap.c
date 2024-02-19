@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 15:03:15 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 16:11:31 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,30 @@
 // 		pa(stack_a, &stack_b);
 // }
 
-void	push_swap(t_node **stack, int (*f)())
+void	push_swap(t_node **stack)
 {
+	int		swapped;
+	t_node	*temp;
 	
+	swapped = 1;
+	temp = *stack;
+
+	while (swapped)
+	{
+		swapped = 0;
+		if (is_sorted(*stack))
+			return ;
+		while (temp && temp->next)
+		{
+			if (temp->value > temp->next->value)
+			{
+				sa(stack);
+				swapped = 1;
+			}
+			temp = temp->next;
+		}
+	//	temp = *stack;
+	}
 }
 
 t_node	*initialize_stack_a(char **av, int ac)
@@ -55,25 +76,22 @@ t_node	*initialize_stack_a(char **av, int ac)
 /*
 int	main(int argc, char **argv)
 {
-	int		ac;
-	char	**av;
+	int		count;
+	char	**list;
 	t_node	*stack_a;
-	t_node	*stack_b;
 
-	stack_b = NULL;
 	stack_a = NULL;
 	if (argc < 2)
 		return (0);
-	av = parse_args(&ac, argc, argv);
-	if (check_errors(ac, av))
+	list = parse_args(&count, argc, argv);
+	if (check_errors(count, list))
 	{
 		write (2, "Error\n", 6);
 		return (EXIT_FAILURE);
 	}
-	stack_a = initialize_stack_a(av);
-	free_tab(av);
-	//push_swap(&stack_a, &stack_b);
-	//free_stack(stack_a);
-	//free_stack(stack_b);
+	stack_a = initialize_stack_a(list);
+	free_tab(list);
+	push_swap(&stack_a, is_sorted);
+	free_stack(stack_a);
 	return (0);
 }*/

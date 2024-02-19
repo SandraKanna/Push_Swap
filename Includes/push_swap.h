@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/15 18:21:15 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 15:59:19 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,10 @@
 # include <stdio.h>
 # include "../libft/Includes/libft_extended.h"
 
-//static: for test
-int		is_signed_nbr(char *str);//to review
+//checks
 int		has_duplicates(int ac, int *input);
-//utils
 char	**parse_args(int *ac, int argc, char **av);
 int		check_errors(int ac, char **av);
-// size_t	ft_strlen(const char *str); libft
-//char	*ft_vide(void); libft
-//char	*ft_substr(char const *s, unsigned int start, size_t len); libft
-// char	**ft_split(char const *s, char c); libft
-int		do_atoi(const char *str, int *error); //to review, prioritize libft
-//clean strings
-//void	free_args(char **av); libft
 
 typedef struct s_node
 {
@@ -63,7 +54,8 @@ void	rra(t_node **stack_a);
 void	rrb(t_node **stack_b);
 void	rrr(t_node **stack_a, t_node **stack_b);
 int		is_sorted(t_node *stack);
-void	push_swap(t_node **stack_a);
+void	push_swap(t_node **stack);
+//void	push_swap(t_node **stack, int (*f)(t_node *));
 //clean nodes
 void	free_stack(t_node **stack);
 

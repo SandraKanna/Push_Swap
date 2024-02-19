@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 15:03:15 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 15:11:05 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	check_errors(int int_count, char **int_list)
 	int	i;
 	int	*temp_conversion;
 	int	error;
-	
+
 	i = 0;
 	temp_conversion = malloc (sizeof(int *) * int_count);
 	if (!temp_conversion)
