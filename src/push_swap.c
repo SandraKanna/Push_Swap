@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 14:49:44 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/19 15:03:15 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,10 @@
 // 		pa(stack_a, &stack_b);
 // }
 
-
+void	push_swap(t_node **stack, int (*f)())
+{
+	
+}
 
 t_node	*initialize_stack_a(char **av, int ac)
 {

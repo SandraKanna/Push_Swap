@@ -30,12 +30,12 @@ $(NAME): $(OBJ) $(LIBFT)
 all: $(NAME)
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 	@echo "object files deleted"
 #$(BONUS_OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	@make --no-print-directory -C $(LIBFT_DIR) fclean
 	@echo "binaries files deleted"
 
