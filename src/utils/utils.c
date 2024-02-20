@@ -12,47 +12,74 @@
 
 #include "../../Includes/push_swap.h"
 
-// int find_biggest(t_node *list)
-// {
+static void	push_bottom(t_node **stack, int input, int *err)
+{
+	t_node	*new_node;
+	t_node	*last;
 
-// }
+	new_node = malloc (sizeof(t_node));
+	if (new_node == NULL)
+	{
+		*err = 1;
+		return ;
+	}
+	new_node->value = input;
+	if (*stack == NULL)
+	{
+		new_node->next = NULL;
+		*stack = new_node;
+	}
+	else
+	{
+		last = find_last(*stack);
+		last->next = new_node;
+	}
+}
 
-// int find_smallest(t_node *list)
-// {
-
-// }
-
-int find_last_value(t_node **list)
+void	list_init(t_node **stack_a, int input, int *err)
 {
 	t_node	*last;
 
-	last = *list;
-	while (last->next != NULL)
-		last = last->next;
-	return (last->value);
+	if (stack_a != NULL)
+	{
+		if (is_smaller(input, (*stack_a)->value)) //put smallest at the top of A so head_index = a
+			push_top(stack_a, input, err);
+
+	}
+	push_bottom(stack_a, input, &err);
 }
 
-int	find_prev_last_value(t_node **list)
+t_node	*find_last(t_node *list)
+{
+	t_node	*last;
+
+	last = list;
+	while (last->next != NULL)
+		last = last->next;
+	return (last);
+}
+
+t_node	*find_prev_last(t_node *list)
 {
 	t_node	*prev;
 
-	prev = *list;
+	prev = list;
 	while (prev->next->next != NULL)
 		prev = prev->next;
-	return (prev->value);
+	return (prev);
 }
 
-int	find_middle_value(t_node **list)
-{
-	t_node	*middle;
-	t_node	*move;
+// int	find_middle_value(t_node **list)
+// {
+// 	t_node	*middle;
+// 	t_node	*move;
 
-	middle = *list;
-	move = (*list)->next;
-	while (move != NULL && move->next != NULL)
-	{
-		middle = middle->next;
-		move = move->next;
-	}
-	return (middle->value);
-}
+// 	middle = *list;
+// 	move = (*list)->next;
+// 	while (move != NULL && move->next != NULL)
+// 	{
+// 		middle = middle->next;
+// 		move = move->next;
+// 	}
+// 	return (middle->value);
+// }

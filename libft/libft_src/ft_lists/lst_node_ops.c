@@ -39,13 +39,13 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_list	*temp;
+	// t_list	*temp;
 
 	if (!lst)
 		return ;
 	if (!new)
 		return ;
-	temp = *lst;
-	new->next = temp;
+	// temp = *lst;
+	new->next = *lst;
 	*lst = new;
 }

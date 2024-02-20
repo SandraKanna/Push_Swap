@@ -23,6 +23,7 @@
         "functional": "c",
         "type_traits": "c",
         "utility": "c",
-        "random": "c"
+        "random": "c",
+        "stack": "c"
     }
 }

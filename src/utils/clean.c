@@ -26,14 +26,17 @@ void	free_stack(t_node **stack)
 	}
 }
 
-void	err_handling(t_struct *struct)
+void	free_struct(t_struct *structure)
 {
-	if (struct != NULL)
-	{
-		if ((*struct)->list != NULL)
-			free_stack(struct->list);
-		free (struct);
-	}
+	if (structure->list != NULL)
+		free_stack(structure->list);
+	free (structure);
+}
+
+void	err_handling(t_struct *structure)
+{
+	if (structure != NULL)
+		free_struct(structure);
 	// write (2, "Error\n", 6);
 	exit (EXIT_FAILURE);
 }
