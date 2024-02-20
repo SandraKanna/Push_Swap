@@ -2,6 +2,27 @@
     "files.associations": {
         "push_swap.h": "c",
         "stdlib.h": "c",
-        "unistd.h": "c"
+        "unistd.h": "c",
+        "__bit_reference": "c",
+        "bitset": "c",
+        "unordered_map": "c",
+        "algorithm": "c",
+        "format": "c",
+        "__node_handle": "c",
+        "deque": "c",
+        "__memory": "c",
+        "limits": "c",
+        "optional": "c",
+        "ratio": "c",
+        "system_error": "c",
+        "tuple": "c",
+        "vector": "c",
+        "charconv": "c",
+        "chrono": "c",
+        "array": "c",
+        "functional": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "random": "c"
     }
 }

@@ -12,13 +12,16 @@
 
 #include "../../Includes/push_swap.h"
 
-int	push(t_node **stack, int input)
+void	push(t_node **stack, int input, int *err)
 {
 	t_node	*new_node;
 
 	new_node = malloc (sizeof(t_node));
 	if (new_node == NULL)
-		err_handling ();
+	{
+		*err = 1;
+		return ;
+	}
 	new_node->value = input;
 	new_node->next = *stack; //linking the new_node to the current stack
 	*stack = new_node; //making the new_node the top of the stack == updating the current top

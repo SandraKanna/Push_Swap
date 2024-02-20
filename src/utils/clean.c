@@ -25,3 +25,15 @@ void	free_stack(t_node **stack)
 		*stack = temp;
 	}
 }
+
+void	err_handling(t_struct *struct)
+{
+	if (struct != NULL)
+	{
+		if ((*struct)->list != NULL)
+			free_stack(struct->list);
+		free (struct);
+	}
+	// write (2, "Error\n", 6);
+	exit (EXIT_FAILURE);
+}

@@ -29,6 +29,22 @@ int	is_nbr(char *str)
 	return (1);
 }
 
+int	is_bigger(int value1, int value2)
+{
+	if (value1 > value2)
+		return (1);
+	else
+		return (0);
+}
+
+int	is_smaller(int value1, int value2)
+{
+	if (value1 < value2)
+		return (1);
+	else
+		return (0);
+}
+
 int	has_quotes(char const *str)
 {
 	int	i;

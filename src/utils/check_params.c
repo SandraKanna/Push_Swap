@@ -41,7 +41,7 @@ char	**parse_args(int *count, int ac, char **av)
 	{
 		new_av = ft_split(av[1], ' ');
 		if (!new_av)
-			exit(EXIT_FAILURE);
+			return (NULL);
 		i = 0;
 		while (new_av[i] != NULL)
 			i++;
@@ -51,7 +51,7 @@ char	**parse_args(int *count, int ac, char **av)
 	{
 		new_av = malloc (sizeof(char *) * ac);
 		if (!new_av)
-			exit(EXIT_FAILURE);
+			return (NULL);
 		new_av = ++av;
 		*count = ac - 1;
 	}

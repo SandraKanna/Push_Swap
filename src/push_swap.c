@@ -50,49 +50,77 @@ t_node	*initialize_stack_b(char **av, int count)
 	
 }*/
 
-t_node	*initialize_stack_b(char **av, int count)
+t_struct	*initialize_b(char **av, int count)
 {
 
 }
 
-t_node	*initialize_stack_a(char **av, int count)
+void	fill_index(t_struct *structure)
+{
+	int		i;
+	t_node	*last;
+	t_node	*last_prev;
+	t_node	*head;
+
+	i = 0;
+	head = structure->list;
+	last = find_last_value(structure->list);
+	last_prev = find_prev_last_value (structure->list);
+	while (i < 5)
+	{
+		if (head != NULL)
+		{
+			if (head->value > )
+		}
+	}
+}
+
+t_node	*initialize_a(char **av, int count, t_struct *struct_a)
 {
 	t_node	*stack_a;
 	int		input;
 	int		i;
-	int		check;
+	int		err;
 
 	stack_a = NULL;
 	i = count - 1;
-	check = 0;
+	err = 0;
 	while (i >= 0)
 	{
 		input = ft_atoi(av[i]);
-		check = push(&stack_a, input);
+		push(&stack_a, input, &err);
+		if (err)
+			err_handling(struct_a);
 		i--;
 	}
-	return (stack_a);
+	struct_a->list = stack_a;
+	fill_index(struct_a);
+
+	return (struct_a);
 }
-/*
+
+
 int	main(int argc, char **argv)
 {
-	int		count;
-	char	**list;
-	t_node	*stack_a;
+	t_struct	*struct_a;
+	int			elements_count;
+	char		**list;
+	t_node		*stack_a;
 
-	stack_a = NULL;
 	if (argc < 2)
 		return (0);
-	count = argc;
-	list = parse_args(&count, argc, argv);
-	if (check_errors(count, list))
-	{
-		write (2, "Error\n", 6);
-		return (EXIT_FAILURE);
-	}
-	stack_a = initialize_stack_a(list);
+	elements_count = 0;
+	list = parse_args(&elements_count, argc, argv);
+	if (!list)
+		return (0);
+	if (check_errors(elements_count, list))
+		return (write (2, "Error\n", 6));
+	struct_a = malloc (sizeof(t_struct));
+	if (!struct_a)
+		return (err_handling(struct_a), 0);
+	stack_a = initialize_a(list, elements_count, &struct_a);
 	free_tab(list);
-	push_swap(&stack_a, count);
+	//push_swap(&stack_a, elements_count);
 	free_stack(stack_a);
 	return (0);
-}*/
+}

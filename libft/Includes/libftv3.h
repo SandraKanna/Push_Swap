@@ -37,6 +37,8 @@ int		ft_isalnum(int c);
 int		ft_isascii(int c);
 int		ft_isprint(int c);
 int		is_nbr(char *str);
+int		is_bigger(int value1, int value2);
+int		is_smaller(int value1, int value2);
 int		has_quotes(char const *str);
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
