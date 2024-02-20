@@ -29,20 +29,31 @@
 // 	while (stack_b != NULL)
 // 		pa(stack_a, &stack_b);
 // }
-/*
-void	sort_5()
+
+t_node	*initialize_b(t_struct *struct_a)
 {
+	t_struct	*struct_b;
+	t_node		*stack_b;
+	int			len;
+
+	len = struct_a->count;
 
 }
-t_node	*initialize_stack_b(char **av, int count)
+
+void	sort_5(t_struct *struct_a)
 {
+	initialize_b(struct_a);
+}
+
+void	push_swap(t_struct *struct_a)
+{
+	if (struct_a->list != NULL)
+	{
+		if ((struct_a->count > 5))
+			sort_5();
+	}
 	
-}
-*/
 
-void	push_swap(t_struct *structure)
-{
-	while (structure)
 }
 
 int	put_index(t_struct *structure)
@@ -58,7 +69,7 @@ int	put_index(t_struct *structure)
 	last_prev = find_prev_last(structure->list);
 	while (i < 5)
 	{
-		temp =  structure->list;
+		temp = structure->list;
 		//is a in the right position?
 		if (is_smaller(temp->value, temp->next->value))
 			structure->index[i] = temp->value;
