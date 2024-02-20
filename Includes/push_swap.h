@@ -35,11 +35,11 @@ typedef struct s_node
 typedef struct s_struct
 {
 	int				count;
-	int				a;
-	int				b;
-	int				c;
-	int				d;
-	int				e;
+	int				index[5];
+	// int				b;
+	// int				c;
+	// int				d;
+	// int				e;
 	int				sorted;
 	struct s_node	**list;
 }					t_struct;

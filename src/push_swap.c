@@ -55,24 +55,30 @@ t_struct	*initialize_b(char **av, int count)
 
 }
 
-void	fill_index(t_struct *structure)
+void	fill_struct(t_struct *structure)
 {
 	int		i;
 	t_node	*last;
 	t_node	*last_prev;
 	t_node	*head;
 
-	i = 0;
+	i = 1;
 	head = structure->list;
 	last = find_last_value(structure->list);
 	last_prev = find_prev_last_value (structure->list);
-	while (i < 5)
+	while (i <= 5)
 	{
-		if (head != NULL)
-		{
-			if (head->value > )
-		}
+		//is a in the right position?
+		if (is_smaller(head->value, head->next->value))
+			structure->index[i] = head->value;
+		if (is_smaller(head->value, last))
+			structure->index[i] = last;
+		else
+			structure->index[i] = last;
 	}
+	else
+
+	i++;
 }
 
 t_node	*initialize_a(char **av, int count, t_struct *struct_a)
@@ -94,7 +100,7 @@ t_node	*initialize_a(char **av, int count, t_struct *struct_a)
 		i--;
 	}
 	struct_a->list = stack_a;
-	fill_index(struct_a);
+	fill_struct(struct_a);
 
 	return (struct_a);
 }
