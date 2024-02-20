@@ -15,10 +15,10 @@
 void	push_swap(t_node **stack_a)
 {
 	t_node	*stack_b;
-	t_node	*temp;
+	// t_node	*temp;
 
 	stack_b = NULL;
-	temp = *stack_a;
+	// temp = *stack_a;
 	while (!is_sorted(*stack_a))
 	{
 		if ((*stack_a)->value < (*stack_a)->next->value)
@@ -29,56 +29,46 @@ void	push_swap(t_node **stack_a)
 	while (stack_b != NULL)
 		pa(stack_a, &stack_b);
 }
+/*
+void	sort_5()
+{
 
-A: 0 -2 6 85 4
-min: -2
-max: 85
-med: 
+}
 
+void	sort_3()
+{
 
-// void	push_swap(t_node **stack, int count)
-// {
-// 	int		iteration;
-// 	t_node	*temp;
+}
+
+void	push_swap(t_node **stack, int count)
+{
+	while (count >= 5)
+}
+
+t_node	*initialize_stack_b(char **av, int count)
+{
 	
-// 	if (count == 2)
-// 	{
-// 		if (!is_sorted(*stack))
-// 			sa(stack);
-// 		return ;
-// 	}
-// 	iteration = 0;
-// 	while (iteration < count)
-// 	{
-// 		if (is_sorted(*stack))
-// 			return ;
-// 		temp = *stack;
-// 		while (temp && temp->next)
-// 		{
-// 			if (temp->value > temp->next->value)
-// 			{
-// 				ra(stack);
-// 				// break ;
-// 			}
-// 			temp = temp->next;
-// 		}
-// 		iteration++;
-// 	}
-// }
+}*/
+
+t_node	*initialize_stack_b(char **av, int count)
+{
+
+}
 
 t_node	*initialize_stack_a(char **av, int count)
 {
 	t_node	*stack_a;
-
 	int		input;
 	int		i;
+	int		check;
 
 	stack_a = NULL;
 	i = count - 1;
+	check = 0;
 	while (i >= 0)
 	{
 		input = ft_atoi(av[i]);
-		push(&stack_a, input);
+		check = push(&stack_a, input);
 		i--;
 	}
 	return (stack_a);

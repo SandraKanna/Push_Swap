@@ -10,33 +10,54 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../Includes/push_swap.h"
+
 // int find_biggest(t_node *list)
 // {
-	
+
 // }
 
 // int find_smallest(t_node *list)
 // {
-	
+
 // }
+
+void	err_handling()
+{
+	// free_tab();
+	// free_list();
+	//exit (EXIT_FAILURE);
+
+}
 
 int find_last_value(t_node *list)
 {
-	t_node *last;
-	
-	while(last->next != NULL)
+	t_node	*last;
+
+	last = list;
+	while (last->next != NULL)
 		last = last->next;
 	return (last->value);
 }
 
-int find_middle_value(t_node *list)
+int	find_prev_last_value(t_node *list)
 {
-	t_node *middle;
-	t_node *move;
-	
+	t_node	*prev;
+
+	prev = list;
+	while (prev->next->next != NULL)
+		prev = prev->next;
+	return (prev->value);
+}
+
+int	find_middle_value(t_node *list)
+{
+	t_node	*middle;
+	t_node	*move;
+
 	middle = list;
 	move = list->next;
-	while(move != NULL && move->next != NULL)
+	while (move != NULL && move->next != NULL)
 	{
 		middle = middle->next;
 		move = move->next;

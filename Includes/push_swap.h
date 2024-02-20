@@ -20,10 +20,10 @@
 # include <stdio.h>
 # include "../libft/Includes/libft_extended.h"
 
-//checks
-int		has_duplicates(int ac, int *input);
+//params checks
 char	**parse_args(int *count, int ac, char **av);
 int		check_errors(int int_count, char **int_list);
+int		has_duplicates(int ac, int *input);
 
 typedef struct s_node
 {
@@ -33,21 +33,25 @@ typedef struct s_node
 
 typedef struct s_struct
 {
-	int				bigest;
-	int				smallest;
-	int				median;
-	struct	s_node	*list;
+	int				count;
+	int				a;
+	int				b;
+	int				c;
+	int				d;
+	int				e;
+	int				sorted;
+	struct s_node	**list;
 }					t_struct;
 
-t_node	*initialize_stack_a(char **av, int count);
-t_node	*initialize_stack_a2(char **av, int ac);
 //core
-void	push(t_node **stack, int input);
-void	push2(t_node **head, int input);
+t_node	*initialize_stack_a(char **av, int count);
+
+int		find_last_value(t_node *list);
+int 	find_prev_last_value(t_node *list);
+//ops
+int		push(t_node **stack, int input);
 int		pop(t_node **stack);
-int		pop2(t_node **stack);
 void	swap(t_node	**stack);
-void	swap2(t_node	**stack);
 void	rotate_up(t_node **stack);
 void	rotate_down(t_node **stack);
 void	pa(t_node **stack_a, t_node **stack_b);

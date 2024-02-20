@@ -1,4 +1,4 @@
-TESTS = test1 test2 test3 test4 test5
+TESTS = input core ops algo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -Isrc
 
@@ -19,23 +19,19 @@ $(LIBFT):
 all: $(LIBFT)
 	@echo "Run one test at a time. Available tests: $(TESTS)"
 
-test1: $(OBJ) test_input.o
+input: $(OBJ) test_input.o
 	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
 	@./$@
 
-test2: $(OBJ) test_core.o
+core: $(OBJ) test_core.o
 	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
 	@./$@
 
-test3: $(OBJ) test_circular.o
+ops: $(OBJ) test_ops.o
 	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
 	@./$@
 
-test4: $(OBJ) test_ops.o
-	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
-	@./$@
-
-test5: $(OBJ) test_algo.o
+algo: $(OBJ) test_algo.o
 	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
 	@./$@
 
@@ -48,4 +44,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re test1 test2 test3 test4 test5
+.PHONY: all clean fclean re input core ops algo
