@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 19:58:37 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/21 16:37:03 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,58 +55,6 @@ void	push_swap(t_struct *struct_a)
 	
 
 }
-
-int	put_index(t_struct *structure)
-{
-	t_node	*last;
-	t_node	*last_prev;
-	t_node	*temp;
-	int		i;
-
-	i = 0;
-//	head = structure->list;
-	last = find_last(structure->list);
-	last_prev = find_prev_last(structure->list);
-	while (i < 5)
-	{
-		temp = structure->list;
-		//is a in the right position?
-		if (is_smaller(temp->value, temp->next->value))
-			structure->index[i] = temp->value;
-		if (is_smaller(temp->value, last->value))
-			structure->index[i] = last->value;
-		else
-			structure->index[i] = last->value;
-	}
-}
-
-t_struct	*initialize_a(char **av, int count)
-{
-	t_struct	*struct_a;
-	t_node		*stack_a;
-	int			input;
-	int			i;
-	int			err;
-
-	stack_a = NULL;
-	struct_a = malloc (sizeof(t_struct));
-	if (!struct_a)
-		return (NULL);
-	struct_a->count = count;
-	i = count - 1;
-	err = 0;
-	while (i >= 0)
-	{
-		input = ft_atoi(av[i]);
-		list_init(struct_a->list, input, &err);
-		if (err)
-			return (NULL);
-		i--;
-	}
-	struct_a->head_index = put_index(struct_a);
-	return (struct_a);
-}
-
 
 int	main(int argc, char **argv)
 {

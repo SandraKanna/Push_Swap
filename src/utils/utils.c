@@ -6,48 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 19:57:10 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/21 16:22:26 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/push_swap.h"
-
-static void	push_bottom(t_node **stack, int input, int *err)
-{
-	t_node	*new_node;
-	t_node	*last;
-
-	new_node = malloc (sizeof(t_node));
-	if (new_node == NULL)
-	{
-		*err = 1;
-		return ;
-	}
-	new_node->value = input;
-	if (*stack == NULL)
-	{
-		new_node->next = NULL;
-		*stack = new_node;
-	}
-	else
-	{
-		last = find_last(*stack);
-		last->next = new_node;
-	}
-}
-
-void	list_init(t_node **stack_a, int input, int *err)
-{
-	t_node	*last;
-
-	if (stack_a != NULL)
-	{
-		if (is_smaller(input, (*stack_a)->value)) //put smallest at the top of A so head_index = a
-			push_top(stack_a, input, err);
-
-	}
-	push_bottom(stack_a, input, &err);
-}
 
 t_node	*find_last(t_node *list)
 {
@@ -67,6 +30,25 @@ t_node	*find_prev_last(t_node *list)
 	while (prev->next->next != NULL)
 		prev = prev->next;
 	return (prev);
+}
+
+int	find_smallest(t_node *list, int n)
+{
+	t_node	*temp;
+	int		i;
+	int		smallest;
+
+	i = 0;
+	smallest = INT_MAX;
+	temp = list->next;
+	while (temp != NULL && i < n)
+	{
+		if (temp->value < smallest)
+			smallest = temp->value;
+		temp = temp->next;
+		i++;
+	}
+	return (smallest);
 }
 
 // int	find_middle_value(t_node **list)

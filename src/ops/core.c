@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:46:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 15:11:05 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/21 13:47:09 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	pop(t_node **stack)
 	int		value;
 
 	if (stack == NULL || *stack == NULL)
-		return (0);//cant remove element of empty
+		return (0);
 	top_node = *stack;
 	value = top_node->value;
 	*stack = top_node->next;
@@ -58,14 +58,14 @@ void	rotate_up(t_node **stack)
 	t_node	*temp;
 	t_node	*first;
 
-	if (*stack == NULL || (*stack)->next == NULL) //if empty or only one node
+	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
-	first = *stack; //saving first node
-	*stack = (*stack)->next;//detaching first node
+	first = *stack;
+	*stack = (*stack)->next;
 	temp = *stack;
 	while(temp->next != NULL)
 		temp = temp->next;
-	temp->next = first; //reattaching first node at the end
+	temp->next = first;
 	first->next = NULL;
 }
 
