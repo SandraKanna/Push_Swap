@@ -24,6 +24,7 @@
         "type_traits": "c",
         "utility": "c",
         "random": "c",
-        "stack": "c"
+        "stack": "c",
+        "variant": "c"
     }
 }

@@ -88,5 +88,5 @@ int	main(int ac, char **av)
 		free(convert);
 	}
 	else
-		printf(COLOR_YELLOW "\nPlease enter at least 2 numbers after './test1'\n\n" COLOR_RESET);
+		printf(COLOR_YELLOW "\nPlease enter at least 2 numbers after './input'\n\n" COLOR_RESET);
 }

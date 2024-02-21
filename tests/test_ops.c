@@ -26,14 +26,16 @@ int	main(int argc, char **argv)
 	t_node	*stack_b = NULL;
 	int		ac;
 	t_node	*stack_a;
+	t_struct	*a;
 
 	if (argc >= 2)
 	{
 		new_tab = parse_args(&ac, argc, argv);
 		//create stack
 		printf("Initializing stacks A and B:\n----------\n");
-		stack_a = initialize_stack_a(new_tab, ac);
-		print_stacks(stack_a, stack_b);
+		a = initialize_a(new_tab, ac);
+		printf("\n----TEST------\n");
+		print_stacks(*a->head, stack_b);
 		printf("-   -\n");
 		printf("A   B\n");
 		printf("\n");
@@ -124,6 +126,6 @@ int	main(int argc, char **argv)
 		// printf("\n");
 	}
 	else
-		printf("Please enter at least 2 numbers after './test4'\n");
+		printf("Please enter at least 2 numbers after './ops'\n");
 	return (0);
 }

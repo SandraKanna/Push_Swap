@@ -36,20 +36,22 @@ typedef struct s_node
 typedef struct s_struct
 {
 	int				count;
-	int				*index;
+	int				*set;
+	int				*tags;
 	int				sorted;
-	int				head_index;
+	//int				head_index;
 	struct s_node	**head;
 }					t_struct;
 
 //init
-void		list_init(t_node **stack, int input, int *err);
-//int			put_index(t_struct *structure);
-void		push_bottom(t_node **stack, int input, int *err);
 t_struct	*initialize_a(char **av, int count);
-//core
+
 t_node		*find_last(t_node *list);
 t_node		*find_prev_last(t_node *list);
+void	list_init(t_struct *stack_a, int input, int *err);
+void	get_set(t_struct *structure, int set_size);
+// void		push_bottom(t_node **stack, int input, int *err);
+
 //ops
 void		push_top(t_node **stack, int input, int *err);
 int			pop(t_node **stack);
@@ -67,13 +69,14 @@ void		rr(t_node **stack_a, t_node **stack_b);
 void		rra(t_node **stack_a);
 void		rrb(t_node **stack_b);
 void		rrr(t_node **stack_a, t_node **stack_b);
-int			is_sorted(t_node *stack);
+int		stack_sorted(t_node *stack);
+int		index_sorted(int *array, int len);
 void		push_swap(t_struct *structure);
 //clean nodes
 void		free_stack(t_node **stack);
 void		free_struct(t_struct *structure);
 void		err_handling(t_struct *structure);
-
+//core
 
 
 #endif

@@ -28,8 +28,10 @@ void	free_stack(t_node **stack)
 
 void	free_struct(t_struct *structure)
 {
-	if (structure->index != NULL)
-		free (structure->index);
+	if (structure->set != NULL)
+		free (structure->set);
+	if (structure->tags != NULL)
+		free (structure->tags);
 	if (structure->head != NULL)
 		free_stack(structure->head);
 	free (structure);

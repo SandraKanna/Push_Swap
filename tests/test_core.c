@@ -15,14 +15,15 @@ int	main(int argc, char **argv)
 	int		ac;
 	int		add = 44;
 	t_node	*stack_test;
+	t_struct	*a;
 
 	if (argc >= 2)
 	{
 		new_tab = parse_args(&ac, argc, argv);
 		//test create stack
 		printf("Initializing the stack A:\n---\n");
-		stack_test = initialize_stack_a(new_tab, ac);
-		print_test(stack_test);
+		a = initialize_a(new_tab, ac);
+		print_test(*a->head = stack_test);
 		printf("\n");
 
 		//test push
@@ -54,7 +55,7 @@ int	main(int argc, char **argv)
 		print_test(stack_test);
 	}
 	else
-		printf("Please enter at least 2 numbers after './test2'\n");
+		printf("Please enter at least 2 numbers after './core'\n");
 	
 	return (0);
 }

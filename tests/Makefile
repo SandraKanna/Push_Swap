@@ -1,6 +1,6 @@
 TESTS = input core ops algo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -Isrc
+CFLAGS = -Wall -Wextra -Werror -g3 -Isrc
 
 LIBFT = ../libft/libft3.a
 LIBFT_DIR = ../libft

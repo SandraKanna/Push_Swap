@@ -23,8 +23,16 @@ void	push_top(t_node **stack, int input, int *err)
 		return ;
 	}
 	new_node->value = input;
-	new_node->next = *stack;
-	*stack = new_node;
+	if (*stack == NULL)
+	{
+		new_node->next = NULL;
+		*stack = new_node;
+	}
+	else
+	{
+		new_node->next = *stack;
+		*stack = new_node;
+	}
 }
 
 int	pop(t_node **stack)

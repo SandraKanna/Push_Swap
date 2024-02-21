@@ -19,7 +19,7 @@
 
 // 	stack_b = NULL;
 // 	// temp = *stack_a;
-// 	while (!is_sorted(*stack_a))
+// 	while (!stack_sorted(*stack_a))
 // 	{
 // 		if ((*stack_a)->value < (*stack_a)->next->value)
 // 			ra(stack_a);
@@ -30,7 +30,7 @@
 // 		pa(stack_a, &stack_b);
 // }
 
-t_node	*initialize_b(t_struct *struct_a)
+/*t_node	*initialize_b(t_struct *struct_a)
 {
 	t_struct	*struct_b;
 	t_node		*stack_b;
@@ -47,11 +47,11 @@ void	sort_5(t_struct *struct_a)
 
 void	push_swap(t_struct *struct_a)
 {
-	if (struct_a->list != NULL)
-	{
-		if ((struct_a->count > 5))
-			sort_5();
-	}
+	// if (struct_a->list != NULL)
+	// {
+	// 	if ((struct_a->count > 5))
+	// 		sort_5();
+	// }
 	
 
 }
@@ -76,4 +76,4 @@ int	main(int argc, char **argv)
 	free_tab(list);
 	push_swap(struct_a);
 	return (free_struct(struct_a), 0);
-}
+}*/

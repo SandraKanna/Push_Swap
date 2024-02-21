@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 
 	}
 	else
-		printf(COLOR_YELLOW "\nPlease enter at least 2 numbers after './test5'\n\n" COLOR_RESET);
+		printf(COLOR_YELLOW "\nPlease enter at least 2 numbers after './algo'\n\n" COLOR_RESET);
 
 	return (0);
 }
