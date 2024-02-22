@@ -15,10 +15,10 @@
 void	push_swap(t_node **stack_a)
 {
 	t_node	*stack_b;
-	t_node	*temp;
+	// t_node	*temp;
 
 	stack_b = NULL;
-	temp = *stack_a;
+	// temp = *stack_a;
 	while (!is_sorted(*stack_a) && *stack_a != NULL)
 	{
 		if ((*stack_a)->value < (*stack_a)->next->value)
