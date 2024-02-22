@@ -39,7 +39,6 @@ typedef struct s_struct
 	int				*set;
 	int				*tags;
 	int				sorted;
-	//int				head_index;
 	struct s_node	*head;
 }					t_struct;
 
@@ -53,7 +52,7 @@ void	get_set(t_struct *structure, int set_size);
 // void		push_bottom(t_node **stack, int input, int *err);
 
 //ops
-void		push_top(t_node **stack, int input, int *err);
+void		push(t_node **stack, int input, int *err);
 int			pop(t_node **stack);
 void		swap(t_node	**stack);
 void		rotate_up(t_node **stack);

@@ -12,13 +12,12 @@
 
 #include "../Includes/push_swap.h"
 
-//void	tag_values_b(t_struct *structure, int set_size)
 
 void	tag_values_a(t_struct *structure, int set_size)
 {
 	int	i;
 	int	j;
-	int	rank;
+	int	rank_a;
 
 	structure->tags = malloc (sizeof(int) * set_size);
 	if (!structure->tags)
@@ -27,14 +26,14 @@ void	tag_values_a(t_struct *structure, int set_size)
 	while (i < set_size)
 	{
 		j = 0;
-		rank = 1;
+		rank_a = 1;
 		while (j < set_size)
 		{
-			if (structure->set[i] > structure->set[j])
-				rank++;
+			if (structure->set[i] < structure->set[j])
+				rank_a++;
 			j++;
 		}
-		structure->tags[i] = rank;
+		structure->tags[i] = rank_a;
 		i++;
 	}
 }
@@ -64,41 +63,8 @@ void	get_set(t_struct *structure, int set_size)
 	if (last_prev != NULL)
 		structure->set[i] = last_prev->value;
 	tag_values_a(structure, set_size);
+	index_sorted(structure->set, set_size);
 }
-
-/*static void	push_bottom(t_node **stack, int input, int *err)
-{
-	t_node	*new_node;
-	t_node	*last;
-
-	new_node = malloc (sizeof(t_node));
-	if (new_node == NULL)
-	{
-		*err = 1;
-		return ;
-	}
-	if (*stack == NULL)
-	{
-		new_node->next = NULL;
-		*stack = new_node;
-	}
-	else
-	{
-		new_node->value = input;
-		last = find_last(*stack);
-		last->next = new_node;
-	}
-}*/
-
-// void	list_init(t_struct *stack_a, int input, int *err)
-// {
-// 	if (stack_a->head != NULL)
-// 	{
-// 		if (input > stack_a->head->value)
-// 			return (push_bottom(&stack_a->head, input, err));
-// 	}
-// 	push_top(&stack_a->head, input, err);
-// }
 
 t_struct	*initialize_a(char **av, int count)
 {
@@ -117,16 +83,14 @@ t_struct	*initialize_a(char **av, int count)
 	while (i < count)
 	{
 		input = ft_atoi(av[i]);
-	//	printf("test atoi: %i\n", input);
-		// list_init(struct_a, input, &err);
-		push_top(&struct_a->head, input, &err);
-	//	printf("test sortie: %p\n", struct_a->head);
+		push(&struct_a->head, input, &err);
 		if (err)
 			return (NULL);
 		i++;
 	}
-	get_set(struct_a, 7);
-	struct_a->sorted = index_sorted(struct_a->set, 7);
+	if (struct_a->count > 7)
+		get_set(struct_a, 7);
+	else
+		get_set(struct_a, struct_a->count);
 	return (struct_a);
 }
-

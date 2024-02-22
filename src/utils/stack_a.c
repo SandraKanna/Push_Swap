@@ -51,6 +51,17 @@ int	find_smallest(t_node *list, int n)
 	return (smallest);
 }
 
+int	stack_sorted(t_node *stack)
+{
+	while (stack->next != NULL)
+	{
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
 // int	find_middle_value(t_node **list)
 // {
 // 	t_node	*middle;

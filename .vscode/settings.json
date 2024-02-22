@@ -25,6 +25,7 @@
         "utility": "c",
         "random": "c",
         "stack": "c",
-        "variant": "c"
+        "variant": "c",
+        "atomic": "c"
     }
 }

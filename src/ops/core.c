@@ -12,10 +12,10 @@
 
 #include "../../Includes/push_swap.h"
 
-void	push_top(t_node **stack, int input, int *err)
+void	push(t_node **stack, int input, int *err)
 {
 	t_node	*new_node;
-	
+
 	new_node = malloc (sizeof(t_node));
 	if (new_node == NULL)
 	{
@@ -23,16 +23,16 @@ void	push_top(t_node **stack, int input, int *err)
 		return ;
 	}
 	new_node->value = input;
-	if (*stack == NULL)
-	{
-		new_node->next = NULL;
-		*stack = new_node;
-	}
-	else
-	{
+	// if (*stack == NULL)
+	// {
+	// 	new_node->next = NULL;
+	// 	*stack = new_node;
+	// }
+	// else
+	// {
 		new_node->next = *stack;
 		*stack = new_node;
-	}
+	//}
 }
 
 int	pop(t_node **stack)
@@ -71,7 +71,7 @@ void	rotate_up(t_node **stack)
 	first = *stack;
 	*stack = (*stack)->next;
 	temp = *stack;
-	while(temp->next != NULL)
+	while (temp->next != NULL)
 		temp = temp->next;
 	temp->next = first;
 	first->next = NULL;
@@ -85,7 +85,7 @@ void	rotate_down(t_node **stack)
 	if (*stack == NULL || (*stack)->next == NULL)
 		return ;
 	temp = *stack;
-	while(temp->next->next != NULL)
+	while (temp->next->next != NULL)
 		temp = temp->next;
 	new_first = temp->next;
 	new_first->next = *stack;

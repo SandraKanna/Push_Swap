@@ -18,6 +18,7 @@ int	main(int argc, char **argv)
 {
 	char	**new_tab = NULL;
 	int		ac;
+	int set_len;
 	t_struct	*a;
 
 	if (argc >= 2)
@@ -33,12 +34,15 @@ int	main(int argc, char **argv)
 		print_test(a->head);
 		printf("-\n");
 		printf("A\n\n");
-		printf("\nInitializing working set and tags\n----------\n");
-		for (int j = 0; j < 7; j++)
+		printf("\nInitializing working set and tags\n----------\n\n");
+		if (a->count > 7)		
+			set_len = 7;
+		else
+			set_len = a->count;
+		for (int j = 0; j < set_len; j++)
 			printf("set[%i]: %i\n", j, a->set[j]);
 		printf("\n");
-
-		for (int j = 0; j < 7; j++)
+		for (int j = 0; j < set_len; j++)
 			printf("tag[%i]: %i\n", j, a->tags[j]);
 		if (a->sorted)
 			printf(COLOR_GREEN "\nThe working set is sorted\n" COLOR_RESET);

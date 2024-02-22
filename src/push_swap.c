@@ -30,33 +30,39 @@
 // 		pa(stack_a, &stack_b);
 // }
 
-/*t_node	*initialize_b(t_struct *struct_a)
+int	index_sorted(int *array, int len)
 {
-	t_struct	*struct_b;
-	t_node		*stack_b;
-	int			len;
+	int	i;
 
-	len = struct_a->count;
-
+	i = 0;
+	while (i < len)
+	{
+		if (array[i] > array[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-void	sort_5(t_struct *struct_a)
+/*void	sort_5(t_struct *struct_a)
 {
 	initialize_b(struct_a);
 }
 
 void	push_swap(t_struct *struct_a)
 {
-	// if (struct_a->list != NULL)
-	// {
-	// 	if ((struct_a->count > 5))
-	// 		sort_5();
-	// }
-	
+	if (struct_a->count <= 5)
+	{
+		if (struct_a->sorted)
+			return ;
+		sort_5(struct_a);
+	}
+	else
+		call_b();
 
-}
+}*/
 
-int	main(int argc, char **argv)
+/*int	main(int argc, char **argv)
 {
 	t_struct	*struct_a;
 	int			elements_count;

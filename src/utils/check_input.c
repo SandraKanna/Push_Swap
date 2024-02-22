@@ -82,28 +82,3 @@ int	check_errors(int int_count, char **int_list)
 		return (free (temp_conversion), 1);
 	return (free (temp_conversion), 0);
 }
-
-int	stack_sorted(t_node *stack)
-{
-	while (stack->next != NULL)
-	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
-int	index_sorted(int *array, int len)
-{
-	int	i;
-
-	i = 0;
-	while (i < len - 1)
-	{
-		if (array[i] > array[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
-}

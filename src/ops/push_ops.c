@@ -20,7 +20,7 @@ void	pa(t_node **stack_a, t_node **stack_b)
 		return ;
 	//pa (push a): Take the first element at the top of b and put it at the top of a.
 	value = pop(stack_b);
-	push_top(stack_a, value, 0);
+	push(stack_a, value, 0);
 	write(1, "pa\n", 3);
 }
 
@@ -32,7 +32,7 @@ void	pb(t_node **stack_a, t_node **stack_b)
 		return ;
 	//pb (push b): Take the first element at the top of a and put it at the top of b.
 	value = pop(stack_a);
-	push_top(stack_b, value, 0);
+	push(stack_b, value, 0);
 	write(1, "pb\n", 3);
 	return ;
 }

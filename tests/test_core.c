@@ -30,7 +30,7 @@ int	main(int argc, char **argv)
 
 		//test push
 		printf("Add: %i\n---\n", add);
-		push_top(&a->head, add, 0);
+		push(&a->head, add, 0);
 		print_test(a->head);
 		printf("\n");
 
