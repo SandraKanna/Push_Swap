@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/21 18:28:36 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/22 17:17:28 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_struct
 	int				*tags;
 	int				sorted;
 	//int				head_index;
-	struct s_node	**head;
+	struct s_node	*head;
 }					t_struct;
 
 //init

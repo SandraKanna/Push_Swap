@@ -1,5 +1,4 @@
 #include "../Includes/push_swap.h"
-# include <stdio.h>
 
 #define COLOR_RED "\033[91m"
 #define COLOR_GREEN "\033[92m"

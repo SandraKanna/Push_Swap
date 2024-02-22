@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:46:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/21 13:47:09 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/22 18:23:30 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	push_top(t_node **stack, int input, int *err)
 {
 	t_node	*new_node;
-
+	
 	new_node = malloc (sizeof(t_node));
 	if (new_node == NULL)
 	{

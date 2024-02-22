@@ -14,45 +14,47 @@ int	main(int argc, char **argv)
 	char	**new_tab = NULL;
 	int		ac;
 	int		add = 44;
-	t_node	*stack_test;
 	t_struct	*a;
 
 	if (argc >= 2)
 	{
 		new_tab = parse_args(&ac, argc, argv);
-		//test create stack
+		if (check_errors(ac, new_tab))
+			return (write (2, "Input error\n", 12));
+
+		printf("\n##### TEST CORE #####\n");
 		printf("Initializing the stack A:\n---\n");
 		a = initialize_a(new_tab, ac);
-		print_test(*a->head = stack_test);
+		print_test(a->head);
 		printf("\n");
 
 		//test push
 		printf("Add: %i\n---\n", add);
-		push(&stack_test, add);
-		print_test(stack_test);
+		push_top(&a->head, add, 0);
+		print_test(a->head);
 		printf("\n");
 
 		//test pop
-		printf("Remove: %i\n---\n", pop(&stack_test));
-		print_test(stack_test);
+		printf("Remove: %i\n---\n", pop(&a->head));
+		print_test(a->head);
 		printf("\n");
 
 		//test swap
 		printf("Swap:\n---\n");
-		swap(&stack_test);
-		print_test(stack_test);
+		swap(&a->head);
+		print_test(a->head);
 		printf("\n");
 
 		//test rotate up
 		printf("Rotate 1 up:\n---\n");
-		rotate_up(&stack_test);
-		print_test(stack_test);
+		rotate_up(&a->head);
+		print_test(a->head);
 		printf("\n");
 		
 		//test rotate down
 		printf("Rotate 1 down:\n---\n");
-		rotate_down(&stack_test);
-		print_test(stack_test);
+		rotate_down(&a->head);
+		print_test(a->head);
 	}
 	else
 		printf("Please enter at least 2 numbers after './core'\n");

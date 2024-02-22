@@ -1,4 +1,4 @@
-TESTS = input core ops algo
+TESTS = input init core ops algo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3 -Isrc
 
@@ -23,6 +23,10 @@ input: $(OBJ) test_input.o
 	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
 	@./$@
 
+init: $(OBJ) test_init.o
+	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
+	@./$@
+
 core: $(OBJ) test_core.o
 	@$(CC) $(CFLAGS) -o $@ $^ $(LIBFT)
 	@./$@
@@ -44,4 +48,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re input core ops algo
+.PHONY: all clean fclean re input init core ops algo

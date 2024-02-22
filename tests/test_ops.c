@@ -1,10 +1,16 @@
 #include "../Includes/push_swap.h"
+#include <stdio.h>
+
+#define COLOR_RED "\033[91m"
+#define COLOR_GREEN "\033[92m"
+#define COLOR_YELLOW "\033[93m"
+#define COLOR_RESET "\033[0m"
 
 void	print_stacks(t_node *A, t_node *B)
 {
 	while (A != NULL && B != NULL)
 	{
-		printf("%i  %i\n", A->value, B->value);
+		printf("\n%i    %i\n", A->value, B->value);
 		A = A->next;
 		B = B->next;
 	}
@@ -15,7 +21,7 @@ void	print_stacks(t_node *A, t_node *B)
 	}
 	while (B != NULL)
 	{
-		printf("   %i\n", B->value);
+		printf("     %i\n", B->value);
 		B = B->next;
 	}
 }
@@ -25,107 +31,40 @@ int	main(int argc, char **argv)
 	char	**new_tab = NULL;
 	t_node	*stack_b = NULL;
 	int		ac;
-	t_node	*stack_a;
+	// t_node	*stack_a;
 	t_struct	*a;
 
 	if (argc >= 2)
 	{
 		new_tab = parse_args(&ac, argc, argv);
-		//create stack
-		printf("Initializing stacks A and B:\n----------\n");
+		if (check_errors(ac, new_tab))
+			return (write (2, "Input error\n", 12));
+
+		printf(COLOR_YELLOW "\n##### TEST OPS #####\n" COLOR_RESET);
+		printf("\nInitializing stacks A and B:\n----------\n");
 		a = initialize_a(new_tab, ac);
-		printf("\n----TEST------\n");
-		print_stacks(*a->head, stack_b);
-		printf("-   -\n");
-		printf("A   B\n");
+		print_stacks(a->head, stack_b);
+		printf("-    -\n");
+		printf("A    B\n");
 		printf("\n");
 
 		//test push & pop ops
-		printf("Exec push ops:\n----------\n");
-		pb(&stack_a, &stack_b);
-		pb(&stack_a, &stack_b);
-		pb(&stack_a, &stack_b);
-		print_stacks(stack_a, stack_b);
-		printf("-   -\n");
-		printf("A   B\n");
+		printf("Exec ops:\n----------\n");
+		pb(&a->head, &stack_b);
+		sa(&a->head);
+		pb(&a->head, &stack_b);
+		ss(&a->head, &stack_b);
+		print_stacks(a->head, stack_b);
+		printf("-    -\n");
+		printf("A    B\n");
 		printf("\n");
 
-		// pa(&stack_a, &stack_b);
-		// pa(&stack_a, &stack_b);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		sa(&stack_a);
-		print_stacks(stack_a, stack_b);
-		printf("-   -\n");
-		printf("A   B\n");
+		sa(&a->head);
+		print_stacks(a->head, stack_b);
+		printf("-    -\n");
+		printf("A    B\n");
 		printf("\n");
-
-		// pb(&stack_a, &stack_b);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		// sb(&stack_b);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		// ss(&stack_a, &stack_b);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		// ra(&stack_a);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		// pb(&stack_a, &stack_b);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		// rb(&stack_b);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		// rr(&stack_a, &stack_b);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		// rra(&stack_a);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		// rrb(&stack_b);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		// rrr(&stack_a, &stack_b);
-		// print_stacks(stack_a, stack_b);
-		// printf("-   -\n");
-		// printf("A   B\n");
-		// printf("\n");
-
-		// printf("\n");
 	}
-	else
-		printf("Please enter at least 2 numbers after './ops'\n");
+	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:41:19 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/21 18:34:29 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/22 18:26:20 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	tag_values_a(t_struct *structure, int set_size)
 {
 	int	i;
 	int	j;
+	int	rank;
 
 	structure->tags = malloc (sizeof(int) * set_size);
 	if (!structure->tags)
@@ -26,12 +27,14 @@ void	tag_values_a(t_struct *structure, int set_size)
 	while (i < set_size)
 	{
 		j = 0;
-		while (j < set_size - 1)
+		rank = 1;
+		while (j < set_size)
 		{
-			if (structure->set[j] < structure->set[j + 1])
-				structure->tags[i] = structure->set[j];
+			if (structure->set[i] > structure->set[j])
+				rank++;
 			j++;
 		}
+		structure->tags[i] = rank;
 		i++;
 	}
 }
@@ -47,23 +50,23 @@ void	get_set(t_struct *structure, int set_size)
 	if (!structure->set)
 		err_handling(structure);
 	i = 0;
-	temp = *structure->head;
+	temp = structure->head;
 	while (temp != NULL && i < set_size)
 	{
 		structure->set[i] = temp->value;
 		temp = temp->next;
 		i++;
 	}
-	last = find_last(*structure->head);
+	last = find_last(structure->head);
 	if (last != NULL)
 		structure->set[i++] = last->value;
-	last_prev = find_prev_last(*structure->head);
+	last_prev = find_prev_last(structure->head);
 	if (last_prev != NULL)
 		structure->set[i] = last_prev->value;
 	tag_values_a(structure, set_size);
 }
 
-static void	push_bottom(t_node **stack, int input, int *err)
+/*static void	push_bottom(t_node **stack, int input, int *err)
 {
 	t_node	*new_node;
 	t_node	*last;
@@ -85,17 +88,17 @@ static void	push_bottom(t_node **stack, int input, int *err)
 		last = find_last(*stack);
 		last->next = new_node;
 	}
-}
+}*/
 
-void	list_init(t_struct *stack_a, int input, int *err)
-{
-	if (stack_a->head != NULL)
-	{
-		if (input > (*stack_a->head)->value)
-			return (push_bottom(stack_a->head, input, err));
-	}
-	push_top(stack_a->head, input, err);
-}
+// void	list_init(t_struct *stack_a, int input, int *err)
+// {
+// 	if (stack_a->head != NULL)
+// 	{
+// 		if (input > stack_a->head->value)
+// 			return (push_bottom(&stack_a->head, input, err));
+// 	}
+// 	push_top(&stack_a->head, input, err);
+// }
 
 t_struct	*initialize_a(char **av, int count)
 {
@@ -114,9 +117,10 @@ t_struct	*initialize_a(char **av, int count)
 	while (i < count)
 	{
 		input = ft_atoi(av[i]);
-		printf("test: %i\n", input);
-		list_init(struct_a, input, &err);//correct dereferencing error
-		printf("test: %p\n", struct_a->head);
+	//	printf("test atoi: %i\n", input);
+		// list_init(struct_a, input, &err);
+		push_top(&struct_a->head, input, &err);
+	//	printf("test sortie: %p\n", struct_a->head);
 		if (err)
 			return (NULL);
 		i++;
