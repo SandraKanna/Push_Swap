@@ -28,10 +28,10 @@ int	main(int argc, char **argv)
 			return (write (2, "Input error\n", 12));
 
 		printf(COLOR_YELLOW "\n##### TEST: INITIALIZATION OF STRUCTURE A #####\n" COLOR_RESET);
-		a = initialize_a(new_tab, ac);
+		a = struct_init(new_tab, ac);
 		printf("\nNumber of elements: %i\n", a->count);
 		printf("\nInitializing stack A\n----------\n");
-		print_test(a->head);
+		print_test(a->head_a);
 		printf("-\n");
 		printf("A\n\n");
 		printf("\nInitializing working set and tags\n----------\n\n");
@@ -45,9 +45,10 @@ int	main(int argc, char **argv)
 		for (int j = 0; j < set_len; j++)
 			printf("tag[%i]: %i\n", j, a->tags[j]);
 		if (a->sorted)
-			printf(COLOR_GREEN "\nThe working set is sorted\n" COLOR_RESET);
+			printf(COLOR_GREEN "\n***** The working set is sorted *****\n\n" COLOR_RESET);
 		else
-			printf(COLOR_RED "\nThe working set is NOT sorted\n\n" COLOR_RESET);
+			printf(COLOR_RED "\n----- The working set is NOT sorted -----\n\n" COLOR_RESET);
+	
 	}
 	else
 		printf("Please enter at least 2 numbers after './init'\n");

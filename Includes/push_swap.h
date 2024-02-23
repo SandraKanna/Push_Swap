@@ -39,11 +39,12 @@ typedef struct s_struct
 	int				*set;
 	int				*tags;
 	int				sorted;
-	struct s_node	*head;
+	struct s_node	*head_a;
+	struct s_node	**head_b;
 }					t_struct;
 
 //init
-t_struct	*initialize_a(char **av, int count);
+t_struct	*struct_init(char **av, int count);
 
 t_node		*find_last(t_node *list);
 t_node		*find_prev_last(t_node *list);
@@ -68,8 +69,11 @@ void		rr(t_node **stack_a, t_node **stack_b);
 void		rra(t_node **stack_a);
 void		rrb(t_node **stack_b);
 void		rrr(t_node **stack_a, t_node **stack_b);
-int		stack_sorted(t_node *stack);
-int		index_sorted(int *array, int len);
+int		is_stack_sorted(t_node *stack);
+void	tiny_sort_a(t_struct *structure);
+void	tiny_sort_b(t_struct *structure);;
+int		is_set_sorted(int *array, int len);
+void	call_b(t_struct *structure, int size);
 void		push_swap(t_struct *structure);
 //clean nodes
 void		free_stack(t_node **stack);

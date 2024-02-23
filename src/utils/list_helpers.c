@@ -51,7 +51,7 @@ int	find_smallest(t_node *list, int n)
 	return (smallest);
 }
 
-int	stack_sorted(t_node *stack)
+int	is_stack_sorted(t_node *stack)
 {
 	while (stack->next != NULL)
 	{

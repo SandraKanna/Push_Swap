@@ -32,8 +32,8 @@ void	free_struct(t_struct *structure)
 		free (structure->set);
 	if (structure->tags != NULL)
 		free (structure->tags);
-	if (structure->head != NULL)
-		free_stack(&structure->head);
+	if (structure->head_a != NULL)
+		free_stack(&structure->head_a);
 	free (structure);
 }
 
@@ -41,6 +41,8 @@ void	err_handling(t_struct *structure)
 {
 	if (structure != NULL)
 		free_struct(structure);
+	// if (structure_b != NULL)
+	// 	free_Struct_b(structure_b);
 	// write (2, "Error\n", 6);
 	exit (EXIT_FAILURE);
 }
