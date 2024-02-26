@@ -34,41 +34,49 @@ void	tiny_sort_a(t_struct *structure)
 	//printf("test list size: %i\n", structure->count);
 	size = structure->count;
 	if (size == 2)
-		return (sa(&structure->head_a));
+		return (sa(&structure->head));
 	if (size == 3)
 	{
-		rra(&structure->head_a);
-		if (!is_stack_sorted(structure->head_a))
-			return (sa(&structure->head_a));
+		rra(&structure->head);
+		if (!is_stack_sorted(structure->head))
+			return (sa(&structure->head));
 	}
 }
 
-void	push_swap(t_struct *structure, int size)
+void	merge_ab(t_struct *a, t_struct b)
 {
-	int	next_size;
-	
-	if (structure->head_a && is_stack_sorted(structure->head_a))
+
+}
+
+void	push_swap(t_struct *a, int size)
+{
+	t_struct	**b;
+	int			i;
+
+	if (a->head && is_stack_sorted(a->head))
 	{
 		printf("Already sorted!\n");
 		return ;
 	}
-	if (structure->count <= 3)
-		tiny_sort_a(structure);
-	// next_size = size / 5;
-	// else if (next_size > 0)
-	while (size / 5 > 0)
+	if (a->count <= 3)
+		tiny_sort_a(a);
+	i = size / 5;
+	if (i > 1)
 	{
 		// printf("WORK IN PROGRESS...\n");
-		// push_swap(structure, size / 5);
-		// size = size / 5;
-		call_b(structure, size);
+		b[i] = initialize_b(a, 5);
+		if (!b[i])
+			err_handling_b(b, a);
+		// size -= 5;
+		push_swap(a, size - 5);
+		merge_ab(a, *b[i]);
 		return ;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_struct	*structure;
+	t_struct	*a;
 	int			elements_count;
 	char		**list;
 
@@ -80,11 +88,11 @@ int	main(int argc, char **argv)
 		return (0);
 	if (check_errors(elements_count, list))
 		return (write (2, "Error\n", 6));
-	structure = struct_init(list, elements_count);
-	if (!structure)
-		return (err_handling(structure), 0);
+	a = initialize_a(list, elements_count);
+	if (!a)
+		return (err_handling(a), 0);
 	if (argc == 2)
 		free_tab(list);
-	push_swap(structure, structure->count);
-	return (free_struct(structure), 0);
+	push_swap(a, a->count);
+	return (free_struct(a), 0);
 }

@@ -49,48 +49,48 @@ void	get_set(t_struct *structure, int set_size)
 	if (!structure->set)
 		err_handling(structure);
 	i = 0;
-	temp = structure->head_a;
+	temp = structure->head;
 	while (temp != NULL && i < set_size)
 	{
 		structure->set[i] = temp->value;
 		temp = temp->next;
 		i++;
 	}
-	last = find_last(structure->head_a);
+	last = find_last(structure->head);
 	if (last != NULL)
 		structure->set[i++] = last->value;
-	last_prev = find_prev_last(structure->head_a);
+	last_prev = find_prev_last(structure->head);
 	if (last_prev != NULL)
 		structure->set[i] = last_prev->value;
 	tag_values_a(structure, set_size);
 	structure->sorted = is_set_sorted(structure->set, set_size);
 }
 
-t_struct	*struct_init(char **av, int count)
+t_struct	*initialize_a(char **av, int count)
 {
-	t_struct	*structure;
+	t_struct	*a;
 	int			input;
 	int			i;
 	int			err;
 
-	structure = malloc (sizeof(t_struct));
-	if (!structure)
+	a = malloc (sizeof(t_struct));
+	if (!a)
 		return (NULL);
-	structure->count = count;
-	structure->head_a = NULL;
+	a->count = count;
+	a->head = NULL;
 	i = count - 1;
 	err = 0;
 	while (i >= 0)
 	{
 		input = ft_atoi(av[i]);
-		push(&structure->head_a, input, &err);
+		push(&a->head, input, &err);
 		if (err)
 			return (NULL);
 		i--;
 	}
-	if (structure->count > 7)
-		get_set(structure, 7);
+	if (a->count > 7)
+		get_set(a, 7);
 	else
-		get_set(structure, structure->count);
-	return (structure);
+		get_set(a, a->count);
+	return (a);
 }

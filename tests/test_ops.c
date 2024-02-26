@@ -43,24 +43,24 @@ int	main(int argc, char **argv)
 		printf(COLOR_YELLOW "\n##### TEST OPS #####\n" COLOR_RESET);
 		printf("\nInitializing stacks A and B:\n----------\n");
 		a = struct_init(new_tab, ac);
-		print_stacks(a->head_a, stack_b);
+		print_stacks(a->head, stack_b);
 		printf("-    -\n");
 		printf("A    B\n");
 		printf("\n");
 
 		//test push & pop ops
 		printf("Exec ops:\n----------\n");
-		pb(&a->head_a, &stack_b);
-		sa(&a->head_a);
-		pb(&a->head_a, &stack_b);
-		ss(&a->head_a, &stack_b);
-		print_stacks(a->head_a, stack_b);
+		pb(&a->head, &stack_b);
+		sa(&a->head);
+		pb(&a->head, &stack_b);
+		ss(&a->head, &stack_b);
+		print_stacks(a->head, stack_b);
 		printf("-    -\n");
 		printf("A    B\n");
 		printf("\n");
 
-		sa(&a->head_a);
-		print_stacks(a->head_a, stack_b);
+		sa(&a->head);
+		print_stacks(a->head, stack_b);
 		printf("-    -\n");
 		printf("A    B\n");
 		printf("\n");

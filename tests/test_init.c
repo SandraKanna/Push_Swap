@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 		a = struct_init(new_tab, ac);
 		printf("\nNumber of elements: %i\n", a->count);
 		printf("\nInitializing stack A\n----------\n");
-		print_test(a->head_a);
+		print_test(a->head);
 		printf("-\n");
 		printf("A\n\n");
 		printf("\nInitializing working set and tags\n----------\n\n");
