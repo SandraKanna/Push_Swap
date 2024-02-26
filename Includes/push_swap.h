@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/22 17:17:28 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/26 16:13:44 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	tiny_sort_a(t_struct *structure);
 void	tiny_sort_b(t_struct *structure);;
 int		is_set_sorted(int *array, int len);
 void	call_b(t_struct *structure, int size);
-void		push_swap(t_struct *structure);
+void	push_swap(t_struct *structure, structure->count);
 //clean nodes
 void		free_stack(t_node **stack);
 void		free_struct(t_struct *structure);

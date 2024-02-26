@@ -18,14 +18,14 @@ OBJ = $(CFILES:.c=.o)
 
 %.o: %.c
 	@echo "compiling..."
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
 
 $(LIBFT):
 	@make --no-print-directory -C $(LIBFT_DIR)
 	@echo "---compiled with libft---"
-
-$(NAME): $(OBJ) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
 
 all: $(NAME)
 

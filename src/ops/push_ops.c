@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:06:48 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/15 17:35:43 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/26 15:55:47 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	pa(t_node **stack_a, t_node **stack_b)
 {
 	int	value;
 	//Do nothing if b is empty.
-	if (*stack_b == NULL | stack_b == NULL)
+	if ((*stack_b == NULL) | (stack_b == NULL))
 		return ;
 	//pa (push a): Take the first element at the top of b and put it at the top of a.
 	value = pop(stack_b);
@@ -28,7 +28,7 @@ void	pb(t_node **stack_a, t_node **stack_b)
 {
 	int	value;
 	//Do nothing if a is empty.
-	if (*stack_a == NULL | stack_a == NULL)
+	if ((*stack_a == NULL) | (stack_a == NULL))
 		return ;
 	//pb (push b): Take the first element at the top of a and put it at the top of b.
 	value = pop(stack_a);
