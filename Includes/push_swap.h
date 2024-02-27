@@ -29,25 +29,23 @@ int		has_duplicates(int ac, int *input);
 typedef struct s_node
 {
 	int				value;
+	int				rank;
 	struct s_node	*next;
 }					t_node;
 
 typedef struct s_struct
 {
 	int				count;
-	int				*set;
-	int				*tags;
-	int				sorted;
-	struct s_node	*head;
-	// struct s_node	**head_b;
+	struct s_node	*head_a;
+	struct s_node	**head_b;
 }					t_struct;
 
 //init
 t_node		*find_last(t_node *list);
 t_node		*find_prev_last(t_node *list);
 int			*tag_values(t_struct *structure, int set_size);
-t_struct	*initialize_a(char **av, int count);
-t_struct	*initialize_b(t_struct *a, int size);
+t_struct	*init_struct(char **av, int count);
+// t_struct	*initialize_b(t_struct *a, int size);
 void		get_set_a(t_struct *a, int set_size);
 void		get_set_b(t_struct *b, t_struct *a, int set_size);
 //ops

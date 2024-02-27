@@ -14,86 +14,78 @@
 
 void	tiny_sort_a(t_struct *structure)
 {
-	int		size;
 	t_node	*last;
+	int		size;
 
-	//printf("test list size: %i\n", structure->count);
 	size = structure->count;
 	if (size == 2)
-		return (sa(&structure->head));
-	last = find_last(structure->head);
+		return (sa(&structure->head_a));
 	if (size == 3)
 	{
-		if (structure->head->value < last->value)
+		last = find_last(structure->head_a);
+		if (structure->head_a->value < last->value)
 		{
-			sa(&structure->head);
-			if (!is_stack_sorted(structure->head))
-				return (ra(&structure->head));
+			sa(&structure->head_a);
+			if (!is_stack_sorted(structure->head_a))
+				return (ra(&structure->head_a));
 		}
-		else if (structure->head->value < structure->head->next->value)
-			return (rra(&structure->head));
-		else if (structure->head->value > last->value)
+		else if (structure->head_a->value < structure->head_a->next->value)
+			return (rra(&structure->head_a));
+		else if (structure->head_a->value > last->value)
 		{
-			ra(&structure->head);
-			if (!is_stack_sorted(structure->head))
-				return (sa(&structure->head));	
+			ra(&structure->head_a);
+			if (!is_stack_sorted(structure->head_a))
+				return (sa(&structure->head_a));
 		}
 	}
 }
 
+void	sort(t_struct *structure, int size, char c)
+{
+	int		size;
+	t_node	*last;
+
+	i = 0;
+	last = find_last(structure->head_a);
+	if (size == 4)
+	{
+		
+	}
+	// if (i > 1)
+	while ((size / 5) > 1)
+	{
+
+	}
+	
+}
+
 // void	merge_ab(t_struct *a, t_struct **b)
 // {
-	
+
 // }
 
-void	push_swap(t_struct *a, int size)
+void	push_swap(t_struct *structure, int size)
 {
-	t_struct	**b;
-	t_node		*last;
-	int			i;
+	t_node	**b;
+	t_node	*last;
+	int		i;
 
-	if (a->head && is_stack_sorted(a->head))
+	if (structure->head_a && is_stack_sorted(structure->head_a))
 	{
 		printf("Already sorted!\n");
 		return ;
 	}
-	if (a->count <= 3)
-		tiny_sort_a(a);
+	if (structure->count <= 3)
+		return (tiny_sort_a(structure));
+	rank_set(structure->head_a, size);
 	b = NULL;
-	// i = size / 5;
-	i = 0;
-	// if (i > 1)
-	while ((size / 5) > 1)
-	{
-		if (size > 7)
-			get_set_a(a, 7);
-		else
-			get_set_a(a, size);
-		// printf("WORK IN PROGRESS...\n");
-		last = find_last(a->head);
-		if (a->tags[i] != 1)
-		{
-			if (a->head->value > a->head->next->value)
-			{
-				if (a->head->value > last->value)
-					rra(&a->head);
-				else
-					sa (&a->head);
-			}
-		}
-		b[i] = initialize_b(a, 5);
-		if (!b[i])
-			err_handling_b(b, a);
-		a->count -= 5;
-		size -= 5;
-		// push_swap(a, size - 5);
-	}
+	sort (structure, size);
 	// merge_ab(a, b);
 }
 
 int	main(int argc, char **argv)
 {
-	t_struct	*a;
+	t_struct	*structure;
 	int			elements_count;
 	char		**list;
 
@@ -105,11 +97,11 @@ int	main(int argc, char **argv)
 		return (0);
 	if (check_errors(elements_count, list))
 		return (write (2, "Error\n", 6));
-	a = initialize_a(list, elements_count);
+	structure = init_struct(list, elements_count);
 	if (argc == 2)
 		free_tab(list);
-	if (!a)
-		return (err_handling(a), 0);
-	push_swap(a, a->count);
-	return (free_struct(a), 0);
+	if (!structure)
+		return (err_handling(structure), 0);
+	push_swap(structure, structure->count);
+	return (free_struct(main), 0);
 }

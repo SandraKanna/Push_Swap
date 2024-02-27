@@ -12,101 +12,88 @@
 
 #include "../Includes/push_swap.h"
 
-int	is_set_a_sorted(int *array, int len)
+int	rank_set(t_node *list, int set_size)
 {
 	int	i;
+	t_node	*last;
+	t_node	*last_prev;
+	t_node	*temp;
 
+	last = find_last(list);
+	last_prev = find_prev_last(list);
 	i = 0;
-	while (i < len)
-	{
-		if (array[i] > array[i + 1])
-			return (0);
-		//printf("test sort index: %i\n", array[i]);
-		i++;
-	}
-	return (1);
-}
-
-int	*tag_values(t_struct *structure, int set_size)
-{
-	int	i;
-	int	j;
-	int	rank;
-
-	structure->tags = malloc (sizeof(int) * set_size);
-	if (!structure->tags)
-		return (NULL);
-	i = 0;
+	if (set_size > 5)
+		set_size = 5;
 	while (i < set_size)
 	{
-		j = 0;
-		rank = 1;
-		while (j < set_size)
+		list->rank = 1;
+		temp = list;
+		while (temp && temp->next != NULL)
 		{
-			if (structure->set[i] > structure->set[j])
-				rank++;
-			j++;
+			if (temp->value > temp->next->value)
+				temp->rank++;
+			temp = temp->next;
 		}
-		structure->tags[i] = rank;
 		i++;
 	}
-	return (structure->tags);
 }
 
-void	get_set_a(t_struct *a, int set_size)
+void	get_set(t_struct *structure, char c, int index, int set_size)
 {
 	t_node	*last;
 	t_node	*last_prev;
 	t_node	*temp;
 	int		i;
 
-	a->set = malloc (sizeof(int *) * set_size);
-	if (!a->set)
-		err_handling(a);
+	temp = structure->head_a;
+	last = find_last(structure->head_a);
+	last_prev = find_prev_last(structure->head_a);
+	if (c == 'b')
+	{
+		last = find_last(structure->head_b[index]);
+		last_prev = find_prev_last(structure->head_b);
+		temp = structure->head_b;
+	}
 	i = 0;
-	temp = a->head;
 	while (temp != NULL && i < set_size)
 	{
-		a->set[i] = temp->value;
+		structure->head_a = temp->value;
 		temp = temp->next;
 		i++;
 	}
-	last = find_last(a->head);
+
 	if (last != NULL)
-		a->set[i++] = last->value;
-	last_prev = find_prev_last(a->head);
+		structure->set[i++] = last->value;
+
 	if (last_prev != NULL)
-		a->set[i] = last_prev->value;
-	if (!tag_values(a, set_size))
-		err_handling(a);
-	a->sorted = is_set_a_sorted(a->set, set_size);
+		structure->set[i] = last_prev->value;
+	if (!tag_values(structure, set_size))
+		err_handling(structure);
 }
 
-t_struct	*initialize_a(char **av, int count)
+t_struct	*init_struct(char **av, int count)
 {
-	t_struct	*a;
+	t_struct	*structure;
 	int			input;
 	int			i;
 	int			err;
 
-	a = malloc (sizeof(t_struct));
-	if (!a)
+	structure = malloc (sizeof(t_struct));
+	if (!structure)
 		return (NULL);
-	a->count = count;
-	a->head = NULL;
+	structure->count = count;
+	structure->head_a = NULL;
 	i = count - 1;
 	err = 0;
 	while (i >= 0)
 	{
 		input = ft_atoi(av[i]);
-		push(&a->head, input, &err);
+		push(&structure->head_a, input, &err);
 		if (err)
 			return (NULL);
 		i--;
 	}
-	// if (a->count > 7)
-	// 	get_set_a(a, 7);
-	// else
-	// 	get_set_a(a, a->count);
-	return (a);
+	structure->head_b = NULL;
+	*structure->head_b = NULL;
+	return (structure);
 }

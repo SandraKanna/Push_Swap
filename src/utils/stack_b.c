@@ -38,17 +38,17 @@ void	get_set_b(t_struct *b, t_struct *a, int set_size)
 	if (!b->set)
 		err_handling_b(&b, a);
 	i = 0;
-	temp = b->head;
+	temp = b->head_a;
 	while (temp != NULL && i < set_size)
 	{
 		b->set[i] = temp->value;
 		temp = temp->next;
 		i++;
 	}
-	last = find_last(b->head);
+	last = find_last(b->head_a);
 	if (last != NULL)
 		b->set[i++] = last->value;
-	last_prev = find_prev_last(b->head);
+	last_prev = find_prev_last(b->head_a);
 	if (last_prev != NULL)
 		b->set[i] = last_prev->value;
 	if (!tag_values(b, set_size))
@@ -68,11 +68,11 @@ t_struct	*initialize_b(t_struct *a, int size)
 	if (!b)
 		return (NULL);
 	b->count = size;
-	b->head = NULL;
+	b->head_a = NULL;
 	i = 0;
 	while (i < size)
 	{
-		pb(&a->head, &b->head, &err);
+		pb(&a->head_a, &b->head_a, &err);
 		if (err)
 			return (NULL);
 		i++;

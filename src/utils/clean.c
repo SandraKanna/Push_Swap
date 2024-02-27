@@ -26,36 +26,27 @@ void	free_stack(t_node **stack)
 	}
 }
 
-void	free_struct(t_struct *structure)
-{
-	if (structure->set != NULL)
-		free (structure->set);
-	if (structure->tags != NULL)
-		free (structure->tags);
-	if (structure->head != NULL)
-		free_stack(&structure->head);
-	free (structure);
-}
-
-void	free_struct_b(t_struct **b)
+void	free_b(t_node ***b)
 {
 	int	i;
 
 	i = 0;
 	while (b[i] != NULL)
-		free_struct(b[i++]);
+		free_stack(*b);
 	free (b);
 }
 
-void	err_handling_b(t_struct **structure_b, t_struct *structure_a)
+void	free_struct(t_struct *structure)
 {
-	free_struct_b(structure_b);
-	err_handling(structure_a);
+	if (structure->head_a != NULL)
+		free_stack(&structure->head_a);
+	if (structure->head_b != NULL || *structure->head_b != NULL )
+		free_b(&structure->head_b);
+	free (structure);
 }
 
-void	err_handling(t_struct *structure_a)
+void	err_handling(t_struct *structure)
 {
-	if (structure_a != NULL)
-		free_struct(structure_a);
+	free_struct(structure);
 	exit (EXIT_FAILURE);
 }
