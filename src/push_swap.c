@@ -6,47 +6,45 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/26 16:32:57 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/27 15:55:23 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
 
-int	is_set_sorted(int *array, int len)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (array[i] > array[i + 1])
-			return (0);
-		//printf("test sort index: %i\n", array[i]);
-		i++;
-	}
-	return (1);
-}
-
 void	tiny_sort_a(t_struct *structure)
 {
-	int	size;
+	int		size;
+	t_node	*last;
 
 	//printf("test list size: %i\n", structure->count);
 	size = structure->count;
 	if (size == 2)
 		return (sa(&structure->head));
+	last = find_last(structure->head);
 	if (size == 3)
 	{
-		rra(&structure->head);
-		if (!is_stack_sorted(structure->head))
-			return (sa(&structure->head));
+		if (structure->head->value < last->value)
+		{
+			sa(&structure->head);
+			if (!is_stack_sorted(structure->head))
+				return (ra(&structure->head));
+		}
+		else if (structure->head->value < structure->head->next->value)
+			return (rra(&structure->head));
+		else if (structure->head->value > last->value)
+		{
+			ra(&structure->head);
+			if (!is_stack_sorted(structure->head))
+				return (sa(&structure->head));	
+		}
 	}
 }
 
-void	merge_ab(t_struct *a, t_struct b)
-{
+// void	merge_ab(t_struct *a, t_struct b)
+// {
 
-}
+// }
 
 void	push_swap(t_struct *a, int size)
 {
@@ -60,6 +58,7 @@ void	push_swap(t_struct *a, int size)
 	}
 	if (a->count <= 3)
 		tiny_sort_a(a);
+	b = NULL;
 	i = size / 5;
 	if (i > 1)
 	{
@@ -69,7 +68,7 @@ void	push_swap(t_struct *a, int size)
 			err_handling_b(b, a);
 		// size -= 5;
 		push_swap(a, size - 5);
-		merge_ab(a, *b[i]);
+		// merge_ab(a, *b[i]);
 		return ;
 	}
 }

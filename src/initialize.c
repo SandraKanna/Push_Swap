@@ -6,36 +6,51 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:41:19 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/22 18:26:20 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/27 14:21:19 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
 
+int	is_set_a_sorted(int *array, int len)
+{
+	int	i;
 
-void	tag_values_a(t_struct *structure, int set_size)
+	i = 0;
+	while (i < len)
+	{
+		if (array[i] > array[i + 1])
+			return (0);
+		//printf("test sort index: %i\n", array[i]);
+		i++;
+	}
+	return (1);
+}
+
+int	*tag_values(t_struct *structure, int set_size)
 {
 	int	i;
 	int	j;
-	int	rank_a;
+	int	rank;
 
 	structure->tags = malloc (sizeof(int) * set_size);
 	if (!structure->tags)
-		err_handling(structure);
+		return (NULL);
 	i = 0;
 	while (i < set_size)
 	{
 		j = 0;
-		rank_a = 1;
+		rank = 1;
 		while (j < set_size)
 		{
 			if (structure->set[i] > structure->set[j])
-				rank_a++;
+				rank++;
 			j++;
 		}
-		structure->tags[i] = rank_a;
+		structure->tags[i] = rank;
 		i++;
 	}
+	return (structure->tags);
 }
 
 void	get_set(t_struct *structure, int set_size)
@@ -62,8 +77,9 @@ void	get_set(t_struct *structure, int set_size)
 	last_prev = find_prev_last(structure->head);
 	if (last_prev != NULL)
 		structure->set[i] = last_prev->value;
-	tag_values_a(structure, set_size);
-	structure->sorted = is_set_sorted(structure->set, set_size);
+	if (!tag_values(structure, set_size))
+		err_handling (structure);
+	structure->sorted = is_set_a_sorted(structure->set, set_size);
 }
 
 t_struct	*initialize_a(char **av, int count)

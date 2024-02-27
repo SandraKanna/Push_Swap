@@ -12,10 +12,25 @@
 
 #include "../../Includes/push_swap.h"
 
+int	is_set_b_sorted(int *array, int len)
+{
+	int	i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (array[i] < array[i + 1])
+			return (0);
+		//printf("test sort index: %i\n", array[i]);
+		i++;
+	}
+	return (1);
+}
+
 t_struct	*initialize_b(t_struct *a, int size)
 {
 	t_struct	*b;
-	int			input;
+	// int			input;
 	int			i;
 	int			err;
 
@@ -27,7 +42,7 @@ t_struct	*initialize_b(t_struct *a, int size)
 	i = 0;
 	while (i < size)
 	{
-		pb(a->head, b->head, &err);
+		pb(&a->head, &b->head, &err);
 		if (err)
 			return (NULL);
 		i++;

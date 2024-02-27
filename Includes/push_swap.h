@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/26 16:13:44 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/27 14:55:18 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,10 @@ typedef struct s_struct
 //init
 t_node		*find_last(t_node *list);
 t_node		*find_prev_last(t_node *list);
-int	*tag_values(t_struct *structure, int set_size);
+int			*tag_values(t_struct *structure, int set_size);
 t_struct	*initialize_a(char **av, int count);
-// void		list_init_a(t_struct *stack_a, int input, int *err);
+t_struct	*initialize_b(t_struct *a, int size);
 void		get_set(t_struct *structure, int set_size);
-// void		push_bottom(t_node **stack, int input, int *err);
-
 //ops
 void		push(t_node **stack, int input, int *err);
 int			pop(t_node **stack);
@@ -68,16 +66,19 @@ void		rr(t_node **stack_a, t_node **stack_b);
 void		rra(t_node **stack_a);
 void		rrb(t_node **stack_b);
 void		rrr(t_node **stack_a, t_node **stack_b);
-int		is_stack_sorted(t_node *stack);
-void	tiny_sort_a(t_struct *structure);
-void	tiny_sort_b(t_struct *structure);;
-int		is_set_sorted(int *array, int len);
+int			is_stack_sorted(t_node *stack);
+void		tiny_sort_a(t_struct *structure);
+void		tiny_sort_b(t_struct *structure);
+int			is_set_a_sorted(int *array, int len);
+int			is_set_b_sorted(int *array, int len);
 // void	call_b(t_struct *structure, int size);
-void	push_swap(t_struct *structure, int size);
+void		push_swap(t_struct *structure, int size);
 //clean nodes
 void		free_stack(t_node **stack);
 void		free_struct(t_struct *structure);
 void		err_handling(t_struct *structure);
+void	err_handling_b(t_struct **structure_b, t_struct *structure_a);
+
 //core
 
 
