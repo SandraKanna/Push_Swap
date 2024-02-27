@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:46:26 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/22 14:47:14 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/27 16:59:24 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,19 @@ void	free_struct(t_struct *structure)
 	free (structure);
 }
 
-void	err_handling_b(t_struct **structure_b, t_struct *structure_a)
+void	free_struct_b(t_struct **b)
 {
 	int	i;
 
 	i = 0;
-	while (structure_b[i] != NULL)
-		free_struct(structure_b[i++]);
+	while (b[i] != NULL)
+		free_struct(b[i++]);
+	free (b);
+}
+
+void	err_handling_b(t_struct **structure_b, t_struct *structure_a)
+{
+	free_struct_b(structure_b);
 	err_handling(structure_a);
 }
 

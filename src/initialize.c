@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:41:19 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/27 14:21:19 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/27 17:24:03 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,33 +53,33 @@ int	*tag_values(t_struct *structure, int set_size)
 	return (structure->tags);
 }
 
-void	get_set(t_struct *structure, int set_size)
+void	get_set_a(t_struct *a, int set_size)
 {
 	t_node	*last;
 	t_node	*last_prev;
 	t_node	*temp;
 	int		i;
 
-	structure->set = malloc (sizeof(int *) * set_size);
-	if (!structure->set)
-		err_handling(structure);
+	a->set = malloc (sizeof(int *) * set_size);
+	if (!a->set)
+		err_handling(a);
 	i = 0;
-	temp = structure->head;
+	temp = a->head;
 	while (temp != NULL && i < set_size)
 	{
-		structure->set[i] = temp->value;
+		a->set[i] = temp->value;
 		temp = temp->next;
 		i++;
 	}
-	last = find_last(structure->head);
+	last = find_last(a->head);
 	if (last != NULL)
-		structure->set[i++] = last->value;
-	last_prev = find_prev_last(structure->head);
+		a->set[i++] = last->value;
+	last_prev = find_prev_last(a->head);
 	if (last_prev != NULL)
-		structure->set[i] = last_prev->value;
-	if (!tag_values(structure, set_size))
-		err_handling (structure);
-	structure->sorted = is_set_a_sorted(structure->set, set_size);
+		a->set[i] = last_prev->value;
+	if (!tag_values(a, set_size))
+		err_handling(a);
+	a->sorted = is_set_a_sorted(a->set, set_size);
 }
 
 t_struct	*initialize_a(char **av, int count)
@@ -104,9 +104,9 @@ t_struct	*initialize_a(char **av, int count)
 			return (NULL);
 		i--;
 	}
-	if (a->count > 7)
-		get_set(a, 7);
-	else
-		get_set(a, a->count);
+	// if (a->count > 7)
+	// 	get_set_a(a, 7);
+	// else
+	// 	get_set_a(a, a->count);
 	return (a);
 }

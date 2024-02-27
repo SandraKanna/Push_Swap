@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/27 15:55:23 by skanna           ###   ########.fr       */
+/*   Updated: 2024/02/27 17:52:11 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ void	tiny_sort_a(t_struct *structure)
 	}
 }
 
-// void	merge_ab(t_struct *a, t_struct b)
+// void	merge_ab(t_struct *a, t_struct **b)
 // {
-
+	
 // }
 
 void	push_swap(t_struct *a, int size)
 {
 	t_struct	**b;
+	t_node		*last;
 	int			i;
 
 	if (a->head && is_stack_sorted(a->head))
@@ -59,18 +60,35 @@ void	push_swap(t_struct *a, int size)
 	if (a->count <= 3)
 		tiny_sort_a(a);
 	b = NULL;
-	i = size / 5;
-	if (i > 1)
+	// i = size / 5;
+	i = 0;
+	// if (i > 1)
+	while ((size / 5) > 1)
 	{
+		if (size > 7)
+			get_set_a(a, 7);
+		else
+			get_set_a(a, size);
 		// printf("WORK IN PROGRESS...\n");
+		last = find_last(a->head);
+		if (a->tags[i] != 1)
+		{
+			if (a->head->value > a->head->next->value)
+			{
+				if (a->head->value > last->value)
+					rra(&a->head);
+				else
+					sa (&a->head);
+			}
+		}
 		b[i] = initialize_b(a, 5);
 		if (!b[i])
 			err_handling_b(b, a);
-		// size -= 5;
-		push_swap(a, size - 5);
-		// merge_ab(a, *b[i]);
-		return ;
+		a->count -= 5;
+		size -= 5;
+		// push_swap(a, size - 5);
 	}
+	// merge_ab(a, b);
 }
 
 int	main(int argc, char **argv)
@@ -88,10 +106,10 @@ int	main(int argc, char **argv)
 	if (check_errors(elements_count, list))
 		return (write (2, "Error\n", 6));
 	a = initialize_a(list, elements_count);
-	if (!a)
-		return (err_handling(a), 0);
 	if (argc == 2)
 		free_tab(list);
+	if (!a)
+		return (err_handling(a), 0);
 	push_swap(a, a->count);
 	return (free_struct(a), 0);
 }

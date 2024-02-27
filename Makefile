@@ -25,7 +25,8 @@ $(NAME): $(OBJ) $(LIBFT)
 
 $(LIBFT):
 	@make --no-print-directory -C $(LIBFT_DIR)
-	@echo "---compiled with libft---"
+	@echo "---compiled with libft---" 
+#pas de retour a la ligne: echo - n o printg (met pas de \n a la fin)
 
 all: $(NAME)
 
