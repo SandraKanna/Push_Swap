@@ -12,63 +12,75 @@
 
 #include "../Includes/push_swap.h"
 
-int	rank_set(t_node *list, int set_size)
+void	rank_set(t_node **nodes, int set_size)
 {
 	int	i;
-	t_node	*last;
-	t_node	*last_prev;
-	t_node	*temp;
+	int	j;
+	int	rank;
 
-	last = find_last(list);
-	last_prev = find_prev_last(list);
 	i = 0;
-	if (set_size > 5)
-		set_size = 5;
 	while (i < set_size)
 	{
-		list->rank = 1;
-		temp = list;
-		while (temp && temp->next != NULL)
+		if (nodes[i] != NULL)
 		{
-			if (temp->value > temp->next->value)
-				temp->rank++;
-			temp = temp->next;
+			rank = 1;
+			j = 0;
+			while (j < set_size)
+			{
+				if (i != j && nodes[j] != NULL)
+				{
+					if (nodes[i]->value > nodes[j]->value)
+						rank++;
+				}
+				j++;
+			}
+			nodes[i]->rank = rank;
 		}
 		i++;
 	}
 }
 
-void	get_set(t_struct *structure, char c, int index, int set_size)
+int	update_rank(t_node *list, int set_size)
 {
-	t_node	*last;
-	t_node	*last_prev;
-	t_node	*temp;
-	int		i;
+	t_node	**set;
 
-	temp = structure->head_a;
+	if (set_size > 5)
+		set_size = 5;
+	set = malloc (sizeof(t_node *) * set_size);
+	if (!set)
+		return (0);
+	set [0] = list;
+	set [1] = list->next;
+	set [2] = find_prev_to_last(list);
+	set [3] = find_last(list);
+	if (set_size == 5)
+		set [4] = find_mid_of_set(list);
+	rank_set(set, set_size);
+	free (set);
+	return (1);
+}
+
+void	update_order(t_struct *structure, char c)
+{
+	t_node	*mid;
+	t_node	*prev;
+	t_node	*last;
+
+	mid = find_mid_of_set(structure->head_a);
+	structure->head_a->middle = mid;
 	last = find_last(structure->head_a);
-	last_prev = find_prev_last(structure->head_a);
+	structure->head_a->last = last;
+	prev = find_prev_to_last(structure->head_a);
+	structure->head_a->prev_to_last = prev;
 	if (c == 'b')
 	{
-		last = find_last(structure->head_b[index]);
-		last_prev = find_prev_last(structure->head_b);
-		temp = structure->head_b;
+		mid = find_mid_of_set(*structure->head_b);
+		(*structure->head_b)->middle = mid;
+		last = find_last(*structure->head_b);
+		(*structure->head_b)->last = last;
+		prev = find_prev_to_last(*structure->head_b);
+		(*structure->head_b)->prev_to_last = prev;
 	}
-	i = 0;
-	while (temp != NULL && i < set_size)
-	{
-		structure->head_a = temp->value;
-		temp = temp->next;
-		i++;
-	}
-
-	if (last != NULL)
-		structure->set[i++] = last->value;
-
-	if (last_prev != NULL)
-		structure->set[i] = last_prev->value;
-	if (!tag_values(structure, set_size))
-		err_handling(structure);
 }
 
 t_struct	*init_struct(char **av, int count)
@@ -94,6 +106,5 @@ t_struct	*init_struct(char **av, int count)
 		i--;
 	}
 	structure->head_b = NULL;
-	*structure->head_b = NULL;
 	return (structure);
 }

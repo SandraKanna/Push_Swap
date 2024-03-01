@@ -31,6 +31,9 @@ typedef struct s_node
 	int				value;
 	int				rank;
 	struct s_node	*next;
+	struct s_node	*middle;
+	struct s_node	*prev_to_last;
+	struct s_node	*last;
 }					t_node;
 
 typedef struct s_struct
@@ -40,14 +43,6 @@ typedef struct s_struct
 	struct s_node	**head_b;
 }					t_struct;
 
-//init
-t_node		*find_last(t_node *list);
-t_node		*find_prev_last(t_node *list);
-int			*tag_values(t_struct *structure, int set_size);
-t_struct	*init_struct(char **av, int count);
-// t_struct	*initialize_b(t_struct *a, int size);
-void		get_set_a(t_struct *a, int set_size);
-void		get_set_b(t_struct *b, t_struct *a, int set_size);
 //ops
 void		push(t_node **stack, int input, int *err);
 int			pop(t_node **stack);
@@ -68,18 +63,23 @@ void		rrr(t_node **stack_a, t_node **stack_b);
 int			is_stack_sorted(t_node *stack);
 void		tiny_sort_a(t_struct *structure);
 void		tiny_sort_b(t_struct *structure);
-int			is_set_a_sorted(int *array, int len);
-int			is_set_b_sorted(int *array, int len);
-// void	call_b(t_struct *structure, int size);
-void		push_swap(t_struct *structure, int size);
+
 //clean nodes
 void		free_stack(t_node **stack);
 void		free_struct(t_struct *structure);
-void		free_struct_b(t_struct **b);
+void		free_b(t_node ***b);
 void		err_handling(t_struct *structure);
-void		err_handling_b(t_struct **structure_b, t_struct *structure_a);
 
 //core
-
+// void	call_b(t_struct *structure, int size);
+int			sort_ops_a(t_struct *structure, int set_size);
+void		push_swap(t_struct *structure, int size);
+t_node		*find_last(t_node *list);
+t_node		*find_prev_to_last(t_node *list);
+t_node		*find_mid_of_set(t_node *list);
+int			*tag_values(t_struct *structure, int set_size);
+void		update_order(t_struct *structure, char c);
+int			update_rank(t_node *list, int set_size);
+t_struct	*init_struct(char **av, int count);
 
 #endif

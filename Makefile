@@ -8,7 +8,7 @@ LIBFT = libft/libft3.a
 LIBFT_DIR = libft/
 
 CFILES = $(addprefix src/, push_swap.c initialize.c\
-	utils/list_helpers.c utils/stack_b.c utils/check_input.c utils/clean.c \
+	utils/list_helpers.c utils/stack_a.c utils/stack_b.c utils/check_input.c utils/clean.c \
 	ops/core.c ops/push_ops.c ops/rev_ops.c ops/rot_ops.c ops/swap_ops.c)
 
 #BONUS_FILES = bonus/bonus.c 
@@ -20,6 +20,8 @@ OBJ = $(CFILES:.c=.o)
 	@echo "compiling..."
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+all: $(NAME)
+
 $(NAME): $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
 
@@ -27,8 +29,6 @@ $(LIBFT):
 	@make --no-print-directory -C $(LIBFT_DIR)
 	@echo "---compiled with libft---" 
 #pas de retour a la ligne: echo - n o printg (met pas de \n a la fin)
-
-all: $(NAME)
 
 clean:
 	@rm -f $(OBJ)

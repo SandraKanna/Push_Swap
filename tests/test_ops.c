@@ -38,11 +38,11 @@ int	main(int argc, char **argv)
 	{
 		new_tab = parse_args(&ac, argc, argv);
 		if (check_errors(ac, new_tab))
-			return (write (2, "Input error\n", 12));
+			return (write (2, COLOR_RED "Input error\n" COLOR_RESET, 12));
 
 		printf(COLOR_YELLOW "\n##### TEST OPS #####\n" COLOR_RESET);
-		printf("\nInitializing stacks A and B:\n----------\n");
-		a = struct_init(new_tab, ac);
+		printf(COLOR_YELLOW "\nInitializing stacks A and B:\n----------\n" COLOR_RESET);
+		a = init_struct(new_tab, ac);
 		print_stacks(a->head_a, stack_b);
 		printf("-    -\n");
 		printf("A    B\n");
@@ -65,6 +65,7 @@ int	main(int argc, char **argv)
 		printf("A    B\n");
 		printf("\n");
 	}
-	
+	else
+		printf(COLOR_YELLOW "\nPlease enter at least 2 numbers after './ops'\n\n" COLOR_RESET);
 	return (0);
 }

@@ -14,8 +14,6 @@
 
 void	rra(t_node **stack_a)
 {
-	//rra (reverse rotate a): Shift down all elements of stack a by 1.
-	//The last element becomes the first one.
 	rotate_down(stack_a);
 	write(1, "rra\n", 4);
 }

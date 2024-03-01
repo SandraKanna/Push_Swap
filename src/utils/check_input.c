@@ -32,31 +32,7 @@ int	has_duplicates(int ac, int *input)
 	return (0);
 }
 
-char	**parse_args(int *count, int ac, char **av)
-{
-	char	**new_av;
-	int		i;
 
-	if (ac == 2)
-	{
-		new_av = ft_split(av[1], ' ');
-		if (!new_av)
-			return (NULL);
-		i = 0;
-		while (new_av[i] != NULL)
-			i++;
-		*count = i;
-	}
-	else
-	{
-		new_av = malloc (sizeof(char *) * ac);
-		if (!new_av)
-			return (NULL);
-		new_av = ++av;
-		*count = ac - 1;
-	}
-	return (new_av);
-}
 
 int	check_errors(int int_count, char **int_list)
 {
@@ -81,4 +57,30 @@ int	check_errors(int int_count, char **int_list)
 	if (has_duplicates(int_count, temp_conversion))
 		return (free (temp_conversion), 1);
 	return (free (temp_conversion), 0);
+}
+
+char	**parse_args(int *count, int ac, char **av)
+{
+	char	**new_av;
+	int		i;
+
+	if (ac == 2)
+	{
+		new_av = ft_split(av[1], ' ');
+		if (!new_av)
+			return (NULL);
+		i = 0;
+		while (new_av[i] != NULL)
+			i++;
+		*count = i;
+	}
+	else
+	{
+		// new_av = malloc (sizeof(char *) * ac);
+		// if (!new_av)
+		// 	return (NULL);
+		new_av = ++av;
+		*count = ac - 1;
+	}
+	return (new_av);
 }

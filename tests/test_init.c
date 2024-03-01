@@ -5,7 +5,7 @@
 #define COLOR_YELLOW "\033[93m"
 #define COLOR_RESET "\033[0m"
 
-void	print_test(t_node *printme)
+void	print_values(t_node *printme)
 {
 	while (printme != NULL)
 	{
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 {
 	char	**new_tab = NULL;
 	int		ac;
-	int set_len;
+	// int set_len;
 	t_struct	*a;
 
 	if (argc >= 2)
@@ -28,29 +28,19 @@ int	main(int argc, char **argv)
 			return (write (2, "Input error\n", 12));
 
 		printf(COLOR_YELLOW "\n##### TEST: INITIALIZATION OF STRUCTURE A #####\n" COLOR_RESET);
-		a = struct_init(new_tab, ac);
+		a = init_struct(new_tab, ac);
 		printf("\nNumber of elements: %i\n", a->count);
-		printf("\nInitializing stack A\n----------\n");
-		print_test(a->head_a);
+		printf(COLOR_YELLOW "\nInitializing stack A\n----------\n" COLOR_RESET);
+		print_values(a->head_a);
 		printf("-\n");
 		printf("A\n\n");
-		printf("\nInitializing working set and tags\n----------\n\n");
-		if (a->count > 7)		
-			set_len = 7;
+		if (is_stack_sorted(a->head_a))
+			printf("\xE2\x9C\x93 This stack is sorted.\n"); // ✓ This stack is sorted.
 		else
-			set_len = a->count;
-		for (int j = 0; j < set_len; j++)
-			printf("set[%i]: %i\n", j, a->set[j]);
-		printf("\n");
-		for (int j = 0; j < set_len; j++)
-			printf("tag[%i]: %i\n", j, a->tags[j]);
-		if (a->sorted)
-			printf(COLOR_GREEN "\n***** The working set is sorted *****\n\n" COLOR_RESET);
-		else
-			printf(COLOR_RED "\n----- The working set is NOT sorted -----\n\n" COLOR_RESET);
-	
+			printf("\xE2\x9D\x8C This stack is NOT sorted.\n\n"); // ✗ This stack is NOT sorted.
 	}
 	else
-		printf("Please enter at least 2 numbers after './init'\n");
+		printf(COLOR_YELLOW "\nPlease enter at least 2 numbers after './init'\n\n" COLOR_RESET);
 	return (0);
 }
+

@@ -40,7 +40,7 @@ void	free_struct(t_struct *structure)
 {
 	if (structure->head_a != NULL)
 		free_stack(&structure->head_a);
-	if (structure->head_b != NULL || *structure->head_b != NULL )
+	if (structure->head_b != NULL)
 		free_b(&structure->head_b);
 	free (structure);
 }

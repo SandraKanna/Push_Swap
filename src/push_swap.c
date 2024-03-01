@@ -20,9 +20,9 @@ void	tiny_sort_a(t_struct *structure)
 	size = structure->count;
 	if (size == 2)
 		return (sa(&structure->head_a));
+	last = find_last(structure->head_a);
 	if (size == 3)
 	{
-		last = find_last(structure->head_a);
 		if (structure->head_a->value < last->value)
 		{
 			sa(&structure->head_a);
@@ -40,24 +40,38 @@ void	tiny_sort_a(t_struct *structure)
 	}
 }
 
-void	sort(t_struct *structure, int size, char c)
+void	sort_in_a(t_struct *structure, int size)
 {
-	int		size;
-	t_node	*last;
+	int		i;
 
-	i = 0;
-	last = find_last(structure->head_a);
-	if (size == 4)
+	if (size <= 3)
+		return (tiny_sort_a(structure));
+	i = size + 2;
+	while (i > 0)
 	{
-		
+		update_order(structure, 'a');
+		if (sort_ops_a(structure, size))
+			return ;
+		i--;
 	}
-	// if (i > 1)
-	while ((size / 5) > 1)
-	{
-
-	}
-	
 }
+
+// void	call_b(t_struct *structure, int arr_size)
+// {
+// 	int	i;
+
+// 	structure->head_b = malloc (sizeof(t_node) * (arr_size));
+// 	if (!structure->head_b)
+// 		err_handling(structure);
+// 	structure->head_b = NULL;
+// 	i = 0;
+// 	while (i < arr_size)
+// 	{
+// 		if ()
+// 		 return ;
+// 	}
+
+// }
 
 // void	merge_ab(t_struct *a, t_struct **b)
 // {
@@ -66,21 +80,22 @@ void	sort(t_struct *structure, int size, char c)
 
 void	push_swap(t_struct *structure, int size)
 {
-	t_node	**b;
-	t_node	*last;
-	int		i;
-
 	if (structure->head_a && is_stack_sorted(structure->head_a))
 	{
 		printf("Already sorted!\n");
 		return ;
 	}
-	if (structure->count <= 3)
-		return (tiny_sort_a(structure));
-	rank_set(structure->head_a, size);
-	b = NULL;
-	sort (structure, size);
-	// merge_ab(a, b);
+	if (size <= 5)
+		sort_in_a(structure, size);
+	if (is_stack_sorted(structure->head_a))
+		return ;
+	// else
+	// {
+	// 	size = size / 5;
+	// 	call_b(structure, size);
+	// }
+	if (structure->head_b)
+		free_b(&structure->head_b);
 }
 
 int	main(int argc, char **argv)
@@ -101,7 +116,7 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 		free_tab(list);
 	if (!structure)
-		return (err_handling(structure), 0);
+		return (err_handling(structure), 0); //return (0) ?
 	push_swap(structure, structure->count);
-	return (free_struct(main), 0);
+	return (free_struct(structure), 0);
 }

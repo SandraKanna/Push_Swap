@@ -22,34 +22,57 @@ t_node	*find_last(t_node *list)
 	return (last);
 }
 
-t_node	*find_prev_last(t_node *list)
+t_node	*find_prev_to_last(t_node *list)
 {
-	t_node	*prev;
+	t_node	*prev_to_last;
 
-	prev = list;
-	while (prev->next->next != NULL)
-		prev = prev->next;
-	return (prev);
+	prev_to_last = list;
+	while (prev_to_last->next->next != NULL)
+		prev_to_last = prev_to_last->next;
+	return (prev_to_last);
 }
 
-int	find_smallest(t_node *list, int n)
+t_node	*find_mid_of_set(t_node *list)
 {
-	t_node	*temp;
-	int		i;
-	int		smallest;
+	t_node	*middle;
 
-	i = 0;
-	smallest = INT_MAX;
-	temp = list->next;
-	while (temp != NULL && i < n)
-	{
-		if (temp->value < smallest)
-			smallest = temp->value;
-		temp = temp->next;
-		i++;
-	}
-	return (smallest);
+	middle = list->next->next;
+	return (middle);
 }
+
+// t_node	*find_middle(t_node *list)
+// {
+// 	t_node	*middle;
+// 	t_node	*move;
+
+// 	middle = list;
+// 	move = list->next;
+// 	while (move != NULL && move->next != NULL)
+// 	{
+// 		middle = middle->next;
+// 		move = move->next;
+// 	}
+// 	return (middle);
+// }
+
+// int	find_smallest(t_node *list, int n)
+// {
+// 	t_node	*temp;
+// 	int		i;
+// 	int		smallest;
+
+// 	i = 0;
+// 	smallest = INT_MAX;
+// 	temp = list->next;
+// 	while (temp != NULL && i < n)
+// 	{
+// 		if (temp->value < smallest)
+// 			smallest = temp->value;
+// 		temp = temp->next;
+// 		i++;
+// 	}
+// 	return (smallest);
+// }
 
 int	is_stack_sorted(t_node *stack)
 {
@@ -62,17 +85,4 @@ int	is_stack_sorted(t_node *stack)
 	return (1);
 }
 
-// int	find_middle_value(t_node **list)
-// {
-// 	t_node	*middle;
-// 	t_node	*move;
 
-// 	middle = *list;
-// 	move = (*list)->next;
-// 	while (move != NULL && move->next != NULL)
-// 	{
-// 		middle = middle->next;
-// 		move = move->next;
-// 	}
-// 	return (middle->value);
-// }
