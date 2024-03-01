@@ -12,48 +12,56 @@
 
 #include "../Includes/push_swap.h"
 
-void	tiny_sort_a(t_struct *structure)
+int	tiny_sort_a(t_struct *structure, int size)
 {
-	t_node	*last;
-	int		size;
+	int	head;
+	int	mid;
 
-	size = structure->count;
 	if (size == 2)
-		return (sa(&structure->head_a));
-	last = find_last(structure->head_a);
-	if (size == 3)
+		return (sa(&structure->head_a), 1);
+	head = structure->head_a->rank;
+	mid = structure->head_a->next->rank;
+	if (head <= 2)
 	{
-		if (structure->head_a->value < last->value)
-		{
+		if (mid == 1)
 			sa(&structure->head_a);
-			if (!is_stack_sorted(structure->head_a))
-				return (ra(&structure->head_a));
-		}
-		else if (structure->head_a->value < structure->head_a->next->value)
-			return (rra(&structure->head_a));
-		else if (structure->head_a->value > last->value)
-		{
-			ra(&structure->head_a);
-			if (!is_stack_sorted(structure->head_a))
-				return (sa(&structure->head_a));
-		}
+		else
+			rra(&structure->head_a);
 	}
+	else if (head == 3)
+	{
+		if (mid == 1)
+			ra(&structure->head_a);
+		else
+			sa(&structure->head_a);
+	}
+	return (is_stack_sorted(structure->head_a));
 }
 
-void	sort_in_a(t_struct *structure, int size)
+int	sort_in_a(t_struct *structure, int size)
 {
 	int		i;
 
-	if (size <= 3)
-		return (tiny_sort_a(structure));
 	i = size + 2;
+	if (size <= 3)
+	{
+		while (i > 0)
+		{
+			update_order(structure, 'a');
+			update_rank(structure->head_a, size);
+			if (tiny_sort_a(structure, size))
+				break ;
+			i--;
+		}
+	}
 	while (i > 0)
 	{
 		update_order(structure, 'a');
 		if (sort_ops_a(structure, size))
-			return ;
+			break ;
 		i--;
 	}
+	return (is_stack_sorted(structure->head_a));
 }
 
 // void	call_b(t_struct *structure, int arr_size)
@@ -88,7 +96,10 @@ void	push_swap(t_struct *structure, int size)
 	if (size <= 5)
 		sort_in_a(structure, size);
 	if (is_stack_sorted(structure->head_a))
+	{
+		printf("stack_a is sorted!\n");
 		return ;
+	}
 	// else
 	// {
 	// 	size = size / 5;

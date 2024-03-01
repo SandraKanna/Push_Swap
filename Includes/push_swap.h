@@ -61,8 +61,8 @@ void		rra(t_node **stack_a);
 void		rrb(t_node **stack_b);
 void		rrr(t_node **stack_a, t_node **stack_b);
 int			is_stack_sorted(t_node *stack);
-void		tiny_sort_a(t_struct *structure);
-void		tiny_sort_b(t_struct *structure);
+int			tiny_sort_a(t_struct *structure, int size);
+int			tiny_sort_b(t_struct *structure);
 
 //clean nodes
 void		free_stack(t_node **stack);
