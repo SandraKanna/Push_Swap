@@ -35,12 +35,12 @@ static int	head_1(int next, int last, int count, t_node **set_list)
 	prev = find_prev_to_last(*set_list)->rank;
 	if (next < mid)
 	{
-		// if (count == 4 || (next != 4 && (mid == 5 || prev == 5)))
-		if (next < mid && mid < 4)
+		if (count == 4 || (next != 4 && (mid == 5 || prev == 5)))
+		// if (next < mid && mid < 4)
 			rra(set_list);
 	}
 	else if ((count == 4 && prev == 2) || (count == 5 && mid == 2))
-	// else if (next !=  2)
+	// else if (next !=  2 && mid != 3)
 		sa(set_list);
 	else if (count == 4 && (next == 2 || last == count || prev == count - 1))
 		ra(set_list);
