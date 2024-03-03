@@ -33,6 +33,7 @@
         "queue": "c",
         "span": "c",
         "string": "c",
-        "string_view": "c"
+        "string_view": "c",
+        "__locale": "c"
     }
 }
