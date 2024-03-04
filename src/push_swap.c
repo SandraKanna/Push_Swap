@@ -65,7 +65,6 @@ int	tiny_sort_a(t_struct *structure, int size)
 int	sort_in_a(t_struct *structure, int size)
 {
 	int		i;
-	int		need_b;
 
 	i = size + 3;
 	if (size <= 3)
@@ -80,14 +79,10 @@ int	sort_in_a(t_struct *structure, int size)
 	while (i > 0)
 	{
 		update_order(structure, 'a');
-		need_b = sort_ops_a(structure, size);
-		if (need_b)
+		if (sort_ops_a(structure, size))
 			break ;
 		i--;
 	}
-	// if (need_b == 5)
-	// 	printf ("coming soon");
-	// 	// call_b();
 	return (is_stack_sorted(structure->head_a));
 }
 
