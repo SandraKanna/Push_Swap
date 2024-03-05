@@ -50,8 +50,7 @@ void		swap(t_node	**stack);
 void		rotate_up(t_node **stack);
 void		rotate_down(t_node **stack);
 void		pa(t_node **stack_a, t_node **stack_b, int *err);
-// void		pb(t_node **stack_a, t_node **stack_b, int *err);
-void	pb(t_node **stack_a, t_node ***stack_b, int i, int *err);
+void		pb(t_node **stack_a, t_node **stack_b, int *err);
 void		sa(t_node **stack);
 void		sb(t_node **stack);
 void		ss(t_node **stack_a, t_node **stack_b);
@@ -63,7 +62,7 @@ void		rrb(t_node **stack_b);
 void		rrr(t_node **stack_a, t_node **stack_b);
 int			is_stack_sorted(t_node *stack);
 int			tiny_sort_a(t_struct *structure, int size);
-// int			tiny_sort_b(t_struct *structure);
+// int		tiny_sort_b(t_struct *structure);
 
 //clean nodes
 void		free_stack(t_node **stack);
@@ -72,7 +71,8 @@ void		free_b(t_node ***b);
 void		err_handling(t_struct *structure);
 
 //core
-// void	call_b(t_struct *structure, int size);
+void		fill_b(t_struct *structure, int index);
+void		call_b(t_struct *structure, int arr_size);
 int			head_1(int next, int prev, int last, t_node **set_list);
 int			head_2(int next, int prev, int last, t_node **set_list);
 int			head_3(int next, int prev, t_node **set_list);

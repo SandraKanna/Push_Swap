@@ -27,8 +27,11 @@ t_node	*find_prev_to_last(t_node *list)
 	t_node	*prev_to_last;
 
 	prev_to_last = list;
-	while (prev_to_last->next->next != NULL)
-		prev_to_last = prev_to_last->next;
+	if (list && list->next && list->next->next != NULL)
+	{
+		while (prev_to_last->next->next != NULL)
+			prev_to_last = prev_to_last->next;
+	}
 	return (prev_to_last);
 }
 
@@ -36,7 +39,9 @@ t_node	*find_mid_of_set(t_node *list)
 {
 	t_node	*middle;
 
-	middle = list->next->next;
+	middle = NULL;
+	if (list && list->next && list->next->next != NULL)
+		middle = list->next->next;
 	return (middle);
 }
 

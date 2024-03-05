@@ -32,8 +32,7 @@ void	free_b(t_node ***b)
 
 	i = 0;
 	while (b[i] != NULL)
-		free_stack(*b);
-	free (b);
+		free_stack(b[i++]);
 }
 
 void	free_struct(t_struct *structure)

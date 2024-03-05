@@ -23,14 +23,14 @@ void	pa(t_node **stack_a, t_node **stack_b, int *err)
 	write(1, "pa\n", 3);
 }
 
-void	pb(t_node **stack_a, t_node ***stack_b, int i, int *err)
+void	pb(t_node **stack_a, t_node **stack_b, int *err)
 {
 	int	value;
 
 	if ((*stack_a == NULL) | (stack_a == NULL))
 		return ;
 	value = pop(stack_a);
-	push(stack_b[i], value, err);
+	push(stack_b, value, err);
 	write(1, "pb\n", 3);
 	return ;
 }

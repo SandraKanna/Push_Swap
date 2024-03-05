@@ -12,30 +12,27 @@
 
 #include "../Includes/push_swap.h"
 
-t_struct	*init_b(t_struct *structure, int arr_size)
+void	call_b(t_struct *structure, int size)
 {
-	t_node	*temp;
 	int		i;
-	int		*err = NULL;
-	
+
 	if (structure->count >= 5)
-		arr_size /= 5;
-	structure->head_b = malloc (sizeof(t_node) * (arr_size));
+		size /= 5;
+	structure->head_b = malloc (sizeof(t_node *) * (size));
 	if (!structure->head_b)
 		err_handling(structure);
-	structure->head_b = NULL;
 	i = 0;
-	while (i < arr_size)
+	while (i < size)
 	{
-		temp = structure->head_a;
-		while ((temp->rank && (temp->rank < structure->head_a->next->rank 
-			&& temp->rank < structure->head_a->last->rank)))
-			pb (&temp, &structure->head_b, i, err);
-		if (err)
-			return (NULL);
+		structure->head_b[i] = NULL;
 		i++;
 	}
-	return (structure);
+	i = 0;
+	while (i < size)
+	{
+		fill_b(structure, i);
+		i++;
+	}
 }
 
 // void	merge_ab(t_struct *a, t_struct **b)
@@ -66,14 +63,16 @@ int	sort_ops_a(t_struct *structure, int set_size)
 	if (head == 4)
 		return (head_4(next, last, &structure->head_a));
 	if (head == 5)
-	    return (head_5(next, prev, last, &structure->head_a));
+		return (head_5(next, prev, last, &structure->head_a));
 	return (0);
 }
+
+
 
 int	sort_in_a(t_struct *structure, int size)
 {
 	int	i;
-	
+
 	i = size + 3;
 	if (size <= 3)
 	{
@@ -90,34 +89,6 @@ int	sort_in_a(t_struct *structure, int size)
 		if (sort_ops_a(structure, size))
 			break ;
 		i--;
-	}
-	return (is_stack_sorted(structure->head_a));
-}
-
-int	tiny_sort_a(t_struct *structure, int size)
-{
-	int	head;
-	int	mid;
-
-	if (size == 2)
-		return (sa(&structure->head_a), 1);
-	update_order(structure, 'a');
-	update_rank_a(structure->head_a, size);
-	head = structure->head_a->rank;
-	mid = structure->head_a->next->rank;
-	if (head <= 2)
-	{
-		if (mid == 1)
-			sa(&structure->head_a);
-		else
-			rra(&structure->head_a);
-	}
-	else if (head == 3)
-	{
-		if (mid == 1)
-			ra(&structure->head_a);
-		else
-			sa(&structure->head_a);
 	}
 	return (is_stack_sorted(structure->head_a));
 }
@@ -139,10 +110,8 @@ void	push_swap(t_struct *structure, int size)
 	else
 	{
 		printf("need stack_b\n");
-		init_b(structure, size);
+		call_b(structure, size);
 	}
-	if (structure->head_b)
-		free_b(&structure->head_b);
 }
 
 int	main(int argc, char **argv)
@@ -163,7 +132,17 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 		free_tab(list);
 	if (!structure)
-		return (err_handling(structure), 0); //return (0) ?
+		return (err_handling(structure), 0);
 	push_swap(structure, structure->count);
+	// t_node *temp = structure->head_b[0];
+	// while (temp != NULL)
+	// {	printf ("b[0]: %i\n", temp->value);
+	// 	temp = temp->next;
+	// }
+	// temp = structure->head_b[1];
+	// while (temp != NULL)
+	// {	printf ("b[1]: %i\n", temp->value);
+	// 	temp = temp->next;
+	// }
 	return (free_struct(structure), 0);
 }

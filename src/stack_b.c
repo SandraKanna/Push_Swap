@@ -10,44 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/push_swap.h"
+#include "../Includes/push_swap.h"
 
+void	fill_b(t_struct *structure, int index)
+{
+	t_node	*temp;
+	int		j;
+	int		err;
 
+	j = 0;
+	err = 0;
+	while (j < 5)
+	{
+		temp = structure->head_a;
+		if (temp->rank > temp->next->rank
+			&& temp->next->rank > temp->last->rank)
+			rra(&structure->head_a);
+		else if (temp->rank > temp->next->rank
+			&& temp->next->rank < temp->last->rank)
+			sa(&structure->head_a);
+		pb (&structure->head_a, &structure->head_b[index], &err);
+		if (err)
+			err_handling (structure);
+		update_order(structure, 'a');
+		update_rank_a(structure->head_a, 5);
+		if (structure->head_a->next->next->next == NULL)
+			break ;
+		j++;
+	}
+}
 
-
-// void	call_b(t_struct *structure, int size)
-// {
-// 	int	next_size;
-
-// 	next_size = size / 5;
-// 	if (next_size > 0)
-// 		call_b(structure, size / 5);
-// 	initialize_b(structure, size);
-// 	//initialise the structure: diff table of lists
-// 	//
-// }
-
-// void	tag_values_b(t_struct *structure, int set_size)
-// {
-// 	int	i;
-// 	int	j;
-// 	int	rank_b;
-
-// 	structure->tags = malloc (sizeof(int) * set_size);
-// 	if (!structure->tags)
-// 		err_handling(structure);
-// 	i = 0;
-// 	while (i < set_size)
-// 	{
-// 		j = 0;
-// 		rank_b = 1;
-// 		while (j < set_size)
-// 		{
-// 			if (structure->set[i] > structure->set[j])
-// 				rank_b++;
-// 			j++;
-// 		}
-// 		structure->tags[i] = rank_b;
-// 		i++;
-// 	}
-// }
