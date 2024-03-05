@@ -6,56 +6,37 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/05 17:32:55 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/05 18:08:43 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
 
-int	tiny_sort_a(t_struct *structure, int size)
+t_struct	*init_b(t_struct *structure, int arr_size)
 {
-	int	head;
-	int	mid;
-
-	if (size == 2)
-		return (sa(&structure->head_a), 1);
-	update_order(structure, 'a');
-	update_rank_a(structure->head_a, size);
-	head = structure->head_a->rank;
-	mid = structure->head_a->next->rank;
-	if (head <= 2)
+	t_node	*temp;
+	int		i;
+	int		*err = NULL;
+	
+	if (structure->count >= 5)
+		arr_size /= 5;
+	structure->head_b = malloc (sizeof(t_node) * (arr_size));
+	if (!structure->head_b)
+		err_handling(structure);
+	structure->head_b = NULL;
+	i = 0;
+	while (i < arr_size)
 	{
-		if (mid == 1)
-			sa(&structure->head_a);
-		else
-			rra(&structure->head_a);
+		temp = structure->head_a;
+		while ((temp->rank && (temp->rank < structure->head_a->next->rank 
+			&& temp->rank < structure->head_a->last->rank)))
+			pb (&temp, &structure->head_b, i, err);
+		if (err)
+			return (NULL);
+		i++;
 	}
-	else if (head == 3)
-	{
-		if (mid == 1)
-			ra(&structure->head_a);
-		else
-			sa(&structure->head_a);
-	}
-	return (is_stack_sorted(structure->head_a));
+	return (structure);
 }
-
-// void	call_b(t_struct *structure, int arr_size)
-// {
-// 	int	i;
-
-// 	structure->head_b = malloc (sizeof(t_node) * (arr_size));
-// 	if (!structure->head_b)
-// 		err_handling(structure);
-// 	structure->head_b = NULL;
-// 	i = 0;
-// 	while (i < arr_size)
-// 	{
-// 		if ()
-// 		 return ;
-// 	}
-
-// }
 
 // void	merge_ab(t_struct *a, t_struct **b)
 // {
@@ -113,6 +94,34 @@ int	sort_in_a(t_struct *structure, int size)
 	return (is_stack_sorted(structure->head_a));
 }
 
+int	tiny_sort_a(t_struct *structure, int size)
+{
+	int	head;
+	int	mid;
+
+	if (size == 2)
+		return (sa(&structure->head_a), 1);
+	update_order(structure, 'a');
+	update_rank_a(structure->head_a, size);
+	head = structure->head_a->rank;
+	mid = structure->head_a->next->rank;
+	if (head <= 2)
+	{
+		if (mid == 1)
+			sa(&structure->head_a);
+		else
+			rra(&structure->head_a);
+	}
+	else if (head == 3)
+	{
+		if (mid == 1)
+			ra(&structure->head_a);
+		else
+			sa(&structure->head_a);
+	}
+	return (is_stack_sorted(structure->head_a));
+}
+
 void	push_swap(t_struct *structure, int size)
 {
 	if (structure->head_a && is_stack_sorted(structure->head_a))
@@ -130,8 +139,7 @@ void	push_swap(t_struct *structure, int size)
 	else
 	{
 		printf("need stack_b\n");
-		// size = size / 5;
-		// call_b(structure, size);
+		init_b(structure, size);
 	}
 	if (structure->head_b)
 		free_b(&structure->head_b);

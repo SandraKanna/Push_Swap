@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/05 17:31:51 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/05 18:05:01 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void		swap(t_node	**stack);
 void		rotate_up(t_node **stack);
 void		rotate_down(t_node **stack);
 void		pa(t_node **stack_a, t_node **stack_b, int *err);
-void		pb(t_node **stack_a, t_node **stack_b, int *err);
+// void		pb(t_node **stack_a, t_node **stack_b, int *err);
+void	pb(t_node **stack_a, t_node ***stack_b, int i, int *err);
 void		sa(t_node **stack);
 void		sb(t_node **stack);
 void		ss(t_node **stack_a, t_node **stack_b);
