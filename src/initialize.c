@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:41:19 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/27 17:24:03 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/05 17:32:22 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	rank_set(t_node **nodes, int set_size)
 		i++;
 	}
 }
+//update rank for b function
 
-int	update_rank(t_node *list, int set_size)
+int	update_rank_a(t_node *list, int set_size)
 {
 	t_node	**set;
 

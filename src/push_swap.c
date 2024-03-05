@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/27 17:52:11 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/05 17:32:55 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	tiny_sort_a(t_struct *structure, int size)
 	if (size == 2)
 		return (sa(&structure->head_a), 1);
 	update_order(structure, 'a');
-	update_rank(structure->head_a, size);
+	update_rank_a(structure->head_a, size);
 	head = structure->head_a->rank;
 	mid = structure->head_a->next->rank;
 	if (head <= 2)
@@ -62,17 +62,44 @@ int	tiny_sort_a(t_struct *structure, int size)
 
 // }
 
+int	sort_ops_a(t_struct *structure, int set_size)
+{
+	int	next;
+	int	prev;
+	int	last;
+	int	head;
+
+	if (is_stack_sorted(structure->head_a))
+		return (1);
+	update_rank_a(structure->head_a, set_size);
+	head = structure->head_a->rank;
+	next = structure->head_a->next->rank;
+	prev = structure->head_a->prev_to_last->rank;
+	last = structure->head_a->last->rank;
+	if (head == 1)
+		return (head_1(next, prev, last, &structure->head_a));
+	if (head == 2)
+		return (head_2(next, prev, last, &structure->head_a));
+	if (head == 3)
+		return (head_3(next, prev, &structure->head_a));
+	if (head == 4)
+		return (head_4(next, last, &structure->head_a));
+	if (head == 5)
+	    return (head_5(next, prev, last, &structure->head_a));
+	return (0);
+}
+
 int	sort_in_a(t_struct *structure, int size)
 {
-	int		i;
-
+	int	i;
+	
 	i = size + 3;
 	if (size <= 3)
 	{
 		while (i > 0)
 		{
 			if (tiny_sort_a(structure, size))
-				break ;
+				return (is_stack_sorted(structure->head_a));
 			i--;
 		}
 	}
@@ -100,11 +127,12 @@ void	push_swap(t_struct *structure, int size)
 		printf("stack_a is sorted!\n");
 		return ;
 	}
-	// else
-	// {
-	// 	size = size / 5;
-	// 	call_b(structure, size);
-	// }
+	else
+	{
+		printf("need stack_b\n");
+		// size = size / 5;
+		// call_b(structure, size);
+	}
 	if (structure->head_b)
 		free_b(&structure->head_b);
 }
