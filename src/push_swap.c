@@ -40,35 +40,6 @@ void	call_b(t_struct *structure, int size)
 
 // }
 
-int	sort_ops_a(t_struct *structure, int set_size)
-{
-	int	next;
-	int	prev;
-	int	last;
-	int	head;
-
-	if (is_stack_sorted(structure->head_a))
-		return (1);
-	update_rank_a(structure->head_a, set_size);
-	head = structure->head_a->rank;
-	next = structure->head_a->next->rank;
-	prev = structure->head_a->prev_to_last->rank;
-	last = structure->head_a->last->rank;
-	if (head == 1)
-		return (head_1(next, prev, last, &structure->head_a));
-	if (head == 2)
-		return (head_2(next, prev, last, &structure->head_a));
-	if (head == 3)
-		return (head_3(next, prev, &structure->head_a));
-	if (head == 4)
-		return (head_4(next, last, &structure->head_a));
-	if (head == 5)
-		return (head_5(next, prev, last, &structure->head_a));
-	return (0);
-}
-
-
-
 int	sort_in_a(t_struct *structure, int size)
 {
 	int	i;

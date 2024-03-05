@@ -12,6 +12,59 @@
 
 #include "../Includes/push_swap.h"
 
+void	rank_set(t_node **nodes, int set_size)
+{
+	int	i;
+	int	j;
+	int	rank;
+
+	i = 0;
+	while (i < set_size)
+	{
+		if (nodes[i] != NULL)
+		{
+			rank = 1;
+			j = 0;
+			while (j < set_size)
+			{
+				if (i != j && nodes[j] != NULL)
+				{
+					if (nodes[i]->value > nodes[j]->value)
+						rank++;
+				}
+				j++;
+			}
+			nodes[i]->rank = rank;
+		}
+		i++;
+	}
+}
+
+int	update_rank_a(t_node *list, int set_size)
+{
+	t_node	**set;
+
+	if (set_size > 5)
+		set_size = 5;
+	set = malloc (sizeof(t_node *) * set_size);
+	if (!set)
+		return (0);
+	set [0] = list;
+	set [1] = list->next;
+	if (set_size == 3)
+		set [2] = find_last(list);
+	else
+	{
+		set [2] = find_prev_to_last(list);
+		set [3] = find_last(list);
+	}
+	if (set_size == 5)
+		set [4] = find_mid_of_set(list);
+	rank_set(set, set_size);
+	free (set);
+	return (1);
+}
+
 int	tiny_sort_a(t_struct *structure, int size)
 {
 	int	head;
@@ -38,4 +91,57 @@ int	tiny_sort_a(t_struct *structure, int size)
 			sa(&structure->head_a);
 	}
 	return (is_stack_sorted(structure->head_a));
+}
+
+int	sort_ops_a(t_struct *structure, int set_size)
+{
+	int	next;
+	int	prev;
+	int	last;
+	int	head;
+
+	if (is_stack_sorted(structure->head_a))
+		return (1);
+	update_rank_a(structure->head_a, set_size);
+	head = structure->head_a->rank;
+	next = structure->head_a->next->rank;
+	prev = structure->head_a->prev_to_last->rank;
+	last = structure->head_a->last->rank;
+	if (head == 1)
+		return (head_1(next, prev, last, &structure->head_a));
+	if (head == 2)
+		return (head_2(next, prev, last, &structure->head_a));
+	if (head == 3)
+		return (head_3(next, prev, &structure->head_a));
+	if (head == 4)
+		return (head_4(next, last, &structure->head_a));
+	if (head == 5)
+		return (head_5(next, prev, last, &structure->head_a));
+	return (0);
+}
+
+t_struct	*init_struct(char **av, int count)
+{
+	t_struct	*structure;
+	int			input;
+	int			i;
+	int			err;
+
+	structure = malloc (sizeof(t_struct));
+	if (!structure)
+		return (NULL);
+	structure->count = count;
+	structure->head_a = NULL;
+	i = count - 1;
+	err = 0;
+	while (i >= 0)
+	{
+		input = ft_atoi(av[i]);
+		push(&structure->head_a, input, &err);
+		if (err)
+			return (NULL);
+		i--;
+	}
+	structure->head_b = NULL;
+	return (structure);
 }

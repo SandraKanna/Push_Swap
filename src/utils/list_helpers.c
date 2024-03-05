@@ -45,6 +45,39 @@ t_node	*find_mid_of_set(t_node *list)
 	return (middle);
 }
 
+int	is_stack_sorted(t_node *stack)
+{
+	while (stack->next != NULL)
+	{
+		if (stack->value > stack->next->value)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
+}
+
+void	update_order(t_struct *structure, char c)
+{
+	t_node	*mid;
+	t_node	*prev;
+	t_node	*last;
+
+	mid = find_mid_of_set(structure->head_a);
+	structure->head_a->middle = mid;
+	last = find_last(structure->head_a);
+	structure->head_a->last = last;
+	prev = find_prev_to_last(structure->head_a);
+	structure->head_a->prev_to_last = prev;
+	if (c == 'b')
+	{
+		mid = find_mid_of_set(*structure->head_b);
+		(*structure->head_b)->middle = mid;
+		last = find_last(*structure->head_b);
+		(*structure->head_b)->last = last;
+		prev = find_prev_to_last(*structure->head_b);
+		(*structure->head_b)->prev_to_last = prev;
+	}
+}
 // t_node	*find_middle(t_node *list)
 // {
 // 	t_node	*middle;
@@ -78,16 +111,3 @@ t_node	*find_mid_of_set(t_node *list)
 // 	}
 // 	return (smallest);
 // }
-
-int	is_stack_sorted(t_node *stack)
-{
-	while (stack->next != NULL)
-	{
-		if (stack->value > stack->next->value)
-			return (0);
-		stack = stack->next;
-	}
-	return (1);
-}
-
-
