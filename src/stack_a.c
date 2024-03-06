@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_5.c                                           :+:      :+:    :+:   */
+/*   stack_a.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 21:06:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/05 17:30:50 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:06:34 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	tiny_sort_a(t_struct *structure, int size)
 
 	if (size == 2)
 		return (sa(&structure->head_a), 1);
-	update_order(structure, 'a');
+	update_order(structure, 'a', -1);
 	update_rank_a(structure->head_a, size);
 	head = structure->head_a->rank;
 	mid = structure->head_a->next->rank;
@@ -105,7 +105,7 @@ int	sort_ops_a(t_struct *structure, int set_size)
 	update_rank_a(structure->head_a, set_size);
 	head = structure->head_a->rank;
 	next = structure->head_a->next->rank;
-	prev = structure->head_a->prev_to_last->rank;
+	prev = structure->head_a->prev->rank;
 	last = structure->head_a->last->rank;
 	if (head == 1)
 		return (head_1(next, prev, last, &structure->head_a));
@@ -132,6 +132,7 @@ t_struct	*init_struct(char **av, int count)
 		return (NULL);
 	structure->count = count;
 	structure->head_a = NULL;
+	structure->head_b = NULL;
 	i = count - 1;
 	err = 0;
 	while (i >= 0)
@@ -142,6 +143,5 @@ t_struct	*init_struct(char **av, int count)
 			return (NULL);
 		i--;
 	}
-	structure->head_b = NULL;
 	return (structure);
 }

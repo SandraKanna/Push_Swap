@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   list_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/21 16:22:26 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/06 19:05:06 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ t_node	*find_last(t_node *list)
 	t_node	*last;
 
 	last = list;
-	while (last->next != NULL)
+	if (list)
+	{
+		while (last->next != NULL)
 		last = last->next;
+	}
 	return (last);
 }
 
@@ -27,7 +30,7 @@ t_node	*find_prev_to_last(t_node *list)
 	t_node	*prev_to_last;
 
 	prev_to_last = list;
-	if (list && list->next && list->next->next != NULL)
+	if (list && list->next != NULL && list->next->next != NULL)
 	{
 		while (prev_to_last->next->next != NULL)
 			prev_to_last = prev_to_last->next;
@@ -56,7 +59,7 @@ int	is_stack_sorted(t_node *stack)
 	return (1);
 }
 
-void	update_order(t_struct *structure, char c)
+void	update_order(t_struct *structure, char c, int i)
 {
 	t_node	*mid;
 	t_node	*prev;
@@ -67,15 +70,15 @@ void	update_order(t_struct *structure, char c)
 	last = find_last(structure->head_a);
 	structure->head_a->last = last;
 	prev = find_prev_to_last(structure->head_a);
-	structure->head_a->prev_to_last = prev;
+	structure->head_a->prev = prev;
 	if (c == 'b')
 	{
-		mid = find_mid_of_set(*structure->head_b);
-		(*structure->head_b)->middle = mid;
-		last = find_last(*structure->head_b);
-		(*structure->head_b)->last = last;
-		prev = find_prev_to_last(*structure->head_b);
-		(*structure->head_b)->prev_to_last = prev;
+		// mid = find_mid_of_set(structure->head_b[i]);
+		// (structure->head_b[i])->middle = mid;
+		last = find_last(structure->head_b[i]);
+		(structure->head_b[i])->last = last;
+		prev = find_prev_to_last(structure->head_b[i]);
+		(structure->head_b[i])->prev = prev;
 	}
 }
 // t_node	*find_middle(t_node *list)

@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/05 18:05:01 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:06:12 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_node
 	int				rank;
 	struct s_node	*next;
 	struct s_node	*middle;
-	struct s_node	*prev_to_last;
+	struct s_node	*prev;
 	struct s_node	*last;
 }					t_node;
 
@@ -84,7 +84,7 @@ t_node		*find_last(t_node *list);
 t_node		*find_prev_to_last(t_node *list);
 t_node		*find_mid_of_set(t_node *list);
 int			*tag_values(t_struct *structure, int set_size);
-void		update_order(t_struct *structure, char c);
+void		update_order(t_struct *structure, char c, int i);
 int			update_rank_a(t_node *list, int set_size);
 t_struct	*init_struct(char **av, int count);
 

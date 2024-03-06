@@ -6,11 +6,56 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/05 18:08:43 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/06 19:09:31 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
+
+void	merge_ab(t_struct *structure, int index)
+{
+	t_node	*b;
+	int		err;
+	
+	err = 0;
+	b = structure->head_b[index];
+	while (b != NULL)
+	{
+		update_order(structure, 'b', index);
+		if (b->next != NULL && b->last != NULL)
+		{
+			if ((b->value < b->next->value) 
+				&& (b->next->value < b->last->value))
+				sb(&b);
+			else if ((b->value < b->last->value)
+				&& (b->last->value < b->next->value))
+				rrb(&b);
+		}
+		pa(&structure->head_a, &b, &err);
+		if (err)
+			err_handling (structure);
+	}
+}
+
+	// while (head_b[index] != NULL)
+	// {
+	// 	update_order(structure, 'b', i);
+	// 	b = structure->head_b[index];
+	// 	if (b != NULL && b[i] != NULL && b[i]->next != NULL 
+	// 		&& b[i]->last != NULL)
+	// 	{
+	// 		if ((b[i]->value < b[i]->next->value) 
+	// 			&& (b[i]->next->value < b[i]->last->value))
+	// 			sb(&b[i]);
+	// 		else if ((b[i]->value < b[i]->last->value)
+	// 			&& (b[i]->last->value < b[i]->next->value))
+	// 			rrb(&b[i]);
+	// 		pa(&structure->head_a, &b[i], &err);
+	// 		if (err)
+	// 			err_handling (structure);
+	// 	}
+	// 	i++;
+	// }
 
 void	call_b(t_struct *structure, int size)
 {
@@ -18,27 +63,19 @@ void	call_b(t_struct *structure, int size)
 
 	if (structure->count >= 5)
 		size /= 5;
-	structure->head_b = malloc (sizeof(t_node *) * (size));
+	structure->head_b = malloc (sizeof(t_node *) * (size + 1));
 	if (!structure->head_b)
 		err_handling(structure);
 	i = 0;
-	while (i < size)
-	{
-		structure->head_b[i] = NULL;
-		i++;
-	}
+	while (i <= size)
+		structure->head_b[i++] = NULL;
 	i = 0;
 	while (i < size)
-	{
-		fill_b(structure, i);
-		i++;
-	}
+		fill_b(structure, i++);
+	i = 0;
+	while (structure->head_b != NULL && i < size)
+		merge_ab(structure, i++);
 }
-
-// void	merge_ab(t_struct *a, t_struct **b)
-// {
-
-// }
 
 int	sort_in_a(t_struct *structure, int size)
 {
@@ -56,7 +93,7 @@ int	sort_in_a(t_struct *structure, int size)
 	}
 	while (i > 0)
 	{
-		update_order(structure, 'a');
+		update_order(structure, 'a', -1);
 		if (sort_ops_a(structure, size))
 			break ;
 		i--;
@@ -117,3 +154,4 @@ int	main(int argc, char **argv)
 	// }
 	return (free_struct(structure), 0);
 }
+//for i in {1..500}; do echo $i; done | sort -R | tr '\n' ' '

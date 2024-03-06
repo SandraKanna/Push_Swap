@@ -42,6 +42,9 @@ fclean: clean
 
 re: fclean all
 
+test:
+	sh test.sh
+
 #bonus: clean
 #$(CC) $(CFLAGS) $(OBJ) $(BONUS_FILES) -o $(NAME)
 

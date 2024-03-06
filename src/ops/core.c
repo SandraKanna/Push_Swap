@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:46:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/22 18:23:30 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/06 18:06:49 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	push(t_node **stack, int input, int *err)
 {
 	t_node	*new_node;
 
+	new_node = NULL;
 	new_node = malloc (sizeof(t_node));
 	if (new_node == NULL)
 	{
@@ -23,6 +24,10 @@ void	push(t_node **stack, int input, int *err)
 		return ;
 	}
 	new_node->value = input;
+	new_node->rank = -1;
+	new_node->middle = NULL;
+	new_node->prev = NULL;
+	new_node->last = NULL;
 	new_node->next = *stack;
 	*stack = new_node;
 
