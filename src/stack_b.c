@@ -39,3 +39,30 @@ void	fill_b(t_struct *structure, int index)
 	}
 }
 
+int	update_rank_b(t_node *list, int set_size)
+{
+	t_node	**set;
+
+	set = malloc (sizeof(t_node *) * set_size);
+	if (!set)
+		return (0);
+	set [0] = find_last(list);;
+	set [1] = find_prev_to_last(list);
+	if (set_size == 3)
+		set [2] = list;
+	else if (set_size == 4)
+	{
+		set [2] = list->next;
+		set [3] = list;
+	}
+	if (set_size == 5)
+	{
+		set [2] = find_mid_of_set(list);
+		set [3] = list->next;
+		set [4] = list;
+	}
+	rank_set(set, set_size);
+	free (set);
+	return (1);
+}
+

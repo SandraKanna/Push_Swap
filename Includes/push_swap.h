@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/06 18:06:12 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:36:37 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ t_node		*find_prev_to_last(t_node *list);
 t_node		*find_mid_of_set(t_node *list);
 int			*tag_values(t_struct *structure, int set_size);
 void		update_order(t_struct *structure, char c, int i);
+void		rank_set(t_node **nodes, int set_size);
 int			update_rank_a(t_node *list, int set_size);
+int			update_rank_b(t_node *list, int set_size);
 t_struct	*init_struct(char **av, int count);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:46:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/06 18:06:49 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/08 12:09:37 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	push(t_node **stack, int input, int *err)
 	new_node->last = NULL;
 	new_node->next = *stack;
 	*stack = new_node;
-
 }
 
 int	pop(t_node **stack)
