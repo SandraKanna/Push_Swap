@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:46:26 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/06 19:08:10 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/11 19:03:50 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,10 @@ void	free_stack(t_node **stack)
 
 void	free_struct(t_struct *structure)
 {
-	int	i;
-
 	if (structure->head_a != NULL)
 		free_stack(&structure->head_a);
-	i = 0;
 	if (structure->head_b != NULL)
-	{
-		while (structure->head_b[i])
-			free_stack(&structure->head_b[i++]);
-		free (structure->head_b);
-	}
+		free_stack(&structure->head_b);
 	free (structure);
 }
 

@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/06 19:05:06 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/11 19:01:27 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,27 +59,18 @@ int	is_stack_sorted(t_node *stack)
 	return (1);
 }
 
-void	update_order(t_struct *structure, char c, int i)
+void	update_order(t_node **list)
 {
 	t_node	*mid;
 	t_node	*prev;
 	t_node	*last;
 
-	mid = find_mid_of_set(structure->head_a);
-	structure->head_a->middle = mid;
-	last = find_last(structure->head_a);
-	structure->head_a->last = last;
-	prev = find_prev_to_last(structure->head_a);
-	structure->head_a->prev = prev;
-	if (c == 'b')
-	{
-		// mid = find_mid_of_set(structure->head_b[i]);
-		// (structure->head_b[i])->middle = mid;
-		last = find_last(structure->head_b[i]);
-		(structure->head_b[i])->last = last;
-		prev = find_prev_to_last(structure->head_b[i]);
-		(structure->head_b[i])->prev = prev;
-	}
+	mid = find_mid_of_set(*list);
+	(*list)->middle = mid;
+	last = find_last(*list);
+	(*list)->last = last;
+	prev = find_prev_to_last(*list);
+	(*list)->prev = prev;
 }
 // t_node	*find_middle(t_node *list)
 // {

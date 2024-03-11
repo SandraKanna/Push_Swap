@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_params.c                                     :+:      :+:    :+:   */
+/*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/19 16:32:12 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/11 18:20:34 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char	**parse_args(int *count, int ac, char **av)
 
 	if (ac == 2)
 	{
+		if (av[1][0] == '\0' || av[1][1] == '\0')
+			return (NULL);
 		new_av = ft_split(av[1], ' ');
 		if (!new_av)
 			return (NULL);
@@ -76,9 +78,6 @@ char	**parse_args(int *count, int ac, char **av)
 	}
 	else
 	{
-		// new_av = malloc (sizeof(char *) * ac);
-		// if (!new_av)
-		// 	return (NULL);
 		new_av = ++av;
 		*count = ac - 1;
 	}

@@ -6,66 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/08 13:35:20 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/11 19:02:13 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
-
-void	merge_ab(t_struct *structure, int index)
-{
-	t_node	**b;
-	int		err;
-	
-	err = 0;
-	b = &structure->head_b[index];
-	while (*b != NULL)
-	{
-		update_order(structure, 'b', index);
-		if ((*b)->next != NULL && (*b)->last != NULL)
-		{
-			if (((*b)->value < (*b)->next->value) 
-				&& ((*b)->next->value < (*b)->last->value))
-				sb(b);
-			else if (((*b)->value < (*b)->last->value)
-				&& ((*b)->last->value < (*b)->next->value))
-				rrb(b);
-		}
-		pa(&structure->head_a, b, &err);
-		if (err)
-			err_handling (structure);
-	}
-}
-
-void	call_b(t_struct *structure, int size)
-{
-	int		i;
-
-	if (structure->count >= 5)
-		size /= 5;
-	structure->head_b = malloc (sizeof(t_node *) * (size + 1));
-	if (!structure->head_b)
-		err_handling(structure);
-	i = 0;
-	while (i <= size)
-		structure->head_b[i++] = NULL;
-	i = 0;
-	while (i < size)
-		fill_b(structure, i++);
-	// t_node *temp = structure->head_b[0];
-	// while (temp != NULL)
-	// {	printf ("b[0]: %i\n", temp->value);
-	// 	temp = temp->next;
-	// }
-	// temp = structure->head_b[1];
-	// while (temp != NULL)
-	// {	printf ("b[1]: %i\n", temp->value);
-	// 	temp = temp->next;
-	// }
-	i = 0;
-	while (structure->head_b != NULL && i < size)
-		merge_ab(structure, i++);
-}
 
 int	sort_in_a(t_struct *structure, int size)
 {
@@ -83,7 +28,7 @@ int	sort_in_a(t_struct *structure, int size)
 	}
 	while (i > 0)
 	{
-		update_order(structure, 'a', -1);
+		update_order(&structure->head_a);
 		if (sort_ops_a(structure, size))
 			break ;
 		i--;
@@ -109,7 +54,7 @@ void	push_swap(t_struct *structure, int size)
 	{
 		printf("need stack_b\n");
 		// while (!is_stack_sorted(structure->head_a))
-		call_b(structure, size);
+		// call_b(structure, size);
 	}
 	// if (is_stack_sorted(structure->head_a))
 	// {
@@ -131,7 +76,7 @@ int	main(int argc, char **argv)
 	elements_count = 0;
 	list = parse_args(&elements_count, argc, argv);
 	if (!list)
-		return (0);
+		return (write (2, "Error\n", 6));
 	if (check_errors(elements_count, list))
 		return (write (2, "Error\n", 6));
 	structure = init_struct(list, elements_count);

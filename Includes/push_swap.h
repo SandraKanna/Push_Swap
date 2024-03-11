@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/08 12:36:37 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/11 19:01:17 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_struct
 {
 	int				count;
 	struct s_node	*head_a;
-	struct s_node	**head_b;
+	struct s_node	*head_b;
 }					t_struct;
 
 //ops
@@ -62,7 +62,6 @@ void		rrb(t_node **stack_b);
 void		rrr(t_node **stack_a, t_node **stack_b);
 int			is_stack_sorted(t_node *stack);
 int			tiny_sort_a(t_struct *structure, int size);
-// int		tiny_sort_b(t_struct *structure);
 
 //clean nodes
 void		free_stack(t_node **stack);
@@ -71,7 +70,6 @@ void		free_b(t_node ***b);
 void		err_handling(t_struct *structure);
 
 //core
-void		fill_b(t_struct *structure, int index);
 void		call_b(t_struct *structure, int arr_size);
 int			head_1(int next, int prev, int last, t_node **set_list);
 int			head_2(int next, int prev, int last, t_node **set_list);
@@ -84,10 +82,9 @@ t_node		*find_last(t_node *list);
 t_node		*find_prev_to_last(t_node *list);
 t_node		*find_mid_of_set(t_node *list);
 int			*tag_values(t_struct *structure, int set_size);
-void		update_order(t_struct *structure, char c, int i);
+void		update_order(t_node **list);
 void		rank_set(t_node **nodes, int set_size);
 int			update_rank_a(t_node *list, int set_size);
-int			update_rank_b(t_node *list, int set_size);
 t_struct	*init_struct(char **av, int count);
 
 #endif

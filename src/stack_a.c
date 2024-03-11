@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/08 12:36:17 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/11 19:51:49 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	tiny_sort_a(t_struct *structure, int size)
 
 	if (size == 2)
 		return (sa(&structure->head_a), 1);
-	update_order(structure, 'a', -1);
+	update_order(&structure->head_a);
 	update_rank_a(structure->head_a, size);
 	head = structure->head_a->rank;
 	mid = structure->head_a->next->rank;
@@ -120,12 +120,40 @@ int	sort_ops_a(t_struct *structure, int set_size)
 	return (0);
 }
 
+void	rank_elems(t_node **nodes, int size)
+{
+	int	i;
+	int	j;
+	int	rank;
+
+	i = 0;
+	while (i < size)
+	{
+		if (nodes[i] != NULL)
+		{
+			rank = 1;
+			j = 0;
+			while (j < size)
+			{
+				if (i != j && nodes[j] != NULL)
+				{
+					if (nodes[i]->value > nodes[j]->value)
+						rank++;
+				}
+				j++;
+			}
+			nodes[i]->rank = rank;
+		}
+		i++;
+	}
+}
+
 t_struct	*init_struct(char **av, int count)
 {
 	t_struct	*structure;
+	int			err;
 	int			input;
 	int			i;
-	int			err;
 
 	structure = malloc (sizeof(t_struct));
 	if (!structure)
@@ -142,6 +170,15 @@ t_struct	*init_struct(char **av, int count)
 		if (err)
 			return (NULL);
 		i--;
+	}
+	rank_elems(&structure->head_a, count);
+	i = 0;
+	t_node *temp = structure->head_a;
+	while (structure->head_a != NULL)
+	{
+		printf ("rank[%i]: %i\n", i, temp->rank);
+		i++;
+		temp = temp->next;
 	}
 	return (structure);
 }

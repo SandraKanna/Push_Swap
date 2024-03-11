@@ -6,14 +6,13 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 21:06:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/05 17:30:50 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/11 18:14:02 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
 
 int	head_1(int next, int prev, int last, t_node **set_list)
-// static int	head_1(int next, t_node **set_list)
 {
 	int	mid;
 
@@ -30,7 +29,8 @@ int	head_1(int next, int prev, int last, t_node **set_list)
 	}
 	else if (next == 4 || next == 5)
 	{
-		if (mid == 4 || ((mid == 3 && last == 5) || (mid == 5 && prev == 3) || (mid == 2 && prev == 5)))
+		if (mid == 4 || ((mid == 3 && last == 5) || (mid == 5 && prev == 3)
+			|| (mid == 2 && prev == 5)))
 			return (5);
 		if (next == 4 && mid == 3)
 			ra(set_list);
@@ -73,7 +73,6 @@ int	head_3(int next, int prev, t_node **set_list)
 	int	mid;
 
 	mid = find_mid_of_set(*set_list)->rank;
-//	printf ("test mid head3: %i\ntest prev head3: %i\n", mid, prev);
 	if (next == 1 || next == 2)
 	{
 		if (next == 1 && (mid == 5 || (mid == 2 && prev == 5)))
