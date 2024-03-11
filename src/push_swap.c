@@ -21,7 +21,7 @@ int	sort_in_a(t_struct *structure, int size)
 	{
 		while (i > 0)
 		{
-			if (tiny_sort_a(structure, size))
+			if (tiny_sort(structure, size))
 				return (is_stack_sorted(structure->head_a));
 			i--;
 		}
@@ -29,7 +29,7 @@ int	sort_in_a(t_struct *structure, int size)
 	while (i > 0)
 	{
 		update_order(&structure->head_a);
-		if (sort_ops_a(structure, size))
+		if (sort_5(structure))
 			break ;
 		i--;
 	}

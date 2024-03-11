@@ -29,8 +29,8 @@ int	head_1(int next, int prev, int last, t_node **set_list)
 	}
 	else if (next == 4 || next == 5)
 	{
-		if (mid == 4 || ((mid == 3 && last == 5) || (mid == 5 && prev == 3)
-			|| (mid == 2 && prev == 5)))
+		if (mid == 4 || ((mid == 3 && last == 5)
+				|| (mid == 5 && prev == 3) || (mid == 2 && prev == 5)))
 			return (5);
 		if (next == 4 && mid == 3)
 			ra(set_list);
@@ -46,8 +46,8 @@ int	head_2(int next, int prev, int last, t_node **set_list)
 
 	mid = find_mid_of_set(*set_list)->rank;
 	if ((next == 3 && mid == 1 && prev == 5) || (next == 5
-		&& ((mid == 1 && last == 3) || (mid == 4 && last == 1))))
-			return (5);
+			&& ((mid == 1 && last == 3) || (mid == 4 && last == 1))))
+		return (5);
 	if (next == 1 || next == 5)
 	{
 		if (next == 5 && mid == 4)
@@ -121,31 +121,28 @@ int	head_4(int next, int last, t_node **set_list)
 	return (is_stack_sorted(*set_list));
 }
 
-int	head_5(int next, int prev, int last, t_node **set_list)
+int	sort_5(t_struct *structure)
 {
-	int	mid;
+	int	next;
+	int	prev;
+	int	last;
+	int	head;
 
-	mid = find_mid_of_set(*set_list)->rank;
-	if ((next == 3 && mid == 1 && prev == 4)
-		|| (next == 4 && mid == 3 && prev == 2))
-		return (5);
-	if (next == 1 || next == 2)
-	{
-		if (last == 4 || (next == 1 && mid == 4 && prev == 2))
-			ra(set_list);
-		else if (next == 2 && mid == 4 && prev == 1)
-			sa(set_list);
-		else
-			rra(set_list);
-	}
-	else if (next == 4 || next == 3)
-	{
-		if (next == 3 && last == 4)
-			ra(set_list);
-		else if (mid == 2 && prev == 4)
-			rra(set_list);
-		else
-			sa(set_list);
-	}
-	return (is_stack_sorted(*set_list));
+	if (is_stack_sorted(structure->head_a))
+		return (1);
+	head = structure->head_a->rank;
+	next = structure->head_a->next->rank;
+	prev = structure->head_a->prev->rank;
+	last = structure->head_a->last->rank;
+	if (head == 1)
+		return (head_1(next, prev, last, &structure->head_a));
+	if (head == 2)
+		return (head_2(next, prev, last, &structure->head_a));
+	if (head == 3)
+		return (head_3(next, prev, &structure->head_a));
+	if (head == 4)
+		return (head_4(next, last, &structure->head_a));
+	if (head == 5)
+		return (head_5(next, prev, last, &structure->head_a));
+	return (0);
 }
