@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/12 15:33:27 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:45:36 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int	main(int argc, char **argv)
 		return (0);
 	elements_count = 0;
 	list = parse_args(&elements_count, argc, argv);
-	if (!list || check_errors(elements_count, list))
+	if (!list || !*list || check_errors(elements_count, list))
 	{	
 		if (argc == 2 && list)
 			free_tab(list);
