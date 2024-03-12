@@ -6,13 +6,13 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:46:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/08 12:09:37 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/12 10:35:37 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../Includes/push_swap.h"
 
-void	push(t_node **stack, int input, int *err)
+void	push(t_node **stack, int input, int rank, int *err)
 {
 	t_node	*new_node;
 
@@ -24,7 +24,7 @@ void	push(t_node **stack, int input, int *err)
 		return ;
 	}
 	new_node->value = input;
-	new_node->rank = -1;
+	new_node->rank = rank;
 	new_node->middle = NULL;
 	new_node->prev = NULL;
 	new_node->last = NULL;

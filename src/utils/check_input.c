@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/11 18:20:34 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:33:27 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	has_duplicates(int ac, int *input)
 	}
 	return (0);
 }
-
-
 
 int	check_errors(int int_count, char **int_list)
 {

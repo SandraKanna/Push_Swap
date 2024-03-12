@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_a.c                                          :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/11 19:51:49 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/12 11:29:29 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,11 @@ t_struct	*init_struct(char **av, int count)
 	while (i >= 0)
 	{
 		input = ft_atoi(av[i]);
-		push(&structure->head_a, input, &err);
+		push(&structure->head_a, input, -1, &err);
 		if (err)
 			return (NULL);
 		i--;
 	}
 	rank_elems(structure->head_a);
-	// i = 0;
-	// t_node *temp = structure->head_a;
-	// while (temp != NULL)
-	// {
-	// 	printf("rank[%i]: %i\n", i, temp->rank);
-	// 	i++;
-	// 	temp = temp->next;
-	// }
 	return (structure);
 }

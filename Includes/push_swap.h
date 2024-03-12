@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/11 19:01:17 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/12 13:44:39 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		check_errors(int int_count, char **int_list);
 int		has_duplicates(int ac, int *input);
 
 //ops
-void	push(t_node **stack, int input, int *err);
+void	push(t_node **stack, int input, int rank, int *err);
 int		pop(t_node **stack);
 void	swap(t_node	**stack);
 void	rotate_up(t_node **stack);
@@ -75,7 +75,7 @@ int		sort_5(t_struct *structure);
 void	push_swap(t_struct *structure, int size);
 t_node	*find_last(t_node *list);
 int		count_nodes(t_node *list);
-int		*tag_values(t_struct *structure, int set_size);
+void	rank_elems(t_node *list);
 t_struct	*init_struct(char **av, int count);
 
 #endif
