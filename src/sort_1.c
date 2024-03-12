@@ -12,29 +12,28 @@
 
 #include "../Includes/push_swap.h"
 
-int	tiny_sort(t_struct *structure, int size)
+int	tiny_sort(t_struct *structure)
 {
 	int	head;
 	int	mid;
+	int	last;
+	int	size;
 
+	size = count_nodes(structure->head_a);
 	if (size == 2)
 		return (sa(&structure->head_a), 1);
-	head = structure->head_a->rank;
-	mid = structure->head_a->next->rank;
-	if (head <= 2)
+	head = structure->head_a->value;
+	mid = structure->head_a->next->value;
+	last = structure->head_a->next->next->value;
+	if (head > mid)
 	{
-		if (mid == 1)
-			sa(&structure->head_a);
-		else
-			rra(&structure->head_a);
-	}
-	else if (head == 3)
-	{
-		if (mid == 1)
+		if (head > last && mid < last)
 			ra(&structure->head_a);
 		else
 			sa(&structure->head_a);
 	}
+	else
+		rra(&structure->head_a);
 	return (is_stack_sorted(structure->head_a));
 }
 
@@ -42,7 +41,7 @@ int	head_5(int next, int prev, int last, t_node **set_list)
 {
 	int	mid;
 
-	mid = find_mid_of_set(*set_list)->rank;
+	mid = (*set_list)->next->next->rank;
 	if ((next == 3 && mid == 1 && prev == 4)
 		|| (next == 4 && mid == 3 && prev == 2))
 		return (5);

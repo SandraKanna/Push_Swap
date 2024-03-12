@@ -20,32 +20,9 @@ t_node	*find_last(t_node *list)
 	if (list)
 	{
 		while (last->next != NULL)
-		last = last->next;
+			last = last->next;
 	}
 	return (last);
-}
-
-t_node	*find_prev_to_last(t_node *list)
-{
-	t_node	*prev_to_last;
-
-	prev_to_last = list;
-	if (list && list->next != NULL && list->next->next != NULL)
-	{
-		while (prev_to_last->next->next != NULL)
-			prev_to_last = prev_to_last->next;
-	}
-	return (prev_to_last);
-}
-
-t_node	*find_mid_of_set(t_node *list)
-{
-	t_node	*middle;
-
-	middle = NULL;
-	if (list && list->next && list->next->next != NULL)
-		middle = list->next->next;
-	return (middle);
 }
 
 int	is_stack_sorted(t_node *stack)
@@ -59,19 +36,23 @@ int	is_stack_sorted(t_node *stack)
 	return (1);
 }
 
-void	update_order(t_node **list)
+int	count_nodes(t_node *list)
 {
-	t_node	*mid;
-	t_node	*prev;
-	t_node	*last;
+	t_node	*current;
+	int		i;
 
-	mid = find_mid_of_set(*list);
-	(*list)->middle = mid;
-	last = find_last(*list);
-	(*list)->last = last;
-	prev = find_prev_to_last(*list);
-	(*list)->prev = prev;
+	if (!list)
+		return (0);
+	i = 0;
+	current = list;
+	while (current != NULL)
+	{
+		i++;
+		current = current->next;
+	}
+	return (i);
 }
+
 // t_node	*find_middle(t_node *list)
 // {
 // 	t_node	*middle;

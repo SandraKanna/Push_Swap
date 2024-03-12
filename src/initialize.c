@@ -49,7 +49,6 @@ t_struct	*init_struct(char **av, int count)
 		return (NULL);
 	structure->count = count;
 	structure->head_a = NULL;
-
 	structure->head_b = NULL;
 	i = count - 1;
 	err = 0;

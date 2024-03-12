@@ -69,15 +69,13 @@ void	err_handling(t_struct *structure);
 //core
 // void	call_b(t_struct *structure, int arr_size);
 int		is_stack_sorted(t_node *stack);
-int		tiny_sort(t_struct *structure, int size);
+int		tiny_sort(t_struct *structure);
 int		head_5(int next, int prev, int last, t_node **set_list);
 int		sort_5(t_struct *structure);
 void	push_swap(t_struct *structure, int size);
 t_node	*find_last(t_node *list);
-t_node	*find_prev_to_last(t_node *list);
-t_node	*find_mid_of_set(t_node *list);
+int		count_nodes(t_node *list);
 int		*tag_values(t_struct *structure, int set_size);
-void	update_order(t_node **list);
 t_struct	*init_struct(char **av, int count);
 
 #endif
