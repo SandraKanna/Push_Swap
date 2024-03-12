@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/12 15:45:36 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/12 15:56:12 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	push_swap(t_struct *structure, int size)
 	}
 	if (is_stack_sorted(structure->head_a))
 	{
-		printf("stack_a is sorted!\n");
+	//	printf("stack_a is sorted!\n");
 		return ;
 	}
 	else
