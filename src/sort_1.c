@@ -12,31 +12,41 @@
 
 #include "../Includes/push_swap.h"
 
-void	sort_b(t_struct *structure, int mid)
+void	sort_b(t_struct *structure, int piv)
 {
 	t_node	*b;
-	t_node	*a;
+	// t_node	*a;
 
 	b = structure->head_b;
-	a = structure->head_a;
-	if ((b != NULL && b->next != NULL) && b->value < b->next->value)
+	// a = structure->head_a;
+//	if ((b != NULL && b->next != NULL) && b->value < b->next->value)
+	if (b->rank > piv)
 	{
-		b->last = find_last(b);
-		if (b->value > b->last->value)
-		{
-			if (a->rank > mid && a->rank > a->next->rank)
-				ss(&a, &b);
-			else
-				sb(&b);
-		}
-		else
-		{
-			if (b->value > b->last->value)
-				rr(&a, &b);
-			else
-				rb(&structure->head_a);
-		}
+		// b->last = find_last(b);
+		// if (b->value > b->last->value)
+		// {
+		// 	if (a->rank > mid && a->rank > a->next->rank)
+		// 		ss(&structure->head_a, &structure->head_b);
+		// 	else
+		// 		sb(&structure->head_b);
+		// }
+		// else
+		// {
+			// a->last = find_last(a);
+			// if (a->rank > mid)
+			// 	rr(&structure->head_a, &structure->head_b);
+			// else
+		rb(&structure->head_b);
+		// }
 	}
+	// t_node *temp = structure->head_b;
+	// int i = 0;
+	// while (temp != NULL && i < 100)
+	// {
+	// 	printf("b[%i]: %i\n", i, temp->value);
+	// 	i++;
+	// 	temp = temp->next;
+	// }
 }
 
 int	tiny_sort(t_struct *structure)

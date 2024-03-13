@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/12 11:29:29 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/13 17:02:03 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,12 @@ t_struct	*init_struct(char **av, int count)
 		i--;
 	}
 	rank_elems(structure->head_a);
+	structure->head_a->last = find_last(structure->head_a);
+	// t_node *printme = structure->head_a;
+	// while (printme != NULL)
+	// {
+	// 	printf("%i\n", printme->value);
+	// 	printme = printme->next;
+	// }
 	return (structure);
 }

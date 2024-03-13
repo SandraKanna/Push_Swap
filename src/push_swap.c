@@ -6,63 +6,17 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/12 15:56:12 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/13 18:29:51 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
 
-// void	merge_ab(t_struct *structure)
-// {
-// 	int		mid;
-// 	int		err;
-// 	t_node	*b;
-// 	t_node	*a;
-
-// 	b = structure->head_b;
-// 	a = structure->head_a;
-// 	mid = (structure->count * 0.55);
-// 	err = 0;
-// 	while (b != NULL)
-// 	{
-// 		b->last = find_last(b);
-// 		if ((b->next != NULL && b->last != NULL)
-// 			&& (b->last->rank >= b->next->rank && b->last->rank >= b->rank))
-// 			rrb(&b);
-// 		else if ((b->next != NULL && b->last != NULL)
-// 			&& (b->next->rank > b->rank))
-// 			sb(&b);
-// 		else
-// 		{
-// 			pa(&structure->head_a, &b, &err);
-// 			if (err)
-// 				err_handling(structure);
-// 		}
-// 	}
-// }
-
-void	call_b(t_struct *structure)
+void	merge_ab(t_struct *structure)
 {
-	int	mid;
 	int	err;
-
-	mid = (structure->count * 0.55);
+	
 	err = 0;
-	while (structure->head_a != NULL && structure->head_a->next != NULL
-		&& structure->head_a->next->next != NULL  && structure->head_a->next->next->next != NULL)
-	{
-		structure->head_a->last = find_last(structure->head_a);
-		if (structure->head_a->rank > mid)
-			ra(&structure->head_a);
-		pb(&structure->head_a, &structure->head_b, &err);
-		if (err)
-			err_handling(structure);
-		rank_elems(structure->head_a);
-		mid = (count_nodes(structure->head_a) * 0.55);
-		sort_b(structure, mid);
-		// if (structure->head_a->next->next->next == NULL )
-		// 	break ;
-	}
 	while (!is_stack_sorted(structure->head_a))
 		tiny_sort(structure);
 	while (structure->head_b != NULL)
@@ -71,6 +25,32 @@ void	call_b(t_struct *structure)
 		if (err)
 			err_handling(structure);
 	}
+}
+
+void	call_b(t_struct *structure, float *mult)
+{
+	int	piv;
+	int	err;
+
+	err = 0;
+	while (structure->head_a != NULL && structure->head_a->next != NULL
+		&& structure->head_a->next->next != NULL)
+	{
+		piv = (structure->count * mult[0]);
+		if (structure->head_a->rank >= piv)
+			ra(&structure->head_a);
+		else
+		{
+			pb(&structure->head_a, &structure->head_b, &err);
+			if (err)
+				err_handling(structure);
+			rank_elems(structure->head_a);
+			structure->head_a->last = find_last(structure->head_a);
+			piv = (count_nodes(structure->head_a) * mult[1]);
+			sort_b(structure, piv);
+		}
+	}
+	merge_ab(structure);
 }
 
 int	sort_in_a(t_struct *structure, int size)
@@ -112,9 +92,19 @@ void	push_swap(t_struct *structure, int size)
 	}
 	else
 	{
+		float mult[2] = {0.6, 0.2};
 		// printf("need stack_b\n");
 		while (!is_stack_sorted(structure->head_a))
-			call_b(structure);
+		{
+			// int i = 0;
+			// while (i < 3)
+			// {
+				rank_elems(structure->head_a);
+				structure->head_a->last = find_last(structure->head_a);
+				call_b(structure, mult);
+				// i++;
+			// }
+		}
 	}
 	if (is_stack_sorted(structure->head_a))
 	{
@@ -145,8 +135,14 @@ int	main(int argc, char **argv)
 	if (argc == 2)
 		free_tab(list);
 	if (!structure)
-		return (err_handling(structure), 0);
+		return (0);
 	push_swap(structure, structure->count);
+	// t_node *printme = structure->head_a;
+	// while (printme != NULL)
+	// {
+	// 	printf("%i\n", printme->value);
+	// 	printme = printme->next;
+	// }
 	return (free_struct(structure), 0);
 }
 //for i in {-10..20}; do echo $i; done | sort -R | tr '\n' ' '

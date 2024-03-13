@@ -1,0 +1,3 @@
+/home/skanna/Documents/Push_Swap/push_swap_visualizer/build/_deps/catch2-subbuild/CMakeFiles/catch2-populate.dir
+/home/skanna/Documents/Push_Swap/push_swap_visualizer/build/_deps/catch2-subbuild/CMakeFiles/edit_cache.dir
+/home/skanna/Documents/Push_Swap/push_swap_visualizer/build/_deps/catch2-subbuild/CMakeFiles/rebuild_cache.dir

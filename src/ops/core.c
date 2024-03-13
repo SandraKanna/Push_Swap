@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 13:46:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/12 10:35:37 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/13 16:12:10 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ void	push(t_node **stack, int input, int rank, int *err)
 	}
 	new_node->value = input;
 	new_node->rank = rank;
-	new_node->middle = NULL;
-	new_node->prev = NULL;
 	new_node->last = NULL;
 	new_node->next = *stack;
 	*stack = new_node;

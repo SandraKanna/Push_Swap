@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/12 13:44:39 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/13 18:25:07 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@ typedef struct s_node
 	int				value;
 	int				rank;
 	struct s_node	*next;
-	struct s_node	*middle;
-	struct s_node	*prev;
 	struct s_node	*last;
 }					t_node;
 
@@ -69,7 +67,7 @@ void	err_handling(t_struct *structure);
 //core
 // void	call_b(t_struct *structure, int arr_size);
 int		is_stack_sorted(t_node *stack);
-void	sort_b(t_struct *structure, int mid);
+void	sort_b(t_struct *structure, int piv);
 int		tiny_sort(t_struct *structure);
 int		head_5(int next, int prev, int last, t_node **set_list);
 int		sort_5(t_struct *structure);
