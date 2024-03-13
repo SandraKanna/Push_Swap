@@ -12,45 +12,53 @@
 
 #include "../Includes/push_swap.h"
 
-void	merge_ab(t_struct *structure)
+void	merge_ab(t_struct *structure, float div)
 {
-	int	err;
-	
-	err = 0;
+	int		err;
+	int		piv;
+
 	while (!is_stack_sorted(structure->head_a))
 		tiny_sort(structure);
 	while (structure->head_b != NULL)
 	{
-		pa(&structure->head_a, &structure->head_b, &err);
-		if (err)
-			err_handling(structure);
+		rank_elems(structure->head_b);
+		piv = (count_nodes(structure->head_b) * div);
+		err = 0;
+		if (structure->head_b->rank < piv)
+			rb(&structure->head_b);
+		else
+		{
+			pa(&structure->head_a, &structure->head_b, &err);
+			if (err)
+				err_handling(structure);
+		}
 	}
 }
 
-void	call_b(t_struct *structure, float *mult)
+void	call_b(t_struct *structure, float div)
 {
-	int	piv;
-	int	err;
+	int		piv;
+	int		size;
+	int		err;
 
-	err = 0;
-	while (structure->head_a != NULL && structure->head_a->next != NULL
-		&& structure->head_a->next->next != NULL)
+	size = structure->count;
+	while (size > 3)
 	{
-		piv = (structure->count * mult[0]);
-		if (structure->head_a->rank >= piv)
+		size = count_nodes(structure->head_a);
+		rank_elems(structure->head_a);
+		err = 0;
+		piv = (size * div);
+		if (structure->head_a->rank > piv)
 			ra(&structure->head_a);
 		else
 		{
 			pb(&structure->head_a, &structure->head_b, &err);
 			if (err)
 				err_handling(structure);
-			rank_elems(structure->head_a);
-			structure->head_a->last = find_last(structure->head_a);
-			piv = (count_nodes(structure->head_a) * mult[1]);
-			sort_b(structure, piv);
+			sort_b(structure, div);
 		}
 	}
-	merge_ab(structure);
+	merge_ab(structure, div);
 }
 
 int	sort_in_a(t_struct *structure, int size)
@@ -78,6 +86,9 @@ int	sort_in_a(t_struct *structure, int size)
 
 void	push_swap(t_struct *structure, int size)
 {
+	float	div;
+
+	div = 0.5;
 	if (structure->head_a && is_stack_sorted(structure->head_a))
 	{
 		// printf("Already sorted!\n");
@@ -85,34 +96,17 @@ void	push_swap(t_struct *structure, int size)
 	}
 	if (size <= 5)
 		sort_in_a(structure, size);
-	if (is_stack_sorted(structure->head_a))
-	{
+	// if (is_stack_sorted(structure->head_a))
 		// printf("stack_a is sorted!\n");
-		return ;
-	}
 	else
 	{
-		float mult[2] = {0.6, 0.2};
 		// printf("need stack_b\n");
 		while (!is_stack_sorted(structure->head_a))
-		{
-			// int i = 0;
-			// while (i < 3)
-			// {
-				rank_elems(structure->head_a);
-				structure->head_a->last = find_last(structure->head_a);
-				call_b(structure, mult);
-				// i++;
-			// }
-		}
+			call_b(structure, div);
 	}
-	if (is_stack_sorted(structure->head_a))
-	{
-	//	printf("stack_a is sorted!\n");
-		return ;
-	}
-	else
-		printf(" :(");
+	// if (is_stack_sorted(structure->head_a)
+	// 	&& (count_nodes(structure->head_a) == structure->count))
+	// 	printf("stack_a is sorted!\n");
 }
 
 int	main(int argc, char **argv)

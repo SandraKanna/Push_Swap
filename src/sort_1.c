@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_b.c                                            :+:      :+:    :+:   */
+/*   sort_1.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,33 +12,13 @@
 
 #include "../Includes/push_swap.h"
 
-void	sort_b(t_struct *structure, int piv)
+void	sort_b(t_struct *structure, float div)
 {
-	t_node	*b;
-	// t_node	*a;
+	int	piv;
 
-	b = structure->head_b;
-	// a = structure->head_a;
-//	if ((b != NULL && b->next != NULL) && b->value < b->next->value)
-	if (b->rank > piv)
-	{
-		// b->last = find_last(b);
-		// if (b->value > b->last->value)
-		// {
-		// 	if (a->rank > mid && a->rank > a->next->rank)
-		// 		ss(&structure->head_a, &structure->head_b);
-		// 	else
-		// 		sb(&structure->head_b);
-		// }
-		// else
-		// {
-			// a->last = find_last(a);
-			// if (a->rank > mid)
-			// 	rr(&structure->head_a, &structure->head_b);
-			// else
+	piv = count_nodes(structure->head_b) * div;
+	if (structure->head_b->next != NULL && structure->head_b->rank < piv)
 		rb(&structure->head_b);
-		// }
-	}
 	// t_node *temp = structure->head_b;
 	// int i = 0;
 	// while (temp != NULL && i < 100)
