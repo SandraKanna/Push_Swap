@@ -69,6 +69,7 @@ void	err_handling(t_struct *structure);
 //core
 // void	call_b(t_struct *structure, int arr_size);
 int		is_stack_sorted(t_node *stack);
+void	sort_b(t_struct *structure, int mid);
 int		tiny_sort(t_struct *structure);
 int		head_5(int next, int prev, int last, t_node **set_list);
 int		sort_5(t_struct *structure);

@@ -12,64 +12,65 @@
 
 #include "../Includes/push_swap.h"
 
-void	merge_ab(t_struct *structure)
-{
-	// int	mid;
-	int	err;
+// void	merge_ab(t_struct *structure)
+// {
+// 	int		mid;
+// 	int		err;
+// 	t_node	*b;
+// 	t_node	*a;
 
-	// mid = structure->count / 2;
-	err = 0;
-	while (structure->head_b != NULL)
-	{
-		structure->head_b->last = find_last(structure->head_b);
-		if ((structure->head_b->next != NULL && structure->head_b->last != NULL)
-			&& (structure->head_b->last->rank >= structure->head_b->next->rank && structure->head_b->last->rank >= structure->head_b->rank ))
-			rrb(&structure->head_b);
-		else if((structure->head_b->next != NULL && structure->head_b->last != NULL)
-			&& (structure->head_b->next->rank > structure->head_b->rank ))
-			sb(&structure->head_b);
-		else
-		{
-			pa(&structure->head_a, &structure->head_b, &err);
-			if (err)
-				err_handling(structure);
-		}
-	}
-}
+// 	b = structure->head_b;
+// 	a = structure->head_a;
+// 	mid = (structure->count * 0.55);
+// 	err = 0;
+// 	while (b != NULL)
+// 	{
+// 		b->last = find_last(b);
+// 		if ((b->next != NULL && b->last != NULL)
+// 			&& (b->last->rank >= b->next->rank && b->last->rank >= b->rank))
+// 			rrb(&b);
+// 		else if ((b->next != NULL && b->last != NULL)
+// 			&& (b->next->rank > b->rank))
+// 			sb(&b);
+// 		else
+// 		{
+// 			pa(&structure->head_a, &b, &err);
+// 			if (err)
+// 				err_handling(structure);
+// 		}
+// 	}
+// }
 
 void	call_b(t_struct *structure)
 {
 	int	mid;
-	//int	quart;
-	// int	temp;
 	int	err;
 
-	mid = (structure->count * 0.5) + 1;
-	if (mid > 3)
-		mid = (structure->count * 0.75);
-//	quart = (structure->count * 0.75);
-	// temp = structure->count - 2;
-	// mid = (count_nodes(structure->head_a) / 2);
+	mid = (structure->count * 0.55);
 	err = 0;
-	while (structure->head_a != NULL)
+	while (structure->head_a != NULL && structure->head_a->next != NULL
+		&& structure->head_a->next->next != NULL  && structure->head_a->next->next->next != NULL)
 	{
 		structure->head_a->last = find_last(structure->head_a);
-		if (structure->head_a->rank >= mid)
+		if (structure->head_a->rank > mid)
 			ra(&structure->head_a);
-		else if (structure->head_a->rank < mid && structure->head_a->next->rank < structure->head_a->rank)
-			sa(&structure->head_a);
-		else
-		{
-			pb(&structure->head_a, &structure->head_b, &err);
-			if (err)
-				err_handling(structure);
-		}
-		if (structure->head_a->next->next->next == NULL )
-			break ;
+		pb(&structure->head_a, &structure->head_b, &err);
+		if (err)
+			err_handling(structure);
+		rank_elems(structure->head_a);
+		mid = (count_nodes(structure->head_a) * 0.55);
+		sort_b(structure, mid);
+		// if (structure->head_a->next->next->next == NULL )
+		// 	break ;
 	}
 	while (!is_stack_sorted(structure->head_a))
 		tiny_sort(structure);
-	merge_ab(structure);
+	while (structure->head_b != NULL)
+	{
+		pa(&structure->head_a, &structure->head_b, &err);
+		if (err)
+			err_handling(structure);
+	}
 }
 
 int	sort_in_a(t_struct *structure, int size)
@@ -135,7 +136,7 @@ int	main(int argc, char **argv)
 	elements_count = 0;
 	list = parse_args(&elements_count, argc, argv);
 	if (!list || !*list || check_errors(elements_count, list))
-	{	
+	{
 		if (argc == 2 && list)
 			free_tab(list);
 		return (write (2, "Error\n", 6));

@@ -12,9 +12,36 @@
 
 #include "../Includes/push_swap.h"
 
+void	sort_b(t_struct *structure, int mid)
+{
+	t_node	*b;
+	t_node	*a;
+
+	b = structure->head_b;
+	a = structure->head_a;
+	if ((b != NULL && b->next != NULL) && b->value < b->next->value)
+	{
+		b->last = find_last(b);
+		if (b->value > b->last->value)
+		{
+			if (a->rank > mid && a->rank > a->next->rank)
+				ss(&a, &b);
+			else
+				sb(&b);
+		}
+		else
+		{
+			if (b->value > b->last->value)
+				rr(&a, &b);
+			else
+				rb(&structure->head_a);
+		}
+	}
+}
+
 int	tiny_sort(t_struct *structure)
 {
-	int	head;
+	int	first;
 	int	mid;
 	int	last;
 	int	size;
@@ -22,12 +49,12 @@ int	tiny_sort(t_struct *structure)
 	size = count_nodes(structure->head_a);
 	if (size == 2)
 		return (sa(&structure->head_a), 1);
-	head = structure->head_a->value;
+	first = structure->head_a->value;
 	mid = structure->head_a->next->value;
 	last = structure->head_a->next->next->value;
-	if (head > mid)
+	if (first > mid)
 	{
-		if (head > last && mid < last)
+		if (first > last && mid < last)
 			ra(&structure->head_a);
 		else
 			sa(&structure->head_a);
