@@ -13,12 +13,15 @@
 //#include "../Includes/push_swap.h"
 #include "push_swap.h"
 
-void	sort_b(t_struct *structure, float div)
+void	push_sort_b(t_struct *structure, int piv)
 {
-	int	piv;
+	int		err;
 
-	piv = count_nodes(structure->head_b) * div;
-	if (structure->head_b->next != NULL && structure->head_b->rank < piv)
+	err = 0;
+	pb(&structure->head_a, &structure->head_b, &err);
+	if (err)
+		err_handling(structure);
+	if (structure->head_b->rank <= piv)
 		rb(&structure->head_b);
 	// t_node *temp = structure->head_b;
 	// int i = 0;

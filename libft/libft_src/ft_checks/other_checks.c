@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 18:37:04 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 11:13:37 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 14:14:02 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,20 +29,20 @@ int	is_nbr(char *str)
 	return (1);
 }
 
-int	is_bigger(int value1, int value2)
+int	max_value(int value1, int value2)
 {
 	if (value1 > value2)
-		return (1);
+		return (value1);
 	else
-		return (0);
+		return (value2);
 }
 
-int	is_smaller(int value1, int value2)
+int	min_value(int value1, int value2)
 {
 	if (value1 < value2)
-		return (1);
+		return (value1);
 	else
-		return (0);
+		return (value2);
 }
 
 int	has_quotes(char const *str)

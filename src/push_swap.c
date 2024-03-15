@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 10:44:37 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 15:34:05 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,32 @@
 
 void	merge_ab(t_struct *structure, float div)
 {
-	int		err;
-	int		piv;
+	int	err;
+	int	piv;
+	int	size_b;
+	int	i;
 
-	while (!is_stack_sorted(structure->head_a))
-		tiny_sort(structure);
+	sort_in_a(structure, count_nodes(structure->head_a));
 	while (structure->head_b != NULL)
 	{
 		rank_elems(structure->head_b);
-		piv = (count_nodes(structure->head_b) * div);
+		size_b = count_nodes(structure->head_b);
+		piv = (size_b * div);
+		if (piv == 0)
+			piv = 1;
 		err = 0;
-		if (structure->head_b->rank < piv)
-			rb(&structure->head_b);
-		else
+		i = 0;
+		while (i < (piv * 2))
 		{
-			pa(&structure->head_a, &structure->head_b, &err);
-			if (err)
-				err_handling(structure);
+			if (structure->head_b->rank > piv)
+				rb(&structure->head_b);
+			else	
+			{
+				pa(&structure->head_a, &structure->head_b, &err);
+				if (err)
+					err_handling(structure);
+				i++;
+			}
 		}
 	}
 }
@@ -38,24 +47,25 @@ void	merge_ab(t_struct *structure, float div)
 void	call_b(t_struct *structure, float div)
 {
 	int		piv;
-	int		size;
-	int		err;
+	int		size_a;
+	int		i;
 
-	size = structure->count;
-	while (size > 3)
+	size_a = structure->count;
+	while (size_a > 4)
 	{
-		size = count_nodes(structure->head_a);
+		size_a = count_nodes(structure->head_a);
+		i = 0;
 		rank_elems(structure->head_a);
-		err = 0;
-		piv = (size * div);
-		if (structure->head_a->rank > piv)
-			ra(&structure->head_a);
-		else
+		piv = (size_a * div);
+		while (i < (piv * 2) && size_a > 4)
 		{
-			pb(&structure->head_a, &structure->head_b, &err);
-			if (err)
-				err_handling(structure);
-			sort_b(structure, div);
+			if (structure->head_a->rank > piv && structure->head_a->rank < (size_a - piv))
+				ra(&structure->head_a);
+			else
+			{
+				push_sort_b(structure, piv);
+				i++;
+			}
 		}
 	}
 	merge_ab(structure, div);
@@ -88,7 +98,7 @@ void	push_swap(t_struct *structure, int size)
 {
 	float	div;
 
-	div = 0.5;
+	div = 0.25;
 	if (structure->head_a && is_stack_sorted(structure->head_a))
 	{
 		// printf("Already sorted!\n");
@@ -101,8 +111,8 @@ void	push_swap(t_struct *structure, int size)
 	else
 	{
 		// printf("need stack_b\n");
-		while (!is_stack_sorted(structure->head_a))
-			call_b(structure, div);
+		//while (!is_stack_sorted(structure->head_a))
+		call_b(structure, div);
 	}
 	// if (is_stack_sorted(structure->head_a)
 	// 	&& (count_nodes(structure->head_a) == structure->count))
@@ -139,4 +149,4 @@ int	main(int argc, char **argv)
 	// }
 	return (free_struct(structure), 0);
 }
-//for i in {-10..20}; do echo $i; done | sort -R | tr '\n' ' '
+//for i in {-100..200}; do echo $i; done | sort -R | tr '\n' ' '
