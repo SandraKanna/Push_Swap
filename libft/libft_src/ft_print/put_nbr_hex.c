@@ -6,11 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 19:30:32 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/14 11:30:33 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:12:15 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/ft_printf.h"
+#include "ft_printf.h"
 
 static char	*def_print_base(const char c)
 {

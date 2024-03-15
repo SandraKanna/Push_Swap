@@ -6,11 +6,12 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/12 15:33:27 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 10:45:32 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/push_swap.h"
+//#include "../../Includes/push_swap.h"
+#include "push_swap.h"
 
 int	has_duplicates(int ac, int *input)
 {

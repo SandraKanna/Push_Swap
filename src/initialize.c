@@ -6,11 +6,12 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/13 17:02:03 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 10:45:56 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/push_swap.h"
+//#include "../Includes/push_swap.h"
+#include "push_swap.h"
 
 void	rank_elems(t_node *list)
 {

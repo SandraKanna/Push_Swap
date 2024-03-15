@@ -6,11 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:02:20 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/14 19:31:18 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:12:50 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/libftv3.h"
+#include "libftv3.h"
 
 char	*ft_strtrim(char const *s1, char const *set)
 {

@@ -6,11 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 19:21:42 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/14 11:23:37 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:13:47 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/libftv3.h"
+#include "libftv3.h"
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {

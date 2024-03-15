@@ -6,11 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 14:56:32 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/14 11:30:40 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:13:55 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/ft_printf.h"
+#include "ft_printf.h"
 
 static int	print_type(va_list arg, char specifier)
 {

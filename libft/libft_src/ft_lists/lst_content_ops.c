@@ -6,11 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 17:06:40 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/14 11:23:40 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:11:10 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/libftv3.h"
+#include "libftv3.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {

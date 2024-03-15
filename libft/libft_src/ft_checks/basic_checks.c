@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/libftv3.h"
+#include "libftv3.h"
 
 int	ft_isalpha(int c)
 {

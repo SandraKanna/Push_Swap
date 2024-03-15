@@ -1,6 +1,6 @@
 NAME = push_swap
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -g3 -IIncludes
 #-fsanitize=address 
 #-Ibonus
 

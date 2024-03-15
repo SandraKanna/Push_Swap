@@ -6,11 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 19:12:39 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/14 11:30:41 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:13:02 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/get_next_line.h"
+#include "get_next_line.h"
 
 t_lst	*new_elem(char *buf, int bytes)
 {

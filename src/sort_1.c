@@ -10,7 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/push_swap.h"
+//#include "../Includes/push_swap.h"
+#include "push_swap.h"
 
 void	sort_b(t_struct *structure, float div)
 {

@@ -6,11 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 18:00:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/14 19:10:22 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:12:47 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/libftv3.h"
+#include "libftv3.h"
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {

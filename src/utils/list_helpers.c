@@ -6,11 +6,12 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/11 19:01:27 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 10:45:43 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/push_swap.h"
+//#include "../../Includes/push_swap.h"
+#include "push_swap.h"
 
 t_node	*find_last(t_node *list)
 {

@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_5.c                                           :+:      :+:    :+:   */
+/*   sort_2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 21:06:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/11 18:14:02 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 10:46:10 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/push_swap.h"
+//#include "../Includes/push_swap.h"
+#include "push_swap.h"
 
 int	head_1(int next, int prev, int last, t_node **set_list)
 {

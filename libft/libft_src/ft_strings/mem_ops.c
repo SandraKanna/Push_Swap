@@ -6,18 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:58:15 by skanna            #+#    #+#             */
-/*   Updated: 2024/02/14 18:34:53 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 11:14:05 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../Includes/libftv3.h"
-
-/*
-memcpy: string copying when there is a guarantee that source 
-and destination memory areas do not overlap. Faster than strcpy.
-memmove:copies n bytes from a source memory area to a destination memory area. 
-It is designed to handle overlapping memory areas safely. Useful for substrings.
-*/
+#include "libftv3.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {

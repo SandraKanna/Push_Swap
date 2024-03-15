@@ -6,11 +6,11 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/13 18:29:51 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/15 10:44:37 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../Includes/push_swap.h"
+#include "push_swap.h"
 
 void	merge_ab(t_struct *structure, float div)
 {
