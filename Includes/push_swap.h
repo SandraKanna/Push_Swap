@@ -67,7 +67,7 @@ void	err_handling(t_struct *structure);
 //core
 // void	call_b(t_struct *structure, int arr_size);
 int		is_stack_sorted(t_node *stack);
-void	sort_b(t_struct *structure, float div);
+void	push_sort_b(t_struct *structure, int group);
 int		tiny_sort(t_struct *structure);
 int		head_5(int next, int prev, int last, t_node **set_list);
 int		sort_5(t_struct *structure);
@@ -75,6 +75,8 @@ void	push_swap(t_struct *structure, int size);
 t_node	*find_last(t_node *list);
 int		count_nodes(t_node *list);
 void	rank_elems(t_node *list);
+int		quadrant(int size, int position);
+int		find_group(int count, int rank);
 t_struct	*init_struct(char **av, int count);
 
 #endif

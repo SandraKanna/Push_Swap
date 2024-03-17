@@ -12,61 +12,76 @@
 
 #include "push_swap.h"
 
-void	merge_ab(t_struct *structure, float div)
+void	merge_ab(t_struct *structure, int count_b)
 {
 	int	err;
-	int	piv;
-	int	size_b;
-	int	i;
+	int	head_group;
+	int	big;
+	int	small;
 
-	sort_in_a(structure, count_nodes(structure->head_a));
-	while (structure->head_b != NULL)
+	count_b = count_nodes(structure->head_b);
+	if (count_b == 0)
+		return ;
+	rank_elems(structure->head_b);
+	head_group = find_group(count_b, structure->head_a->rank);
+	err = 0;
+	big = find_biggest(structure->head_a);
+	small = find_smallest(structure->head_a);
+	if (head_group )	
+		pa(&structure->head_a, &structure->head_b, &err);
+	if (err)
+		err_handling(structure);
+	if (structure->head_a->next != NULL
+		&& structure->head_a->value > structure->head_a->next->value)
+		ra(&structure->head_a);
+	merge_ab(structure, count_b);
+}
+
+int	rotate_direction(t_node	*list, int size, int big, int small)
+{
+	int	quad_big;
+	int	quad_small;
+
+	quad_big = quadrant(size, big);
+	quad_small = quadrant(size, small);
+	if (quad_big <= 2)
 	{
-		rank_elems(structure->head_b);
-		size_b = count_nodes(structure->head_b);
-		piv = (size_b * div);
-		if (piv == 0)
-			piv = 1;
-		err = 0;
-		i = 0;
-		while (i < (piv * 2))
-		{
-			if (structure->head_b->rank > piv)
-				rb(&structure->head_b);
-			else	
-			{
-				pa(&structure->head_a, &structure->head_b, &err);
-				if (err)
-					err_handling(structure);
-				i++;
-			}
-		}
+		if (quad_small <= 2)
+			return (1); //ra
+		else if (big > (size - small))
+			return (2); //rra
+	}
+	else if (quad_big > 2)
+	{
+		if (quad_small > 2)
+			return (2); //rra
+		else if ((size - big) > small)
+			return (1); //ra
 	}
 }
 
-void	call_b(t_struct *structure, float div)
+void	call_b(t_struct *structure, int count)
 {
-	int		piv;
-	int		size_a;
-	int		i;
+	int	big;
+	int	small;
+	int	head_group;
 
-	size_a = structure->count;
-	while (size_a > 4)
+	count = count_nodes(structure->head_a);
+	rank_elems(structure->head_a);
+	big = find_biggest(structure->head_a);
+	small = find_smallest(structure->head_a);
+	head_group = find_group((count / 2), structure->head_a->rank);
+	if (count <= 4)
+		sort_in_a(structure, count);
+	else
 	{
-		size_a = count_nodes(structure->head_a);
-		i = 0;
-		rank_elems(structure->head_a);
-		piv = (size_a * div);
-		while (i < (piv * 2) && size_a > 4)
-		{
-			if (structure->head_a->rank > piv && structure->head_a->rank < (size_a - piv))
-				ra(&structure->head_a);
-			else
-			{
-				push_sort_b(structure, piv);
-				i++;
-			}
-		}
+		if (head_group == 1 || head_group == 4)
+			push_sort_b(structure, head_group);
+		else if (rotate_direction(structure->head_a, count, big, small) == 1)
+			ra(&structure->head_a);
+		else if (rotate_direction(structure->head_a, count, big, small) == 2)
+			rra(&structure->head_a);
+		call_b(structure, count);
 	}
 	merge_ab(structure, div);
 }
@@ -96,9 +111,6 @@ int	sort_in_a(t_struct *structure, int size)
 
 void	push_swap(t_struct *structure, int size)
 {
-	float	div;
-
-	div = 0.25;
 	if (structure->head_a && is_stack_sorted(structure->head_a))
 	{
 		// printf("Already sorted!\n");
@@ -112,7 +124,7 @@ void	push_swap(t_struct *structure, int size)
 	{
 		// printf("need stack_b\n");
 		//while (!is_stack_sorted(structure->head_a))
-		call_b(structure, div);
+		call_b(structure, size);
 	}
 	// if (is_stack_sorted(structure->head_a)
 	// 	&& (count_nodes(structure->head_a) == structure->count))

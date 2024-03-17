@@ -13,6 +13,38 @@
 //#include "../Includes/push_swap.h"
 #include "push_swap.h"
 
+int	find_group(int count, int rank)
+{
+	if (rank < ((count / 4) * 3))
+	{
+		if (rank < ((count / 4) * 2))
+		{
+			if (rank < (count / 4))
+				return (1);
+			return (2);
+		}
+		return (3);
+	}
+	else
+		return (4);
+}
+
+int	quadrant(int size, int position)
+{
+	if (position < ((size / 4) * 3))
+	{
+		if (position < ((size / 4) * 2))
+		{
+			if (position < (size / 4))
+				return (1);
+			return (2);
+		}
+		return (3);
+	}
+	else
+		return (4);
+}
+
 void	rank_elems(t_node *list)
 {
 	t_node	*current;

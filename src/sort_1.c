@@ -13,16 +13,36 @@
 //#include "../Includes/push_swap.h"
 #include "push_swap.h"
 
-void	push_sort_b(t_struct *structure, int piv)
+void	push_sort_b(t_struct *structure, int group)
 {
 	int		err;
+	t_node	*top_b;
 
 	err = 0;
 	pb(&structure->head_a, &structure->head_b, &err);
 	if (err)
 		err_handling(structure);
-	if (structure->head_b->rank <= piv)
-		rb(&structure->head_b);
+	top_b = structure->head_b;
+	if (top_b->next != NULL)
+	{
+		if (group == 1)
+		{
+			if (structure->head_a->rank != 1 && structure->head_a->rank != 4)
+				rr(&structure->head_a, &structure->head_b);
+			else
+				rb(&structure->head_b);
+		}
+		else
+		{
+			if (top_b->value > top_b->next->value)
+			{
+				if (structure->head_a->next->rank <= group)
+					ss(&structure->head_a, &structure->head_b);
+				else
+					sb(&structure->head_b);
+			}
+		}
+	}
 	// t_node *temp = structure->head_b;
 	// int i = 0;
 	// while (temp != NULL && i < 100)

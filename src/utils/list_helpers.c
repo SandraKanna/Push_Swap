@@ -40,18 +40,68 @@ int	is_stack_sorted(t_node *stack)
 int	count_nodes(t_node *list)
 {
 	t_node	*current;
-	int		i;
+	int		count;
 
 	if (!list)
 		return (0);
-	i = 0;
+	count = 0;
 	current = list;
 	while (current != NULL)
 	{
-		i++;
+		count++;
 		current = current->next;
 	}
-	return (i);
+	return (count);
+}
+
+int	find_smallest(t_node *list, int n)
+{
+	t_node	*temp;
+	int		i;
+	int		steps;
+	int		smallest;
+
+	i = 0;
+	steps = 0;
+	smallest = INT_MAX;
+	temp = list->next;
+	while (temp != NULL && i < n)
+	{
+		if (temp->value < smallest)
+		{
+			smallest = temp->value;
+			steps++;
+		}
+		temp = temp->next;
+		i++;
+	}
+	return (steps);
+	// return (smallest);
+}
+
+int	find_biggest(t_node *list, int n)
+{
+	t_node	*temp;
+	int		i;
+	int		steps;
+	int		biggest;
+
+	i = 0;
+	steps = 0;
+	biggest = INT_MIN;
+	temp = list->next;
+	while (temp != NULL && i < n)
+	{
+		if (temp->value > biggest)
+		{
+			biggest = temp->value;
+			steps++;
+		}
+		temp = temp->next;
+		i++;
+	}
+	return (steps);
+	//return (biggest);
 }
 
 // t_node	*find_middle(t_node *list)
@@ -69,21 +119,3 @@ int	count_nodes(t_node *list)
 // 	return (middle);
 // }
 
-// int	find_smallest(t_node *list, int n)
-// {
-// 	t_node	*temp;
-// 	int		i;
-// 	int		smallest;
-
-// 	i = 0;
-// 	smallest = INT_MAX;
-// 	temp = list->next;
-// 	while (temp != NULL && i < n)
-// 	{
-// 		if (temp->value < smallest)
-// 			smallest = temp->value;
-// 		temp = temp->next;
-// 		i++;
-// 	}
-// 	return (smallest);
-// }

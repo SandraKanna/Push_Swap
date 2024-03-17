@@ -45,7 +45,6 @@ int	main(int argc, char **argv)
 		print_values(a->head_a);
 		printf("\n");
 		update_rank(a->head_a, ac);
-		update_order(a, 'a', -1);
 		print_order(a->head_a);
 		printf("\n");
 	}
