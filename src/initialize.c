@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 10:45:56 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/18 13:15:44 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 int	find_group(int count, int rank)
 {
-	if (rank < ((count / 4) * 3))
+	if (rank <= ((count / 4) * 3))
 	{
-		if (rank < ((count / 4) * 2))
+		if (rank <= ((count / 4) * 2))
 		{
-			if (rank < (count / 4))
+			if (rank <= (count / 4))
 				return (1);
 			return (2);
 		}

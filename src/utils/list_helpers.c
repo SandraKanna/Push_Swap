@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 10:45:43 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/18 18:24:46 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,54 +53,102 @@ int	count_nodes(t_node *list)
 	}
 	return (count);
 }
+int	find_position(t_node *list, int value)
+{
+	t_node	*temp;
+	int		position;
+
+	position = 1;
+	temp = list;
+	while (temp != NULL)
+	{
+		if (temp->value == value)
+			break ;
+		position++;
+		temp = temp->next;
+	}
+	return (position);
+}
 
 int	find_smallest(t_node *list, int n)
 {
 	t_node	*temp;
 	int		i;
-	int		steps;
 	int		smallest;
 
-	i = 0;
-	steps = 0;
+	i = 1;
 	smallest = INT_MAX;
-	temp = list->next;
-	while (temp != NULL && i < n)
+	temp = list;
+	while (temp != NULL && i <= n)
 	{
 		if (temp->value < smallest)
-		{
 			smallest = temp->value;
-			steps++;
-		}
+		i++;
+		temp = temp->next;
+	}
+	return (smallest);
+}
+
+int	find_sec_smallest(t_node *list, int n, int smallest)
+{
+	t_node	*temp;
+	int		i;
+	int		sec_smallest;
+
+	i = 1;
+	sec_smallest = INT_MAX;
+	temp = list;
+	while (temp != NULL && i <= n)
+	{
+		if (temp->value < sec_smallest && temp->value != smallest)
+			sec_smallest = temp->value;
 		temp = temp->next;
 		i++;
 	}
-	return (steps);
-	// return (smallest);
+	return (sec_smallest);
 }
 
 int	find_biggest(t_node *list, int n)
 {
 	t_node	*temp;
 	int		i;
-	int		steps;
 	int		biggest;
 
-	i = 0;
-	steps = 0;
+	i = 1;
 	biggest = INT_MIN;
-	temp = list->next;
-	while (temp != NULL && i < n)
+	temp = list;
+	while (temp != NULL && i <= n)
+	{
+		if (temp->value > biggest)
+			biggest = temp->value;
+		temp = temp->next;
+		i++;
+	}
+	return (biggest);
+}
+
+int	find_sec_biggest(t_node *list, int n)
+{
+	t_node	*temp;
+	int		i;
+	int		position;
+	int		biggest;
+
+	i = 1;
+	position = 0;
+	biggest = INT_MIN;
+	temp = list;
+	while (temp != NULL && i <= n)
 	{
 		if (temp->value > biggest)
 		{
 			biggest = temp->value;
-			steps++;
+			position = i;
 		}
 		temp = temp->next;
 		i++;
 	}
-	return (steps);
+	return (position);
 	//return (biggest);
 }
 
