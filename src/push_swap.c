@@ -12,101 +12,127 @@
 
 #include "push_swap.h"
 
-void	merge_ab(t_struct *structure, int count_b)
-{
-	int	err;
-	int	head_group;
-
-	while (count_b > 0)
-	{
-		count_b = count_nodes(structure->head_b);
-		rank_elems(structure->head_b);
-		head_group = find_group(count_b, structure->head_a->rank);
-		err = 0;
-		if (head_group > 2)
-		{
-			pa(&structure->head_a, &structure->head_b, &err);
-			if (err)
-				err_handling(structure);
-			if (structure->head_a->next != NULL
-				&& structure->head_a->value > structure->head_a->next->value)
-				ra(&structure->head_a);
-		}
-		else
-			rrb(&structure->head_b);
-	}
-}
-
-int	rotate_direction(int size, int big, int small)
+int	rotate_direction(int size, int position)
 {
 	int	mid;
-	int	rot_dir;
 
 	mid = size / 2;
-	rot_dir = -1;
-	if (big <= mid)
-	{
-		if (small < mid || big < (size - small))
-			rot_dir = 1; //ra
-		else if (big > (size - small))
-			rot_dir = 2; //rra
-	}
-	else if (big > mid)
-	{
-		if (small >= mid || small > (size - big))
-			rot_dir = 2; //rra
-		else if (small < (size - big))
-			rot_dir = 1; //ra
-	}
-	return (rot_dir);
-}
-
-void	call_b(t_struct *structure, int count)
-{
-	int	small;
-	int	sec_small;
-	int	head_group;
-	int	pos1;
-	int	pos2;
-
-	count = count_nodes(structure->head_a);
-	rank_elems(structure->head_a);
-	small = find_smallest(structure->head_a, count);
-	pos1 = find_position(structure->head_a, small);
-	sec_small = find_sec_smallest(structure->head_a, count, small);
-	pos2 = find_position(structure->head_a, sec_small);
-	head_group = find_group(count, structure->head_a->rank);
-	if (count <= 4)
-		sort_in_a(structure, count);
+	if (position <= mid)
+		return (1);
 	else
-	{
-		if (head_group <= 2)
-			push_sort_b(structure, head_group);
-		else if (rotate_direction(count, pos2, pos1) == 1)
-			ra(&structure->head_a);
-		else if (rotate_direction(count, pos2, pos1) == 2)
-			rra(&structure->head_a);
-		call_b(structure, count);
-	}
-	merge_ab(structure, count_nodes(structure->head_b));
+		return (2);
 }
+
+void	go_to_target(t_struct *structure, int direction, int target_pos)
+{
+	int	rotations_needed;
+
+	rotations_needed = count_nodes(structure->head_a) - target_pos + 1;
+	if (direction == 1)
+	{
+		while (target_pos > 1)
+		{
+			ra(&(structure->head_a));
+			target_pos--;
+		}
+	}
+	else if (direction == 2)
+	{
+		while (rotations_needed > 0)
+		{
+			rra(&(structure->head_a));
+			rotations_needed--;
+		}
+	}
+}
+
+void	merge_ab(t_struct *structure)
+{
+	int	err;
+
+	while (structure->head_b != NULL)
+	{
+		err = 0;
+		pa(&structure->head_a, &structure->head_b, &err);
+		if (err)
+			err_handling(structure);
+		structure->head_a->last = find_last(structure->head_a);
+		if (structure->head_a->value > structure->head_a->last->value)
+			ra(&(structure->head_a));
+		else if (structure->head_a->value > structure->head_a->next->value && structure->head_a->value < structure->head_a->next->next->value)
+			sa(&(structure->head_a));
+	}
+}
+
+void	call_b(t_struct *structure, int start_group, int end_group)
+{
+	int		cur_pos;
+	int		group_of_current;
+	int		direction;
+	t_node	*current;
+	int		err;
+
+	if (start_group > end_group)
+		return ;
+	current = structure->head_a;
+	while (current != NULL && count_nodes(structure->head_a) > 3)
+	{
+		err = 0;
+		cur_pos = find_position(structure->head_a, current->value);
+		group_of_current = find_group(structure->count, current->rank);
+		if (group_of_current == start_group)
+		{
+			direction = rotate_direction(count_nodes(structure->head_a), cur_pos);
+			go_to_target(structure, direction, cur_pos);
+			pb(&structure->head_a, &structure->head_b, &err);
+			if (err)
+				err_handling(structure);
+			if (structure->head_b->next != NULL && structure->head_b->value < structure->head_b->next->value)
+				sb(&(structure->head_b));
+			current = structure->head_a;
+		}
+		else
+			current = current->next;
+	}
+	call_b(structure, start_group + 1, end_group);
+}
+
 
 void	push_swap(t_struct *structure, int size)
 {
+	int	total_groups;
+
 	if (structure->head_a && is_stack_sorted(structure->head_a))
-	{
-		// printf("Already sorted!\n");
 		return ;
+	if (size <= 3)
+	{
+		while(!is_stack_sorted(structure->head_a))
+			tiny_sort(structure);
 	}
-	if (size <= 5)
-		sort_in_a(structure, size);
 	// if (is_stack_sorted(structure->head_a))
 		// printf("stack_a is sorted!\n");
-	else
+	else if (size <= 99)
 	{
 		// printf("need stack_b\n");
 		//while (!is_stack_sorted(structure->head_a))
-		call_b(structure, size);
+		total_groups = 11;
+		call_b(structure, 1, total_groups);
+		t_node *temp = structure->head_b;
+		int i = 0;
+		while (temp != NULL && i < 100)
+		{
+			printf("b[%i]: %i\n", i, temp->value);
+			i++;
+			temp = temp->next;
+		}
+		tiny_sort(structure);
+		t_node *printme = structure->head_a;
+		while (printme != NULL)
+		{
+			printf("%i\n", printme->value);
+			printme = printme->next;
+		}
+		merge_ab(structure);
 	}
 	if (is_stack_sorted(structure->head_a)
 		&& (count_nodes(structure->head_a) == structure->count))
@@ -143,4 +169,4 @@ int	main(int argc, char **argv)
 	}
 	return (free_struct(structure), 0);
 }
-//for i in {-100..200}; do echo $i; done | sort -R | tr '\n' ' '
+//for i in {-10..20}; do echo $i; done | sort -R | tr '\n' ' '

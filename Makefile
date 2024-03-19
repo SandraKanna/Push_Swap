@@ -7,7 +7,7 @@ CFLAGS = -Wall -Wextra -Werror -g3 -IIncludes
 LIBFT = libft/libft3.a
 LIBFT_DIR = libft/
 
-CFILES = $(addprefix src/, push_swap.c sort_1.c sort_2.c initialize.c\
+CFILES = $(addprefix src/, push_swap.c sort_1.c initialize.c\
 	utils/list_helpers.c utils/check_input.c utils/clean.c \
 	ops/core.c ops/push_ops.c ops/rev_ops.c ops/rot_ops.c ops/swap_ops.c)
 

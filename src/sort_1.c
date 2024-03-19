@@ -13,50 +13,6 @@
 //#include "../Includes/push_swap.h"
 #include "push_swap.h"
 
-void	push_sort_b(t_struct *structure, int head_b_group)
-{
-	int		err;
-	t_node	*top_b;
-	int		head_a_group;
-	//int		head_a_next_group;
-
-	err = 0;
-	pb(&structure->head_a, &structure->head_b, &err);
-	if (err)
-		err_handling(structure);
-	top_b = structure->head_b;
-	head_a_group = find_group(count_nodes(structure->head_a), structure->head_a->rank);
-	//head_a_next_group = find_group(count_nodes(structure->head_a), structure->head_a->next->rank);
-	if (top_b->next != NULL)
-	{
-		if (head_b_group == 1)
-		{
-			if (head_a_group > 2)
-				rr(&structure->head_a, &structure->head_b);
-			else
-				rb(&structure->head_b);
-		}
-		// else
-		// {
-		// 	if (top_b->value > top_b->next->value)
-		// 	{
-		// 		if (head_a_next_group <= 2)
-		// 			ss(&structure->head_a, &structure->head_b);
-		// 		else
-		// 			sb(&structure->head_b);
-		// 	}
-		// }
-	}
-	t_node *temp = structure->head_b;
-	int i = 0;
-	while (temp != NULL && i < 100)
-	{
-		printf("b[%i]: %i\n", i, temp->value);
-		i++;
-		temp = temp->next;
-	}
-}
-
 int	tiny_sort(t_struct *structure)
 {
 	int	first;
@@ -82,54 +38,58 @@ int	tiny_sort(t_struct *structure)
 	return (is_stack_sorted(structure->head_a));
 }
 
-int	sort_in_a(t_struct *structure, int size)
+int	find_position_back(t_node *stack_a, int value)
 {
-	int	i;
+	t_node	*current;
+	int		position;
 
-	i = size + 2;
-	if (size <= 3)
+	current = stack_a;
+	position = 1;
+	if (!current || value < current->value)
+		return (1);
+	while (current->next != NULL && value > current->next->value)
 	{
-		while (i > 0)
-		{
-			if (tiny_sort(structure))
-				return (is_stack_sorted(structure->head_a));
-			i--;
-		}
+		position++;
+		current = current->next;
 	}
-	while (i > 0)
-	{
-		if (sort_5(structure))
-			break ;
-		i--;
-	}
-	return (is_stack_sorted(structure->head_a));
+	if (current->next == NULL && value > current->value)
+		return (position + 1);
+	return (position);
 }
 
-int	head_5(int next, int prev, int last, t_node **set_list)
+int	find_position(t_node *list, int value)
 {
-	int	mid;
+	t_node	*temp;
+	int		position;
 
-	mid = (*set_list)->next->next->rank;
-	if ((next == 3 && mid == 1 && prev == 4)
-		|| (next == 4 && mid == 3 && prev == 2))
-		return (5);
-	if (next == 1 || next == 2)
+	position = 1;
+	temp = list;
+	while (temp != NULL)
 	{
-		if (last == 4 || (next == 1 && mid == 4 && prev == 2))
-			ra(set_list);
-		else if (next == 2 && mid == 4 && prev == 1)
-			sa(set_list);
-		else
-			rra(set_list);
+		if (temp->value == value)
+			break ;
+		position++;
+		temp = temp->next;
 	}
-	else if (next == 4 || next == 3)
+	return (position);
+}
+
+int	find_group(int count, int rank)
+{
+	int	group_size;
+	int	max_groups;
+	int	groups;
+	int	i;
+
+	max_groups = 11;
+	groups = min_value(count, max_groups);
+	group_size = count / groups;
+	i = 1;
+	while (i <= groups)
 	{
-		if (next == 3 && last == 4)
-			ra(set_list);
-		else if (mid == 2 && prev == 4)
-			rra(set_list);
-		else
-			sa(set_list);
+		if (rank <= group_size * i)
+			return (i);
+		i++;
 	}
-	return (is_stack_sorted(*set_list));
+	return (groups);
 }

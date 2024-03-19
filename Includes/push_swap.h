@@ -67,20 +67,17 @@ void	err_handling(t_struct *structure);
 //core
 
 int		is_stack_sorted(t_node *stack);
-void	push_sort_b(t_struct *structure, int group);
+void	call_b(t_struct *structure, int start_group, int end_group);
 int		tiny_sort(t_struct *structure);
-int		sort_in_a(t_struct *structure, int size);
-int		head_5(int next, int prev, int last, t_node **set_list);
-int		sort_5(t_struct *structure);
 void	push_swap(t_struct *structure, int size);
 t_node	*find_last(t_node *list);
 int		count_nodes(t_node *list);
 void	rank_elems(t_node *list);
-int		quadrant(int size, int position);
 int		find_position(t_node *list, int value);
-int		find_smallest(t_node *list, int n);
-int		find_sec_smallest(t_node *list, int n, int smallest);
-int		find_biggest(t_node *list, int n);
+int		find_position_back(t_node *stack_a, int value);
+// int		find_smallest(t_node *list, int n);
+// int		find_sec_smallest(t_node *list, int n, int smallest);
+// int		find_biggest(t_node *list, int n);
 int		find_group(int count, int rank);
 t_struct	*init_struct(char **av, int count);
 

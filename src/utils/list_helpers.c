@@ -53,22 +53,6 @@ int	count_nodes(t_node *list)
 	}
 	return (count);
 }
-int	find_position(t_node *list, int value)
-{
-	t_node	*temp;
-	int		position;
-
-	position = 1;
-	temp = list;
-	while (temp != NULL)
-	{
-		if (temp->value == value)
-			break ;
-		position++;
-		temp = temp->next;
-	}
-	return (position);
-}
 
 int	find_smallest(t_node *list, int n)
 {
@@ -89,25 +73,6 @@ int	find_smallest(t_node *list, int n)
 	return (smallest);
 }
 
-int	find_sec_smallest(t_node *list, int n, int smallest)
-{
-	t_node	*temp;
-	int		i;
-	int		sec_smallest;
-
-	i = 1;
-	sec_smallest = INT_MAX;
-	temp = list;
-	while (temp != NULL && i <= n)
-	{
-		if (temp->value < sec_smallest && temp->value != smallest)
-			sec_smallest = temp->value;
-		temp = temp->next;
-		i++;
-	}
-	return (sec_smallest);
-}
-
 int	find_biggest(t_node *list, int n)
 {
 	t_node	*temp;
@@ -126,44 +91,3 @@ int	find_biggest(t_node *list, int n)
 	}
 	return (biggest);
 }
-
-int	find_sec_biggest(t_node *list, int n)
-{
-	t_node	*temp;
-	int		i;
-	int		position;
-	int		biggest;
-
-	i = 1;
-	position = 0;
-	biggest = INT_MIN;
-	temp = list;
-	while (temp != NULL && i <= n)
-	{
-		if (temp->value > biggest)
-		{
-			biggest = temp->value;
-			position = i;
-		}
-		temp = temp->next;
-		i++;
-	}
-	return (position);
-	//return (biggest);
-}
-
-// t_node	*find_middle(t_node *list)
-// {
-// 	t_node	*middle;
-// 	t_node	*move;
-
-// 	middle = list;
-// 	move = list->next;
-// 	while (move != NULL && move->next != NULL)
-// 	{
-// 		middle = middle->next;
-// 		move = move->next;
-// 	}
-// 	return (middle);
-// }
-
