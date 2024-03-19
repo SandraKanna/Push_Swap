@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/18 18:22:06 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/19 18:55:50 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,8 @@ int		count_nodes(t_node *list);
 void	rank_elems(t_node *list);
 int		find_position(t_node *list, int value);
 int		find_position_back(t_node *stack_a, int value);
-// int		find_smallest(t_node *list, int n);
-// int		find_sec_smallest(t_node *list, int n, int smallest);
+int		find_smallest(t_node *list, int n);
+int		find_sec_smallest(t_node *list, int n, int smallest);
 // int		find_biggest(t_node *list, int n);
 int		find_group(int count, int rank);
 t_struct	*init_struct(char **av, int count);

@@ -6,62 +6,35 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/19 12:05:39 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/19 19:01:29 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	rotate_direction(t_node *list, int size, int position)
+int	rotate_direction(int size, int pos1, int pos2)
 {
 	int	mid;
-	int	smallest;
-	int	sec_smallest;
-	int	position2;
+	int	rot_dir;
 
 	mid = size / 2;
-	smallest = find_smallest(list);
-	sec_smallest = find_sec_smallest(list, smallest_pos);
-	position2 = find_position(list, smallest_pos);
-	if (position == position2)
-		position2 = find_position(list, sec_smallest_pos);
-	if (position <= mid)
+	rot_dir = -1;
+	if (pos1 <= mid)
 	{
-		if (position != smallest_pos && smallest_pos <= mid || position < (size - smallest_pos))
-			return (1);
+		if (pos2 < mid || pos1 < (size - pos2))
+			rot_dir = 1; //ra
+		else if (pos1 > (size - pos2))
+			rot_dir = 2; //rra
 	}
-	if (position == smallest_pos)
+	else if (pos1 > mid)
 	{
-		if (position <= mid && sec_smallest_pos <= mid)
-			return (1);
-		else
-			return (2);
+		if (pos2 >= mid || pos2 > (size - pos1))
+			rot_dir = 2; //rra
+		else if (pos2 < (size - pos1))
+			rot_dir = 1; //ra
 	}
+	return (rot_dir);
 }
-
-// int	rotate_direction(int size, int big, int small)
-// {
-// 	int	mid;
-// 	int	rot_dir;
-
-// 	mid = size / 2;
-// 	rot_dir = -1;
-// 	if (big <= mid)
-// 	{
-// 		if (small < mid || big < (size - small))
-// 			rot_dir = 1; //ra
-// 		else if (big > (size - small))
-// 			rot_dir = 2; //rra
-// 	}
-// 	else if (big > mid)
-// 	{
-// 		if (small >= mid || small > (size - big))
-// 			rot_dir = 2; //rra
-// 		else if (small < (size - big))
-// 			rot_dir = 1; //ra
-// 	}
-// 	return (rot_dir);
-// }
 
 void	go_to_target(t_struct *structure, int direction, int target_pos, int size)
 {
@@ -121,11 +94,12 @@ void	call_b(t_struct *structure, int start_group, int end_group)
 		printf("Current value: %d, Group: %d, Target Group: %d\n", current->value, group_of_current, start_group);
 		if (group_of_current == start_group)
 		{
-			direction = rotate_direction(structure->head_a, count_a, cur_pos);
-			// if (cur_pos <= count_a / 2)
-			// 	direction = 1;
-			// else
-			// 	direction = 2;
+			
+			//direction = rotate_direction(structure->head_a, count_a, cur_pos);
+			if (cur_pos <= count_a / 2)
+				direction = 1;
+			else
+				direction = 2;
 			go_to_target(structure, direction, cur_pos, count_a);
 			pb(&structure->head_a, &structure->head_b, &err);
 			if (err)
