@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/18 18:24:46 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/19 11:53:19 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,25 @@ int	find_smallest(t_node *list, int n)
 		temp = temp->next;
 	}
 	return (smallest);
+}
+
+int	find_sec_smallest(t_node *list, int n, int smallest)
+{
+	t_node	*temp;
+	int		i;
+	int		sec_smallest;
+
+	i = 1;
+	sec_smallest = INT_MAX;
+	temp = list;
+	while (temp != NULL && i <= n)
+	{
+		if (temp->value < sec_smallest && temp->value != smallest)
+			sec_smallest = temp->value;
+		temp = temp->next;
+		i++;
+	}
+	return (sec_smallest);
 }
 
 int	find_biggest(t_node *list, int n)

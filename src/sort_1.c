@@ -77,12 +77,19 @@ int	find_position(t_node *list, int value)
 int	find_group(int count, int rank)
 {
 	int	group_size;
-	int	max_groups;
 	int	groups;
 	int	i;
 
-	max_groups = 11;
-	groups = min_value(count, max_groups);
+	groups = 1;
+	i = 3;
+	while (i <= count && groups <= 11)
+	{
+		if (count > i)
+			groups++;
+		else
+			break ;
+		i += 3;
+	}
 	group_size = count / groups;
 	i = 1;
 	while (i <= groups)

@@ -6,22 +6,62 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/18 18:35:55 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/19 12:05:39 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	rotate_direction(int size, int position)
+int	rotate_direction(t_node *list, int size, int position)
 {
 	int	mid;
+	int	smallest;
+	int	sec_smallest;
+	int	position2;
 
 	mid = size / 2;
+	smallest = find_smallest(list);
+	sec_smallest = find_sec_smallest(list, smallest_pos);
+	position2 = find_position(list, smallest_pos);
+	if (position == position2)
+		position2 = find_position(list, sec_smallest_pos);
 	if (position <= mid)
-		return (1);
-	else
-		return (2);
+	{
+		if (position != smallest_pos && smallest_pos <= mid || position < (size - smallest_pos))
+			return (1);
+	}
+	if (position == smallest_pos)
+	{
+		if (position <= mid && sec_smallest_pos <= mid)
+			return (1);
+		else
+			return (2);
+	}
 }
+
+// int	rotate_direction(int size, int big, int small)
+// {
+// 	int	mid;
+// 	int	rot_dir;
+
+// 	mid = size / 2;
+// 	rot_dir = -1;
+// 	if (big <= mid)
+// 	{
+// 		if (small < mid || big < (size - small))
+// 			rot_dir = 1; //ra
+// 		else if (big > (size - small))
+// 			rot_dir = 2; //rra
+// 	}
+// 	else if (big > mid)
+// 	{
+// 		if (small >= mid || small > (size - big))
+// 			rot_dir = 2; //rra
+// 		else if (small < (size - big))
+// 			rot_dir = 1; //ra
+// 	}
+// 	return (rot_dir);
+// }
 
 void	go_to_target(t_struct *structure, int direction, int target_pos, int size)
 {
@@ -77,15 +117,15 @@ void	call_b(t_struct *structure, int start_group, int end_group)
 		err = 0;
 		count_a = count_nodes(structure->head_a);
 		cur_pos = find_position(structure->head_a, current->value);
-		group_of_current = find_group(structure->count, current->rank);
-		printf("Current value: %d, Group: %d, Target Group: %d\n", current->value, find_group(structure->count, current->rank), start_group);
+		group_of_current = find_group(count_a, current->rank);
+		printf("Current value: %d, Group: %d, Target Group: %d\n", current->value, group_of_current, start_group);
 		if (group_of_current == start_group)
 		{
-			//direction = rotate_direction(count_nodes(structure->head_a), cur_pos);
-			if (cur_pos <= count_a / 2)
-				direction = 1;
-			else
-				direction = 2;
+			direction = rotate_direction(structure->head_a, count_a, cur_pos);
+			// if (cur_pos <= count_a / 2)
+			// 	direction = 1;
+			// else
+			// 	direction = 2;
 			go_to_target(structure, direction, cur_pos, count_a);
 			pb(&structure->head_a, &structure->head_b, &err);
 			if (err)
@@ -128,7 +168,8 @@ void	push_swap(t_struct *structure, int size)
 			i++;
 			temp = temp->next;
 		}
-		tiny_sort(structure);
+		while(!is_stack_sorted(structure->head_a))
+			tiny_sort(structure);
 		t_node *printme = structure->head_a;
 		while (printme != NULL)
 		{
