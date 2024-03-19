@@ -23,26 +23,22 @@ int	rotate_direction(int size, int position)
 		return (2);
 }
 
-void	go_to_target(t_struct *structure, int direction, int target_pos)
+void	go_to_target(t_struct *structure, int direction, int target_pos, int size)
 {
 	int	rotations_needed;
 
-	rotations_needed = count_nodes(structure->head_a) - target_pos + 1;
+	rotations_needed = 0;
 	if (direction == 1)
+		rotations_needed = target_pos - 1;
+	else
+		rotations_needed = size - target_pos + 1;
+	while (rotations_needed > 0)
 	{
-		while (target_pos > 1)
-		{
+		if (direction == 1)
 			ra(&(structure->head_a));
-			target_pos--;
-		}
-	}
-	else if (direction == 2)
-	{
-		while (rotations_needed > 0)
-		{
+		else
 			rra(&(structure->head_a));
-			rotations_needed--;
-		}
+		rotations_needed--;
 	}
 }
 
@@ -69,6 +65,7 @@ void	call_b(t_struct *structure, int start_group, int end_group)
 	int		cur_pos;
 	int		group_of_current;
 	int		direction;
+	int		count_a;
 	t_node	*current;
 	int		err;
 
@@ -78,12 +75,18 @@ void	call_b(t_struct *structure, int start_group, int end_group)
 	while (current != NULL && count_nodes(structure->head_a) > 3)
 	{
 		err = 0;
+		count_a = count_nodes(structure->head_a);
 		cur_pos = find_position(structure->head_a, current->value);
 		group_of_current = find_group(structure->count, current->rank);
+		printf("Current value: %d, Group: %d, Target Group: %d\n", current->value, find_group(structure->count, current->rank), start_group);
 		if (group_of_current == start_group)
 		{
-			direction = rotate_direction(count_nodes(structure->head_a), cur_pos);
-			go_to_target(structure, direction, cur_pos);
+			//direction = rotate_direction(count_nodes(structure->head_a), cur_pos);
+			if (cur_pos <= count_a / 2)
+				direction = 1;
+			else
+				direction = 2;
+			go_to_target(structure, direction, cur_pos, count_a);
 			pb(&structure->head_a, &structure->head_b, &err);
 			if (err)
 				err_handling(structure);
