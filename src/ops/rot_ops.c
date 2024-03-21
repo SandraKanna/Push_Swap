@@ -13,22 +13,38 @@
 //#include "../../Includes/push_swap.h"
 #include "push_swap.h"
 
-void	ra(t_node **stack_a)
+void	rotate_up(t_node **stack)
 {
-	rotate_up(stack_a);
-	write(1, "ra\n", 3);
+	t_node	*temp;
+	t_node	*first;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+		return ;
+	first = *stack;
+	*stack = (*stack)->next;
+	temp = *stack;
+	while (temp->next != NULL)
+		temp = temp->next;
+	temp->next = first;
+	first->next = NULL;
 }
 
-void	rb(t_node **stack_b)
+void	rotate_up_stack(t_struct *structure, char c)
 {
-	rotate_up(stack_b);
-	write(1, "rb\n", 3);
+	if (c == 'a')
+	{
+		rotate_up(&structure->head_a);
+		write(1, "ra\n", 3);
+	}
+	else if (c == 'b')
+	{
+		rotate_up(&structure->head_b);
+		write(1, "rb\n", 3);
+	}
+	else
+	{
+		rotate_up(&structure->head_a);
+		rotate_up(&structure->head_b);
+		write(1, "rr\n", 3);
+	}
 }
-
-void	rr(t_node **stack_a, t_node **stack_b)
-{
-	rotate_up(stack_a);
-	rotate_up(stack_b);
-	write(1, "rr\n", 3);
-}
-

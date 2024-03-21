@@ -13,25 +13,39 @@
 //#include "../../Includes/push_swap.h"
 #include "push_swap.h"
 
-void	rra(t_node **stack_a)
+void	rotate_down(t_node **stack)
 {
-	rotate_down(stack_a);
-	write(1, "rra\n", 4);
+	t_node	*temp;
+	t_node	*new_first;
+
+	if (*stack == NULL || (*stack)->next == NULL)
+		return ;
+	temp = *stack;
+	while (temp->next->next != NULL)
+		temp = temp->next;
+	new_first = temp->next;
+	new_first->next = *stack;
+	temp->next = NULL;
+	*stack = new_first;
 }
 
-void	rrb(t_node **stack_b)
+void	rotate_down_stack(t_struct *structure, char c)
 {
-	//rrb (reverse rotate b): Shift down all elements of stack b by 1.
-	//The last element becomes the first one.
-	rotate_down(stack_b);
-	write(1, "rrb\n", 4);
-}
-
-void	rrr(t_node **stack_a, t_node **stack_b)
-{
-	//rrr : rra and rrb at the same time.
-	rotate_down(stack_a);
-	rotate_down(stack_b);
-	write(1, "rrr\n", 4);
+	if (c == 'a')
+	{
+		rotate_down(&structure->head_a);
+		write(1, "rra\n", 4);
+	}
+	else if (c == 'b')
+	{
+		rotate_down(&structure->head_b);
+		write(1, "rrb\n", 4);
+	}
+	else
+	{
+		rotate_down(&structure->head_a);
+		rotate_down(&structure->head_b);
+		write(1, "rrr\n", 4);
+	}
 }
 

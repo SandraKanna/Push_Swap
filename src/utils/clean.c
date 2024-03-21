@@ -22,6 +22,8 @@ void	free_stack(t_node **stack)
 	while (*stack)
 	{
 		temp = (*stack)->next;
+		if ((*stack)->bit != NULL)
+			free((*stack)->bit);
 		free(*stack);
 		*stack = temp;
 	}

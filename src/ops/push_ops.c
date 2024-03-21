@@ -13,6 +13,39 @@
 //#include "../../Includes/push_swap.h"
 #include "push_swap.h"
 
+void	push(t_node **stack, int input, int rank, int *err)
+{
+	t_node	*new_node;
+
+	new_node = NULL;
+	new_node = malloc (sizeof(t_node));
+	if (new_node == NULL)
+	{
+		*err = 1;
+		return ;
+	}
+	new_node->value = input;
+	new_node->rank = rank;
+	new_node->bit = NULL;
+	new_node->last = NULL;
+	new_node->next = *stack;
+	*stack = new_node;
+}
+
+int	pop(t_node **stack)
+{
+	t_node	*top_node;
+	int		value;
+
+	if (stack == NULL || *stack == NULL)
+		return (0);
+	top_node = *stack;
+	value = top_node->value;
+	*stack = top_node->next;
+	free(top_node);
+	return (value);
+}
+
 void	pa(t_node **stack_a, t_node **stack_b, int *err)
 {
 	int	rank;
@@ -40,3 +73,15 @@ void	pb(t_node **stack_a, t_node **stack_b, int *err)
 	return ;
 }
 
+void	push_to_stack(t_struct *structure, char c)
+{
+	int	err;
+
+	err = 0;
+	if (c == 'a')
+		pa(&structure->head_a, &structure->head_b, &err);
+	else if (c == 'b')
+		pb(&structure->head_a, &structure->head_b, &err);
+	if (err)
+		err_handling(structure);
+}

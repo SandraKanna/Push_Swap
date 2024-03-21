@@ -13,32 +13,41 @@
 //#include "../../Includes/push_swap.h"
 #include "push_swap.h"
 
-void	sa(t_node **stack)
+void	swap(t_node	**stack)
 {
-	//Do nothing if there is only one or no elements: if node1 or node 2 == NULL
-	if (*stack == NULL || (*stack)->next == NULL)
-		return ;
-	swap(stack);
-	write(1, "sa\n", 3);
+	t_node	*temp1;
+	t_node	*new_first;
+
+	temp1 = *stack;
+	new_first = temp1->next;
+	temp1->next = new_first->next;
+	new_first->next = temp1;
+	*stack = new_first;
 }
 
-void	sb(t_node **stack)
+void	swap_stack(t_struct *structure, char c)
 {
-	//Do nothing if there is only one or no elements: if node1 or node 2 == NULL
-	if (*stack == NULL || (*stack)->next == NULL)
-		return ;
-	swap(stack);
-	write(1, "sb\n", 3);
+	if (c == 'a')
+	{
+		if (structure->head_a == NULL || structure->head_a->next == NULL)
+			return ;
+		swap(&structure->head_a);
+		write(1, "sa\n", 3);
+	}
+	else if (c == 'b')
+	{
+		if (structure->head_b == NULL || (structure->head_b->next == NULL))
+			return ;
+		swap(&structure->head_b);
+		write(1, "sb\n", 3);
+	}
+	else
+	{
+		if (structure->head_b == NULL || structure->head_b->next == NULL
+			|| structure->head_a == NULL || structure->head_a->next == NULL)
+			return ;
+		swap(&structure->head_a);
+		swap(&structure->head_b);
+		write(1, "ss\n", 3);
+	}
 }
-
-void	ss(t_node **stack_a, t_node **stack_b)
-{
-	if ((*stack_a == NULL || (*stack_a)->next == NULL) ||
-		(*stack_b == NULL || (*stack_b)->next == NULL))
-		return ;
-	//ss: sa and sb at the same time
-	swap(stack_a);
-	swap(stack_b);
-	write(1, "ss\n", 3);
-}
-

@@ -22,19 +22,19 @@ int	tiny_sort(t_struct *structure)
 
 	size = count_nodes(structure->head_a);
 	if (size == 2)
-		return (sa(&structure->head_a), 1);
+		return (swap_stack(structure, 'a'), 1);
 	first = structure->head_a->value;
 	mid = structure->head_a->next->value;
 	last = structure->head_a->next->next->value;
 	if (first > mid)
 	{
 		if (first > last && mid < last)
-			ra(&structure->head_a);
+			rotate_up_stack(structure, 'a');
 		else
-			sa(&structure->head_a);
+			swap_stack(structure, 'a');
 	}
 	else
-		rra(&structure->head_a);
+		rotate_down_stack(structure, 'a');
 	return (is_stack_sorted(structure->head_a));
 }
 

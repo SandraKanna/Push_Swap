@@ -9,7 +9,7 @@ LIBFT_DIR = libft/
 
 CFILES = $(addprefix src/, push_swap.c sort_1.c initialize.c\
 	utils/list_helpers.c utils/check_input.c utils/clean.c \
-	ops/core.c ops/push_ops.c ops/rev_ops.c ops/rot_ops.c ops/swap_ops.c)
+	ops/push_ops.c ops/rev_ops.c ops/rot_ops.c ops/swap_ops.c)
 
 #BONUS_FILES = bonus/bonus.c 
 

@@ -37,10 +37,10 @@ int	is_stack_sorted(t_node *stack)
 	return (1);
 }
 
-int	count_nodes(t_node *list)
+unsigned int	count_nodes(t_node *list)
 {
-	t_node	*current;
-	int		count;
+	t_node			*current;
+	unsigned int	count;
 
 	if (!list)
 		return (0);
