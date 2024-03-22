@@ -38,65 +38,70 @@ int	tiny_sort(t_struct *structure)
 	return (is_stack_sorted(structure->head_a));
 }
 
-int	find_position_back(t_node *stack_a, int value)
+void	sort_column(t_struct *structure, int count_a, int i, int bit)
 {
-	t_node	*current;
-	int		position;
+	int		cur_bit;
+	t_node	*a;
 
-	current = stack_a;
-	position = 1;
-	if (!current || value < current->value)
-		return (1);
-	while (current->next != NULL && value > current->next->value)
+	a = structure->head_a;
+	while (count_a > 0)
 	{
-		position++;
-		current = current->next;
-	}
-	if (current->next == NULL && value > current->value)
-		return (position + 1);
-	return (position);
-}
-
-int	find_position(t_node *list, int value)
-{
-	t_node	*temp;
-	int		position;
-
-	position = 1;
-	temp = list;
-	while (temp != NULL)
-	{
-		if (temp->value == value)
+		if (is_column_complete(a, bit, i))
 			break ;
-		position++;
-		temp = temp->next;
-	}
-	return (position);
-}
-
-int	find_group(int count, int rank)
-{
-	int	group_size;
-	int	groups;
-	int	i;
-
-	groups = 1;
-	i = 3;
-	while (i <= count && groups <= 11)
-	{
-		if (count > i)
-			groups++;
+		cur_bit = a->bit[i];
+		printf("Current bit: %d   target bit: %d\n", a->bit[i], bit);
+		if (cur_bit != bit)
+		{
+			push_to_stack(structure, 'b');
+			rotate_up_stack(structure, 'b');
+		}
 		else
-			break ;
-		i += 3;
+			push_to_stack(structure, 'b');
+		a = structure->head_a;
+		count_a = count_nodes(a);
 	}
-	group_size = count / groups;
-	i = 1;
-	while (i <= groups)
+	t_node *printme = structure->head_a;
+	while (printme != NULL)
 	{
-		if (rank <= group_size * i)
-			return (i);
-		i++;
+		printf("A: %i\n", printme->value);
+		printme = printme->next;
 	}
-	return (groups);
+	printme = structure->head_b;
+	while (printme!= NULL)
+	{
+		printf("stack_B: %i\n", printme->value);
+		printme = printme->next;
+	}
+	bit = select_bit(structure->head_b, structure->len_bits, i);
+	printf ("bit_b: %i\n", bit);
+	sort_column_b(structure, i++, bit);
 }
+
+void	sort_column_b(t_struct *structure, int i, int bit)
+{
+	t_node	*b;
+
+	b = structure->head_b;
+	if (b == NULL)
+		return ;
+	while (b != NULL)
+	{
+		// if (is_column_complete(b, bit, i))
+		// 	break ;
+		printf("Current bit_b: %d   target bit: %d\n", b->bit[i], bit);
+		if (b->bit[i] != bit)
+		{
+			// if (i < structure->len_bits && b->bit[i + 1] == 1)
+			// if (b->next != NULL && b->rank < b->next->rank)
+			// 	swap_stack(structure, 'b');
+			push_to_stack(structure, 'a');
+		}
+		else
+		{
+			push_to_stack(structure, 'a');
+			rotate_up_stack(structure, 'a');
+		}
+		b = structure->head_b;
+	}
+}
+

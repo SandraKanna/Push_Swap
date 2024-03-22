@@ -45,22 +45,35 @@ void	init_bit_array(t_struct *structure, int size)
 	t_node	*cur;
 
 	cur = structure->head_a;
+	structure->len_bits = get_bit_len(size);
 	while (cur != NULL)
 	{
 		temp_rank = cur->rank;
-		cur->bit = malloc (sizeof (int) * size);
+		cur->bit = malloc (sizeof (int) * structure->len_bits);
 		if (!cur->bit)
 			err_handling(structure);
-		i = size - 1;
+		i = structure->len_bits - 1;
 		while (i >= 0)
 		{
 			cur->bit[i] = temp_rank & 1;//store the LSB
 			temp_rank >>= 1;//move bits to the right to check the next bit
-			printf("bit[%i]: %i ", i, cur->bit[i]);
+			// printf("bit[%i]: %i ", i, cur->bit[i]);
 			i--;//move to the next storage column
 		}
-		printf("\n");
 		cur = cur->next;
+	}
+	t_node *printme = structure->head_a;
+	while (printme != NULL)
+	{
+		int j = 0;
+		printf("value: %i -> ", printme->value);
+		while (j < structure->len_bits)
+		{
+			printf("bit[%i]: %i ", j, printme->bit[j]);
+			j++;
+		}
+		printf("\n");
+		printme = printme->next;
 	}
 }
 
