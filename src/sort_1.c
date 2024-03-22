@@ -38,70 +38,44 @@ int	tiny_sort(t_struct *structure)
 	return (is_stack_sorted(structure->head_a));
 }
 
-void	sort_column(t_struct *structure, int count_a, int i, int bit)
+int	is_column_complete(t_node *list, int bit, int i)
 {
-	int		cur_bit;
-	t_node	*a;
+	t_node	*cur;
+	int		bit_cur;
 
-	a = structure->head_a;
-	while (count_a > 0)
+	cur = list;
+	while (cur != NULL)
 	{
-		if (is_column_complete(a, bit, i))
-			break ;
-		cur_bit = a->bit[i];
-		printf("Current bit: %d   target bit: %d\n", a->bit[i], bit);
-		if (cur_bit != bit)
-		{
-			push_to_stack(structure, 'b');
-			rotate_up_stack(structure, 'b');
-		}
+		bit_cur = cur->bit[i];
+		if (bit_cur == bit)
+			cur = cur->next;
 		else
-			push_to_stack(structure, 'b');
-		a = structure->head_a;
-		count_a = count_nodes(a);
+			return (0);
 	}
-	t_node *printme = structure->head_a;
-	while (printme != NULL)
-	{
-		printf("A: %i\n", printme->value);
-		printme = printme->next;
-	}
-	printme = structure->head_b;
-	while (printme!= NULL)
-	{
-		printf("stack_B: %i\n", printme->value);
-		printme = printme->next;
-	}
-	bit = select_bit(structure->head_b, structure->len_bits, i);
-	printf ("bit_b: %i\n", bit);
-	sort_column_b(structure, i++, bit);
+	return (1);
 }
 
-void	sort_column_b(t_struct *structure, int i, int bit)
+int	select_bit(t_node *list, int bit_count, int i)
 {
-	t_node	*b;
+	int		zeros;
+	int		ones;
+	int		bit_cur;
+	t_node	*cur;
 
-	b = structure->head_b;
-	if (b == NULL)
-		return ;
-	while (b != NULL)
+	zeros = 0;
+	ones = 0;
+	cur = list;
+	while (cur != NULL)
 	{
-		// if (is_column_complete(b, bit, i))
-		// 	break ;
-		printf("Current bit_b: %d   target bit: %d\n", b->bit[i], bit);
-		if (b->bit[i] != bit)
-		{
-			// if (i < structure->len_bits && b->bit[i + 1] == 1)
-			// if (b->next != NULL && b->rank < b->next->rank)
-			// 	swap_stack(structure, 'b');
-			push_to_stack(structure, 'a');
-		}
+		bit_cur = cur->rank;
+		if (bit_cur & (1 << (bit_count - i)))
+			ones++;
 		else
-		{
-			push_to_stack(structure, 'a');
-			rotate_up_stack(structure, 'a');
-		}
-		b = structure->head_b;
+			zeros++;
+		cur = cur->next;
 	}
+	if (max_value(zeros, ones) == 1)
+		return (1);
+	return (0);
 }
 

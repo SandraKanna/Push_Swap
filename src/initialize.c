@@ -62,19 +62,19 @@ void	init_bit_array(t_struct *structure, int size)
 		}
 		cur = cur->next;
 	}
-	t_node *printme = structure->head_a;
-	while (printme != NULL)
-	{
-		int j = 0;
-		printf("value: %i -> ", printme->value);
-		while (j < structure->len_bits)
-		{
-			printf("bit[%i]: %i ", j, printme->bit[j]);
-			j++;
-		}
-		printf("\n");
-		printme = printme->next;
-	}
+	// t_node *printme = structure->head_a;
+	// while (printme != NULL)
+	// {
+	// 	int j = 0;
+	// 	printf("rank: %i -> ", printme->rank);
+	// 	while (j < structure->len_bits)
+	// 	{
+	// 		printf("bit[%i]: %i ", j, printme->bit[j]);
+	// 		j++;
+	// 	}
+	// 	printf("\n");
+	// 	printme = printme->next;
+	// }
 }
 
 t_struct	*init_struct(char **av, int count)

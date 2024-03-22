@@ -56,7 +56,7 @@ void		rotate_up_stack(t_struct *structure, char c);
 //core
 void		push_swap(t_struct *structure, int size);
 int			tiny_sort(t_struct *structure);
-void		sort_column(t_struct *structure, int bit_count, int i, int bit);
+// void		sort_column(t_struct *structure, int i, int bit);
 void		sort_column_b(t_struct *structure, int i, int bit);
 
 int			count_nodes(t_node *list);

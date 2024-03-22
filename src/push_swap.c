@@ -12,60 +12,31 @@
 
 #include "push_swap.h"
 
-int	is_column_complete(t_node *list, int bit, int i)
+void	radix_sort(t_struct *structure)
 {
-	t_node	*cur;
-	int		bit_cur;
+	int	i;
+	int	j;
+	int	cur_bit;
+	int	count;
 
-	cur = list;
-	while (cur != NULL)
+	i = 0;
+	while (i < structure->len_bits)
 	{
-		bit_cur = cur->bit[i];
-		if (bit_cur == bit)
-			cur = cur->next;
-		else
-			return (0);
+		count = count_nodes(structure->head_a);
+		j = 0;
+		while (j < count)
+		{
+			cur_bit = (structure->head_a->rank >> i) & 1;
+			if (cur_bit == 0)
+				push_to_stack(structure, 'b');
+			else
+				rotate_up_stack(structure, 'a');
+			j++;
+		}
+		while (structure->head_b != NULL)
+			push_to_stack(structure, 'a');
+		i++;
 	}
-	return (1);
-}
-
-int	select_bit(t_node *list, int bit_count, int i)
-{
-	int		zeros;
-	int		ones;
-	int		bit_cur;
-	t_node	*cur;
-
-	zeros = 0;
-	ones = 0;
-	cur = list;
-	while (cur != NULL)
-	{
-		bit_cur = cur->rank;
-		if (bit_cur & (1 << (bit_count - i)))
-			ones++;
-		else
-			zeros++;
-		cur = cur->next;
-	}
-	if (max_value(zeros, ones) == 1)
-		return (1);
-	return (0);
-}
-
-void	radix_sort(t_struct *structure, int bit_column)
-{
-	int		bit;
-
-	// bit = select_bit(structure->head_a, structure->len_bits, bit_column);
-	bit = 1;
-
-	printf("\n--- radix ---\n\n");
-	sort_column(structure, count_nodes(structure->head_a), bit_column, bit);
-	printf("count_a: %i, struct_count: %i\n", count_nodes(structure->head_a), structure->count);
-	if (count_nodes(structure->head_a) == structure->count && bit_column == structure->len_bits - 1)
-		return ;
-	radix_sort(structure, ++bit_column);
 }
 
 void	push_swap(t_struct *structure, int size)
@@ -79,7 +50,7 @@ void	push_swap(t_struct *structure, int size)
 	}
 	else
 	{
-		radix_sort(structure, 0);
+		radix_sort(structure);
 	}
 	if (is_stack_sorted(structure->head_a)
 		&& (count_nodes(structure->head_a) == structure->count))
@@ -108,13 +79,13 @@ int	main(int argc, char **argv)
 	if (!structure)
 		return (0);
 	push_swap(structure, structure->count);
-	t_node *printme = structure->head_a;
-	printf("\n--- final stack A ---\n");
-	while (printme != NULL)
-	{
-		printf("A: %i\n", printme->value);
-		printme = printme->next;
-	}
+	// t_node *printme = structure->head_a;
+	// printf("\n--- final stack A ---\n");
+	// while (printme != NULL)
+	// {
+	// 	printf("A: %i\n", printme->rank);
+	// 	printme = printme->next;
+	// }
 	return (free_struct(structure), 0);
 }
 

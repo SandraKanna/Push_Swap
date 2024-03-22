@@ -35,6 +35,12 @@
         "string": "c",
         "string_view": "c",
         "__locale": "c",
-        "cstdlib": "c"
+        "cstdlib": "c",
+        "bit": "c",
+        "__tree": "c",
+        "list": "c",
+        "map": "c",
+        "set": "c",
+        "stdio.h": "c"
     }
 }
