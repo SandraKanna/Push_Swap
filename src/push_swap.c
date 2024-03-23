@@ -12,31 +12,28 @@
 
 #include "push_swap.h"
 
-void	radix_sort(t_struct *structure)
+void	radix_sort(t_struct *structure, int start)
 {
-	int	i;
 	int	j;
 	int	cur_bit;
 	int	count;
 
-	i = 0;
-	while (i < structure->len_bits)
+	if (start >= structure->len_bits)
+		return ;
+	count = count_nodes(structure->head_a);
+	j = 0;
+	while (j < count)
 	{
-		count = count_nodes(structure->head_a);
-		j = 0;
-		while (j < count)
-		{
-			cur_bit = (structure->head_a->rank >> i) & 1;
-			if (cur_bit == 0)
-				push_to_stack(structure, 'b');
-			else
-				rotate_up_stack(structure, 'a');
-			j++;
-		}
-		while (structure->head_b != NULL)
-			push_to_stack(structure, 'a');
-		i++;
+		cur_bit = (structure->head_a->rank >> start) & 1;
+		if (cur_bit == 0)
+			push_to_stack(structure, 'b');
+		else
+			rotate_up_stack(structure, 'a');
+		j++;
 	}
+	while (structure->head_b != NULL)
+		push_to_stack(structure, 'a');
+	radix_sort(structure, ++start);
 }
 
 void	push_swap(t_struct *structure, int size)
@@ -50,7 +47,7 @@ void	push_swap(t_struct *structure, int size)
 	}
 	else
 	{
-		radix_sort(structure);
+		radix_sort(structure, 0);
 	}
 	if (is_stack_sorted(structure->head_a)
 		&& (count_nodes(structure->head_a) == structure->count))
