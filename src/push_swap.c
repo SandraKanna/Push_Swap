@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+
 void	radix_sort(t_struct *structure, int start)
 {
 	int	j;
@@ -26,13 +27,22 @@ void	radix_sort(t_struct *structure, int start)
 	{
 		cur_bit = (structure->head_a->rank >> start) & 1;
 		if (cur_bit == 0)
+		{
 			push_to_stack(structure, 'b');
+		}
 		else
 			rotate_up_stack(structure, 'a');
+		// if (is_column_complete(structure->head_a, 1, start))
+		// 	break ;
 		j++;
 	}
+	printf("\n--- stack A ---\n");
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("A: %i\n", printme->rank);
+	// start += 1;
 	while (structure->head_b != NULL)
 		push_to_stack(structure, 'a');
+	// sort_b(structure, start, structure->len_bits);
 	radix_sort(structure, ++start);
 }
 
@@ -76,13 +86,13 @@ int	main(int argc, char **argv)
 	if (!structure)
 		return (0);
 	push_swap(structure, structure->count);
-	// t_node *printme = structure->head_a;
-	// printf("\n--- final stack A ---\n");
-	// while (printme != NULL)
-	// {
-	// 	printf("A: %i\n", printme->rank);
-	// 	printme = printme->next;
-	// }
+	t_node *printme = structure->head_a;
+	printf("\n--- final stack A ---\n");
+	while (printme != NULL)
+	{
+		printf("A: %i\n", printme->rank);
+		printme = printme->next;
+	}
 	return (free_struct(structure), 0);
 }
 
