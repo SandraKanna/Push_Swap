@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/19 19:01:29 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/27 13:21:50 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,16 @@ void	radix_sort(t_struct *structure, int start)
 	printf("\n--- stack A ---\n");
 	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
 		printf("A: %i\n", printme->rank);
+	printf("\n--- stack B ---\n");
+	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+		printf("B: %i\n", printme->rank);
 	// start += 1;
 	while (structure->head_b != NULL)
 		push_to_stack(structure, 'a');
 	// sort_b(structure, start, structure->len_bits);
+		printf("\n--- stack A ---\n");
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("A: %i\n", printme->rank);
 	radix_sort(structure, ++start);
 }
 
