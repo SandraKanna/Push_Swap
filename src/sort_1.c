@@ -15,29 +15,36 @@
 
 int	tiny_sort(t_struct *structure, int size)
 {
-	int	first;
-	int	sec;
-	int	third;
-	// int	size;
+	int	smallest;
+	int	biggest;
 
+	// printf("\n--- test tiny ---\n");
 	if (size == 2)
 		return (swap_stack(structure, 'a'), 1);
-	first = structure->head_a->value;
-	sec = structure->head_a->next->value;
-	third = structure->head_a->next->next->value;
-	// if (first > sec)
-	// {
-		if (first < third && sec > third)
-			swap_stack(structure, 'a');
-		else if (first > third && sec < third)
+	smallest = find_smallest(structure->head_a, size);
+	biggest = find_biggest(structure->head_a, size);
+	if (smallest == structure->head_a->rank)
+	{
+		swap_stack(structure, 'a');
+		rotate_up_stack(structure, 'a');
+	}
+	else if (smallest == structure->head_a->next->rank)
+	{
+		if (biggest == structure->head_a->rank)
 			rotate_up_stack(structure, 'a');
-		else if (first > sec && sec < third)
-			swap_stack(structure, 'a');
 		else
 			swap_stack(structure, 'a');
-	// }
-	else
-		rotate_down_stack(structure, 'a');
+	}
+	else if (smallest == structure->head_a->next->next->rank)
+	{
+		if (biggest == structure->head_a->next->rank)
+			rotate_down_stack(structure, 'a');
+		else
+		{
+			swap_stack(structure, 'a');
+			rotate_down_stack(structure, 'a');
+		}
+	}
 	return (is_stack_sorted(structure->head_a));
 }
 

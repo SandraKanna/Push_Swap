@@ -139,8 +139,8 @@ int	find_biggest(t_node *list, int n)
 	temp = list;
 	while (temp != NULL && i <= n)
 	{
-		if (temp->value > biggest)
-			biggest = temp->value;
+		if (temp->rank > biggest)
+			biggest = temp->rank;
 		temp = temp->next;
 		i++;
 	}

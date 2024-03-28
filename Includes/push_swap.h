@@ -55,7 +55,7 @@ void		rotate_up_stack(t_struct *structure, char c);
 
 //core
 void		push_swap(t_struct *structure, int size);
-int			tiny_sort(t_struct *structure);
+int			tiny_sort(t_struct *structure, int size);
 void		sort_b(t_struct *structure, int bit_column);
 void		last_iteration(t_struct *structure, int bit_column);
 
@@ -66,12 +66,12 @@ int			is_column_complete(t_node *list, int bit, int i);
 int			get_bit_len(int n);
 // int			select_bit(t_node *list, int bit_count, int i);
 t_node		*find_last(t_node *list);
-// int			find_position(t_node *list, int value);
+int			find_position(t_node *list, int value);
 int			find_smallest(t_node *list, int n);
 int			find_smallest_bit(t_node *list, int column);
 int			find_biggest_bit(t_node *list, int column);
-// int			find_sec_smallest(t_node *list, int n, int smallest);
-// int		find_biggest(t_node *list, int n);
+int			find_sec_smallest(t_node *list, int n, int smallest);
+int			find_biggest(t_node *list, int n);
 // int			find_group(int count, int rank);
 // int			rotate_direction(int size, int pos1, int pos2);
 
