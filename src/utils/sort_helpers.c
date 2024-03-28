@@ -6,13 +6,13 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/19 11:53:19 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/28 16:43:14 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	find_position(t_node *list, int value)
+int	find_position(t_node *list, int rank)
 {
 	t_node	*temp;
 	int		position;
@@ -21,7 +21,7 @@ int	find_position(t_node *list, int value)
 	temp = list;
 	while (temp != NULL)
 	{
-		if (temp->value == value)
+		if (temp->rank == rank)
 			break ;
 		position++;
 		temp = temp->next;

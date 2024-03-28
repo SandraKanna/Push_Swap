@@ -13,26 +13,29 @@
 //#include "../Includes/push_swap.h"
 #include "push_swap.h"
 
-int	tiny_sort(t_struct *structure)
+int	tiny_sort(t_struct *structure, int size)
 {
 	int	first;
-	int	mid;
-	int	last;
-	int	size;
+	int	sec;
+	int	third;
+	// int	size;
 
-	size = count_nodes(structure->head_a);
 	if (size == 2)
 		return (swap_stack(structure, 'a'), 1);
 	first = structure->head_a->value;
-	mid = structure->head_a->next->value;
-	last = structure->head_a->next->next->value;
-	if (first > mid)
-	{
-		if (first > last && mid < last)
+	sec = structure->head_a->next->value;
+	third = structure->head_a->next->next->value;
+	// if (first > sec)
+	// {
+		if (first < third && sec > third)
+			swap_stack(structure, 'a');
+		else if (first > third && sec < third)
 			rotate_up_stack(structure, 'a');
+		else if (first > sec && sec < third)
+			swap_stack(structure, 'a');
 		else
 			swap_stack(structure, 'a');
-	}
+	// }
 	else
 		rotate_down_stack(structure, 'a');
 	return (is_stack_sorted(structure->head_a));

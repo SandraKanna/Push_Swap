@@ -6,11 +6,44 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/28 14:48:40 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/28 17:00:50 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	sort_6(t_struct *structure, int count)
+{
+	int	smallest;
+	int	position;
+	
+	while (count > 3)
+	{
+		smallest = find_smallest(structure->head_a, count);
+		// sec_smallest = sec_smallest(structure->head_a, count, smallest);
+		position = find_position(structure->head_a, smallest);
+		// sec_smallest = find_position(sec_smallest);
+		while (structure->head_a->rank != smallest)
+		{
+			if (position <= count / 2)
+				rotate_up_stack(structure, 'a');
+			else
+				rotate_down_stack(structure, 'a');
+		}
+		push_to_stack(structure, 'b');
+		if (structure->head_b->next != NULL && structure->head_b->rank < structure->head_b->next->rank)
+			rotate_down_stack(structure, 'b');
+		count--;
+	}
+	printf("\n--- stack A0 ---\n");
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("a: %i\n", printme->rank);
+	// while (count == 3 && !is_stack_sorted(structure->head_a))
+		// tiny_sort(structure);
+	while (structure->head_b != NULL)
+		push_to_stack(structure, 'a');
+	return ;
+}
 
 void	radix_sort(t_struct *structure, int start)
 {
@@ -24,34 +57,11 @@ void	radix_sort(t_struct *structure, int start)
 	move_to_b = count_bits(structure->head_a, 0, start);
 	rotations = count - move_to_b;
 	j = 0;
-	// printf("\n--- stack A0 ---\n");
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-	// 	printf("a: %i\n", printme->rank);
-	// if (structure->count <= 6)
-	// {
-	// 	while (j < (structure->count / 2))
-	// 	{
-	// 		if (structure->head_a->rank <= structure->count / 2)
-	// 		{
-	// 			push_to_stack(structure, 'b');
-	// 			if (structure->head_b->next != NULL && structure->head_b->rank < structure->head_b->next->rank)
-	// 				rotate_down_stack(structure, 'b');
-	// 		}
-	// 		else
-	// 			rotate_up_stack(structure, 'a');
-	// 		j++;
-	// 	}
-	// 	while (!is_stack_sorted(structure->head_a))
-	// 		tiny_sort(structure);
-	// 	while (structure->head_b != NULL)
-	// 	{
-	// 		push_to_stack(structure, 'a');
-	// 		// if (structure->head_a->rank > structure->head_a->next->rank)
-	// 		// 	rotate_up_stack(structure, 'a');
-	// 	}
-	// 	return ;
-		
-	// }
+	printf("\n--- stack A0 ---\n");
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("a: %i\n", printme->rank);
+	if (structure->count <= 6)
+		sort_6(structure, count);
 	while (j < count)
 	{
 		cur_bit = (structure->head_a->rank >> start) & 1;
@@ -102,7 +112,7 @@ void	push_swap(t_struct *structure, int size)
 	if (size <= 3)
 	{
 		while(!is_stack_sorted(structure->head_a))
-			tiny_sort(structure);
+			tiny_sort(structure, size);
 	}
 	else
 	{

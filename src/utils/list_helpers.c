@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/28 13:23:45 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/28 16:31:48 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,24 +90,24 @@ int	find_biggest_bit(t_node *list, int column)
 	return (biggest);
 }
 
-// int	find_smallest(t_node *list, int n)
-// {
-// 	t_node	*temp;
-// 	int		i;
-// 	int		smallest;
+int	find_smallest(t_node *list, int n)
+{
+	t_node	*temp;
+	int		i;
+	int		smallest;
 
-// 	i = 1;
-// 	smallest = INT_MAX;
-// 	temp = list;
-// 	while (temp != NULL && i <= n)
-// 	{
-// 		if (temp->rank < smallest)
-// 			smallest = temp->rank;
-// 		i++;
-// 		temp = temp->next;
-// 	}
-// 	return (smallest);
-// }
+	i = 1;
+	smallest = INT_MAX;
+	temp = list;
+	while (temp != NULL && i <= n)
+	{
+		if (temp->rank < smallest)
+			smallest = temp->rank;
+		i++;
+		temp = temp->next;
+	}
+	return (smallest);
+}
 
 int	find_sec_smallest(t_node *list, int n, int smallest)
 {
