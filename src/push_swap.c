@@ -12,16 +12,13 @@
 
 #include "push_swap.h"
 
-void	sort_6(t_struct *structure, int count)
+void	sort_7(t_struct *structure, int count)
 {
 	int	smallest;
 	int	position;
 	int	move_to_b;
 
 	move_to_b = count - 3;
-	// printf("\n--- stack A0 ---\n");
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-	// 	printf("a: %i\n", printme->rank);
 	while (structure->head_a != NULL)
 	{
 		smallest = find_smallest(structure->head_a, count);
@@ -43,9 +40,6 @@ void	sort_6(t_struct *structure, int count)
 		if (count_nodes(structure->head_a) == 3)
 			break;
 	}
-	// printf("\n--- stack A1 ---\n");
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-	// 	printf("a: %i\n", printme->rank);
 	if (count_nodes(structure->head_a) <= 3 && !is_stack_sorted(structure->head_a))
 		tiny_sort(structure, count_nodes(structure->head_a));
 	while (structure->head_b != NULL)
@@ -53,24 +47,31 @@ void	sort_6(t_struct *structure, int count)
 	return ;
 }
 
+int	do_rotations(t_struct *structure, int rotations, int to_move)
+{
+	if (!to_move && rotations == count_nodes(structure->head_a))
+		return (0);
+	if (!to_move && rotations == (count_nodes(structure->head_a) - 1))
+	{
+		rotate_down_stack(structure, 'a');
+		return (0);
+	}
+	else
+		rotate_up_stack(structure, 'a');
+	return (1);
+}
+
 void	radix_sort(t_struct *structure, int start)
 {
-	int	j;
 	int	cur_bit;
-	int	count;
 	int	rotations;
 	int	move_to_b;
 
-	count = count_nodes(structure->head_a);
 	move_to_b = count_bits(structure->head_a, 0, start);
-	rotations = count - move_to_b;
-	j = 0;
-	// printf("\n--- stack A0 ---\n");
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-	// 	printf("a: %i\n", printme->rank);
-	if (structure->count <= 6)
-		return (sort_6(structure, count));
-	while (j < count)
+	rotations = count_nodes(structure->head_a) - move_to_b;
+	if (structure->count <= 7)
+		return (sort_7(structure, structure->count));
+	while (move_to_b >= 0 && rotations > 0)
 	{
 		cur_bit = (structure->head_a->rank >> start) & 1;
 		if (cur_bit == 0)
@@ -80,38 +81,22 @@ void	radix_sort(t_struct *structure, int start)
 		}
 		else
 		{
-			if (move_to_b == 0)
-			{
-				if (rotations == count_nodes(structure->head_a))	
-					break;
-				if (rotations == (count_nodes(structure->head_a) - 1))
-				{
-					rotate_down_stack(structure, 'a');
-					break;
-				}
-			}
-			rotate_up_stack(structure, 'a');
+			if (!do_rotations(structure, rotations, move_to_b))
+				break ;
 			rotations--;
 		}
-		j++;
 	}
-	start += 1;
-	// printf("\n--- stack A1 ---\n");
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-	// 	printf("a: %i\n", printme->rank);
-	// printf("\n--- stack B1 ---\n");
-	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-	// 	printf("B: %i\n", printme->rank);
-	sort_b(structure, start);
+	sort_b(structure, ++start);
+	if (structure->head_b != NULL)
+		radix_sort(structure, start);
+}
+
 	// printf("\n--- stack A2 ---\n");
 	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
 	// 	printf("a: %i\n", printme->rank);
 	// printf("\n--- stack B2 ---\n");
 	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
 	// 	printf("B: %i\n", printme->rank);
-	if (structure->head_b != NULL)
-		radix_sort(structure, start);
-}
 
 void	push_swap(t_struct *structure, int size)
 {
@@ -131,7 +116,7 @@ void	push_swap(t_struct *structure, int size)
 int	main(int argc, char **argv)
 {
 	t_struct		*structure;
-	int	elements_count;
+	int				elements_count;
 	char			**list;
 
 	if (argc < 2)
@@ -156,4 +141,4 @@ int	main(int argc, char **argv)
 	return (free_struct(structure), 0);
 }
 
-//for i in {0..100}; do echo $i; done | sort -R | tr '\n' ' '
+//for i in {0..101}; do echo $i; done | sort -R | tr '\n' ' '

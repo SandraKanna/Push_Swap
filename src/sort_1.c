@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../Includes/push_swap.h"
 #include "push_swap.h"
 
 int	tiny_sort(t_struct *structure, int size)
