@@ -42,6 +42,65 @@ int	get_bit_len(int n)
 	return (len);
 }
 
+int	count_bits(t_node *list, int bit, int i)
+{
+	t_node	*cur;
+	int		bit_cur;
+	int		count;
+
+	cur = list;
+	count = 0;
+	while (cur != NULL)
+	{
+		bit_cur = (cur->rank >> i) & 1;
+		if (bit_cur == bit)
+			count++;
+		cur = cur->next;
+	}
+	return (count);
+}
+
+int	select_bit(t_node *list, int bit_count, int i)
+{
+	int		zeros;
+	int		ones;
+	int		bit_cur;
+	t_node	*cur;
+
+	zeros = 0;
+	ones = 0;
+	cur = list;
+	while (cur != NULL)
+	{
+		bit_cur = cur->rank;
+		if (bit_cur & (1 << (bit_count - i)))
+			ones++;
+		else
+			zeros++;
+		cur = cur->next;
+	}
+	if (max_value(zeros, ones) == 1)
+		return (1);
+	return (0);
+}
+
+int	is_column_complete(t_node *list, int bit, int i)
+{
+	t_node	*cur;
+	int		bit_cur;
+
+	cur = list;
+	while (cur != NULL)
+	{
+		bit_cur = (cur->rank >> i) & 1;
+		if (bit_cur == bit)
+			cur = cur->next;
+		else
+			return (0);
+	}
+	return (1);
+}
+
 // int	find_group(int count, int rank)
 // {
 // 	int	group_size;

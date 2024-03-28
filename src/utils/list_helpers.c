@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../Includes/push_swap.h"
 #include "push_swap.h"
 
 t_node	*find_last(t_node *list)
@@ -54,24 +53,60 @@ int	count_nodes(t_node *list)
 	return (count);
 }
 
-int	find_smallest(t_node *list, int n)
+int	find_smallest_bit(t_node *list, int column)
 {
 	t_node	*temp;
-	int		i;
+	int		cur_bit;
 	int		smallest;
 
-	i = 1;
 	smallest = INT_MAX;
 	temp = list;
-	while (temp != NULL && i <= n)
+	while (temp != NULL)
 	{
-		if (temp->value < smallest)
-			smallest = temp->value;
-		i++;
+		cur_bit = (temp->rank >> column) & 1;
+		if (cur_bit == 1 && temp->rank < smallest)
+			smallest = temp->rank;
 		temp = temp->next;
 	}
 	return (smallest);
 }
+
+int	find_biggest_bit(t_node *list, int column)
+{
+	t_node	*temp;
+	int		cur_bit;
+	int		biggest;
+
+	biggest = INT_MIN;
+	temp = list;
+	while (temp != NULL)
+	{
+		cur_bit = (temp->rank >> column) & 1;
+		if (cur_bit == 1 && temp->rank > biggest)
+			biggest = temp->rank;
+		temp = temp->next;
+	}
+	return (biggest);
+}
+
+// int	find_smallest(t_node *list, int n)
+// {
+// 	t_node	*temp;
+// 	int		i;
+// 	int		smallest;
+
+// 	i = 1;
+// 	smallest = INT_MAX;
+// 	temp = list;
+// 	while (temp != NULL && i <= n)
+// 	{
+// 		if (temp->rank < smallest)
+// 			smallest = temp->rank;
+// 		i++;
+// 		temp = temp->next;
+// 	}
+// 	return (smallest);
+// }
 
 int	find_sec_smallest(t_node *list, int n, int smallest)
 {
