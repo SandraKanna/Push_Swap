@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/19 11:53:19 by skanna           ###   ########.fr       */
+/*   Updated: 2024/03/28 13:23:45 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	is_stack_sorted(t_node *stack)
 {
 	while (stack->next != NULL)
 	{
-		if (stack->value > stack->next->value)
+		if (stack->rank > stack->next->rank
+			|| stack->next->rank - stack->rank != 1)
 			return (0);
 		stack = stack->next;
 	}
