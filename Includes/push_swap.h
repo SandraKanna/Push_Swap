@@ -57,6 +57,7 @@ void		rotate_up_stack(t_struct *structure, char c);
 void		push_swap(t_struct *structure, int size);
 int			tiny_sort(t_struct *structure);
 void		sort_b(t_struct *structure, int bit_column);
+void		last_iteration(t_struct *structure, int bit_column);
 
 int			count_nodes(t_node *list);
 int			count_bits(t_node *list, int bit, int i);
@@ -64,7 +65,7 @@ int			is_stack_sorted(t_node *stack);
 int			is_column_complete(t_node *list, int bit, int i);
 int			get_bit_len(int n);
 // int			select_bit(t_node *list, int bit_count, int i);
-// t_node		*find_last(t_node *list);
+t_node		*find_last(t_node *list);
 // int			find_position(t_node *list, int value);
 int			find_smallest(t_node *list, int n);
 int			find_smallest_bit(t_node *list, int column);

@@ -32,12 +32,6 @@
 			rotate_up_stack(structure, 'a');
 		j++;
 	}
-	// printf("\n--- stack A ---\n");
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-	// 	printf("A: %i\n", printme->rank);
-	// printf("\n--- stack B ---\n");
-	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-	// 	printf("B: %i\n", printme->rank);
 	while (structure->head_b != NULL)
 		push_to_stack(structure, 'a');
 	radix_sort(structure, ++start);
@@ -61,10 +55,19 @@ void	radix_sort(t_struct *structure, int start)
 		j++;
 	}
 	start += 1;
+	printf("\n--- stack A1 ---\n");
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("a: %i\n", printme->rank);
+	printf("\n--- stack B1 ---\n");
+	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+		printf("B: %i\n", printme->rank);
 	sort_b(structure, start);
-	// printf("\n--- stack B2 ---\n");
-	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-	// 	printf("B: %i\n", printme->rank);
+		printf("\n--- stack A2 ---\n");
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("a: %i\n", printme->rank);
+	printf("\n--- stack B2 ---\n");
+	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+		printf("B: %i\n", printme->rank);
 	if (structure->head_b != NULL)
 		radix_sort(structure, start);
 }

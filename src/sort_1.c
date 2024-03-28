@@ -42,7 +42,7 @@ void	last_iteration(t_struct *structure, int bit_column)
 {
 	int	holder;
 	int	smallest_b;
-	int group0;
+	int	group0;
 
 	group0 = count_bits(structure->head_b, 0, bit_column);
 	while (structure->head_b != NULL)
