@@ -22,9 +22,7 @@ void	sort_7(t_struct *structure, int count)
 	while (structure->head_a != NULL)
 	{
 		smallest = find_smallest(structure->head_a, count);
-		// sec_smallest = sec_smallest(structure->head_a, count, smallest);
 		position = find_position(structure->head_a, smallest);
-		// sec_smallest = find_position(sec_smallest);
 		if (move_to_b > 0)
 		{
 			if (structure->head_a->rank == smallest)
@@ -108,9 +106,9 @@ void	push_swap(t_struct *structure, int size)
 	{
 		radix_sort(structure, 0);
 	}
-	// if (is_stack_sorted(structure->head_a)
-	// 	&& (count_nodes(structure->head_a) == structure->count))
-	// 	printf("stack_a is sorted!\n");
+	if (is_stack_sorted(structure->head_a)
+		&& (count_nodes(structure->head_a) == structure->count))
+		printf("stack_a is sorted!\n");
 }
 
 int	main(int argc, char **argv)
