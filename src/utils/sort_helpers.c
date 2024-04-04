@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/28 16:43:14 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/04 11:28:19 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,56 +100,3 @@ int	is_column_complete(t_node *list, int bit, int i)
 	}
 	return (1);
 }
-
-// int	find_group(int count, int rank)
-// {
-// 	int	group_size;
-// 	int	groups;
-// 	int	i;
-
-// 	groups = 1;
-// 	i = 3;
-// 	while (i <= count && groups <= 11)
-// 	{
-// 		if (count > i)
-// 			groups++;
-// 		else
-// 			break ;
-// 		i += 3;
-// 	}
-// 	group_size = count / groups;
-// 	i = 1;
-// 	while (i <= groups)
-// 	{
-// 		if (rank <= group_size * i)
-// 			return (i);
-// 		i++;
-// 	}
-// 	return (groups);
-// }
-
-
-
-// int	rotate_direction(int size, int pos1, int pos2)
-// {
-// 	int	mid;
-// 	int	rot_dir;
-
-// 	mid = size / 2;
-// 	rot_dir = -1;
-// 	if (pos1 <= mid)
-// 	{
-// 		if (pos2 < mid || pos1 < (size - pos2))
-// 			rot_dir = 1; //ra
-// 		else if (pos1 > (size - pos2))
-// 			rot_dir = 2; //rra
-// 	}
-// 	else if (pos1 > mid)
-// 	{
-// 		if (pos2 >= mid || pos2 > (size - pos1))
-// 			rot_dir = 2; //rra
-// 		else if (pos2 < (size - pos1))
-// 			rot_dir = 1; //ra
-// 	}
-// 	return (rot_dir);
-// }

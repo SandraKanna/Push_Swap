@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/19 18:55:50 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/04 11:30:35 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ typedef struct s_node
 {
 	int				value;
 	int				rank;
-	int				*bit;
 	struct s_node	*next;
-	struct s_node	*last;
 }					t_node;
 
 typedef struct s_struct

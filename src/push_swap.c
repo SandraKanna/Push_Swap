@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/28 17:00:50 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/04 12:54:49 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	radix_sort(t_struct *structure, int start)
 
 	move_to_b = count_bits(structure->head_a, 0, start);
 	rotations = count_nodes(structure->head_a) - move_to_b;
-	if (structure->count <= 7)
+	if (structure->count <= 3)
 		return (sort_7(structure, structure->count));
 	while (move_to_b >= 0 && rotations > 0)
 	{
@@ -96,6 +96,33 @@ void	radix_sort(t_struct *structure, int start)
 	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
 	// 	printf("B: %i\n", printme->rank);
 
+void	divide_and_conquer(t_struct *structure)
+{
+	int	mid;
+	int	move_to_b;
+	int size;
+
+	size = count_nodes(structure->head_a);
+	while (size > 3)
+	{
+		mid = size / 2;
+		if (size % 2 != 0)
+			mid += 1;
+		move_to_b = mid;
+		while (move_to_b > 0 && count_nodes(structure->head_a) > 3)
+		{
+			if (structure->head_a->rank < mid)
+			{
+				push_to_stack(structure, 'b');
+				move_to_b--;
+			}
+			else
+				rotate_up_stack(structure, 'a');
+		}
+		size = count_nodes(structure->head_a);
+	}
+}
+
 void	push_swap(t_struct *structure, int size)
 {
 	if (structure->head_a && is_stack_sorted(structure->head_a))
@@ -104,6 +131,11 @@ void	push_swap(t_struct *structure, int size)
 		tiny_sort(structure, size);
 	else
 	{
+		divide_and_conquer(structure);
+		tiny_sort(structure, size);
+		printf("\n--- stack B0 ---\n");
+		for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+			printf("B: %i\n", printme->rank);
 		radix_sort(structure, 0);
 	}
 	if (is_stack_sorted(structure->head_a)
