@@ -45,39 +45,50 @@ void	sort_7(t_struct *structure, int count)
 	return ;
 }
 
-int	do_rotations(t_struct *structure, char c, int rot, int to_move)
+int	do_rotations(t_struct *structure, int rot, int start)
 {
 	t_node	*last;
+	t_node	*next;
+	int		temp_bit;
 
-	last = find_last(structure->head_a);
-	if (c == 'a')
+	last = find_last(structure->head_b);
+	next = structure->head_b->next;
+	temp_bit = (next->rank >> start) & 1;
+	// if (!to_move && rot == 0)
+	if (rot != 0)
 	{
-		// if (!to_move && rot == count_nodes(structure->head_a))
-		// 	return (0);
-		// if (!to_move && rot == (count_nodes(structure->head_a) - 1))
-		// 	rotate_down_stack(structure, c);
-		// else
-		// 	return (rotate_up_stack(structure, c), 1);
-		if (!to_move && rot == 0)
-			return (0);
-		if (to_move && (last->rank < structure->head_a->rank))
-			rotate_down_stack(structure, c);
-		else
-			return (rotate_up_stack(structure, c), 1);
+		if (temp_bit == 1)
+		{
+			
+		}
 	}
-	else if (c == 'b')
-	{
-		last = find_last(structure->head_b);
-		if (!to_move && rot == 0)
-			return (0);
-		if (to_move && (last->rank > structure->head_b->rank))
-			rotate_down_stack(structure, c);
-		else
-			return (rotate_up_stack(structure, c), 1);
-	}
+		// return (0);
+	// if (to_move && (last->rank > structure->head_b->rank))
+		rotate_down_stack(structure, 'b');
+	else
+		return (rotate_up_stack(structure, 'b'), 1);
 	return (-1);
 }
 
+// int	do_rotations_a(t_struct *structure, int rot, int to_move)
+// {
+// 	t_node	*last;
+// 	int		cur_bit;
+
+// 	last = find_last(structure->head_a);
+// 	if (!to_move && rot == count_nodes(structure->head_a))
+// 		return (0);
+// 	if (!to_move && rot == (count_nodes(structure->head_a) - 1))
+// 		rotate_down_stack(structure, 'a');
+// 	else
+// 		return (rotate_up_stack(structure, 'a'), 1);
+// 		// if (!to_move && rot == 0)
+// 		// 	return (0);
+// 		// if (to_move && (last->rank < structure->head_a->rank))
+// 		// 	rotate_down_stack(structure, c);
+// 		// else
+// 		// 	return (rotate_up_stack(structure, c), 1);
+// }
 
 // void	radix_sort(t_struct *structure, int start)
 // {
@@ -116,26 +127,28 @@ int	do_rotations(t_struct *structure, char c, int rot, int to_move)
 	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
 	// 	printf("B: %i\n", printme->rank);
 
-void	radix_sort(t_struct *structure, int start, int end, int to_sort)
+// void	radix_sort(t_struct *structure, int start, int end, int to_sort)
+void	radix_sort(t_struct *structure, int iteration)
 {
 	int	count_a;
 
 	count_a = count_nodes(structure->head_a);
 	if (count_a <= 3 && !is_stack_sorted(structure->head_a, 3))
 		tiny_sort(structure, count_a);
-	// to_sort = count_nodes(structure->head_b);
-	if (to_sort > 0 && start <= end)
-	{
-		if (to_sort == 1)
-			sort_b(structure, start++, to_sort * 2);
-		if (to_sort != 1 && to_sort / 2 >= 1)
-		{
-			to_sort /= 2;
-			radix_sort(structure, start, end, to_sort);
-		}
-		// sort_b(structure, start++, to_sort * 2);
+	if (iteration > 0)
+	//to_sort = count_nodes(structure->head_b);
+	// if (to_sort > 0 && start <= end)
+	// {
+		// if (to_sort >= 2)
+		// {
+			// to_sort /= 2;
+			// radix_sort(structure, start, end, (to_sort / 2));
+		radix_sort(structure, iteration - 1);
+		// }
+	else
+		sort_b(structure, 0, count_nodes(structure->head_b));
 	}
-}
+// }
 
 int	get_mid(t_node *lst, int size)
 {
@@ -149,15 +162,15 @@ int	get_mid(t_node *lst, int size)
 	return (mid);
 }
 
-void	divide_and_conquer(t_struct *structure, int size, int iterations)
+int	divide_and_conquer(t_struct *structure, int size, int iterations)
 {
 	int	send_to_b;
 	int	biggest;
 	int	i;
 	int	mid;
 
-	i = iterations;
-	while (i > 0 && size > 3)
+	i = 0;
+	while (iterations > 0 && size > 3)
 	{
 		biggest = find_biggest(structure->head_a, size);
 		send_to_b = size / 2;
@@ -176,21 +189,23 @@ void	divide_and_conquer(t_struct *structure, int size, int iterations)
 				rotate_up_stack(structure, 'a');
 			size = count_nodes(structure->head_a);
 		}
-		i--;
+		i++;
+		iterations--;
 	}
+	return (i);
 }
 
 void	push_swap(t_struct *structure, int size)
 {
 	int	iterations;
 
-	iterations = structure->len_bits - 1;
+	//iterations = structure->len_bits - 1;
 	if (structure->head_a && is_stack_sorted(structure->head_a, size))
 		return ;
 	if (size <= 3)
 		return (tiny_sort(structure, size));
-	divide_and_conquer(structure, size, iterations);
-	radix_sort(structure, 0, iterations, count_nodes(structure->head_b));
+	iterations = divide_and_conquer(structure, size, structure->len_bits - 1);
+	radix_sort(structure, iterations);
 	if (is_stack_sorted(structure->head_a, size)
 		&& (count_nodes(structure->head_a) == structure->count))
 		printf("stack_a is sorted!\n");
