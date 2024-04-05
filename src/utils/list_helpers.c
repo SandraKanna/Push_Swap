@@ -25,13 +25,14 @@ t_node	*find_last(t_node *list)
 	return (last);
 }
 
-int	is_stack_sorted(t_node *stack)
+int	is_stack_sorted(t_node *stack, int n)
 {
-	while (stack->next != NULL)
+	while (stack->next != NULL && n > 0)
 	{
 		if (stack->rank > stack->next->rank
 			|| stack->next->rank - stack->rank != 1)
 			return (0);
+		n--;
 		stack = stack->next;
 	}
 	return (1);

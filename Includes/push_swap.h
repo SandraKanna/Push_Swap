@@ -55,13 +55,14 @@ void		rotate_up_stack(t_struct *structure, char c);
 
 //core
 void		push_swap(t_struct *structure, int size);
-int			tiny_sort(t_struct *structure, int size);
-void		sort_b(t_struct *structure, int bit_column);
+void		tiny_sort(t_struct *structure, int size);
+void		sort_b(t_struct *structure, int start, int to_sort, int rot);
 void		last_iteration(t_struct *structure, int bit_column);
 
 int			count_nodes(t_node *list);
-int			count_bits(t_node *list, int bit, int i);
-int			is_stack_sorted(t_node *stack);
+int			count_bits(t_node *list, int bit, int i, int size);
+int			do_rotations(t_struct *structure, char c, int rot, int to_move);
+int			is_stack_sorted(t_node *stack, int n);
 int			is_column_complete(t_node *list, int bit, int i);
 int			get_bit_len(int n);
 // int			select_bit(t_node *list, int bit_count, int i);

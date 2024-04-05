@@ -42,7 +42,7 @@ int	get_bit_len(int n)
 	return (len);
 }
 
-int	count_bits(t_node *list, int bit, int i)
+int	count_bits(t_node *list, int bit, int i, int size)
 {
 	t_node	*cur;
 	int		bit_cur;
@@ -50,12 +50,13 @@ int	count_bits(t_node *list, int bit, int i)
 
 	cur = list;
 	count = 0;
-	while (cur != NULL)
+	while (cur != NULL && size < 0)
 	{
 		bit_cur = (cur->rank >> i) & 1;
 		if (bit_cur == bit)
 			count++;
 		cur = cur->next;
+		size++;
 	}
 	return (count);
 }
