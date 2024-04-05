@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/28 17:00:50 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/05 19:20:18 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,15 +121,32 @@ void	radix_sort(t_struct *structure, int start, int end, int to_sort)
 	int	count_a;
 
 	count_a = count_nodes(structure->head_a);
-	if (count_a <= 3)
+	if (count_a <= 3 && !is_stack_sorted(structure->head_a, 3))
 		tiny_sort(structure, count_a);
-	to_sort = count_nodes(structure->head_b);
+	// to_sort = count_nodes(structure->head_b);
 	if (to_sort > 0 && start <= end)
 	{
-		if (to_sort / 2 >= 1)
-			radix_sort(structure, start, end, to_sort / 2);
-		sort_b(structure, start++, to_sort * 2);
+		if (to_sort == 1)
+			sort_b(structure, start++, to_sort * 2);
+		if (to_sort != 1 && to_sort / 2 >= 1)
+		{
+			to_sort /= 2;
+			radix_sort(structure, start, end, to_sort);
+		}
+		// sort_b(structure, start++, to_sort * 2);
 	}
+}
+
+int	get_mid(t_node *lst, int size)
+{
+	int	mid;
+	int	smallest;
+	int	biggest;
+
+	smallest = find_smallest(lst, size);
+	biggest = find_biggest(lst, size);
+	mid = (smallest + biggest) / 2;
+	return (mid);
 }
 
 void	divide_and_conquer(t_struct *structure, int size, int iterations)
@@ -137,17 +154,19 @@ void	divide_and_conquer(t_struct *structure, int size, int iterations)
 	int	send_to_b;
 	int	biggest;
 	int	i;
+	int	mid;
 
 	i = iterations;
 	while (i > 0 && size > 3)
 	{
 		biggest = find_biggest(structure->head_a, size);
 		send_to_b = size / 2;
+		mid = get_mid(structure->head_a, size);
 		if (size % 2 != 0)
 			send_to_b += 1;
-		while (send_to_b > 0)
+		while (send_to_b > 0 && size > 3)
 		{
-			if (structure->head_a->rank < (size / 2)
+			if (structure->head_a->rank <= mid
 				&& structure->head_a->rank < (biggest - 2))
 			{
 				push_to_stack(structure, 'b');
@@ -155,8 +174,8 @@ void	divide_and_conquer(t_struct *structure, int size, int iterations)
 			}
 			else
 				rotate_up_stack(structure, 'a');
+			size = count_nodes(structure->head_a);
 		}
-		size = count_nodes(structure->head_a);
 		i--;
 	}
 }
@@ -171,7 +190,7 @@ void	push_swap(t_struct *structure, int size)
 	if (size <= 3)
 		return (tiny_sort(structure, size));
 	divide_and_conquer(structure, size, iterations);
-	radix_sort(structure, 0, iterations, size);
+	radix_sort(structure, 0, iterations, count_nodes(structure->head_b));
 	if (is_stack_sorted(structure->head_a, size)
 		&& (count_nodes(structure->head_a) == structure->count))
 		printf("stack_a is sorted!\n");

@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/19 18:55:50 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/05 16:09:39 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void		rotate_up_stack(t_struct *structure, char c);
 //core
 void		push_swap(t_struct *structure, int size);
 void		tiny_sort(t_struct *structure, int size);
-void		sort_b(t_struct *structure, int start, int to_sort, int rot);
+void		sort_b(t_struct *structure, int start, int to_sort);
 void		last_iteration(t_struct *structure, int bit_column);
 
 int			count_nodes(t_node *list);

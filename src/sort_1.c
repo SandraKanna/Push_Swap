@@ -17,9 +17,9 @@ void	tiny_sort(t_struct *structure, int size)
 	int	smallest;
 	int	biggest;
 
-	// printf("\n--- test tiny ---\n");
+	printf("\n--- test tiny ---\n");
 	if (size == 2)
-		return (swap_stack(structure, 'a'), 1);
+		return (swap_stack(structure, 'a'));
 	smallest = find_smallest(structure->head_a, size);
 	biggest = find_biggest(structure->head_a, size);
 	if (smallest == structure->head_a->rank)
@@ -82,35 +82,13 @@ void	last_iteration(t_struct *structure, int bit_column)
 	}
 }
 
-void	sort_top_stacks(t_struct *structure)
-{
-	int	biggest_b;
-	int	smallest_a;
-
-	smallest_a = find_smallest(structure->head_a, 3);
-	biggest_b = find_biggest(structure->head_b, 3);
-	if (structure->head_a->rank > structure->head_b->rank)
-	{
-		if ()
-		swap_stack(structure, 'b');
-	}
-	else
-	{
-		push_to_stack(structure, 'a');
-		if (structure->head_a->rank > structure->head_b->next->rank)
-		{
-			swap_stack(structure, 'a');
-		}
-	}
-
-}
-
-void	sort_a(t_struct *structure, int start, int to_sort, int rotations)
+void	sort_a(t_struct *structure, int start, int to_sort, int *rotations)
 {
 	int	cur_bit;
 	int	move_to_b;
 
-	while ()
+	move_to_b = count_bits(structure->head_a, 0, start, to_sort);
+	while (move_to_b > 0)
 	{
 		cur_bit = (structure->head_a->rank >> start) & 1;
 		if (cur_bit == 0)
@@ -119,21 +97,23 @@ void	sort_a(t_struct *structure, int start, int to_sort, int rotations)
 			move_to_b--;
 		}
 		else
-			rotations += do_rotations(structure, 'b', rotations, move_to_b);
+			*rotations += do_rotations(structure, 'b', *rotations, move_to_b);
 	}
 }
 
-void	sort_b(t_struct *structure, int start, int to_sort, int rot)
+void	sort_b(t_struct *structure, int start, int to_sort)
 {
 	int	cur_bit;
 	int	move_to_a;
+	int	rot;
 	int	i;
-//sort == 1 radix == len_bit of biggest rank of to_sort elements
-//iterations == iterate through each bit of the to_sort elements->rank
-	i = to_sort;
-	while (i > 0)
+
+	i = 0;
+	rot = 0;
+	while (i < structure->len_bits)
 	{
-		move_to_a = count_bits(structure->head_b, 1, start, to_sort);
+		// move_to_a = count_bits(structure->head_b, 1, start, to_sort);
+		move_to_a = to_sort / 2;
 		while (move_to_a >= 0)
 		{
 			cur_bit = (structure->head_b->rank >> start) & 1;
@@ -145,8 +125,8 @@ void	sort_b(t_struct *structure, int start, int to_sort, int rot)
 			else
 				rot += do_rotations(structure, 'b', rot, move_to_a);
 		}
-		sort_a(structure, ++start, to_sort, rot);
-		i--;
+		sort_a(structure, ++start, to_sort, &rot);
+		i++;
 	}
 }
 
