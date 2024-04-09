@@ -92,7 +92,7 @@ void	sort_top(t_struct *structure, int to_sort)
 
 	i = 0;
 	rot = 0;
-	// printf("\nsort top: %i ---\n", to_sort);
+	printf("\nsort top: %i ---\n", to_sort);
 	// printf("\nstack B \n");
 	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
 	// 	printf("B: %i\n", printme->rank);
@@ -126,12 +126,12 @@ void	sort_top(t_struct *structure, int to_sort)
 			rot--;
 		}
 	}
-	// printf("\n Stack A\n");
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-	// 	printf("A: %i\n", printme->rank);
-	// printf("\n----\n stack B \n");
-	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-	// 	printf("B: %i\n", printme->rank);
+	printf("\n Stack A\n");
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("A: %i\n", printme->rank);
+// 	printf("\n----\n stack B \n");
+// 	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+// 		printf("B: %i\n", printme->rank);
 }
 
 int	sort_bit_a(t_struct *structure, int start, int work_set)
@@ -143,9 +143,9 @@ int	sort_bit_a(t_struct *structure, int start, int work_set)
 
 	moved = 0;
 	rot = 0;
-	// printf("\n--- stack A before start: %i ---\n", start);
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-	// 	printf("A: %i\n", printme->rank);
+	printf("\n--- stack A before start: %i ---\n", start);
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("A: %i\n", printme->rank);
 	to_move = count_bits(structure->head_a, 0, start, work_set);
 	if (start == structure->len_bits - 1)
 		return (0);
@@ -181,10 +181,10 @@ int	sort_bit_a(t_struct *structure, int start, int work_set)
 			--rot;
 		}
 	}
-	// printf("\nTest sort in a rot: %i kep in a: %i \n", rot, work_set - moved);
-	// printf("\n--- stack A after start: %i ---\n", start);
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-	// 	printf("A: %i\n", printme->rank);
+	printf("\nTest sort in a rot: %i kep in a: %i \n", rot, work_set - moved);
+	printf("\n--- stack A after start: %i ---\n", start);
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("A: %i\n", printme->rank);
 	return (work_set - moved);
 }
 
@@ -198,14 +198,14 @@ int	sort_bit_b(t_struct *structure, int start, int group_size)
 	moved = 0;
 	rot = 0;
 	to_move = count_bits(structure->head_b, 1, start, group_size);
-	// printf("\nB group size = %i   to move: %i \n", group_size, to_move);
-	// printf("\n--- stack B before start: %i ---\n", start);
-	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-	// 	printf("B: %i\n", printme->rank);
+	printf("\nB group size = %i   to move: %i \n", group_size, to_move);
+	printf("\n--- stack B before start: %i ---\n", start);
+	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+		printf("B: %i\n", printme->rank);
 	while (to_move > moved)
 	{
 		cur_bit = (structure->head_b->rank >> start) & 1;
-		// printf("\ncur_bit = %i \n", cur_bit);
+		printf("\ncur_bit = %i \n", cur_bit);
 		if (cur_bit == 1)
 		{
 			push_to_stack(structure, 'a');
@@ -234,9 +234,9 @@ int	sort_bit_b(t_struct *structure, int start, int group_size)
 			--rot;
 		}
 	}
-	// printf("\n stack B after start: %i \n", start);
-	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-	// printf("B: %i\n", printme->rank);
+	printf("\n stack B after start: %i \n", start);
+	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+	printf("B: %i\n", printme->rank);
 	return (moved);
 }
 
