@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/05 19:20:18 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/09 16:03:20 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,20 +117,18 @@ void	push_swap(t_struct *structure, int size)
 	int	batches;
 
 	//iterations = structure->len_bits - 1;
-	printf("\n--- len bits: %i ---\n", structure->len_bits);
+	batches = 0;
+	// printf("\n--- len bits: %i ---\n", structure->len_bits);
 	if (structure->head_a && is_stack_sorted(structure->head_a, size))
 		return ;
 	if (size <= 3)
-		return (tiny_sort(structure, size));
-	batches = divide_and_conquer(structure, size, structure->len_bits - 1);
-	printf("\n--- batches : %i ---\n", batches);
-	printf("\n--- initial A ---\n");
-	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-		printf("A: %i\n", printme->rank);
-	printf("\n--- initial B ---\n");
-	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-		printf("B: %i\n", printme->rank);
-	radix_sort(structure, batches);
+		tiny_sort(structure, size);
+	else
+	{
+		batches = divide_and_conquer(structure, size, structure->len_bits - 1);
+		// printf("\n--- batches : %i ---\n", batches);
+		radix_sort(structure, batches);
+	}
 	if (is_stack_sorted(structure->head_a, size)
 		&& (count_nodes(structure->head_a) == structure->count))
 		printf("stack_a is sorted!\n");
@@ -217,4 +215,49 @@ int	main(int argc, char **argv)
 // 	sort_b(structure, ++start);
 // 	if (structure->head_b != NULL)
 // 		radix_sort(structure, start);
+// }
+
+
+// int	sort_a(t_struct *structure, int start, int to_sort, int index)
+// {
+// 	int	cur_bit;
+// 	int	move_to_b;
+// 	int	rot_a;
+// 	int	i;
+// 	int	group_limit;
+
+// 	move_to_b = count_bits(structure->head_a, 0, start, to_sort);
+// 	i = 0;
+// 	group_limit = 3;
+// 	while (i <= index)
+// 	{
+// 		group_limit += structure->group_size[index - i];
+// 		i++;
+// 	}
+// 	rot_a = 0;
+// 	i = 0;
+// 	printf("group limit: %i\n", group_limit);
+// 	while (i < move_to_b && structure->head_a->rank < (structure->count - group_limit))
+// 	{
+// 		cur_bit = (structure->head_a->rank >> start) & 1;
+// 		if (cur_bit == 0)
+// 		{
+// 			push_to_stack(structure, 'b');
+// 			i++;
+// 		}
+// 		else
+// 		{
+// 			rotate_up_stack(structure, 'a');
+// 			rot_a += 1;
+// 		}
+// 	}
+// 	while (rot_a > 0 && rot_a < count_nodes(structure->head_a))
+// 	{
+// 		rotate_down_stack(structure, 'a');
+// 		rot_a--;
+// 	}
+// 	printf("\n--- stack A[%i] ---\n", start);
+// 	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+// 		printf("A: %i\n", printme->rank);
+// 	return (to_sort - i);
 // }
