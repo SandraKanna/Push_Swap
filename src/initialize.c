@@ -37,31 +37,21 @@ void	rank_elems(t_node *list)
 		current = current->next;
 	}
 }
-
-void	init_bit_array(t_struct *structure, int size)
+void	init_group_size(t_struct *structure, int iter, int max, int size)
 {
-	int		i;
-	int		temp_rank;
-	t_node	*cur;
-
-	cur = structure->head_a;
-	structure->len_bits = get_bit_len(size);
-	while (cur != NULL)
+	if (iter == 0)
 	{
-		temp_rank = cur->rank;
-		cur->bit = malloc (sizeof (int) * structure->len_bits);
-		if (!cur->bit)
+		structure->group_size = malloc(sizeof(int) * max);
+		if (!structure->group_size)
 			err_handling(structure);
-		i = structure->len_bits - 1;
-		while (i >= 0)
-		{
-			cur->bit[i] = temp_rank & 1;//store the LSB
-			temp_rank >>= 1;//move bits to the right to check the next bit
-			// printf("bit[%i]: %i ", i, cur->bit[i]);
-			i--;//move to the next storage column
-		}
-		cur = cur->next;
 	}
+	structure->group_size[iter] = size;
+	// printf("\n--- init group size ---\n");
+	// for (int i = 0; i <= iter; i++)
+	// 	printf("size[%i]: %i\n", i, structure->group_size[i]);
+}
+
+
 	// t_node *printme = structure->head_a;
 	// while (printme != NULL)
 	// {
@@ -75,7 +65,6 @@ void	init_bit_array(t_struct *structure, int size)
 	// 	printf("\n");
 	// 	printme = printme->next;
 	// }
-}
 
 t_struct	*init_struct(char **av, int count)
 {
@@ -90,6 +79,7 @@ t_struct	*init_struct(char **av, int count)
 	structure->count = count;
 	structure->head_a = NULL;
 	structure->head_b = NULL;
+	structure->group_size = NULL;
 	i = count - 1;
 	err = 0;
 	while (i >= 0)
@@ -101,8 +91,9 @@ t_struct	*init_struct(char **av, int count)
 		i--;
 	}
 	rank_elems(structure->head_a);
-	init_bit_array(structure, structure->count);
+	// init_bit_array(structure, structure->count);
 	structure->head_a->last = find_last(structure->head_a);
+	structure->len_bits = get_bit_len(count);
 	// t_node *printme = structure->head_a;
 	// while (printme != NULL)
 	// {
@@ -111,3 +102,29 @@ t_struct	*init_struct(char **av, int count)
 	// }
 	return (structure);
 }
+
+// void	init_bit_array(t_struct *structure, int size)
+// {
+// 	int		i;
+// 	int		temp_rank;
+// 	t_node	*cur;
+
+// 	cur = structure->head_a;
+// 	structure->len_bits = get_bit_len(size);
+// 	while (cur != NULL)
+// 	{
+// 		temp_rank = cur->rank;
+// 		cur->bit = malloc (sizeof (int) * structure->len_bits);
+// 		if (!cur->bit)
+// 			err_handling(structure);
+// 		i = structure->len_bits - 1;
+// 		while (i >= 0)
+// 		{
+// 			cur->bit[i] = temp_rank & 1;//store the LSB
+// 			temp_rank >>= 1;//move bits to the right to check the next bit
+// 			// printf("bit[%i]: %i ", i, cur->bit[i]);
+// 			i--;//move to the next storage column
+// 		}
+// 		cur = cur->next;
+// 	}
+//}

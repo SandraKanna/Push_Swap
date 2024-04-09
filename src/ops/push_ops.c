@@ -26,7 +26,6 @@ void	push(t_node **stack, int input, int rank, int *err)
 	}
 	new_node->value = input;
 	new_node->rank = rank;
-	new_node->bit = NULL;
 	new_node->last = NULL;
 	new_node->next = *stack;
 	*stack = new_node;
@@ -50,15 +49,12 @@ void	pa(t_node **stack_a, t_node **stack_b, int *err)
 {
 	int	rank;
 	int	value;
-	int	*bit;
 
 	if ((*stack_b == NULL) | (stack_b == NULL))
 		return ;
 	rank = (*stack_b)->rank;
-	bit = (*stack_b)->bit;
 	value = pop(stack_b);
 	push(stack_a, value, rank, err);
-	(*stack_a)->bit = bit;
 	write(1, "pa\n", 3);
 }
 
@@ -66,15 +62,12 @@ void	pb(t_node **stack_a, t_node **stack_b, int *err)
 {
 	int	rank;
 	int	value;
-	int	*bit;
 
 	if ((*stack_a == NULL) | (stack_a == NULL))
 		return ;
 	rank = (*stack_a)->rank;
-	bit = (*stack_a)->bit;
 	value = pop(stack_a);
 	push(stack_b, value, rank, err);
-	(*stack_b)->bit = bit;
 	write(1, "pb\n", 3);
 	return ;
 }

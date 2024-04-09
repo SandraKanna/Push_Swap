@@ -22,8 +22,6 @@ void	free_stack(t_node **stack)
 	while (*stack)
 	{
 		temp = (*stack)->next;
-		if ((*stack)->bit != NULL)
-			free((*stack)->bit);
 		free(*stack);
 		*stack = temp;
 	}
@@ -31,10 +29,15 @@ void	free_stack(t_node **stack)
 
 void	free_struct(t_struct *structure)
 {
+
 	if (structure->head_a != NULL)
 		free_stack(&structure->head_a);
 	if (structure->head_b != NULL)
 		free_stack(&structure->head_b);
+	if (structure->group_size != NULL)
+	{
+		free(structure->group_size);
+	}
 	free (structure);
 }
 

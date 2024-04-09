@@ -25,7 +25,6 @@ typedef struct s_node
 {
 	int				value;
 	int				rank;
-	int				*bit;
 	struct s_node	*next;
 	struct s_node	*last;
 }					t_node;
@@ -34,6 +33,7 @@ typedef struct s_struct
 {
 	int				count;
 	int				len_bits;
+	int				*group_size;
 	struct s_node	*head_a;
 	struct s_node	*head_b;
 }					t_struct;
@@ -56,14 +56,15 @@ void		rotate_up_stack(t_struct *structure, char c);
 //core
 void		push_swap(t_struct *structure, int size);
 void		tiny_sort(t_struct *structure, int size);
-void		sort_b(t_struct *structure, int start, int to_sort);
+void		sort_batch(t_struct *structure, int start, int batch);
 void		last_iteration(t_struct *structure, int bit_column);
 
 int			count_nodes(t_node *list);
 int			count_bits(t_node *list, int bit, int i, int size);
+void		init_group_size(t_struct *structure, int iter, int max, int size);
 int			do_rotations(t_struct *structure, char c, int rot, int to_move);
 int			is_stack_sorted(t_node *stack, int n);
-int			is_column_complete(t_node *list, int bit, int i);
+int			is_column_complete(t_node *list, int bit, int i, int n);
 int			get_bit_len(int n);
 // int			select_bit(t_node *list, int bit_count, int i);
 t_node		*find_last(t_node *list);

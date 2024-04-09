@@ -47,16 +47,18 @@ int	count_bits(t_node *list, int bit, int i, int size)
 	t_node	*cur;
 	int		bit_cur;
 	int		count;
+	int		it;
 
 	cur = list;
 	count = 0;
-	while (cur != NULL && size < 0)
+	it = 0;
+	while (cur != NULL && it < size)
 	{
 		bit_cur = (cur->rank >> i) & 1;
 		if (bit_cur == bit)
 			count++;
+		it++;
 		cur = cur->next;
-		size++;
 	}
 	return (count);
 }
@@ -85,17 +87,22 @@ int	select_bit(t_node *list, int bit_count, int i)
 	return (0);
 }
 
-int	is_column_complete(t_node *list, int bit, int i)
+int	is_column_complete(t_node *list, int bit, int i, int n)
 {
 	t_node	*cur;
 	int		bit_cur;
+	int		counter;
 
 	cur = list;
-	while (cur != NULL)
+	counter = 0;
+	while (cur != NULL && counter < n)
 	{
 		bit_cur = (cur->rank >> i) & 1;
 		if (bit_cur == bit)
+		{
 			cur = cur->next;
+			counter++;
+		}
 		else
 			return (0);
 	}
