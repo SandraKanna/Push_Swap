@@ -315,8 +315,6 @@ void	sort_batch(t_struct *structure, int start, int batch)
 		while (start < structure->len_bits)
 		{
 			// printf("\n--- start: %i ---\n", start);
-			if (in_b <= 4 && is_stack_sorted(structure->head_a, in_a))
-				return (sort_top(structure, in_b));
 			if (start == structure->len_bits - 1)
 			{
 				while (structure->head_b != NULL)
@@ -331,6 +329,8 @@ void	sort_batch(t_struct *structure, int start, int batch)
 				in_b = group_size;
 				// printf("\n--- msb: %i ---\n", msb);
 			}
+			if (in_b <= 4 && is_stack_sorted(structure->head_a, in_a))
+				return (sort_top(structure, in_b));
 			// else
 			// {
 			in_a += sort_bit_b(structure, start, in_b);
