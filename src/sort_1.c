@@ -129,9 +129,9 @@ void	sort_top(t_struct *structure, int to_sort)
 	printf("\n Stack A\n");
 	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
 		printf("A: %i\n", printme->rank);
-// 	printf("\n----\n stack B \n");
-// 	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-// 		printf("B: %i\n", printme->rank);
+	printf("\n----\n stack B \n");
+	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+		printf("B: %i\n", printme->rank);
 }
 
 int	sort_bit_a(t_struct *structure, int start, int work_set)
@@ -152,7 +152,7 @@ int	sort_bit_a(t_struct *structure, int start, int work_set)
 	while (moved < to_move && rot + moved < work_set)
 	{
 		cur_bit = (structure->head_a->rank >> start) & 1;
-		// printf("\ncur_bit = %i \n", cur_bit);
+		printf("\ncur_bit = %i \n", cur_bit);
 		if (cur_bit == 0)
 		{
 			push_to_stack(structure, 'b');
@@ -240,27 +240,81 @@ int	sort_bit_b(t_struct *structure, int start, int group_size)
 	return (moved);
 }
 
+int prepare_batch(t_struct *structure, int msb, int batch_size)
+{
+	int	to_move;
+	int	cur_bit;
+	int	rot;
+
+	to_move = count_bits(structure->head_b, 1, msb, batch_size);
+	rot = 0;
+	printf("\n----Prep last batch. MSB: %i  move to A  %i batch_size: %i \n", msb, to_move, batch_size);
+	while (to_move > 0)
+	{
+		cur_bit = (structure->head_b->rank >> msb) & 1;
+		if (cur_bit == 1)
+		{
+			push_to_stack(structure, 'a');
+			to_move--;
+			batch_size--;
+		}
+		else
+		{
+			rotate_up_stack(structure, 'b');
+			rot++;
+		}
+	}
+	if (rot > count_nodes(structure->head_b) - rot)
+	{
+		rot = count_nodes(structure->head_b) - rot;
+		while (rot > 0)	
+		{
+			rotate_up_stack(structure, 'b'); //add condition to push to A for next bit colum == 1
+			rot--;
+		}
+	}
+	else
+	{
+		while (rot > 0 && rot < count_nodes(structure->head_b))
+		{
+			rotate_down_stack(structure, 'b');
+			rot--;
+		}
+	}
+	printf("\n---- rot in A: %i - - - - \n", rot);
+	printf("\n----\n stack A - - - - \n");
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("A: %i\n", printme->rank);
+	printf("\n----\n stack B - - - -\n");
+	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+		printf("B: %i\n", printme->rank);
+	return (batch_size);
+}
+
 void	sort_batch(t_struct *structure, int start, int batch)
 {
 	int		group_size;
 	int		in_a;
 	int		in_b;
+	int		msb;
 
 	group_size = structure->group_size[batch];
 	in_b = group_size;
 	in_a = 0;
+	msb = 0;
 	printf("\n Batch: %i  elements: %i   start: %i \n", batch, group_size, start);
 	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
 	// 	printf("A: %i\n", printme->rank);
 	// printf("\n----\n stack B \n");
 	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
 	// 	printf("B: %i\n", printme->rank);
+	// if (batch == 0)
+	// 	in_b = prepare_batch(structure, structure->len_bits -1, group_size);
 	while (in_b > 0)
 	{
 		while (start < structure->len_bits)
 		{
 			// printf("\n--- start: %i ---\n", start);
-			in_b = group_size - in_a;
 			if (in_b <= 4 && is_stack_sorted(structure->head_a, in_a))
 				return (sort_top(structure, in_b));
 			if (start == structure->len_bits - 1)
@@ -269,11 +323,19 @@ void	sort_batch(t_struct *structure, int start, int batch)
 					push_to_stack(structure, 'a');
 				return ;
 			}
-			else
+			in_b = group_size - in_a;
+			if (start == 0)
 			{
-				in_a += sort_bit_b(structure, start, in_b);
-				in_a = sort_bit_a(structure, ++start, in_a);
+				msb = get_bit_len((find_biggest(structure->head_b, group_size))) - 1;
+				group_size = prepare_batch(structure, msb, group_size);
+				in_b = group_size;
+				// printf("\n--- msb: %i ---\n", msb);
 			}
+			// else
+			// {
+			in_a += sort_bit_b(structure, start, in_b);
+			in_a = sort_bit_a(structure, ++start, in_a);
+			// }
 		}
 	}
 
