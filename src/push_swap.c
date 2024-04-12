@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/09 16:44:58 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/12 16:10:04 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	divide_and_conquer(t_struct *structure, int size, int max_batches)
 			size = count_nodes(structure->head_a);
 		}
 		init_group_size(structure, i, max_batches, moved);
-		printf("group[%i]: %i\n", i, structure->group_size[i]);
+		// printf("group[%i]: %i\n", i, structure->group_size[i]);
 		i++;
 	}
 	// printf("\nactual batches: %i ---\n", i);
