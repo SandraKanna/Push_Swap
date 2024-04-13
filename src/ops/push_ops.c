@@ -26,7 +26,6 @@ void	push(t_node **stack, int input, int rank, int *err)
 	}
 	new_node->value = input;
 	new_node->rank = rank;
-	new_node->last = NULL;
 	new_node->next = *stack;
 	*stack = new_node;
 }

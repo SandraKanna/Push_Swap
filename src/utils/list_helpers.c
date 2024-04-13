@@ -12,83 +12,34 @@
 
 #include "push_swap.h"
 
-t_node	*find_last(t_node *list)
-{
-	t_node	*last;
+// t_node	*find_last(t_node *list)
+// {
+// 	t_node	*last;
 
-	last = list;
-	if (list)
-	{
-		while (last->next != NULL)
-			last = last->next;
-	}
-	return (last);
-}
+// 	last = list;
+// 	if (list)
+// 	{
+// 		while (last->next != NULL)
+// 			last = last->next;
+// 	}
+// 	return (last);
+// }
 
-int	is_stack_sorted(t_node *stack, int n)
-{
-	while (stack->next != NULL && n > 0)
-	{
-		if (stack->rank > stack->next->rank
-			|| stack->next->rank - stack->rank != 1)
-			return (0);
-		n--;
-		stack = stack->next;
-	}
-	return (1);
-}
-
-int	count_nodes(t_node *list)
-{
-	t_node			*current;
-	unsigned int	count;
-
-	if (!list)
-		return (0);
-	count = 0;
-	current = list;
-	while (current != NULL)
-	{
-		count++;
-		current = current->next;
-	}
-	return (count);
-}
-
-int	find_smallest_bit(t_node *list, int column)
+int	find_position(t_node *list, int rank)
 {
 	t_node	*temp;
-	int		cur_bit;
-	int		smallest;
+	int		position;
 
-	smallest = INT_MAX;
+	position = 1;
 	temp = list;
 	while (temp != NULL)
 	{
-		cur_bit = (temp->rank >> column) & 1;
-		if (cur_bit == 1 && temp->rank < smallest)
-			smallest = temp->rank;
+		if (temp->rank == rank)
+			break ;
+		position++;
 		temp = temp->next;
 	}
-	return (smallest);
-}
-
-int	find_biggest_bit(t_node *list, int column)
-{
-	t_node	*temp;
-	int		cur_bit;
-	int		biggest;
-
-	biggest = INT_MIN;
-	temp = list;
-	while (temp != NULL)
-	{
-		cur_bit = (temp->rank >> column) & 1;
-		if (cur_bit == 1 && temp->rank > biggest)
-			biggest = temp->rank;
-		temp = temp->next;
-	}
-	return (biggest);
+	return (position);
 }
 
 int	find_smallest(t_node *list, int n)

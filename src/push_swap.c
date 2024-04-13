@@ -40,125 +40,94 @@ void	sort_7(t_struct *structure, int count)
 	}
 	if (count_nodes(structure->head_a) <= 3
 		&& !is_stack_sorted(structure->head_a, count))
-		tiny_sort(structure, count_nodes(structure->head_a));
+		base_case_1(structure, count_nodes(structure->head_a));
 	while (structure->head_b != NULL)
 		push_to_stack(structure, 'a');
 	return ;
 }
 
-// void	radix_sort(t_struct *structure, int batch)
-// {
-// 	int	count_a;
-
-// 	count_a = count_nodes(structure->head_a);
-// 	if (batch == 0)
-// 		return ;
-// 	if (count_a <= 3 && !is_stack_sorted(structure->head_a, 3))
-// 		tiny_sort(structure, count_a);
-
-// 	batch -= 1;
-// 	sort_batch(structure, 0, batch);
-// 	if (structure->head_b != NULL)
-// 		radix_sort(structure, batch);
-// }
-
-int	get_mid(t_node *lst, int size)
-{
-	int	mid;
-	int	smallest;
-	int	biggest;
-
-	smallest = find_smallest(lst, size);
-	biggest = find_biggest(lst, size);
-	mid = (smallest + biggest) / 2;
-	return (mid);
-}
-
-void	divide_and_conquer(t_struct *structure, int size, int total_groups)
+void	divide_list(t_struct *structure, int iter, int size, int groups)
 {
 	int	elems_in_group;
-	int	mid;
 	int	remainder_a;
 	int	i;
-	int	j;
-	int	biggest;
-	int	smallest;
-	int	rot = 0;
 
-	elems_in_group = size / total_groups;
-	i = 1;
-	printf("size: %i  elems_in_group: %i  total_groups: %i\n", size, elems_in_group, total_groups);
-	while (i <= total_groups)
+	elems_in_group = size / groups;
+	i = 0;
+	printf("size: %i  elems_in_group: %i  groups in iter: %i\n", size, elems_in_group, groups);
+	while (i < groups)
 	{
 		printf("group: %i\n", i);
-		remainder_a = size - (elems_in_group * i);
-		biggest = elems_in_group * i;
-		smallest = 1 + elems_in_group * (i - 1);
-		mid = (biggest - (elems_in_group / 2));
-		j = 0;
-		printf("remainder_a: %i  biggest: %i  smallest: %i  mid: %i\n", remainder_a, biggest, smallest, mid);
-		while (j < elems_in_group && count_nodes(structure->head_b) < elems_in_group)
-		{
-			if (structure->head_a->rank <= biggest)
-			{
-				push_to_stack(structure, 'b');
-				if (structure->head_b->rank <= mid)
-					rotate_up_stack(structure, 'b');
-				j++;
-			}
-			else
-				rotate_up_stack(structure, 'a');
-		}
+		remainder_a = create_group(structure, iter--, elems_in_group, i);
+		printf("remainder_a: %i \n", remainder_a);
 		printf("\n--- stack B ---\n");
 		for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
 			printf("B: %i\n", printme->rank);
 		i++;
 	}
-	t_node	*a;
-	int	h = 0;
-	a = structure->head_a;
-	if (remainder_a <= 4)
+	if (remainder_a > 4 && i < groups)
 	{
-		while (h < remainder_a)
-		{
-			if (a->rank > a->next->rank)
-				swap_stack(structure, 'a');
-			else
-			{
-				rotate_up_stack(structure, 'a');
-				rot++;
-			}
-			h++;
-		}
-		while (rot > 0)
-		{
-			rotate_down_stack(structure, 'a');
-			rot--;
-			if (a->rank > a->next->rank)
-				swap_stack(structure, 'a');
-		}
-		return ;
+		divide_list(structure, iter, remainder_a, groups / 2);
 	}
-	else
-		divide_and_conquer(structure, remainder_a, total_groups / 2);
+	if (i == groups)
+		last_division(structure, remainder_a, iter);
+}
+
+void	sort_list(t_struct *structure, int size, int iter)
+{
+	int	biggest;
+	int	mid;
+	int	to_move;
+
+	biggest = size;
+	mid = (biggest - (size / 2));
+	to_move = structure->batch_size[iter];
+	printf("sort test: to move: %i iter: %i\n", to_move, iter);
+	while (to_move > 0)
+	{
+		// printf("sort test: move to A: %i \n", to_move);
+		if (structure->head_b->rank >= mid)
+		{
+			push_to_stack(structure, 'a');
+			to_move--;
+		}
+		else
+		{
+			rotate_down_stack(structure, 'b');
+			if (structure->head_b->rank < structure->head_b->next->rank)
+			{
+				if (structure->head_a->rank > structure->head_a->next->rank)
+					swap_stack(structure, 'c');
+				else
+					swap_stack(structure, 'b');
+			}
+		}
+	}
+	size -= biggest;
+	if (iter > 0)
+		sort_list(structure, size, --iter);
 }
 
 void	push_swap(t_struct *structure, int size)
 {
-	int	total_groups;
+	int	initial_groups;
+	int	total_iter;
 
-	//iterations = structure->len_bits - 1;
-	total_groups = structure->len_bits;
-	// printf("\n--- len bits: %i ---\n", structure->len_bits);
+	initial_groups = structure->len_bits;
+	total_iter = 1;
 	if (structure->head_a && is_stack_sorted(structure->head_a, size))
 		return ;
 	if (size <= 3)
-		tiny_sort(structure, size);
+		base_case_1(structure, size);
 	else
 	{
-		divide_and_conquer(structure, size, total_groups);
-		// printf("\n--- total_groups : %i ---\n", total_groups);
-		// radix_sort(structure, total_groups);
+		total_iter = init_batch(structure) - 1;
+		printf("\n---  total iterations: %i---\n", total_iter);
+		divide_list(structure, total_iter, size, initial_groups);
+		printf("\n***  after divde ***\n---- stack B ---\n");
+		for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+			printf("B: %i\n", printme->rank);
+		sort_list(structure, structure->count, total_iter);
 	}
 	if (is_stack_sorted(structure->head_a, size)
 		&& (count_nodes(structure->head_a) == structure->count))

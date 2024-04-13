@@ -13,6 +13,69 @@
 //#include "../Includes/push_swap.h"
 #include "push_swap.h"
 
+int	create_group(t_struct *structure, int iter, int size, int group)
+{
+	int	biggest;
+	int	smallest;
+	int	mid;
+	int	i;
+
+	biggest = size * group;
+	mid = (biggest - (size / 2));
+	i = 0;
+	printf("creating group: %i  biggest: %i  mid: %i\n", group, biggest, mid);
+	while (i < size && count_nodes(structure->head_b) < (size * group))
+	{
+		smallest = find_smallest(structure->head_a, count_nodes(structure->head_a));
+		if (structure->head_a->rank <= biggest)
+		{
+			push_to_stack(structure, 'b');
+			if (structure->head_b->rank <= mid)
+				rotate_up_stack(structure, 'b');
+			i++;
+		}
+		else
+			best_rotation(structure, smallest, 'a');
+	}
+	structure->batch_size[iter] = i;
+	printf("\n---  iteration: %i  batch size init: %i---\n", iter, structure->batch_size[iter]);
+	return (count_nodes(structure->head_a));
+}
+
+int	init_batch(t_struct *structure)
+{
+	int	n;
+	int	total_batches;
+
+	n = structure->count;
+	structure->batch_size = NULL;
+	total_batches = 0;
+	while (n > 3)
+	{
+		total_batches += get_bit_len(n);
+		n /= get_bit_len(n);
+	}
+	printf("\n--- total batches : %i ---\n", total_batches);
+	structure->batch_size = malloc(sizeof(int *) * total_batches);
+	if (!structure->batch_size)
+		err_handling(structure);
+	// structure->batch_size[total_batches] = 0;
+	return (total_batches);
+}
+
+int	get_bit_len(int n)
+{
+	int	len;
+
+	len = 0;
+	while (n > 0)
+	{
+		len++;
+		n >>= 1;
+	}
+	return (len);
+}
+
 void	rank_elems(t_node *list)
 {
 	t_node	*current;
@@ -37,41 +100,13 @@ void	rank_elems(t_node *list)
 		current = current->next;
 	}
 }
-void	init_group_size(t_struct *structure, int iter, int max, int size)
-{
-	if (iter == 0)
-	{
-		structure->group_size = malloc(sizeof(int) * max);
-		if (!structure->group_size)
-			err_handling(structure);
-	}
-	structure->group_size[iter] = size;
-	// printf("\n--- init group size ---\n");
-	// for (int i = 0; i <= iter; i++)
-	// 	printf("size[%i]: %i\n", i, structure->group_size[i]);
-}
-
-
-	// t_node *printme = structure->head_a;
-	// while (printme != NULL)
-	// {
-	// 	int j = 0;
-	// 	printf("rank: %i -> ", printme->rank);
-	// 	while (j < structure->len_bits)
-	// 	{
-	// 		printf("bit[%i]: %i ", j, printme->bit[j]);
-	// 		j++;
-	// 	}
-	// 	printf("\n");
-	// 	printme = printme->next;
-	// }
 
 t_struct	*init_struct(char **av, int count)
 {
 	t_struct		*structure;
 	int				err;
 	int				input;
-	int	i;
+	int				i;
 
 	structure = malloc (sizeof(t_struct));
 	if (!structure)
@@ -79,7 +114,6 @@ t_struct	*init_struct(char **av, int count)
 	structure->count = count;
 	structure->head_a = NULL;
 	structure->head_b = NULL;
-	structure->group_size = NULL;
 	i = count - 1;
 	err = 0;
 	while (i >= 0)
@@ -91,40 +125,7 @@ t_struct	*init_struct(char **av, int count)
 		i--;
 	}
 	rank_elems(structure->head_a);
-	// init_bit_array(structure, structure->count);
-	structure->head_a->last = find_last(structure->head_a);
 	structure->len_bits = get_bit_len(count);
-	// t_node *printme = structure->head_a;
-	// while (printme != NULL)
-	// {
-	// 	printf("%i\n", printme->value);
-	// 	printme = printme->next;
-	// }
+	init_batch(structure);
 	return (structure);
 }
-
-// void	init_bit_array(t_struct *structure, int size)
-// {
-// 	int		i;
-// 	int		temp_rank;
-// 	t_node	*cur;
-
-// 	cur = structure->head_a;
-// 	structure->len_bits = get_bit_len(size);
-// 	while (cur != NULL)
-// 	{
-// 		temp_rank = cur->rank;
-// 		cur->bit = malloc (sizeof (int) * structure->len_bits);
-// 		if (!cur->bit)
-// 			err_handling(structure);
-// 		i = structure->len_bits - 1;
-// 		while (i >= 0)
-// 		{
-// 			cur->bit[i] = temp_rank & 1;//store the LSB
-// 			temp_rank >>= 1;//move bits to the right to check the next bit
-// 			// printf("bit[%i]: %i ", i, cur->bit[i]);
-// 			i--;//move to the next storage column
-// 		}
-// 		cur = cur->next;
-// 	}
-//}

@@ -12,152 +12,79 @@
 
 #include "push_swap.h"
 
-int	find_position(t_node *list, int rank)
+void	best_rotation(t_struct *structure, int value, char c)
 {
-	t_node	*temp;
-	int		position;
+	int	position;
+	int	size;
 
-	position = 1;
-	temp = list;
-	while (temp != NULL)
+	position = find_position(structure->head_a, value);
+	size = count_nodes(structure->head_a);
+	if (c == 'b')
 	{
-		if (temp->rank == rank)
+		position = find_position(structure->head_a, value);
+		size = count_nodes(structure->head_b);
+	}
+	if (position <= size / 2)
+		rotate_up_stack(structure, c);
+	else
+		rotate_down_stack(structure, c);
+}
+
+void	last_division(t_struct *structure, int size, int iter)
+{
+	int	smallest;
+	int	position;
+	int	move_to_b;
+
+	move_to_b = size - 3;
+	structure->batch_size[iter] = move_to_b;
+	while (structure->head_a != NULL)
+	{
+		smallest = find_smallest(structure->head_a, size);
+		position = find_position(structure->head_a, smallest);
+		if (count_nodes(structure->head_a) == 3)
 			break ;
-		position++;
-		temp = temp->next;
-	}
-	return (position);
-}
-
-int	get_bit_len(int n)
-{
-	int	len;
-
-	len = 0;
-	while (n > 0)
-	{
-		len++;
-		n >>= 1;
-	}
-	return (len);
-}
-
-int	count_bits(t_node *list, int bit, int i, int size)
-{
-	t_node	*cur;
-	int		bit_cur;
-	int		count;
-	int		it;
-
-	cur = list;
-	count = 0;
-	it = 0;
-	while (cur != NULL && it < size)
-	{
-		bit_cur = (cur->rank >> i) & 1;
-		if (bit_cur == bit)
-			count++;
-		it++;
-		cur = cur->next;
-	}
-	return (count);
-}
-
-int	select_bit(t_node *list, int bit_count, int i)
-{
-	int		zeros;
-	int		ones;
-	int		bit_cur;
-	t_node	*cur;
-
-	zeros = 0;
-	ones = 0;
-	cur = list;
-	while (cur != NULL)
-	{
-		bit_cur = cur->rank;
-		if (bit_cur & (1 << (bit_count - i)))
-			ones++;
-		else
-			zeros++;
-		cur = cur->next;
-	}
-	if (max_value(zeros, ones) == 1)
-		return (1);
-	return (0);
-}
-
-int	is_column_complete(t_node *list, int bit, int i, int n)
-{
-	t_node	*cur;
-	int		bit_cur;
-	int		counter;
-
-	cur = list;
-	counter = 0;
-	while (cur != NULL && counter < n)
-	{
-		bit_cur = (cur->rank >> i) & 1;
-		if (bit_cur == bit)
+		if (move_to_b > 0)
 		{
-			cur = cur->next;
-			counter++;
+			if (structure->head_a->rank == smallest)
+			{
+				push_to_stack(structure, 'b');
+				move_to_b--;
+			}
+			else
+				best_rotation(structure, position, 'a');
 		}
-		else
+	}
+	size = count_nodes(structure->head_a);
+	base_case_1(structure, size);
+}
+
+int	is_stack_sorted(t_node *stack, int n)
+{
+	while (stack->next != NULL && n > 0)
+	{
+		if (stack->rank > stack->next->rank
+			|| stack->next->rank - stack->rank != 1)
 			return (0);
+		n--;
+		stack = stack->next;
 	}
 	return (1);
 }
 
-// int	find_group(int count, int rank)
-// {
-// 	int	group_size;
-// 	int	groups;
-// 	int	i;
+int	count_nodes(t_node *list)
+{
+	t_node			*current;
+	unsigned int	count;
 
-// 	groups = 1;
-// 	i = 3;
-// 	while (i <= count && groups <= 11)
-// 	{
-// 		if (count > i)
-// 			groups++;
-// 		else
-// 			break ;
-// 		i += 3;
-// 	}
-// 	group_size = count / groups;
-// 	i = 1;
-// 	while (i <= groups)
-// 	{
-// 		if (rank <= group_size * i)
-// 			return (i);
-// 		i++;
-// 	}
-// 	return (groups);
-// }
-
-
-
-// int	rotate_direction(int size, int pos1, int pos2)
-// {
-// 	int	mid;
-// 	int	rot_dir;
-
-// 	mid = size / 2;
-// 	rot_dir = -1;
-// 	if (pos1 <= mid)
-// 	{
-// 		if (pos2 < mid || pos1 < (size - pos2))
-// 			rot_dir = 1; //ra
-// 		else if (pos1 > (size - pos2))
-// 			rot_dir = 2; //rra
-// 	}
-// 	else if (pos1 > mid)
-// 	{
-// 		if (pos2 >= mid || pos2 > (size - pos1))
-// 			rot_dir = 2; //rra
-// 		else if (pos2 < (size - pos1))
-// 			rot_dir = 1; //ra
-// 	}
-// 	return (rot_dir);
-// }
+	if (!list)
+		return (0);
+	count = 0;
+	current = list;
+	while (current != NULL)
+	{
+		count++;
+		current = current->next;
+	}
+	return (count);
+}
