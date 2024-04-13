@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/12 16:10:04 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/13 13:57:24 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,24 @@ int	get_mid(t_node *lst, int size)
 
 void	divide_and_conquer(t_struct *structure, int size, int total_groups)
 {
-	int	;
+	int	elems_in_group;
+	int	send_to_b;
+	int	mid;
+	int	max;
 
-	// i = 0;
-	//if size 4 pb 1 + tiny sort
+	elems_in_group = size;
+	send_to_b = elems_in_group;
+	max = size - elems_in_group;
+	mid = (size - max) / 2;;
 	printf("\nmax iter: %i ---\n", total_groups);
-	if (size > 3)
+	if (size > 4)
 	{
+		elems_in_group = size / total_groups;
+		while (elems_in_group > 0)
+		{
+			if (structure->head_a->rank < elems_in_group)
+		}
 		
-		size /= total_groups;
 	}
 	divide_and_conquer(structure, size, total_groups / 2);
 }
