@@ -47,45 +47,45 @@ void	tiny_sort(t_struct *structure, int size)
 }
 
 
-void	sort_batch(t_struct *structure, int start, int batch)
-{
-	int		group_size;
-	int		in_a;
-	int		in_b;
-	int		biggest;
+// void	sort_batch(t_struct *structure, int start, int batch)
+// {
+// 	int		group_size;
+// 	int		in_a;
+// 	int		in_b;
+// 	int		biggest;
 
-	group_size = structure->group_size[batch];
-	in_b = group_size;
-	in_a = 0;
-	// printf("\n Batch: %i  elements: %i   start: %i \n", batch, group_size, start);
-	while (in_b > 0)
-	{
-		while (start <= structure->len_bits)
-		{			
-			// if (start == structure->len_bits)
-			// {
-			// 	// while (structure->head_b != NULL)
-			// 	// 	push_to_stack(structure, 'a');
-			// 	return ;
-			// }
-			in_b = group_size - in_a;
-			biggest = find_biggest(structure->head_b, count_nodes(structure->head_b));
-			printf("\n--- start: %i   len bits: %i  big: %i---\n", start, structure->len_bits, biggest);
-			if (start == structure->len_bits - 1)
-			 	return (sort_last_batch(structure, in_b, biggest));
-			if (in_b <= 4 && is_stack_sorted(structure->head_a, in_a))
-				return (sort_top(structure, in_b));
-			in_a += sort_bit_b(structure, start, in_b, biggest);
-			in_a = sort_bit_a(structure, ++start, in_a, biggest);
-			if (find_position(structure->head_a, biggest) == in_a)
-			{
-				group_size -= 1;
-				in_a -= 1;
-			}
-		}
-	}
+// 	group_size = structure->group_size[batch];
+// 	in_b = group_size;
+// 	in_a = 0;
+// 	// printf("\n Batch: %i  elements: %i   start: %i \n", batch, group_size, start);
+// 	while (in_b > 0)
+// 	{
+// 		while (start <= structure->len_bits)
+// 		{			
+// 			// if (start == structure->len_bits)
+// 			// {
+// 			// 	// while (structure->head_b != NULL)
+// 			// 	// 	push_to_stack(structure, 'a');
+// 			// 	return ;
+// 			// }
+// 			in_b = group_size - in_a;
+// 			biggest = find_biggest(structure->head_b, count_nodes(structure->head_b));
+// 			printf("\n--- start: %i   len bits: %i  big: %i---\n", start, structure->len_bits, biggest);
+// 			if (start == structure->len_bits - 1)
+// 			 	return (sort_last_batch(structure, in_b, biggest));
+// 			if (in_b <= 4 && is_stack_sorted(structure->head_a, in_a))
+// 				return (sort_top(structure, in_b));
+// 			in_a += sort_bit_b(structure, start, in_b, biggest);
+// 			in_a = sort_bit_a(structure, ++start, in_a, biggest);
+// 			if (find_position(structure->head_a, biggest) == in_a)
+// 			{
+// 				group_size -= 1;
+// 				in_a -= 1;
+// 			}
+// 		}
+// 	}
 
-}
+// }
 
 // void	sort_b(t_struct *structure, int start, int index)
 // {

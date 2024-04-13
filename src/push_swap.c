@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/13 13:57:24 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/13 16:23:51 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,21 @@ void	sort_7(t_struct *structure, int count)
 	return ;
 }
 
-void	radix_sort(t_struct *structure, int batch)
-{
-	int	count_a;
+// void	radix_sort(t_struct *structure, int batch)
+// {
+// 	int	count_a;
 
-	count_a = count_nodes(structure->head_a);
-	if (batch == 0)
-		return ;
-	if (count_a <= 3 && !is_stack_sorted(structure->head_a, 3))
-		tiny_sort(structure, count_a);
+// 	count_a = count_nodes(structure->head_a);
+// 	if (batch == 0)
+// 		return ;
+// 	if (count_a <= 3 && !is_stack_sorted(structure->head_a, 3))
+// 		tiny_sort(structure, count_a);
 
-	batch -= 1;
-	sort_batch(structure, 0, batch);
-	if (structure->head_b != NULL)
-		radix_sort(structure, batch);
-}
+// 	batch -= 1;
+// 	sort_batch(structure, 0, batch);
+// 	if (structure->head_b != NULL)
+// 		radix_sort(structure, batch);
+// }
 
 int	get_mid(t_node *lst, int size)
 {
@@ -77,25 +77,43 @@ int	get_mid(t_node *lst, int size)
 void	divide_and_conquer(t_struct *structure, int size, int total_groups)
 {
 	int	elems_in_group;
-	int	send_to_b;
 	int	mid;
-	int	max;
+	int	remainder_a;
+	int	i;
+	int	j;
+	int	biggest;
+	int	smallest;
 
-	elems_in_group = size;
-	send_to_b = elems_in_group;
-	max = size - elems_in_group;
-	mid = (size - max) / 2;;
-	printf("\nmax iter: %i ---\n", total_groups);
-	if (size > 4)
+	elems_in_group = size / total_groups;
+	i = 1;
+	printf("size: %i  elems_in_group: %i  total_groups: %i\n", size, elems_in_group, total_groups);
+	while (i < total_groups)
 	{
-		elems_in_group = size / total_groups;
-		while (elems_in_group > 0)
+		remainder_a = size - (elems_in_group * i);
+		biggest = elems_in_group * i;
+		smallest = 1 + elems_in_group * (i - 1);
+		mid = (biggest - (elems_in_group / 2));
+		j = 0;
+		printf("remainder_a: %i  biggest: %i  smallest: %i  mid: %i\n", remainder_a, biggest, smallest, mid);
+		while (j < elems_in_group && count_nodes(structure->head_a) > size - elems_in_group)
 		{
-			if (structure->head_a->rank < elems_in_group)
+			remainder_a = size - j;
+			if (structure->head_a->rank < remainder_a)
+			{
+				push_to_stack(structure, 'b');
+				if (structure->head_b->rank < mid && count_nodes(structure->head_b) > 1)
+					rotate_up_stack(structure, 'b');
+				j++;
+			}
+			else
+				rotate_up_stack(structure, 'a');
 		}
-		
+		i++;
 	}
-	divide_and_conquer(structure, size, total_groups / 2);
+	if (size <= 4)
+		return ;
+	else
+		divide_and_conquer(structure, remainder_a, total_groups / 2);
 }
 
 void	push_swap(t_struct *structure, int size)
@@ -113,7 +131,7 @@ void	push_swap(t_struct *structure, int size)
 	{
 		divide_and_conquer(structure, size, total_groups);
 		// printf("\n--- total_groups : %i ---\n", total_groups);
-		radix_sort(structure, total_groups);
+		// radix_sort(structure, total_groups);
 	}
 	if (is_stack_sorted(structure->head_a, size)
 		&& (count_nodes(structure->head_a) == structure->count))
