@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/13 16:23:51 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/13 16:59:29 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,35 +83,62 @@ void	divide_and_conquer(t_struct *structure, int size, int total_groups)
 	int	j;
 	int	biggest;
 	int	smallest;
+	int	rot = 0;
 
 	elems_in_group = size / total_groups;
 	i = 1;
 	printf("size: %i  elems_in_group: %i  total_groups: %i\n", size, elems_in_group, total_groups);
-	while (i < total_groups)
+	while (i <= total_groups)
 	{
+		printf("group: %i\n", i);
 		remainder_a = size - (elems_in_group * i);
 		biggest = elems_in_group * i;
 		smallest = 1 + elems_in_group * (i - 1);
 		mid = (biggest - (elems_in_group / 2));
 		j = 0;
 		printf("remainder_a: %i  biggest: %i  smallest: %i  mid: %i\n", remainder_a, biggest, smallest, mid);
-		while (j < elems_in_group && count_nodes(structure->head_a) > size - elems_in_group)
+		while (j < elems_in_group && count_nodes(structure->head_b) < elems_in_group)
 		{
-			remainder_a = size - j;
-			if (structure->head_a->rank < remainder_a)
+			if (structure->head_a->rank <= biggest)
 			{
 				push_to_stack(structure, 'b');
-				if (structure->head_b->rank < mid && count_nodes(structure->head_b) > 1)
+				if (structure->head_b->rank <= mid)
 					rotate_up_stack(structure, 'b');
 				j++;
 			}
 			else
 				rotate_up_stack(structure, 'a');
 		}
+		printf("\n--- stack B ---\n");
+		for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+			printf("B: %i\n", printme->rank);
 		i++;
 	}
-	if (size <= 4)
+	t_node	*a;
+	int	h = 0;
+	a = structure->head_a;
+	if (remainder_a <= 4)
+	{
+		while (h < remainder_a)
+		{
+			if (a->rank > a->next->rank)
+				swap_stack(structure, 'a');
+			else
+			{
+				rotate_up_stack(structure, 'a');
+				rot++;
+			}
+			h++;
+		}
+		while (rot > 0)
+		{
+			rotate_down_stack(structure, 'a');
+			rot--;
+			if (a->rank > a->next->rank)
+				swap_stack(structure, 'a');
+		}
 		return ;
+	}
 	else
 		divide_and_conquer(structure, remainder_a, total_groups / 2);
 }
@@ -159,6 +186,9 @@ int	main(int argc, char **argv)
 		free_tab(list);
 	if (!structure)
 		return (0);
+	printf("\n--- initial stack A ---\n");
+	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		printf("A: %i\n", printme->rank);
 	push_swap(structure, structure->count);
 	printf("\n--- final stack A ---\n");
 	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
