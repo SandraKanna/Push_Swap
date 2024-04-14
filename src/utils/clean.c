@@ -34,9 +34,9 @@ void	free_struct(t_struct *structure)
 		free_stack(&structure->head_a);
 	if (structure->head_b != NULL)
 		free_stack(&structure->head_b);
-	if (structure->group_size != NULL)
+	if (structure->batch_size != NULL)
 	{
-		free(structure->group_size);
+		free(structure->batch_size);
 	}
 	free (structure);
 }
