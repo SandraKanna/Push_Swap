@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/05 16:09:39 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/15 15:37:54 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_struct
 	int				count;
 	int				len_bits;
 	int				iterations;
-	int				*batch_size;
+	// int				*batch_size;
 	struct s_node	*head_a;
 	struct s_node	*head_b;
 }					t_struct;
@@ -47,7 +47,7 @@ int			has_duplicates(int ac, int *input);
 t_struct	*init_struct(char **av, int count);
 int			get_bit_len(int n);
 int			init_batch(t_struct *structure);
-int			create_group(t_struct *structure, int iter, int size, int group);
+int			create_group(t_struct *structure, int size, int group);
 // void		rank_elems(t_node *list);
 
 //ops
@@ -63,7 +63,7 @@ void		base_case_1(t_struct *structure, int size);
 
 //sort helpers
 void		best_rotation(t_struct *structure, int value, char c);
-void		last_division(t_struct *structure, int size, int iter);
+void		last_division(t_struct *structure, int size);
 int			count_nodes(t_node *list);
 int			is_stack_sorted(t_node *stack, int n);
 

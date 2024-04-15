@@ -6,68 +6,30 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/15 12:48:49 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/15 16:00:08 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //#include "../Includes/push_swap.h"
 #include "push_swap.h"
 
-int	create_group(t_struct *structure, int iter, int size, int group)
-{
-	int	biggest;
-	int	smallest;
-	int	mid;
-	int	i;
-
-	biggest = size * group;
-	mid = (biggest - (size / 2));
-	i = 0;
-	printf("creating group: %i  biggest: %i  mid: %i\n", group, biggest, mid);
-	while (i < size && count_nodes(structure->head_b) < (size * group))
-	{
-		smallest = find_smallest(structure->head_a, count_nodes(structure->head_a));
-		if (structure->head_a->rank <= biggest)
-		{
-			push_to_stack(structure, 'b');
-			if (structure->head_b->rank <= mid)
-				rotate_up_stack(structure, 'b');
-			i++;
-		}
-		else
-			best_rotation(structure, smallest, 'a');
-	}
-	structure->batch_size[iter] = i;
-	printf("\n---  iteration: %i  batch size init: %i---\n", iter, structure->batch_size[iter]);
-	return (count_nodes(structure->head_a));
-}
-
 int	init_batch(t_struct *structure)
 {
 	int	n;
 	int	total_batches;
 	int	divisor;
-	int	i;
 
 	n = structure->count;
 	divisor = get_bit_len(n);
-	structure->batch_size = NULL;
 	total_batches = 0;
 	while (n > 3)
 	{
-		printf("\n---  n: %i  divisor: %i counting batches: %i ---\n", n, divisor, total_batches);
 		total_batches += divisor;
 		n /= divisor;
 		divisor /= 2;
 	}
-	printf("\n--- total batches : %i ---\n", total_batches);
-	structure->batch_size = malloc(sizeof(int *) * total_batches);
-	if (!structure->batch_size)
-		err_handling(structure);
-	i = 0;
-	while (i < total_batches)
-		structure->batch_size[i++] = 0;
-	// structure->iterations = total_batches;
+	// printf("\n--- total batches : %i ---\n", total_batches);
+	structure->iterations = total_batches;
 	return (total_batches);
 }
 
@@ -134,6 +96,5 @@ t_struct	*init_struct(char **av, int count)
 	}
 	rank_elems(structure->head_a);
 	structure->len_bits = get_bit_len(count);
-	init_batch(structure);
 	return (structure);
 }

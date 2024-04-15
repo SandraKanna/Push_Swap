@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/15 13:02:17 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/15 17:15:31 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,42 +46,37 @@ void	sort_7(t_struct *structure, int count)
 	return ;
 }
 
-void	divide_list(t_struct *structure, int iter, int size, int groups)
+void	divide_list(t_struct *structure, int size, int groups)
 {
 	int	elems_in_group;
 	int	remainder_a;
 	int	i;
 
 	elems_in_group = size / groups;
-	i = 0;
-	printf("size: %i  elems_in_group: %i  groups in iter: %i\n", size, elems_in_group, groups);
+	i = 1;
 	while (i < groups)
 	{
-		printf("group: %i\n", i);
-		remainder_a = create_group(structure, iter--, elems_in_group, i);
-		printf("remainder_a: %i \n", remainder_a);
-		printf("\n--- stack B ---\n");
-		for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-			printf("B: %i\n", printme->rank);
+		remainder_a = create_group(structure, elems_in_group, i);
+		printf("\n--- test divide 1 ---\n");
 		i++;
 	}
-	if (remainder_a > 4 && i < groups)
+	if (remainder_a > 6 && i < groups)
 	{
-		divide_list(structure, iter, remainder_a, groups / 2);
+		printf("\n--- test divide 2 ---\n");
+		divide_list(structure, remainder_a, groups / 2);
 	}
-	if (i == groups)
-		last_division(structure, remainder_a, iter);
+	else
+		return (last_division(structure, remainder_a));
 }
 
-void	sort_list(t_struct *structure, int iter)
+void	sort_list(t_struct *structure)
 {
 	int	biggest;
 
-	biggest = structure->head_a->rank - 1;
+	// biggest = structure->head_a->rank - 1;
 	while (structure->head_b != NULL)
 	{
 		biggest = structure->head_a->rank - 1;
-		printf("sort test: to move: %i iter: %i\n", biggest, iter);
 		if (structure->head_b->rank == biggest)
 			push_to_stack(structure, 'a');
 		else if (structure->head_b->next->rank == biggest)
@@ -99,27 +94,21 @@ void	sort_list(t_struct *structure, int iter)
 void	push_swap(t_struct *structure, int size)
 {
 	int	initial_groups;
-	int	total_iter;
 
-	initial_groups = structure->len_bits;
-	total_iter = 1;
+	initial_groups = structure->len_bits - 1;
+	printf("\n--- initial groups : %i ---\n", initial_groups);
 	if (structure->head_a && is_stack_sorted(structure->head_a, size))
 		return ;
 	if (size <= 3)
 		base_case_1(structure, size);
 	else
 	{
-		total_iter = init_batch(structure) - 1;
-		printf("\n---  total iterations: %i---\n", total_iter);
-		divide_list(structure, total_iter, size, initial_groups);
-		printf("\n***  after divde ***\n---- stack B ---\n");
-		for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-			printf("B: %i\n", printme->rank);
-		sort_list(structure, total_iter);
+		divide_list(structure, size, initial_groups);
+		sort_list(structure);
 	}
-	if (is_stack_sorted(structure->head_a, size)
-		&& (count_nodes(structure->head_a) == structure->count))
-		printf("stack_a is sorted!\n");
+	// if (is_stack_sorted(structure->head_a, size)
+	// 	&& (count_nodes(structure->head_a) == structure->count))
+	// 	printf("n: %i stack_a is sorted!\n", size);
 }
 
 int	main(int argc, char **argv)
@@ -143,13 +132,10 @@ int	main(int argc, char **argv)
 		free_tab(list);
 	if (!structure)
 		return (0);
-	printf("\n--- initial stack A ---\n");
-	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-		printf("A: %i\n", printme->rank);
+	// printf("\n--- initial stack A ---\n");
+	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+	// 	printf("A: %i\n", printme->rank);
 	push_swap(structure, structure->count);
-	printf("\n--- final stack A ---\n");
-	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-		printf("A: %i\n", printme->rank);
 	return (free_struct(structure), 0);
 }
 
