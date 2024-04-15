@@ -80,23 +80,15 @@ void	last_division(t_struct *structure, int size)
 {
 	int	smallest;
 	int	sec_smallest;
-	// int	position;
 	int	temp;
 	int	move_to_b;
 
 	move_to_b = size - 3;
-	// printf("\n--- last div ---\n --- stack A ---\n");
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-	// 	printf("A: %i\n", printme->rank);
-	// printf("\n--- stack B ---\n");
-	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-	// 	printf("B: %i\n", printme->rank);
 	temp = 0;
 	while (count_nodes(structure->head_a) > 3 && move_to_b > 0)
 	{
 		smallest = find_smallest(structure->head_a, count_nodes(structure->head_a));
 		sec_smallest = smallest + 1;
-		// position = find_position(structure->head_a, smallest);
 			if (structure->head_a->rank == smallest)
 			{
 				push_to_stack(structure, 'b');
@@ -115,8 +107,6 @@ void	last_division(t_struct *structure, int size)
 			}
 			else
 				rotate_up_stack(structure, 'a');
-				// best_rotation(structure, position, 'a');
-		// }
 	}
 	size = count_nodes(structure->head_a);
 	base_case_1(structure, size);

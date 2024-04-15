@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/15 19:49:17 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/15 20:17:51 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,30 @@ void	divide_list(t_struct *structure, int size, int groups)
 void	sort_list(t_struct *structure)
 {
 	int	biggest;
+	int	sec_big;
+	int	temp;
 
 	// biggest = structure->head_a->rank - 1;
-	
-	while (structure->head_b != NULL && structure->head_a->rank > 1)
+	temp = 0;
+	while (structure->head_b != NULL)
 	{
-		biggest = structure->head_a->rank - 1;
+		biggest = find_biggest(structure->head_b, count_nodes(structure->head_b));
+		sec_big = biggest - 1;
 		// printf("\n--- test sort biggest: %i ---\n", biggest);
 		if (structure->head_b->rank == biggest)
+		{
 			push_to_stack(structure, 'a');
+			if (temp == 1)
+				{
+					swap_stack(structure, 'a');
+					temp = 0;
+				}
+		}
+		else if (structure->head_b->rank == sec_big)
+		{
+			push_to_stack(structure, 'a');
+			temp = 1;
+		}
 		else if (structure->head_b->next->rank == biggest)
 		{
 			if (structure->head_a->rank > structure->head_a->next->rank)\
@@ -108,9 +123,9 @@ void	push_swap(t_struct *structure, int size)
 		divide_list(structure, size, initial_groups);
 		sort_list(structure);
 	}
-	// if (is_stack_sorted(structure->head_a, size)
-	// 	&& (count_nodes(structure->head_a) == structure->count))
-	// 	printf("n: %i stack_a is sorted!\n", size);
+	if (is_stack_sorted(structure->head_a, size)
+		&& (count_nodes(structure->head_a) == structure->count))
+		printf("n: %i stack_a is sorted!\n", size);
 }
 
 int	main(int argc, char **argv)
