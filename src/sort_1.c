@@ -17,6 +17,8 @@ void	base_case_1(t_struct *structure, int size)
 	int	smallest;
 	int	biggest;
 
+	if (is_stack_sorted(structure->head_a, size))
+		return ;
 	if (size == 2)
 		return (swap_stack(structure, 'a'));
 	smallest = find_smallest(structure->head_a, size);
@@ -68,13 +70,6 @@ int	create_group(t_struct *structure, int size, int group)
 			}
 			i++;
 		}
-		// else if (count_nodes(structure->head_a) >= 2 && structure->head_a->next->rank <= biggest)
-		// {
-		// 	if (count_nodes(structure->head_b) >= 2 && structure->head_b->next->rank > structure->head_b->rank)
-		// 		swap_stack(structure, 'c');
-		// 	else
-		// 		swap_stack(structure, 'a');
-		// }
 		else
 			rotate_up_stack(structure, 'a');
 	}
@@ -84,30 +79,44 @@ int	create_group(t_struct *structure, int size, int group)
 void	last_division(t_struct *structure, int size)
 {
 	int	smallest;
-	int	position;
+	int	sec_smallest;
+	// int	position;
+	int	temp;
 	int	move_to_b;
 
 	move_to_b = size - 3;
-	printf("\n--- last div ---\n --- stack A ---\n");
-	for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
-		printf("A: %i\n", printme->rank);
-	printf("\n--- stack B ---\n");
-	for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
-		printf("B: %i\n", printme->rank);
-	while (count_nodes(structure->head_a) > 3)
+	// printf("\n--- last div ---\n --- stack A ---\n");
+	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+	// 	printf("A: %i\n", printme->rank);
+	// printf("\n--- stack B ---\n");
+	// for (t_node *printme = structure->head_b; printme != NULL; printme = printme->next)
+	// 	printf("B: %i\n", printme->rank);
+	temp = 0;
+	while (count_nodes(structure->head_a) > 3 && move_to_b > 0)
 	{
-		smallest = find_smallest(structure->head_a, size);
-		position = find_position(structure->head_a, smallest);
-		if (move_to_b > 0)
-		{
+		smallest = find_smallest(structure->head_a, count_nodes(structure->head_a));
+		sec_smallest = smallest + 1;
+		// position = find_position(structure->head_a, smallest);
 			if (structure->head_a->rank == smallest)
 			{
 				push_to_stack(structure, 'b');
 				move_to_b--;
+				if (temp == 1)
+				{
+					swap_stack(structure, 'b');
+					temp = 0;
+				}
+			}
+			else if (structure->head_a->rank == sec_smallest && count_nodes(structure->head_a) > 4)
+			{
+				push_to_stack(structure, 'b');
+				move_to_b--;
+				temp = 1;
 			}
 			else
-				best_rotation(structure, position, 'a');
-		}
+				rotate_up_stack(structure, 'a');
+				// best_rotation(structure, position, 'a');
+		// }
 	}
 	size = count_nodes(structure->head_a);
 	base_case_1(structure, size);

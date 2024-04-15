@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/15 17:15:31 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/15 19:49:17 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,12 @@ void	divide_list(t_struct *structure, int size, int groups)
 	while (i < groups)
 	{
 		remainder_a = create_group(structure, elems_in_group, i);
-		printf("\n--- test divide 1 ---\n");
+		// printf("\n--- test divide 1 ---\n");
 		i++;
 	}
 	if (remainder_a > 6 && i < groups)
 	{
-		printf("\n--- test divide 2 ---\n");
+		// printf("\n--- test divide 2 ---\n");
 		divide_list(structure, remainder_a, groups / 2);
 	}
 	else
@@ -74,14 +74,16 @@ void	sort_list(t_struct *structure)
 	int	biggest;
 
 	// biggest = structure->head_a->rank - 1;
-	while (structure->head_b != NULL)
+	
+	while (structure->head_b != NULL && structure->head_a->rank > 1)
 	{
 		biggest = structure->head_a->rank - 1;
+		// printf("\n--- test sort biggest: %i ---\n", biggest);
 		if (structure->head_b->rank == biggest)
 			push_to_stack(structure, 'a');
 		else if (structure->head_b->next->rank == biggest)
 		{
-			if (structure->head_a->rank > structure->head_a->next->rank)
+			if (structure->head_a->rank > structure->head_a->next->rank)\
 				swap_stack(structure, 'c');
 			else
 				swap_stack(structure, 'b');
@@ -96,7 +98,7 @@ void	push_swap(t_struct *structure, int size)
 	int	initial_groups;
 
 	initial_groups = structure->len_bits - 1;
-	printf("\n--- initial groups : %i ---\n", initial_groups);
+	// printf("\n--- initial groups : %i ---\n", initial_groups);
 	if (structure->head_a && is_stack_sorted(structure->head_a, size))
 		return ;
 	if (size <= 3)
@@ -140,3 +142,4 @@ int	main(int argc, char **argv)
 }
 
 //for i in {0..101}; do echo $i; done | sort -R | tr '\n' ' '
+// 20 66 73 2 15 50 86 18 56 85 72 53 17 58 84 90 14 79 68 70 38 82 25 42 100 49 65 39 91 5 33 69 45 24 81 98 93 6 67 62 41 51 44 35 26 77 52 23 80 74 3 55 43 8 97 89 36 47 10 78 76 96 60 37 12 4 71 59 0 32 13 64 83 95 94 29 7 48 1 19 34 11 -45 234 67465
