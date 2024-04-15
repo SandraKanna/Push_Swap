@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 10:45:32 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/15 23:08:08 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	check_errors(int int_count, char **int_list)
 		return (free (temp_conversion), 1);
 	return (free (temp_conversion), 0);
 }
-
+// correct: arg 1 send promt not Error
 char	**parse_args(int *count, int ac, char **av)
 {
 	char	**new_av;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/15 15:37:54 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/15 23:41:28 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int			has_duplicates(int ac, int *input);
 //structure initialization
 t_struct	*init_struct(char **av, int count);
 int			get_bit_len(int n);
-int			init_batch(t_struct *structure);
+// int			init_batch(t_struct *structure);
 int			create_group(t_struct *structure, int size, int group);
 // void		rank_elems(t_node *list);
 
@@ -59,11 +59,13 @@ void		rotate_up_stack(t_struct *structure, char c);
 
 //core
 void		push_swap(t_struct *structure, int size);
-void		base_case_1(t_struct *structure, int size);
+void		divide_list(t_struct *structure, int size, int groups);
+void		sort_list(t_struct *structure);
+void		base_case(t_struct *structure, int size);
 
 //sort helpers
 void		best_rotation(t_struct *structure, int value, char c);
-void		last_division(t_struct *structure, int size);
+// void		last_division(t_struct *structure, int size);
 int			count_nodes(t_node *list);
 int			is_stack_sorted(t_node *stack, int n);
 

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/15 16:00:08 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/15 23:09:30 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../Includes/push_swap.h"
-#include "push_swap.h"
+#include "../Includes/push_swap.h"
 
 int	init_batch(t_struct *structure)
 {
