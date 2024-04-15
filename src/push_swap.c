@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/15 20:17:51 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/15 21:00:04 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,17 @@ void	sort_7(t_struct *structure, int count)
 void	divide_list(t_struct *structure, int size, int groups)
 {
 	int	elems_in_group;
-	int	remainder_a;
 	int	i;
 
 	elems_in_group = size / groups;
 	i = 1;
-	while (i < groups)
+	while (i <= groups)
 	{
-		remainder_a = create_group(structure, elems_in_group, i);
-		// printf("\n--- test divide 1 ---\n");
+		if (is_stack_sorted(structure->head_a, count_nodes(structure->head_a)))
+			break ;
+		create_group(structure, elems_in_group, i);
 		i++;
 	}
-	if (remainder_a > 6 && i < groups)
-	{
-		// printf("\n--- test divide 2 ---\n");
-		divide_list(structure, remainder_a, groups / 2);
-	}
-	else
-		return (last_division(structure, remainder_a));
 }
 
 void	sort_list(t_struct *structure)
@@ -75,13 +68,11 @@ void	sort_list(t_struct *structure)
 	int	sec_big;
 	int	temp;
 
-	// biggest = structure->head_a->rank - 1;
 	temp = 0;
 	while (structure->head_b != NULL)
 	{
 		biggest = find_biggest(structure->head_b, count_nodes(structure->head_b));
 		sec_big = biggest - 1;
-		// printf("\n--- test sort biggest: %i ---\n", biggest);
 		if (structure->head_b->rank == biggest)
 		{
 			push_to_stack(structure, 'a');
@@ -113,7 +104,6 @@ void	push_swap(t_struct *structure, int size)
 	int	initial_groups;
 
 	initial_groups = structure->len_bits - 1;
-	// printf("\n--- initial groups : %i ---\n", initial_groups);
 	if (structure->head_a && is_stack_sorted(structure->head_a, size))
 		return ;
 	if (size <= 3)
@@ -123,9 +113,9 @@ void	push_swap(t_struct *structure, int size)
 		divide_list(structure, size, initial_groups);
 		sort_list(structure);
 	}
-	if (is_stack_sorted(structure->head_a, size)
-		&& (count_nodes(structure->head_a) == structure->count))
-		printf("n: %i stack_a is sorted!\n", size);
+	// if (is_stack_sorted(structure->head_a, size)
+	// 	&& (count_nodes(structure->head_a) == structure->count))
+	// 	printf("n: %i stack_a is sorted!\n", size);
 }
 
 int	main(int argc, char **argv)

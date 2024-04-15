@@ -58,7 +58,13 @@ int	create_group(t_struct *structure, int size, int group)
 	i = 0;
 	while (i < size && count_nodes(structure->head_b) < (size * group))
 	{
-		if (structure->head_a->rank <= biggest)
+		if (count_nodes(structure->head_a) <= 6)
+		{
+			// printf("last division condition: size of a: %i\n", count_nodes(structure->head_a));
+			last_division(structure, count_nodes(structure->head_a));
+			break ;
+		}
+		if (structure->head_a->rank <= biggest && structure->head_a->rank < structure->count - 2)
 		{
 			push_to_stack(structure, 'b');
 			if (structure->head_b->rank < mid)
@@ -85,6 +91,7 @@ void	last_division(t_struct *structure, int size)
 
 	move_to_b = size - 3;
 	temp = 0;
+	// printf("last division: size: %i\n", size);
 	while (count_nodes(structure->head_a) > 3 && move_to_b > 0)
 	{
 		smallest = find_smallest(structure->head_a, count_nodes(structure->head_a));
