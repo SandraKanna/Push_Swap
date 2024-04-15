@@ -16,7 +16,7 @@
 int	create_group(t_struct *structure, int iter, int size, int group)
 {
 	int	biggest;
-	int	smallest;
+	// int	smallest;
 	int	mid;
 	int	i;
 
@@ -26,7 +26,7 @@ int	create_group(t_struct *structure, int iter, int size, int group)
 	printf("creating group: %i  biggest: %i  mid: %i\n", group, biggest, mid);
 	while (i < size && count_nodes(structure->head_b) < (size * group))
 	{
-		smallest = find_smallest(structure->head_a, count_nodes(structure->head_a));
+		// smallest = find_smallest(structure->head_a, count_nodes(structure->head_a));
 		if (structure->head_a->rank <= biggest)
 		{
 			push_to_stack(structure, 'b');
@@ -34,8 +34,8 @@ int	create_group(t_struct *structure, int iter, int size, int group)
 				rotate_up_stack(structure, 'b');
 			i++;
 		}
-		else
-			best_rotation(structure, smallest, 'a');
+		// else
+		// 	best_rotation(structure, smallest, 'a');
 	}
 	structure->batch_size[iter] = i;
 	printf("\n---  iteration: %i  batch size init: %i---\n", iter, structure->batch_size[iter]);
@@ -46,20 +46,28 @@ int	init_batch(t_struct *structure)
 {
 	int	n;
 	int	total_batches;
+	int	divisor;
+	int	i;
 
 	n = structure->count;
+	divisor = get_bit_len(n);
 	structure->batch_size = NULL;
 	total_batches = 0;
 	while (n > 3)
 	{
-		total_batches += get_bit_len(n);
-		n /= get_bit_len(n);
+		printf("\n---  n: %i  divisor: %i counting batches: %i ---\n", n, divisor, total_batches);
+		total_batches += divisor;
+		n /= divisor;
+		divisor /= 2;
 	}
 	printf("\n--- total batches : %i ---\n", total_batches);
 	structure->batch_size = malloc(sizeof(int *) * total_batches);
 	if (!structure->batch_size)
 		err_handling(structure);
-	// structure->batch_size[total_batches] = 0;
+	i = 0;
+	while (i < total_batches)
+		structure->batch_size[i++] = 0;
+	structure->iterations = total_batches;
 	return (total_batches);
 }
 

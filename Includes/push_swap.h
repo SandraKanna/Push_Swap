@@ -32,6 +32,7 @@ typedef struct s_struct
 {
 	int				count;
 	int				len_bits;
+	int				iterations;
 	int				*batch_size;
 	struct s_node	*head_a;
 	struct s_node	*head_b;
