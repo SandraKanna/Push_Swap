@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/18 13:15:44 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/15 12:48:49 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int	create_group(t_struct *structure, int iter, int size, int group)
 {
 	int	biggest;
-	// int	smallest;
+	int	smallest;
 	int	mid;
 	int	i;
 
@@ -26,7 +26,7 @@ int	create_group(t_struct *structure, int iter, int size, int group)
 	printf("creating group: %i  biggest: %i  mid: %i\n", group, biggest, mid);
 	while (i < size && count_nodes(structure->head_b) < (size * group))
 	{
-		// smallest = find_smallest(structure->head_a, count_nodes(structure->head_a));
+		smallest = find_smallest(structure->head_a, count_nodes(structure->head_a));
 		if (structure->head_a->rank <= biggest)
 		{
 			push_to_stack(structure, 'b');
@@ -34,8 +34,8 @@ int	create_group(t_struct *structure, int iter, int size, int group)
 				rotate_up_stack(structure, 'b');
 			i++;
 		}
-		// else
-		// 	best_rotation(structure, smallest, 'a');
+		else
+			best_rotation(structure, smallest, 'a');
 	}
 	structure->batch_size[iter] = i;
 	printf("\n---  iteration: %i  batch size init: %i---\n", iter, structure->batch_size[iter]);
@@ -67,7 +67,7 @@ int	init_batch(t_struct *structure)
 	i = 0;
 	while (i < total_batches)
 		structure->batch_size[i++] = 0;
-	structure->iterations = total_batches;
+	// structure->iterations = total_batches;
 	return (total_batches);
 }
 
