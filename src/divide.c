@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   divide.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 23:34:59 by sandra            #+#    #+#             */
-/*   Updated: 2024/04/15 23:48:30 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/16 19:38:54 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	create_group(t_struct *structure, int size, int group)
 			last_division(structure, count_nodes(structure->head_a));
 			break ;
 		}
+		// printf("test cur top A: %i\n", structure->head_a->rank);
 		if (structure->head_a->rank <= biggest && structure->head_a->rank < structure->count - 2)
 		{
 			push_to_stack(structure, 'b');
@@ -94,9 +95,12 @@ void	divide_list(t_struct *structure, int size, int groups)
 	i = 1;
 	while (i <= groups)
 	{
+		// printf("\n--- iter: %i nodes in A: %i---\n", i, count_nodes(structure->head_a));
 		if (is_stack_sorted(structure->head_a, count_nodes(structure->head_a)))
 			break ;
 		create_group(structure, elems_in_group, i);
 		i++;
 	}
+	if (count_nodes(structure->head_a) > 3)
+		last_division(structure, count_nodes(structure->head_a));
 }

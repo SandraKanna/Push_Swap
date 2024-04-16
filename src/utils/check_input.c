@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/15 23:08:08 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/16 12:58:00 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	check_errors(int int_count, char **int_list)
 	int	error;
 
 	i = 0;
+
 	temp_conversion = malloc (sizeof(int *) * int_count);
 	if (!temp_conversion)
 		return (1);
@@ -57,7 +58,7 @@ int	check_errors(int int_count, char **int_list)
 		return (free (temp_conversion), 1);
 	return (free (temp_conversion), 0);
 }
-// correct: arg 1 send promt not Error
+
 char	**parse_args(int *count, int ac, char **av)
 {
 	char	**new_av;
@@ -65,8 +66,6 @@ char	**parse_args(int *count, int ac, char **av)
 
 	if (ac == 2)
 	{
-		if (av[1][0] == '\0' || av[1][1] == '\0')
-			return (NULL);
 		new_av = ft_split(av[1], ' ');
 		if (!new_av)
 			return (NULL);

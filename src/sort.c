@@ -96,6 +96,9 @@ void	push_swap(t_struct *structure, int size)
 	else
 	{
 		divide_list(structure, size, initial_groups);
+		// printf("\n--- after divide stack A ---\n");
+		// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+		// 	printf("A: %i\n", printme->rank);
 		sort_list(structure);
 	}
 	// if (is_stack_sorted(structure->head_a, size)

@@ -6,24 +6,24 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/28 16:31:48 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/16 17:34:02 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// t_node	*find_last(t_node *list)
-// {
-// 	t_node	*last;
+t_node	*find_last(t_node *list)
+{
+	t_node	*last;
 
-// 	last = list;
-// 	if (list)
-// 	{
-// 		while (last->next != NULL)
-// 			last = last->next;
-// 	}
-// 	return (last);
-// }
+	last = list;
+	if (list)
+	{
+		while (last->next != NULL)
+			last = last->next;
+	}
+	return (last);
+}
 
 int	find_position(t_node *list, int rank)
 {

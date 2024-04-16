@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:06:48 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 10:45:08 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/16 13:32:10 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,14 @@ void	push(t_node **stack, int input, int rank, int *err)
 
 	new_node = NULL;
 	new_node = malloc (sizeof(t_node));
-	if (new_node == NULL)
+	if (!new_node)
 	{
 		*err = 1;
 		return ;
 	}
 	new_node->value = input;
 	new_node->rank = rank;
+	new_node->line = NULL;
 	new_node->next = *stack;
 	*stack = new_node;
 }
