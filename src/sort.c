@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_1.c                                            :+:      :+:    :+:   */
+/*   sort.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -47,61 +47,68 @@ void	base_case(t_struct *structure, int size)
 	}
 }
 
+void	sort_helper(t_struct *structure, int big, int sec_big, int *swap)
+{
+	if (structure->b->rank == big)
+	{
+		push_to_stack(structure, 'a');
+		if (*swap == 1)
+		{
+			swap_stack(structure, 'a');
+			*swap = 0;
+		}
+	}
+	else if (structure->b->rank == sec_big)
+	{
+		push_to_stack(structure, 'a');
+		*swap = 1;
+	}
+	else if (structure->b->next->rank == big)
+	{
+		if (structure->a->rank > structure->a->next->rank)
+			swap_stack(structure, 'c');
+		else
+			swap_stack(structure, 'b');
+	}
+	else
+		best_rotation(structure, big, 'b');
+}
+
 void	sort_list(t_struct *structure)
 {
 	int	biggest;
 	int	sec_big;
-	int	temp;
+	int	swap;
 
-	temp = 0;
+	swap = 0;
 	while (structure->b != NULL)
 	{
 		biggest = find_biggest(structure->b, count_nodes(structure->b));
 		sec_big = biggest - 1;
-		if (structure->b->rank == biggest)
-		{
-			push_to_stack(structure, 'a');
-			if (temp == 1)
-			{
-				swap_stack(structure, 'a');
-				temp = 0;
-			}
-		}
-		else if (structure->b->rank == sec_big)
-		{
-			push_to_stack(structure, 'a');
-			temp = 1;
-		}
-		else if (structure->b->next->rank == biggest)
-		{
-			if (structure->a->rank > structure->a->next->rank)\
-				swap_stack(structure, 'c');
-			else
-				swap_stack(structure, 'b');
-		}
-		else
-			best_rotation(structure, biggest, 'b');
+		sort_helper(structure, biggest, sec_big, &swap);
+		// if (structure->b->rank == biggest)
+		// {
+		// 	push_to_stack(structure, 'a');
+		// 	if (swap == 1)
+		// 	{
+		// 		swap_stack(structure, 'a');
+		// 		swap = 0;
+		// 	}
+		// }
+		// else if (structure->b->rank == sec_big)
+		// {
+		// 	push_to_stack(structure, 'a');
+		// 	swap = 1;
+		// }
+		// else if (structure->b->next->rank == biggest)
+		// {
+		// 	if (structure->a->rank > structure->a->next->rank)
+		// 		swap_stack(structure, 'c');
+		// 	else
+		// 		swap_stack(structure, 'b');
+		// }
+		// else
+		// 	best_rotation(structure, biggest, 'b');
 	}
 }
 
-void	push_swap(t_struct *structure, int size)
-{
-	int	initial_groups;
-
-	initial_groups = structure->len_bits - 1;
-	if (structure->a && is_stack_sorted(structure->a, size))
-		return ;
-	if (size <= 3)
-		base_case(structure, size);
-	else
-	{
-		divide_list(structure, size, initial_groups);
-		// printf("\n--- after divide stack A ---\n");
-		// for (t_node *printme = structure->a; printme != NULL; printme = printme->next)
-		// 	printf("A: %i\n", printme->rank);
-		sort_list(structure);
-	}
-	// if (is_stack_sorted(structure->a, size)
-	// 	&& (count_nodes(structure->a) == structure->count))
-	// 	printf("n: %i stack_a is sorted!\n", size);
-}

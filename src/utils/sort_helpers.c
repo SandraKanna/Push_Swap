@@ -6,7 +6,7 @@
 /*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/16 22:57:32 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 01:04:50 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	best_rotation(t_struct *structure, int value, char c)
 		position = find_position(structure->b, value);
 		size = count_nodes(structure->b);
 	}
-	// printf("stack: %c value: %i  position: %i elemes in A: %i  elems in B: %i\n", c, value, position, count_nodes(structure->a), count_nodes(structure->b));
 	if (position <= size / 2)
 		rotate_up_stack(structure, c);
 	else
@@ -47,19 +46,3 @@ int	is_stack_sorted(t_node *stack, int n)
 	return (1);
 }
 
-int	count_nodes(t_node *list)
-{
-	t_node			*current;
-	unsigned int	count;
-
-	if (!list)
-		return (0);
-	count = 0;
-	current = list;
-	while (current != NULL)
-	{
-		count++;
-		current = current->next;
-	}
-	return (count);
-}

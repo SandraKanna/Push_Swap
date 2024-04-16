@@ -26,7 +26,7 @@ $(LIBFT):
 	@echo "\n$(GREEN)✔$(RESET) compiled with libft"
 
 BONUS = checker
-BONUS_FILES = src/bonus/checker.c
+BONUS_FILES = src/bonus/checker.c src/bonus/bonus_helpers.c
 BONUS_OBJ = $(BONUS_FILES:.c=.o)
 $(BONUS): $(COMMON_OBJ) $(BONUS_OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(COMMON_OBJ) $(BONUS_OBJ) -o $(BONUS) $(LIBFT)
@@ -40,7 +40,7 @@ all: $(NAME)
 bonus: $(BONUS)
 
 clean:
-	@rm -f $(COMMON_OBJ) $(BONUS_OBJ) 
+	@rm -f $(COMMON_OBJ) $(MANDATORY_OBJ) $(BONUS_OBJ) 
 	@echo "object files deleted"
 
 fclean: clean

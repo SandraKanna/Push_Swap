@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/16 12:58:00 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/17 00:18:25 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,26 @@ char	**parse_args(int *count, int ac, char **av)
 		*count = ac - 1;
 	}
 	return (new_av);
+}
+
+char	**check_input(int *elements_count, int argc, char **argv)
+{
+	char	**list;
+
+	list = parse_args(elements_count, argc, argv);
+	if (!list || !*list)
+	{
+		if (argc == 2 && list)
+			free_tab(list);
+		write (2, "Error\n", 6);
+		return (NULL);
+	}
+	if (check_errors(*elements_count, list))
+	{
+		if (argc == 2 && list)
+			free_tab(list);
+		write (2, "Error\n", 6);
+		return (NULL);
+	}
+	return (list);
 }
