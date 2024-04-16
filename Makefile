@@ -1,42 +1,50 @@
-NAME = push_swap
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3 -IIncludes
-#-fsanitize=address 
-#-Ibonus
+#-fsanitize=address
 
-LIBFT = libft/libft3.a
-LIBFT_DIR = libft/
+GREEN = \033[32m
+RED = \033[31m
+RESET = \033[0m
 
-CFILES = $(addprefix src/, push_swap.c sort_1.c initialize.c\
+NAME = push_swap
+COMMON_FILES = $(addprefix src/, initialize.c divide.c sort.c \
 	utils/list_helpers.c utils/sort_helpers.c  utils/check_input.c utils/clean.c \
 	ops/push_ops.c ops/rev_ops.c ops/rot_ops.c ops/swap_ops.c)
+COMMON_OBJ = $(COMMON_FILES:.c=.o)
 
-#BONUS_FILES = bonus/bonus.c 
+MANDATORY_MAIN = src/push_swap.c
+MANDATORY_OBJ = $(MANDATORY_MAIN:.c=.o)
 
-OBJ = $(CFILES:.c=.o)
-#BONUS_OBJ = $(BONUS_FILES:.c=.o)
+LIBFT_DIR = libft/
+LIBFT = libft/libft3.a
 
-%.o: %.c
-	@echo "compiling..."
-	@$(CC) $(CFLAGS) -c $< -o $@
-
-all: $(NAME)
-
-$(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBFT)
+$(NAME): $(COMMON_OBJ) $(MANDATORY_OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) $(COMMON_OBJ) $(MANDATORY_OBJ) -o $(NAME) $(LIBFT)
 
 $(LIBFT):
 	@make --no-print-directory -C $(LIBFT_DIR)
-	@echo "---compiled with libft---" 
-#pas de retour a la ligne: echo - n o printg (met pas de \n a la fin)
+	@echo "\n$(GREEN)✔$(RESET) compiled with libft"
+
+BONUS = checker
+BONUS_FILES = src/bonus/checker.c
+BONUS_OBJ = $(BONUS_FILES:.c=.o)
+$(BONUS): $(COMMON_OBJ) $(BONUS_OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) $(COMMON_OBJ) $(BONUS_OBJ) -o $(NAME) $(LIBFT)
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "."
+
+all: $(NAME)
+
+bonus: $(BONUS)
 
 clean:
-	@rm -f $(OBJ)
+	@rm -f $(COMMON_OBJ) $(BONUS_OBJ) 
 	@echo "object files deleted"
-#$(BONUS_OBJ)
 
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(BONUS)
 	@make --no-print-directory -C $(LIBFT_DIR) fclean
 	@echo "binaries files deleted"
 
@@ -45,7 +53,4 @@ re: fclean all
 test:
 	sh test.sh
 
-#bonus: clean
-#$(CC) $(CFLAGS) $(OBJ) $(BONUS_FILES) -o $(NAME)
-
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re bonus

@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/16 12:01:23 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/16 20:52:58 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
-
-int	init_batch(t_struct *structure)
-{
-	int	n;
-	int	total_batches;
-	int	divisor;
-
-	n = structure->count;
-	divisor = get_bit_len(n);
-	total_batches = 0;
-	while (n > 3)
-	{
-		total_batches += divisor;
-		n /= divisor;
-		divisor /= 2;
-	}
-	// printf("\n--- total batches : %i ---\n", total_batches);
-	structure->iterations = total_batches;
-	return (total_batches);
-}
 
 int	get_bit_len(int n)
 {
