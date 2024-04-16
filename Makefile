@@ -15,8 +15,8 @@ COMMON_OBJ = $(COMMON_FILES:.c=.o)
 MANDATORY_MAIN = src/push_swap.c
 MANDATORY_OBJ = $(MANDATORY_MAIN:.c=.o)
 
-LIBFT_DIR = libft/
 LIBFT = libft/libft3.a
+LIBFT_DIR = libft/
 
 $(NAME): $(COMMON_OBJ) $(MANDATORY_OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(COMMON_OBJ) $(MANDATORY_OBJ) -o $(NAME) $(LIBFT)
@@ -29,7 +29,7 @@ BONUS = checker
 BONUS_FILES = src/bonus/checker.c
 BONUS_OBJ = $(BONUS_FILES:.c=.o)
 $(BONUS): $(COMMON_OBJ) $(BONUS_OBJ) $(LIBFT)
-	@$(CC) $(CFLAGS) $(COMMON_OBJ) $(BONUS_OBJ) -o $(NAME) $(LIBFT)
+	@$(CC) $(CFLAGS) $(COMMON_OBJ) $(BONUS_OBJ) -o $(BONUS) $(LIBFT)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rev_ops.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:06:48 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 10:45:13 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/16 22:56:28 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ void	rotate_down_stack(t_struct *structure, char c)
 {
 	if (c == 'a')
 	{
-		rotate_down(&structure->head_a);
+		rotate_down(&structure->a);
 		write(1, "rra\n", 4);
 	}
 	else if (c == 'b')
 	{
-		rotate_down(&structure->head_b);
+		rotate_down(&structure->b);
 		write(1, "rrb\n", 4);
 	}
 	else
 	{
-		rotate_down(&structure->head_a);
-		rotate_down(&structure->head_b);
+		rotate_down(&structure->a);
+		rotate_down(&structure->b);
 		write(1, "rrr\n", 4);
 	}
 }

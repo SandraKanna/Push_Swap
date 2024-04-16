@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   swap_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:06:48 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 10:45:24 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:20:13 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,25 @@ void	swap_stack(t_struct *structure, char c)
 {
 	if (c == 'a')
 	{
-		if (structure->head_a == NULL || structure->head_a->next == NULL)
+		if (structure->a == NULL || structure->a->next == NULL)
 			return ;
-		swap(&structure->head_a);
+		swap(&structure->a);
 		write(1, "sa\n", 3);
 	}
 	else if (c == 'b')
 	{
-		if (structure->head_b == NULL || (structure->head_b->next == NULL))
+		if (structure->b == NULL || (structure->b->next == NULL))
 			return ;
-		swap(&structure->head_b);
+		swap(&structure->b);
 		write(1, "sb\n", 3);
 	}
 	else
 	{
-		if (structure->head_b == NULL || structure->head_b->next == NULL
-			|| structure->head_a == NULL || structure->head_a->next == NULL)
+		if (structure->b == NULL || structure->b->next == NULL
+			|| structure->a == NULL || structure->a->next == NULL)
 			return ;
-		swap(&structure->head_a);
-		swap(&structure->head_b);
+		swap(&structure->a);
+		swap(&structure->b);
 		write(1, "ss\n", 3);
 	}
 }

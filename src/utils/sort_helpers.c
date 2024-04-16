@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/15 19:03:59 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/16 22:57:32 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ void	best_rotation(t_struct *structure, int value, char c)
 
 	if (c == 'a')
 	{
-		position = find_position(structure->head_a, value);
-		size = count_nodes(structure->head_a);
+		position = find_position(structure->a, value);
+		size = count_nodes(structure->a);
 	}
 	if (c == 'b')
 	{
-		position = find_position(structure->head_b, value);
-		size = count_nodes(structure->head_b);
+		position = find_position(structure->b, value);
+		size = count_nodes(structure->b);
 	}
-	// printf("stack: %c value: %i  position: %i elemes in A: %i  elems in B: %i\n", c, value, position, count_nodes(structure->head_a), count_nodes(structure->head_b));
+	// printf("stack: %c value: %i  position: %i elemes in A: %i  elems in B: %i\n", c, value, position, count_nodes(structure->a), count_nodes(structure->b));
 	if (position <= size / 2)
 		rotate_up_stack(structure, c);
 	else

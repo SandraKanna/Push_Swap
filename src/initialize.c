@@ -6,7 +6,7 @@
 /*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/16 20:52:58 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/16 22:55:18 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,19 +61,19 @@ t_struct	*init_struct(char **av, int count)
 	if (!structure)
 		return (NULL);
 	structure->count = count;
-	structure->head_a = NULL;
-	structure->head_b = NULL;
+	structure->a = NULL;
+	structure->b = NULL;
 	i = count - 1;
 	err = 0;
 	while (i >= 0)
 	{
 		input = ft_atoi(av[i]);
-		push(&structure->head_a, input, -1, &err);
+		push(&structure->a, input, -1, &err);
 		if (err)
 			return (NULL);
 		i--;
 	}
-	rank_elems(structure->head_a);
+	rank_elems(structure->a);
 	structure->len_bits = get_bit_len(count);
 	return (structure);
 }

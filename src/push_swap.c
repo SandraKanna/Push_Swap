@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/16 18:58:53 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/16 22:55:08 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ int	main(int argc, char **argv)
 	if (!structure)
 		return (0);
 	// printf("\n--- initial stack A ---\n");
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+	// for (t_node *printme = structure->a; printme != NULL; printme = printme->next)
 	// 	printf("A: %i\n", printme->rank);
 	push_swap(structure, structure->count);
 	// printf("\n--- final stack A ---\n");
-	// for (t_node *printme = structure->head_a; printme != NULL; printme = printme->next)
+	// for (t_node *printme = structure->a; printme != NULL; printme = printme->next)
 	// 	printf("A: %i\n", printme->rank);
 	return (free_struct(structure), 0);
 }

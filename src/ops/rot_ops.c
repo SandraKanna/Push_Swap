@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rot_ops.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:06:48 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 10:45:18 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/16 22:56:45 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ void	rotate_up_stack(t_struct *structure, char c)
 {
 	if (c == 'a')
 	{
-		rotate_up(&structure->head_a);
+		rotate_up(&structure->a);
 		write(1, "ra\n", 3);
 	}
 	else if (c == 'b')
 	{
-		rotate_up(&structure->head_b);
+		rotate_up(&structure->b);
 		write(1, "rb\n", 3);
 	}
 	else
 	{
-		rotate_up(&structure->head_a);
-		rotate_up(&structure->head_b);
+		rotate_up(&structure->a);
+		rotate_up(&structure->b);
 		write(1, "rr\n", 3);
 	}
 }

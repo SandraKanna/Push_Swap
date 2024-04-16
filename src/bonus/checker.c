@@ -3,188 +3,110 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 22:43:04 by sandra            #+#    #+#             */
-/*   Updated: 2024/04/16 17:34:03 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:23:23 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "bonus.h"
 
-void	print_values(t_node *stack)
+int	check_push(t_struct *structure, char *instruction)
 {
-	if (stack == NULL)
-		return ;
-	while (stack != NULL)
+	int	err;
+
+	err = 0;
+	if (ft_strncmp(instruction, "pa\n", 3) == 0)
 	{
-		ft_printf("%i\n", stack->value);
-		stack = stack->next;
+		pa(&structure->a, &structure->b, &err);
+		if (err)
+			return (err_handling(structure), 0);
+		else
+			return (1);
 	}
+	if (ft_strncmp(instruction, "pb\n", 3) == 0)
+	{
+		pb(&structure->a, &structure->b, &err);
+		if (err)
+			return (err_handling(structure), 0);
+		else
+			return (1);
+	}
+	return (0);
 }
 
-void	exec_instructions(t_struct *structure, t_node *instructions)
+int	check_rot(t_struct *structure, char *instruction)
 {
-	t_node	*cur;
-
-	cur = instructions;
-	while (cur != NULL)
+	if (ft_strncmp(instruction, "ra\n", 3) == 0)
+		return (rotate_up(&structure->a), 1);
+	if (ft_strncmp(instruction, "rb\n", 3) == 0)
+		return (rotate_up(&structure->b), 1);
+	if (ft_strncmp(instruction, "rr\n", 3) == 0)
 	{
-		if (cur->value == 1)
-			push_to_stack(structure, 'a');
-		else if (cur->value  == 2)
-			push_to_stack(structure, 'b');
-		else if (cur->value == 3)
-			swap_stack(structure, 'a');
-		else if (cur->value  == 4)
-			swap_stack(structure, 'b');
-		else if (cur->value  == 5)
-			swap_stack(structure, 'c');
-		else if (cur->value  == 6)
-			rotate_up_stack(structure, 'a');
-		else if (cur->value == 7)
-			rotate_up_stack(structure, 'b');
-		else if (cur->value  == 8)
-			rotate_up_stack(structure, 'c');
-		else if (cur->value == 9)
-			rotate_down_stack(structure, 'a');
-		else if (cur->value  == 10)
-			rotate_down_stack(structure, 'b');
-		else if (cur->value  == 11)
-			rotate_down_stack(structure, 'c');
+		rotate_up(&structure->a);
+		rotate_up(&structure->b);
+		return (1);
 	}
+	return (0);
 }
 
-// int	check_instructions(t_node **instructions)
-// {
-// 	t_node	*cur;
+int	check_swap(t_struct *structure, char *instruction)
+{
+	if (ft_strncmp(instruction, "sa\n", 3) == 0)
+		return (swap(&structure->a), 1);
+	if (ft_strncmp(instruction, "sb\n", 3) == 0)
+		return (swap(&structure->b), 1);
+	if (ft_strncmp(instruction, "ss\n", 3) == 0)
+	{
+		if (structure->b == NULL || structure->b->next == NULL
+			|| structure->a == NULL || structure->a->next == NULL)
+			return (0);
+		swap(&structure->a);
+		swap(&structure->b);
+		return (1);
+	}
+	return (0);
+}
 
-// 	cur = *instructions;
-// 	while (cur != NULL)
-// 	{
-// 		if (ft_strncmp(cur->line, "pa", 1))
-// 		{
-// 			cur->value = 1;
-// 			cur = cur->next;
-// 		}
-// 		else if (ft_strncmp(cur->line, "pb", 2))
-// 		{
-// 			cur->value = 2;
-// 			cur = cur->next;
-// 		}
-// 		else if (ft_strncmp(cur->line, "sa", 2))
-// 		{
-// 			cur->value = 3;
-// 			cur = cur->next;
-// 		}
-// 		else if (ft_strncmp(cur->line, "sb", 2))
-// 		{
-// 			cur->value = 4;
-// 			cur = cur->next;
-// 		}
-// 		else if (ft_strncmp(cur->line, "ss", 2))
-// 		{
-// 			cur->value = 5;
-// 			cur = cur->next;
-// 		}
-// 		else if (ft_strncmp(cur->line, "ra", 2))
-// 		{
-// 			cur->value = 6;
-// 			cur = cur->next;
-// 		}
-// 		else if (ft_strncmp(cur->line, "rb", 2))
-// 		{
-// 			cur->value = 7;
-// 			cur = cur->next;
-// 		}
-// 		else if (ft_strncmp(cur->line, "rr", 2))
-// 		{
-// 			cur->value = 8;
-// 			cur = cur->next;
-// 		}
-// 		else if (ft_strncmp(cur->line, "rra", 3))
-// 		{
-// 			cur->value = 9;
-// 			cur = cur->next;
-// 		}
-// 		else if (ft_strncmp(cur->line, "rrb", 3))
-// 		{
-// 			cur->value = 10;
-// 			cur = cur->next;
-// 		}
-// 		else if (ft_strncmp(cur->line, "rrr", 3))
-// 		{
-// 			cur->value = 11;
-// 			cur = cur->next;
-// 		}
-// 		else
-// 			return (0);
-// 	}
-// 	return (1);
-// }
-
-// void	create_instruction_list(t_node **stack, char *line, int *err)
-// {
-// 	t_node	*new_node;
-// 	t_node	*last;
-	
-// 	new_node = NULL;
-// 	last = NULL;
-// 	new_node = malloc (sizeof(t_node));
-// 	if (!new_node)
-// 	{
-// 		*err = 1;
-// 		return ;
-// 	}
-// 	new_node->value = 0;
-// 	new_node->rank = 0;
-// 	new_node->line = ft_strdup(line);
-// 	if (!new_node->line)
-// 	{
-// 		*err = 1;
-// 		return ;
-// 	}
-// 	// printf("stored line: %s", new_node->line);
-// 	new_node->next = NULL;
-// 	if (*stack == NULL)
-// 		*stack = new_node;
-// 	else
-// 	{
-// 		last = find_last(*stack);
-// 		last->next = new_node;
-// 	}
-// }
+int	check_and_exec(t_struct *structure, char *instruction)
+{
+	if (!instruction)
+		return (0);
+	if (check_push(structure, instruction))
+		return (1);
+	if (check_rot(structure, instruction))
+		return (1);
+	if (check_swap(structure, instruction))
+		return (1);
+	if (ft_strncmp(instruction, "rra\n", 4) == 0)
+		return (rotate_down(&structure->a), 1);
+	if (ft_strncmp(instruction, "rrb\n", 4) == 0)
+		return (rotate_down(&structure->b), 1);
+	if (ft_strncmp(instruction, "rrr\n", 4) == 0)
+	{
+		rotate_down(&structure->a);
+		rotate_down(&structure->b);
+		return (1);
+	}
+	return (0);
+}
 
 int	checker(t_struct *structure)
 {
 	char	*line;
-	t_node	*instructions;
-	int		err;
-	
-	err = 0;
-	instructions = NULL;
-	while (1)
+	int		check;
+
+	line = get_next_line(0);
+	while (line)
 	{
-		line = get_next_line(0);
-		printf("line1: %s", line);
-		if (line == NULL)
-			break;
-		// create_instruction_list(&instructions, line, &err);
-		// printf("stored line: %s", instructions->line);
-		printf("line2: %s", line);
+		check = check_and_exec(structure, line);
 		free (line);
-		if (err)
-		{
-			printf("test err");
-			free_stack(&instructions);
-			return (err_handling(structure), 1);
-		}
+		if (!check)
+			return (0);
+		line = get_next_line(0);
 	}
-	printf("test");
-	if (!check_instructions(&instructions))
-		return (free_stack(&instructions), 0);
-	exec_instructions(structure, instructions);
-	free_stack(&instructions);
 	return (1);
 }
 
@@ -211,9 +133,9 @@ int	main(int argc, char **argv)
 		return (0);
 	if (!checker(structure))
 		return (write (2, "Error\n", 6));
-	if (is_stack_sorted(structure->head_a, structure->count))
-		write(1, "OK\n");
+	if (is_stack_sorted(structure->a, structure->count))
+		write(1, "OK\n", 3);
 	else
-		ft_printf("KO\n");
+		write(1, "KO\n", 3);
 	return (free_struct(structure), 0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_ops.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:06:48 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/16 13:32:10 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/16 23:19:41 by sandra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	pa(t_node **stack_a, t_node **stack_b, int *err)
 	rank = (*stack_b)->rank;
 	value = pop(stack_b);
 	push(stack_a, value, rank, err);
-	write(1, "pa\n", 3);
 }
 
 void	pb(t_node **stack_a, t_node **stack_b, int *err)
@@ -68,8 +67,6 @@ void	pb(t_node **stack_a, t_node **stack_b, int *err)
 	rank = (*stack_a)->rank;
 	value = pop(stack_a);
 	push(stack_b, value, rank, err);
-	write(1, "pb\n", 3);
-	return ;
 }
 
 void	push_to_stack(t_struct *structure, char c)
@@ -78,9 +75,15 @@ void	push_to_stack(t_struct *structure, char c)
 
 	err = 0;
 	if (c == 'a')
-		pa(&structure->head_a, &structure->head_b, &err);
+	{
+		pa(&structure->a, &structure->b, &err);
+		write(1, "pa\n", 3);
+	}
 	else if (c == 'b')
-		pb(&structure->head_a, &structure->head_b, &err);
+	{
+		pb(&structure->a, &structure->b, &err);
+		write(1, "pb\n", 3);
+	}
 	if (err)
 		err_handling(structure);
 }
