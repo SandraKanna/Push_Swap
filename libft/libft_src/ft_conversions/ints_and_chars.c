@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 20:51:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 11:13:42 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/17 12:32:34 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	is_sign(long int n)
 int	count_digits(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i])
 	{

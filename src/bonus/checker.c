@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 22:43:04 by sandra            #+#    #+#             */
-/*   Updated: 2024/04/17 00:53:35 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:15:40 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
 #include "bonus.h"
 
 int	checker(t_struct *structure)
@@ -22,7 +21,6 @@ int	checker(t_struct *structure)
 	while (line)
 	{
 		check = check_and_exec(structure, line);
-		ft_printf(" count: %i\n", structure->count);
 		free (line);
 		if (!check)
 			return (0);
@@ -51,7 +49,7 @@ int	main(int argc, char **argv)
 	if (!structure)
 		return (0);
 	if (!checker(structure))
-		return (write (2, "Error\n", 6));
+		return (free_struct(structure), write (2, "Error\n", 6));
 	is_sorted = is_stack_sorted(structure->a, structure->count);
 	if (is_sorted == 1 && structure->b == NULL)
 		write(1, "OK\n", 3);

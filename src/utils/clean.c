@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 10:46:26 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/16 22:54:28 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 12:38:17 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../Includes/push_swap.h"
 #include "push_swap.h"
 
 void	free_stack(t_node **stack)
@@ -29,7 +28,6 @@ void	free_stack(t_node **stack)
 
 void	free_struct(t_struct *structure)
 {
-
 	if (structure->a != NULL)
 		free_stack(&structure->a);
 	if (structure->b != NULL)

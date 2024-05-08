@@ -6,7 +6,7 @@
 /*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:50:28 by skanna            #+#    #+#             */
-/*   Updated: 2024/03/15 11:11:06 by skanna           ###   ########.fr       */
+/*   Updated: 2024/04/17 12:35:40 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,10 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	// t_list	*temp;
-
 	if (!lst)
 		return ;
 	if (!new)
 		return ;
-	// temp = *lst;
 	new->next = *lst;
 	*lst = new;
 }

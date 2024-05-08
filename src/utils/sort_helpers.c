@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_helpers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 18:30:55 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/17 01:04:50 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:22:38 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,47 @@ int	is_stack_sorted(t_node *stack, int n)
 	return (1);
 }
 
+static int	case2_help(t_struct *structure, int move, int small, int count)
+{
+	int	position;
+
+	position = find_position(structure->a, small);
+	if (move > 0)
+	{
+		if (structure->a->rank == small)
+		{
+			push_to_stack(structure, 'b');
+			move--;
+		}
+		else if (position <= count / 2)
+			rotate_up_stack(structure, 'a');
+		else
+			rotate_down_stack(structure, 'a');
+	}
+	return (move);
+}
+
+void	base_case_2(t_struct *structure, int size)
+{
+	int	smallest;
+	int	move_to_b;
+	int	remainder_a;
+
+	if (size <= 3)
+		return (base_case_1(structure, size));
+	move_to_b = size - 3;
+	while (structure->a != NULL)
+	{
+		smallest = find_smallest(structure->a, size);
+		if (move_to_b > 0)
+			move_to_b = case2_help(structure, move_to_b, smallest, size);
+		remainder_a = count_nodes(structure->a);
+		if (remainder_a <= 3)
+			break ;
+	}
+	if (remainder_a <= 3 && !is_stack_sorted(structure->a, remainder_a))
+		base_case_1(structure, remainder_a);
+	while (structure->b != NULL)
+		push_to_stack(structure, 'a');
+	return ;
+}

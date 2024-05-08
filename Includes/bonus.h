@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bonus.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/17 00:53:01 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 12:30:59 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	pb(t_node **stack_a, t_node **stack_b, int *err);
 void	swap(t_node	**stack);
 void	rotate_up(t_node **stack);
 void	rotate_down(t_node **stack);
-int	    check_and_exec(t_struct *structure, char *instruction);
-
+int		check_and_exec(t_struct *structure, char *instruction);
 
 #endif

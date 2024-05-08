@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 11:15:10 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/17 00:30:47 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:06:32 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,13 @@ void	push_swap(t_struct *structure, int size)
 	initial_groups = structure->len_bits - 1;
 	if (structure->a && is_stack_sorted(structure->a, size))
 		return ;
-	if (size <= 3)
-		base_case(structure, size);
+	if (size <= 7)
+		base_case_2(structure, size);
 	else
 	{
 		divide_list(structure, size, initial_groups);
 		sort_list(structure);
 	}
-	// if (is_stack_sorted(structure->a, size)
-	// 	&& (count_nodes(structure->a) == structure->count))
-	// 	printf("n: %i stack_a is sorted!\n", size);
 }
 
 int	main(int argc, char **argv)
@@ -49,10 +46,5 @@ int	main(int argc, char **argv)
 	if (!structure)
 		return (0);
 	push_swap(structure, structure->count);
-	// printf("\n--- final stack A ---\n");
-	// for (t_node *printme = structure->a; printme != NULL; printme = printme->next)
-	// 	printf("A: %i\n", printme->rank);
 	return (free_struct(structure), 0);
 }
-
-//for i in {0..101}; do echo $i; done | sort -R | tr '\n' ' '

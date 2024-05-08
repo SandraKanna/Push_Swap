@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/14 11:16:53 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/17 00:24:43 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:16:27 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../Includes/push_swap.h"
 
-int	get_bit_len(int n)
+static int	get_bit_len(int n)
 {
 	int	len;
 
@@ -25,7 +25,7 @@ int	get_bit_len(int n)
 	return (len);
 }
 
-void	rank_elems(t_node *list)
+static void	rank_elems(t_node *list)
 {
 	t_node	*current;
 	t_node	*temp;

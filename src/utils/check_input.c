@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   check_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 16:41:21 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/17 00:18:25 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 12:37:56 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "../../Includes/push_swap.h"
 #include "push_swap.h"
 
 int	has_duplicates(int ac, int *input)
@@ -40,7 +39,6 @@ int	check_errors(int int_count, char **int_list)
 	int	error;
 
 	i = 0;
-
 	temp_conversion = malloc (sizeof(int *) * int_count);
 	if (!temp_conversion)
 		return (1);

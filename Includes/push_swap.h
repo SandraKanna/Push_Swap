@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:44:01 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/17 01:04:42 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 13:55:22 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct s_struct
 {
 	int				count;
 	int				len_bits;
-	int				iterations;
 	struct s_node	*a;
 	struct s_node	*b;
 }					t_struct;
@@ -46,7 +45,8 @@ void		rotate_up_stack(t_struct *structure, char c);
 
 void		divide_list(t_struct *structure, int size, int groups);
 void		sort_list(t_struct *structure);
-void		base_case(t_struct *structure, int size);
+void		base_case_1(t_struct *structure, int size);
+void		base_case_2(t_struct *structure, int count);
 
 void		best_rotation(t_struct *structure, int value, char c);
 int			count_nodes(t_node *list);

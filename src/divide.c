@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   divide.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 23:34:59 by sandra            #+#    #+#             */
-/*   Updated: 2024/04/17 00:50:13 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:20:09 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	div_helper(t_struct *structure, int smallest, int move_to_b, int *swap)
+static int	div_helper(t_struct *structure, int small, int to_move, int *swap)
 {
 	int	sec_smallest;
 
-	sec_smallest = smallest - 1;
-	if (structure->a->rank == smallest)
+	sec_smallest = small - 1;
+	if (structure->a->rank == small)
 	{
 		push_to_stack(structure, 'b');
-		move_to_b--;
+		to_move--;
 		if (*swap == 1)
 		{
 			swap_stack(structure, 'b');
@@ -31,39 +31,40 @@ int	div_helper(t_struct *structure, int smallest, int move_to_b, int *swap)
 		&& count_nodes(structure->a) > 4)
 	{
 		push_to_stack(structure, 'b');
-		move_to_b--;
+		to_move--;
 		*swap = 1;
 	}
 	else
 		rotate_up_stack(structure, 'a');
-	return (move_to_b);
+	return (to_move);
 }
 
-void	last_division(t_struct *structure, int size)
+static void	last_division(t_struct *structure, int size)
 {
 	int	smallest;
 	int	swap;
 	int	move_to_b;
 
 	move_to_b = size - 3;
+	swap = 0;
 	while (count_nodes(structure->a) > 3 && move_to_b > 0)
 	{
 		smallest = find_smallest(structure->a, count_nodes(structure->a));
 		move_to_b = div_helper(structure, smallest, move_to_b, &swap);
 	}
 	size = count_nodes(structure->a);
-	base_case(structure, size);
+	base_case_1(structure, size);
 }
 
-int	create_group_helper(t_struct *structure, int biggest, int mid, int i)
+static int	create_helper(t_struct *structure, int big, int mid, int i)
 {
-	if (structure->a->rank <= biggest
+	if (structure->a->rank <= big
 		&& structure->a->rank < structure->count - 2)
 	{
 		push_to_stack(structure, 'b');
 		if (structure->b->rank < mid)
 		{
-			if (structure->a->rank > biggest)
+			if (structure->a->rank > big)
 				rotate_up_stack(structure, 'c');
 			else
 				rotate_up_stack(structure, 'b');
@@ -75,7 +76,7 @@ int	create_group_helper(t_struct *structure, int biggest, int mid, int i)
 	return (i);
 }
 
-int	create_group(t_struct *structure, int size, int group)
+static int	create_group(t_struct *structure, int size, int group)
 {
 	int	biggest;
 	int	mid;
@@ -91,7 +92,7 @@ int	create_group(t_struct *structure, int size, int group)
 			last_division(structure, count_nodes(structure->a));
 			break ;
 		}
-		i = create_group_helper(structure, biggest, mid, i);
+		i = create_helper(structure, biggest, mid, i);
 	}
 	return (count_nodes(structure->a));
 }

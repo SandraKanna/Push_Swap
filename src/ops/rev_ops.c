@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rev_ops.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sandra <sandra@student.42.fr>              +#+  +:+       +#+        */
+/*   By: skanna <skanna@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 13:06:48 by skanna            #+#    #+#             */
-/*   Updated: 2024/04/16 22:56:28 by sandra           ###   ########.fr       */
+/*   Updated: 2024/04/17 12:38:52 by skanna           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,3 @@ void	rotate_down_stack(t_struct *structure, char c)
 		write(1, "rrr\n", 4);
 	}
 }
-

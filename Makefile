@@ -30,6 +30,7 @@ BONUS_FILES = src/bonus/checker.c src/bonus/bonus_helpers.c
 BONUS_OBJ = $(BONUS_FILES:.c=.o)
 $(BONUS): $(COMMON_OBJ) $(BONUS_OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(COMMON_OBJ) $(BONUS_OBJ) -o $(BONUS) $(LIBFT)
+	@echo "\n$(GREEN)✔$(RESET) you can try the checker now"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
